@@ -10,11 +10,11 @@ import javax.persistence.Entity;
  *
  */
 /**
- * Detalhes:
+ * [ Detalhes... ]
  * 
- * Entity - Diz que a classe é uma entidade do hibernate
+ * -Entity - Diz que a classe é uma entidade do hibernate
  * 
- * Column(
+ * -Column(
  * | length=Tamanho do campo 
  * | name=define o nome no banco 
  * | nullable= Diz se o campo pode ou não ser nulo "True ou False");
