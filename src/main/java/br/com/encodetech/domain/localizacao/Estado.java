@@ -1,7 +1,9 @@
-package br.com.encodetech.domain;
+package br.com.encodetech.domain.localizacao;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+
+import br.com.encodetech.domain.complementos.GenericDomain;
 
 /**
  * 

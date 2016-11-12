@@ -33,11 +33,19 @@
 		<property name="hbm2ddl.auto">update</property>
 		
 		<!-- Mapeamento das entidades -->
-		<mapping class="br.com.encodetech.domain.Estado"/>
-		<mapping class="br.com.encodetech.domain.Cidade"/>
-		<mapping class="br.com.encodetech.domain.Empresa"/>
+		<mapping class="br.com.encodetech.domain.localizacao.Estado"/>
+		<mapping class="br.com.encodetech.domain.localizacao.Cidade"/>
+		<mapping class="br.com.encodetech.domain.empresas.Empresa"/>
 		<mapping class="br.com.encodetech.domain.Oportunidade"/>
-		<mapping class="br.com.encodetech.domain.Usuario"/>
+		<mapping class="br.com.encodetech.domain.usuarios.Usuario"/>
+		
+		
+		<mapping class="br.com.encodetech.domain.usuarios.Curriculo"/>
+		<mapping class="br.com.encodetech.domain.usuarios.FormacaoAcademica"/>
+		<mapping class="br.com.encodetech.domain.usuarios.ExperienciaProfissional"/>
+		<mapping class="br.com.encodetech.domain.usuarios.AtividadesProfissionais"/>
+		<mapping class="br.com.encodetech.domain.usuarios.InformacoesAdicionais"/>
+		
 		
 		
 

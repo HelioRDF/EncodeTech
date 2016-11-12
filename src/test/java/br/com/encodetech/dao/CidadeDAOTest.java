@@ -2,8 +2,8 @@ package br.com.encodetech.dao;
 
 import org.junit.Test;
 
-import br.com.encodetech.domain.Cidade;
-import br.com.encodetech.domain.Estado;
+import br.com.encodetech.domain.localizacao.Cidade;
+import br.com.encodetech.domain.localizacao.Estado;
 
 public class CidadeDAOTest extends GenericDAO<Cidade> {
 	

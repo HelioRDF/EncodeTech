@@ -1,4 +1,4 @@
-package br.com.encodetech.domain;
+package br.com.encodetech.domain.empresas;
 
 import java.util.Date;
 
@@ -6,6 +6,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import br.com.encodetech.domain.complementos.GenericDomain;
 
 
 /**

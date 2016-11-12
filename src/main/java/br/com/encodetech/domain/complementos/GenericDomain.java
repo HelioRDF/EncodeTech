@@ -1,4 +1,4 @@
-package br.com.encodetech.domain;
+package br.com.encodetech.domain.complementos;
 
 import java.io.Serializable;
 import javax.persistence.GeneratedValue;

@@ -5,7 +5,7 @@ import java.util.List;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import br.com.encodetech.domain.Estado;
+import br.com.encodetech.domain.localizacao.Estado;
 
 /**
  * Detalhes:

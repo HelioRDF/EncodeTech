@@ -1,4 +1,4 @@
-package br.com.encodetech.domain;
+package br.com.encodetech.domain.complementos;
 
 import java.math.BigDecimal;
 
@@ -6,6 +6,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
+import br.com.encodetech.domain.empresas.Empresa;
 
 
 
@@ -41,6 +43,9 @@ public class Oportunidade extends GenericDomain {
 	@ManyToOne
 	@JoinColumn(nullable = false)
 	private Empresa empresa;
+	
+	
+	//--------------------------------------------------
 
 	public String getDescricao() {
 		return descricao;
