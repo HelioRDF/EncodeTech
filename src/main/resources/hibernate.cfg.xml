@@ -36,7 +36,7 @@
 		<mapping class="br.com.encodetech.domain.localizacao.Estado"/>
 		<mapping class="br.com.encodetech.domain.localizacao.Cidade"/>
 		<mapping class="br.com.encodetech.domain.empresas.Empresa"/>
-		<mapping class="br.com.encodetech.domain.Oportunidade"/>
+		<mapping class="br.com.encodetech.domain.complementos.Oportunidade"/>
 		<mapping class="br.com.encodetech.domain.usuarios.Usuario"/>
 		
 		

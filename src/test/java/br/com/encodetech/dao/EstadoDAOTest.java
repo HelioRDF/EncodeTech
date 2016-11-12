@@ -5,6 +5,7 @@ import java.util.List;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import br.com.encodetech.dao.localizacao.EstadoDAO;
 import br.com.encodetech.domain.localizacao.Estado;
 
 /**

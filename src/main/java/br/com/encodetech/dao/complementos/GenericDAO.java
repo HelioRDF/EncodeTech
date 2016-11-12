@@ -1,4 +1,4 @@
-package br.com.encodetech.dao;
+package br.com.encodetech.dao.complementos;
 
 import java.lang.reflect.ParameterizedType;
 import java.util.List;

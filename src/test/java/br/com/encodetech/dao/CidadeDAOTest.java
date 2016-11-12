@@ -2,6 +2,9 @@ package br.com.encodetech.dao;
 
 import org.junit.Test;
 
+import br.com.encodetech.dao.complementos.GenericDAO;
+import br.com.encodetech.dao.localizacao.CidadeDAO;
+import br.com.encodetech.dao.localizacao.EstadoDAO;
 import br.com.encodetech.domain.localizacao.Cidade;
 import br.com.encodetech.domain.localizacao.Estado;
 
