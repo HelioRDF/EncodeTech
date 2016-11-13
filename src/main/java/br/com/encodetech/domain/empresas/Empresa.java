@@ -89,8 +89,18 @@ public class Empresa extends GenericDomain {
 
 	// -------------------------------------------------------
 
+	
+	
 	public Boolean getStatus() {
 		return status;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 
 	public void setStatus(Boolean status) {

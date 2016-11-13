@@ -57,9 +57,9 @@ public class Usuario extends GenericDomain {
 	@Column(length = 12, nullable = false)
 	private String rg;
 
-	@Column(length = 8, nullable = false)
-	private String dataNascimento;
-
+	@Column(nullable = false)
+	@Temporal(TemporalType.DATE)
+	private Date dataNascimento;
 
 
 	@Column(length = 100, nullable = false)
@@ -107,15 +107,22 @@ public class Usuario extends GenericDomain {
 		this.rg = rg;
 	}
 
-	public String getDataNascimento() {
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+
+	public Date getDataNascimento() {
 		return dataNascimento;
 	}
 
-	public void setDataNascimento(String dataNascimento) {
+	public void setDataNascimento(Date dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
-
-	
 
 	public String getEmail() {
 		return email;
