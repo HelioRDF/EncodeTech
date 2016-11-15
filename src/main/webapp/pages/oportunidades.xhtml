@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Oportunidades</title>
+</h:head>
+
+<h:body>
+
+	<h:form>
+		<p:panel header="Oportunidades">
+		</p:panel>
+
+		<p:dataTable emptyMessage="Nenhum Registro" paginator="true">
+			<f:facet name="footer">
+				<p:commandButton value="Adicionar"
+					oncomplete="PF('dialogo').show();" />
+
+			</f:facet>
+			<p:column headerText="ID"></p:column>
+			<p:column headerText="Cargo"></p:column>
+			<p:column headerText="Empresa"></p:column>
+			<p:column headerText="Tipo"></p:column>
+			<p:column headerText="Setor"></p:column>
+			<p:column headerText="Salário"></p:column>
+			<p:column headerText="Vagas"></p:column>
+			<p:column headerText="Descrição"></p:column>
+			<p:column headerText="Opções"></p:column>
+
+		</p:dataTable>
+	</h:form>
+
+	<!-- draggable = false ou true "mover a janela suspensa"| 
+     resizable=false ou true"mudar o tamanho a janela suspensa" |
+     modal=false ou true "clicar foda da janela suspensa"|
+     closable="true?" 'controla o botão fechar do dialogo'-->
+	<p:dialog header="Cadastro de Oportunidades" widgetVar="dialogo" modal="true" height="450" responsive="true">
+		<h:form>
+			<h:panelGrid columns="2" >
+				<p:outputLabel value="Cargo: " />
+				<p:inputText maxlength="50" size="38" />
+
+				<p:outputLabel value="Empresa: " />
+				<p:inputText maxlength="50" size="38" />
+
+
+
+				<p:outputLabel value="Salario: " />
+				<p:inputText maxlength="50" size="38" />
+				
+				<p:outputLabel value="Mostrar Salário: " />
+				<p:selectBooleanButton onLabel="Visível" offLabel="Oculto"></p:selectBooleanButton>
+				
+
+				<p:outputLabel value="Nº de Vagas: " />
+				<p:inputText maxlength="50" size="38" />
+
+				<p:outputLabel value="Descrição: " />
+				<p:inputTextarea maxlength="600" size="50" rows="3" cols="42" />
+
+				<p:outputLabel value="Pré-Requisitos: " />
+				<p:inputTextarea maxlength="600" size="50" rows="3" cols="42" />
+				
+				<p:outputLabel value="Nível: " />
+				<p:selectOneMenu filter="true">
+					<f:selectItem itemValue="" itemLabel="Selecione uma modalidade" />
+					
+					<f:selectItem itemValue="" itemLabel="Trainee" />
+					<f:selectItem itemValue="" itemLabel="Junior" />
+					<f:selectItem itemValue="" itemLabel="Pleno" />
+					<f:selectItem itemValue="" itemLabel="Senior" />
+					<f:selectItem itemValue="" itemLabel="Master" />
+					<f:selectItem itemValue="" itemLabel="Especialista" />
+					<f:selectItem itemValue="" itemLabel="Todos" />
+					<f:selectItem itemValue="" itemLabel="N/A" />				
+				</p:selectOneMenu>
+				
+				<p:outputLabel value="Tipo: " />
+				<p:selectOneMenu filter="true">
+					<f:selectItem itemValue="" itemLabel="Selecione uma modalidade" />
+					<f:selectItem itemValue="" itemLabel="CLT" />
+					<f:selectItem itemValue="" itemLabel="PJ" />
+					<f:selectItem itemValue="" itemLabel="Empreita" />
+					<f:selectItem itemValue="" itemLabel="Estágio" />
+					
+					<f:selectItem itemValue="" itemLabel="CLT-PcD" />
+					<f:selectItem itemValue="" itemLabel="PJ-PcD" />
+					<f:selectItem itemValue="" itemLabel="Empreita-PcD" />
+					<f:selectItem itemValue="" itemLabel="Estágio-PcD" />
+					
+					<f:selectItem itemValue="" itemLabel="Outros" />
+					
+					
+					
+					
+				</p:selectOneMenu>
+
+
+				<p:outputLabel value="Setor: " />
+				<p:selectOneMenu filter="true">
+					<f:selectItem itemValue="" itemLabel="Selecione um setor" />
+				</p:selectOneMenu>
+
+
+			</h:panelGrid>
+			<h:panelGrid columns="2">
+
+				<p:commandButton value="Salvar" />
+				<p:commandButton value="Fechar" oncomplete="PF('dialogo').hide();" />
+
+			</h:panelGrid>
+
+		</h:form>
+
+	</p:dialog>
+</h:body>
+</html>

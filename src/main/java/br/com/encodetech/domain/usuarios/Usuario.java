@@ -31,6 +31,9 @@ import br.com.encodetech.domain.complementos.GenericDomain;
  *  |TIMESTAMP=Data e hora
  *  
  *  -MD5 - A senha está utilizando MD5 para criptografia.
+ *  
+ *  -Atributos
+ *  |dataCadastro - status - nome - senha - cpf - rg - dataNascimento - email - curriculo
  * 
  */
 
@@ -64,6 +67,9 @@ public class Usuario extends GenericDomain {
 
 	@Column(length = 100, nullable = false)
 	private String email;
+	
+	@Column
+	private Curriculo curriculo;
 
 	// -------------------------------------------------------
 
@@ -132,4 +138,13 @@ public class Usuario extends GenericDomain {
 		this.email = email;
 	}
 
+	public Curriculo getCurriculo() {
+		return curriculo;
+	}
+
+	public void setCurriculo(Curriculo curriculo) {
+		this.curriculo = curriculo;
+	}
+
+	
 }

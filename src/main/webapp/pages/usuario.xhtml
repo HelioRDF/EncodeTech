@@ -7,32 +7,32 @@
 
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>Estado</title>
+	<title>Usuários</title>
 </h:head>
-
-
-
 
 <h:body>
 
-
-
 	<h:form>
-		<p:panel header="Estados">
+		<p:panel header="Usuários">
 		</p:panel>
-
-		
 
 		<p:dataTable emptyMessage="Nenhum Registro" paginator="true" >
 		<f:facet name="footer">
 		<p:commandButton value="Adicionar" oncomplete= "PF('dialogo').show();"/>
 	
 		</f:facet>
-
+		
 			<p:column headerText="ID"></p:column>
 			<p:column headerText="Nome"></p:column>
-			<p:column headerText="Sigla"></p:column>
+			<p:column headerText="Email"></p:column>
+			<p:column headerText="Status"></p:column>
+			<p:column headerText="Senha"></p:column>
+			<p:column headerText="RG"></p:column>
+			<p:column headerText="CPF"></p:column>
+			<p:column headerText="Cadastrado"></p:column>
+			<p:column headerText="Data de Nasc"></p:column>	
 			<p:column headerText="Opções"></p:column>
+		
 		</p:dataTable>
 	</h:form>
 
@@ -40,24 +40,39 @@
      resizable=false ou true"mudar o tamanho a janela suspensa" |
      modal=false ou true "clicar foda da janela suspensa"|
      closable="true?" 'controla o botão fechar do dialogo'-->
- <p:dialog header="Cadastro de Estado"  widgetVar= "dialogo"  modal="true" responsive="true">
-<!-- Opcional: " <p:growl  id="mensagem"/> "-->
-<p:messages  id="mensagemDialog"/>
-
+ <p:dialog header="Cadastrar Usuário"  widgetVar= "dialogo"  modal="true" responsive="true">
 <h:form>
-
-
 <h:panelGrid columns="2">
-<p:outputLabel value="Estado: "/>
-<p:inputText maxlength="50" size="20"/>
 
-<p:outputLabel value="Sigla: "/>
-<p:inputText maxlength="50" size="20"/>
+
+<p:outputLabel value="Status: "/>
+<p:selectBooleanButton onLabel="Ativado" offLabel="Desativado"></p:selectBooleanButton>
+
+
+<p:outputLabel value="Nome: "/>
+<p:inputText maxlength="50" size="25"/>
+
+
+<p:outputLabel value="E-mail: "/>
+<p:inputText maxlength="50" size="25"/>
+
+<p:outputLabel value="Senha: "/>
+<p:password  maxlength="16" size="25"/>
+
+<p:outputLabel value="RG: "/>
+<p:inputText maxlength="50" size="25"/>
+
+<p:outputLabel value="CPF: "/>
+<p:inputText maxlength="50" size="25"/>
+
+<p:outputLabel value="Data de Nasc: "/>
+<p:calendar yearRange="c-60:c+1" navigator="true" pages="1"/>
+
 
 </h:panelGrid>
 <h:panelGrid columns="2">
 
-<p:commandButton value="Salvar" actionListener="#{estadoBean.salvar()}" update=":mensagemDialog" />
+<p:commandButton value="Salvar" />
 <p:commandButton value="Fechar" oncomplete="PF('dialogo').hide();"/>
 
 </h:panelGrid>

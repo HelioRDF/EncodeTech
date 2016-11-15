@@ -8,6 +8,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import br.com.encodetech.domain.complementos.GenericDomain;
+import br.com.encodetech.domain.localizacao.Endereco;
 
 
 /**
@@ -37,6 +38,10 @@ import br.com.encodetech.domain.complementos.GenericDomain;
  *  
  *  -MD5 - A senha está utilizando MD5 para criptografia.
  * 
+ *  -Atributos:
+ * 	dataCadastro - status - nomeEmpresa - senha - seguimento - descrição  
+ *  cnpj - rua - numero - bairro - cep - complemento - telefone - email
+ *
  */
 
 
@@ -53,8 +58,8 @@ public class Empresa extends GenericDomain {
 
 	@Column(length = 50, nullable = false)
 	private String nomeEmpresa;
-	
-	@Column(length = 32 )
+
+	@Column(length = 32)
 	private String senha;
 
 	@Column(length = 50, nullable = false)
@@ -65,32 +70,12 @@ public class Empresa extends GenericDomain {
 
 	@Column(length = 14, nullable = false)
 	private String cnpj;
-
-	@Column(length = 100, nullable = false)
-	private String rua;
-
-	@Column(nullable = false)
-	private Short numero;
-
-	@Column(length = 30, nullable = false)
-	private String bairro;
-
-	@Column(length = 10, nullable = false)
-	private String cep;
-
-	@Column(length = 10, nullable = false)
-	private String complemento;
-
-	@Column(length = 13, nullable = false)
-	private String telefone;
-
-	@Column(length = 100, nullable = false)
-	private String email;
+	
+	@Column
+	private Endereco endereco;
 
 	// -------------------------------------------------------
 
-	
-	
 	public Boolean getStatus() {
 		return status;
 	}
@@ -147,60 +132,14 @@ public class Empresa extends GenericDomain {
 		this.cnpj = cnpj;
 	}
 
-	public String getRua() {
-		return rua;
+	public Endereco getEndereco() {
+		return endereco;
 	}
 
-	public void setRua(String rua) {
-		this.rua = rua;
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
 	}
-
-	public Short getNumero() {
-		return numero;
-	}
-
-	public void setNumero(Short numero) {
-		this.numero = numero;
-	}
-
-	public String getBairro() {
-		return bairro;
-	}
-
-	public void setBairro(String bairro) {
-		this.bairro = bairro;
-	}
-
-	public String getCep() {
-		return cep;
-	}
-
-	public void setCep(String cep) {
-		this.cep = cep;
-	}
-
-	public String getComplemento() {
-		return complemento;
-	}
-
-	public void setComplemento(String complemento) {
-		this.complemento = complemento;
-	}
-
-	public String getTelefone() {
-		return telefone;
-	}
-
-	public void setTelefone(String telefone) {
-		this.telefone = telefone;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
+	
+	
 
 }

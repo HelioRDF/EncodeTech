@@ -20,6 +20,12 @@
         <load-on-startup>1</load-on-startup>
     </servlet>
     
+    <!-- Tema do PrimeFaces -->
+    <context-param>  
+    <param-name>primefaces.THEME</param-name>  
+    <param-value>omega</param-value>  
+</context-param> 
+    
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>*.xhtml</url-pattern>

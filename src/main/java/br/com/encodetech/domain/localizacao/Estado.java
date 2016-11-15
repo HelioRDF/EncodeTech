@@ -29,6 +29,9 @@ public class Estado extends GenericDomain {
 	private String sigla;
 	@Column(length = 50, name = "nomeEstado")
 	private String nome;
+	
+	
+	//--------------------------------------------------------------
 
 	public String getSigla() {
 		return sigla;

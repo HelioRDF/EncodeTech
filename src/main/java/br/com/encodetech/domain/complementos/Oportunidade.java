@@ -30,9 +30,19 @@ import br.com.encodetech.domain.empresas.Empresa;
 @SuppressWarnings("serial")
 @Entity
 public class Oportunidade extends GenericDomain {
+	
+	
+	@Column(nullable = false)
+	private String cargo;
+	
+	@Column
+	private String nivel;	//Junior | Senior | Pleno | Trainee
 
-	@Column(length = 100, nullable = false)
+	@Column(nullable = false)
 	private String descricao;
+	
+	@Column
+	private String preRequisitos;
 
 	@Column(nullable = false)
 	private Short quantidade;
@@ -44,11 +54,50 @@ public class Oportunidade extends GenericDomain {
 	@JoinColumn(nullable = false)
 	private Empresa empresa;
 	
+	@Column
+	private String tipo; //CLT | CLT PCD | PJ | Estágio ???
+	
+	private String setor; //MKT | Engenharia | ???
+	
 	
 	//--------------------------------------------------
+	
+	
 
 	public String getDescricao() {
 		return descricao;
+	}
+
+	public String getNivel() {
+		return nivel;
+	}
+
+	public void setNivel(String nivel) {
+		this.nivel = nivel;
+	}
+
+	public String getPreRequisitos() {
+		return preRequisitos;
+	}
+
+	public void setPreRequisitos(String preRequisitos) {
+		this.preRequisitos = preRequisitos;
+	}
+
+	public String getSetor() {
+		return setor;
+	}
+
+	public void setSetor(String setor) {
+		this.setor = setor;
+	}
+
+	public String getCargo() {
+		return cargo;
+	}
+
+	public void setCargo(String cargo) {
+		this.cargo = cargo;
 	}
 
 	public void setDescricao(String descricao) {
@@ -78,5 +127,15 @@ public class Oportunidade extends GenericDomain {
 	public void setEmpresa(Empresa empresa) {
 		this.empresa = empresa;
 	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+	
+	
 
 }
