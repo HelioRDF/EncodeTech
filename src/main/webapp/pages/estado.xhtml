@@ -26,7 +26,7 @@
 
 		<p:dataTable emptyMessage="Nenhum Registro" paginator="true" >
 		<f:facet name="footer">
-		<p:commandButton value="Adicionar" oncomplete= "PF('dialogo').show();" actionListener="#{estadoBean.novo()}"/>
+		<p:commandButton value="Adicionar" oncomplete= "PF('dialogo').show();" actionListener="#{estadoBean.novo()}" update=":formCadastro:painel"/>
 	
 		</f:facet>
 
@@ -44,10 +44,10 @@
  <p:dialog header="Cadastro de Estado"  widgetVar= "dialogo"  modal="true" responsive="true">
 
 
-<h:form>
+<h:form id="formCadastro">
 
 
-<h:panelGrid columns="2">
+<h:panelGrid id="painel" columns="2">
 <p:outputLabel value="Estado: "/>
 <p:inputText maxlength="50" size="20" value="#{estadoBean.estado.nome}" />
 

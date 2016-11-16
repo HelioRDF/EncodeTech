@@ -2,6 +2,7 @@ package br.com.encodetech.bean;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 
 import org.omnifaces.util.Messages;
 
@@ -18,7 +19,7 @@ import br.com.encodetech.domain.localizacao.Estado;
  */
 
 @ManagedBean
-@SessionScoped
+@ViewScoped
 
 public class EstadoBean {
 	
