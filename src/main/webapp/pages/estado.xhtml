@@ -15,7 +15,8 @@
 
 <h:body>
 
-
+<!-- Opcional: " <p:growl  id="mensagem"/> "-->
+<p:messages  id="mensagemDialog"/>
 
 	<h:form>
 		<p:panel header="Estados">
@@ -25,7 +26,7 @@
 
 		<p:dataTable emptyMessage="Nenhum Registro" paginator="true" >
 		<f:facet name="footer">
-		<p:commandButton value="Adicionar" oncomplete= "PF('dialogo').show();"/>
+		<p:commandButton value="Adicionar" oncomplete= "PF('dialogo').show();" actionListener="#{estadoBean.novo()}"/>
 	
 		</f:facet>
 
@@ -41,23 +42,22 @@
      modal=false ou true "clicar foda da janela suspensa"|
      closable="true?" 'controla o botão fechar do dialogo'-->
  <p:dialog header="Cadastro de Estado"  widgetVar= "dialogo"  modal="true" responsive="true">
-<!-- Opcional: " <p:growl  id="mensagem"/> "-->
-<p:messages  id="mensagemDialog"/>
+
 
 <h:form>
 
 
 <h:panelGrid columns="2">
 <p:outputLabel value="Estado: "/>
-<p:inputText maxlength="50" size="20"/>
+<p:inputText maxlength="50" size="20" value="#{estadoBean.estado.nome}" />
 
 <p:outputLabel value="Sigla: "/>
-<p:inputText maxlength="50" size="20"/>
+<p:inputText maxlength="50" size="20" value="#{estadoBean.estado.sigla}"/>
 
 </h:panelGrid>
 <h:panelGrid columns="2">
 
-<p:commandButton value="Salvar" actionListener="#{estadoBean.salvar()}" update=":mensagemDialog" />
+<p:commandButton value="Salvar" actionListener="#{estadoBean.salvar()}" update=":mensagemDialog" oncomplete="PF('dialogo').hide();" />
 <p:commandButton value="Fechar" oncomplete="PF('dialogo').hide();"/>
 
 </h:panelGrid>
