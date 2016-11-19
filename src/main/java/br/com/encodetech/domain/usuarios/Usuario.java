@@ -68,6 +68,10 @@ public class Usuario extends GenericDomain {
 	@Column(length = 100, nullable = false)
 	private String email;
 	
+	@Column(length = 20, nullable = false)
+	private String sexo;
+	
+	
 	@Column
 	private Curriculo curriculo;
 
@@ -144,6 +148,14 @@ public class Usuario extends GenericDomain {
 
 	public void setCurriculo(Curriculo curriculo) {
 		this.curriculo = curriculo;
+	}
+
+	public String getSexo() {
+		return sexo;
+	}
+
+	public void setSexo(String sexo) {
+		this.sexo = sexo;
 	}
 
 	

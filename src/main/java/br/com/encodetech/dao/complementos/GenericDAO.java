@@ -134,6 +134,7 @@ public class GenericDAO<Entidade> {
 			transacao = sessao.beginTransaction();
 			sessao.merge(entidade);
 			transacao.commit();
+			
 
 		} catch (RuntimeException erro) {
 

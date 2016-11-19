@@ -6,79 +6,169 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 <h:head>
+
+
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>Usuários</title>
 </h:head>
 
 <h:body>
 
-	<h:form>
+
+	<h:form id="userform">
+
 		<p:panel header="Usuários">
 		</p:panel>
 
-		<p:dataTable emptyMessage="Nenhum Registro" paginator="true" >
-		<f:facet name="footer">
-		<p:commandButton value="Adicionar" oncomplete= "PF('dialogo').show();"/>
-	
-		</f:facet>
-		
-			<p:column headerText="ID"></p:column>
-			<p:column headerText="Nome"></p:column>
-			<p:column headerText="Email"></p:column>
-			<p:column headerText="Status"></p:column>
-			<p:column headerText="Senha"></p:column>
-			<p:column headerText="RG"></p:column>
-			<p:column headerText="CPF"></p:column>
-			<p:column headerText="Cadastrado"></p:column>
-			<p:column headerText="Data de Nasc"></p:column>	
-			<p:column headerText="Opções"></p:column>
-		
+		<p:growl id="msg" sticky="true" autoUpdate="true" />
+
+
+		<p:dataTable reflow="true" id="datat"
+			rowsPerPageTemplate="8,15,25,50,100" emptyMessage="Nenhum Registro"
+			rows="8" paginator="true" resizableColumns="true" var="users"
+			value="#{usuarioBean.listaUsuario}" style=" text-align:center;">
+
+
+
+			<f:facet name="header">
+				<p:commandButton value="Listar Usuários"
+					action="#{usuarioBean.carregar()}" update=":userform" />
+			</f:facet>
+
+
+			<f:facet name="footer">
+				<p:commandButton value="Adicionar"
+					oncomplete="PF('dialogo').show();" action="#{usuarioBean.novo()}"
+					update=":dialogform" />
+			</f:facet>
+
+
+			<p:column style="width:16px">
+				<p:rowToggler />
+			</p:column>
+
+			<p:column headerText="ID" width="7%">
+				<p:outputLabel value="#{users.codigo}" />
+			</p:column>
+
+			<p:column headerText="Nome">
+				<p:outputLabel value="#{users.nome}" />
+			</p:column>
+
+			<p:column headerText="Email">
+				<p:outputLabel value="#{users.email}" />
+			</p:column>
+
+			<p:column headerText="Status" width="8%">
+				<p:outputLabel value="#{users.status}" />
+			</p:column>
+
+
+			<p:column headerText="Opções" width="15%"></p:column>
+
+
+			<!-- Informações após expandir linha -->
+			<p:rowExpansion styleClass=" width=37%">
+
+				<p:panelGrid columns="1" columnClasses="label,value"
+					style="text-align:left;">
+
+					<h:outputText value="Sexo: #{users.sexo}" />
+					<h:outputText value="Senha: #{users.senha}" />
+					<h:outputText value="CPF: #{users.cpf}" />
+					<h:outputText value="RG: #{users.rg}" />
+					<h:outputText value="Data de Nascimento: #{users.dataNascimento}" />
+					<h:outputText value="Cadastrado dia: #{users.dataCadastro}" />
+					
+				</p:panelGrid>
+							
+				<!-- <p:separator style="border: 2px solid #999966; border-radius: 100px/9px; background-color:  #6666ff; height:10px;"> </p:separator>  -->
+				<p:separator style=" height:10px;background-color:#e6e6ff"></p:separator>
+			</p:rowExpansion>
+
 		</p:dataTable>
 	</h:form>
 
-<!-- draggable = false ou true "mover a janela suspensa"| 
+	<!-- draggable = false ou true "mover a janela suspensa"| 
      resizable=false ou true"mudar o tamanho a janela suspensa" |
      modal=false ou true "clicar foda da janela suspensa"|
      closable="true?" 'controla o botão fechar do dialogo'-->
- <p:dialog header="Cadastrar Usuário"  widgetVar= "dialogo"  modal="true" responsive="true">
-<h:form>
-<h:panelGrid columns="2">
+
+	<p:dialog header="Cadastrar Usuário" widgetVar="dialogo" modal="true"
+		responsive="true">
+
+		<h:form id="dialogform">
+
+			<p:messages id="msgdialog" autoUpdate="true" closable="true" />
+			<h:panelGrid columns="2" id="dialogpanel">
+
+				<p:outputLabel value="Status: " />
+				<p:selectBooleanButton onLabel="Ativado" offLabel="Desativado"
+					value="#{usuarioBean.usuario.status}">
+				</p:selectBooleanButton>
+
+				<p:outputLabel value="Sexo: " />
+				<p:selectOneRadio value="#{usuarioBean.usuario.sexo}">
+
+					<f:selectItem itemValue="masculino" itemLabel="Masculino" />
+					<f:selectItem itemValue="feminino" itemLabel="Feminino" />
+
+				</p:selectOneRadio>
+
+				<p:outputLabel value="Nome: " required="true" />
+				<p:inputText maxlength="50" size="25"
+					value="#{usuarioBean.usuario.nome}" />
 
 
-<p:outputLabel value="Status: "/>
-<p:selectBooleanButton onLabel="Ativado" offLabel="Desativado"></p:selectBooleanButton>
+				<p:outputLabel value="RG: " required="true" />
+				<p:inputText maxlength="50" size="25"
+					value="#{usuarioBean.usuario.rg}" />
+
+				<p:outputLabel value="CPF: " required="true" />
+				<p:inputText maxlength="50" size="25"
+					value="#{usuarioBean.usuario.cpf}" />
+
+				<p:outputLabel value="Data de Nasc: " required="true" />
+				<p:calendar yearRange="c-60:c+1" navigator="true" pages="1"
+					value="#{usuarioBean.usuario.dataNascimento}" />
+
+				<p:separator style="border: 1px solid #e6e6ff; height: 1px;"></p:separator>
+				<p:separator style="border: 1px solid #e6e6ff; height: 1px;"></p:separator>
 
 
-<p:outputLabel value="Nome: "/>
-<p:inputText maxlength="50" size="25"/>
+				<p:outputLabel value="E-mail:" required="true" />
+				<p:inputText maxlength="50" size="25"
+					value="#{usuarioBean.usuario.email}" />
+
+				<p:outputLabel value="Senha:" required="true" />
+				<p:password maxlength="16" size="25"
+					value="#{usuarioBean.usuario.senha}" />
+
+				<p:outputLabel value="Confirmar senha:" required="true" />
+				<p:password maxlength="16" size="25"
+					value="#{usuarioBean.confirmar}" />
 
 
-<p:outputLabel value="E-mail: "/>
-<p:inputText maxlength="50" size="25"/>
-
-<p:outputLabel value="Senha: "/>
-<p:password  maxlength="16" size="25"/>
-
-<p:outputLabel value="RG: "/>
-<p:inputText maxlength="50" size="25"/>
-
-<p:outputLabel value="CPF: "/>
-<p:inputText maxlength="50" size="25"/>
-
-<p:outputLabel value="Data de Nasc: "/>
-<p:calendar yearRange="c-60:c+1" navigator="true" pages="1"/>
+			</h:panelGrid>
 
 
-</h:panelGrid>
-<h:panelGrid columns="2">
 
-<p:commandButton value="Salvar" />
-<p:commandButton value="Fechar" oncomplete="PF('dialogo').hide();"/>
+			<h:panelGrid columns="2">
 
-</h:panelGrid>
+				<p:commandButton value="Salvar"
+					actionListener="#{usuarioBean.salvar()}" update=":dialogform" />
+				<p:commandButton value="Fechar"
+					actionListener="#{usuarioBean.fechar()}"
+					oncomplete="PF('dialogo').hide();" />
 
-</h:form>
+			</h:panelGrid>
 
-</p:dialog>
+		</h:form>
+
+	</p:dialog>
+
+
+
+
 </h:body>
 </html>
