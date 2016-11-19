@@ -29,66 +29,45 @@ public class UsuarioBean implements Serializable {
 		try {
 
 			if (!(usuario.getSenha().length() >= 4)) {
-
 				Messages.addGlobalWarn("Verifique os requisitos minímos de segurança (min 4 digítos)");
-
-			}
-
-			else {
-
+			} else {
 				if (usuario.getSenha().equals(confirmar)) {
-
 					validarInfos = true;
-
 				} else
-
 					Messages.addGlobalWarn("A Confirmação de senha está incorreta");
-				
-
-			}
-
+				}
+			
 			if (validarInfos) {
 				usuario.setDataCadastro(new Date());
 				dao.merge(usuario);
 				Messages.addGlobalInfo("Usuário salvo com sucesso: " + usuario.getNome());
-
 			}
 
 		} catch (Exception e) {
 			Messages.addGlobalError("Não foi possível salvar o usuário, preencha todos os campos corretamente! ");
-
-		}
-
-		finally {
-
+		}finally {
 			validarInfos = false;
-
 		}
 	}
 
 	public void novo() {
 		usuario = new Usuario();
 		dao = new UsuarioDAO();
-
 	}
 
 	public void fechar() {
-
 		usuario = null;
 		dao = null;
-
 	}
 
 	public void carregar() {
-
+		
 		try {
 			usuario = new Usuario();
 			dao = new UsuarioDAO();
 			listaUsuario = dao.listar();
-
 			dao = null;
 			usuario = null;
-
 			Messages.addGlobalInfo("Lista atualizada com sucesso ");
 
 		} catch (Exception e) {
