@@ -50,8 +50,8 @@ public class Usuario extends GenericDomain {
 
 	@Column(length = 50, nullable = false)
 	private String nome;
-	
-	@Column(length = 32 )
+
+	@Column(length = 32)
 	private String senha;
 
 	@Column(length = 14, nullable = false)
@@ -64,14 +64,12 @@ public class Usuario extends GenericDomain {
 	@Temporal(TemporalType.DATE)
 	private Date dataNascimento;
 
-
 	@Column(length = 100, nullable = false)
 	private String email;
-	
+
 	@Column(length = 20, nullable = false)
 	private String sexo;
-	
-	
+
 	@Column
 	private Curriculo curriculo;
 
@@ -117,7 +115,6 @@ public class Usuario extends GenericDomain {
 		this.rg = rg;
 	}
 
-
 	public String getSenha() {
 		return senha;
 	}
@@ -158,5 +155,4 @@ public class Usuario extends GenericDomain {
 		this.sexo = sexo;
 	}
 
-	
 }
