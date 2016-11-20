@@ -40,15 +40,18 @@
 
 			</f:facet>
 
-			<p:column headerText="ID">
+			<p:column headerText="ID" sortBy="#{states.codigo}"
+				filterBy="#{states.codigo}">
 				<p:outputLabel value="#{states.codigo}" />
 			</p:column>
 
-			<p:column headerText="Estado">
+			<p:column headerText="Estado" sortBy="#{states.nome}"
+				filterBy="#{states.nome}">
 				<p:outputLabel value="#{states.nome}" />
 			</p:column>
 
-			<p:column headerText="Sigla">
+			<p:column headerText="Sigla" sortBy="#{states.sigla}"
+				filterBy="#{states.sigla}">
 				<p:outputLabel value="#{states.sigla}" />
 			</p:column>
 

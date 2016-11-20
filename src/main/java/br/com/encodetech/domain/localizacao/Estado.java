@@ -49,4 +49,11 @@ public class Estado extends GenericDomain {
 		this.nome = nome;
 	}
 
+	@Override
+	public String toString() {
+		return "Estado [sigla=" + sigla + ", nome=" + nome + "]";
+	}
+	
+	
+
 }

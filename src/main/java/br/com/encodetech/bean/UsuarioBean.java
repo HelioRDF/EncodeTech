@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.event.ActionEvent;
 
 import org.omnifaces.util.Messages;
 
@@ -35,8 +36,8 @@ public class UsuarioBean implements Serializable {
 					validarInfos = true;
 				} else
 					Messages.addGlobalWarn("A Confirmação de senha está incorreta");
-				}
-			
+			}
+
 			if (validarInfos) {
 				usuario.setDataCadastro(new Date());
 				dao.merge(usuario);
@@ -45,7 +46,7 @@ public class UsuarioBean implements Serializable {
 
 		} catch (Exception e) {
 			Messages.addGlobalError("Não foi possível salvar o usuário, preencha todos os campos corretamente! ");
-		}finally {
+		} finally {
 			validarInfos = false;
 		}
 	}
@@ -61,7 +62,7 @@ public class UsuarioBean implements Serializable {
 	}
 
 	public void carregar() {
-		
+
 		try {
 			usuario = new Usuario();
 			dao = new UsuarioDAO();
@@ -76,6 +77,81 @@ public class UsuarioBean implements Serializable {
 
 	}
 
+	public void excluir(ActionEvent evento) {
+
+		try {
+
+			usuario = (Usuario) evento.getComponent().getAttributes().get("select");
+			UsuarioDAO dao = new UsuarioDAO();
+			Messages.addGlobalInfo("Nome Removido: " + usuario.getNome());
+			dao.excluir(usuario);
+
+		} catch (Exception e) {
+			Messages.addGlobalError("Erro ao Remover: " + usuario.getNome());
+
+		}
+
+	}
+
+	public void editar() {
+
+		try {
+
+			dao = new UsuarioDAO();
+			dao.merge(usuario);
+			Messages.addGlobalInfo("Usuário Editado com sucesso: " + usuario.getNome());
+
+
+		} catch (Exception e) {
+			Messages.addGlobalError("Erro ao Editar: " + usuario.getNome());
+
+		}
+
+	}
+	
+	public void editarSenha() {
+
+		try {
+			
+			if (!(usuario.getSenha().length() >= 4)) {
+				Messages.addGlobalWarn("Verifique os requisitos minímos de segurança (min 4 digítos)");
+			} else {
+				if (usuario.getSenha().equals(confirmar)) {
+					validarInfos = true;
+				} else
+					Messages.addGlobalWarn("A Confirmação de senha está incorreta");
+			}
+
+			if (validarInfos) {
+
+			dao = new UsuarioDAO();
+			dao.merge(usuario);
+			Messages.addGlobalInfo("Usuário Editado com sucesso: " + usuario.getNome());
+
+			}
+		} catch (Exception e) {
+			Messages.addGlobalError("Erro ao Editar: " + usuario.getNome());
+
+		} finally {
+			validarInfos = false;
+		}
+
+	}
+
+	public void getinstancia(ActionEvent evento) {
+
+		try {
+			usuario = (Usuario) evento.getComponent().getAttributes().get("selectUser");
+			Messages.addGlobalInfo("Seleção: " + usuario.getNome());	
+
+		} catch (Exception e) {
+			Messages.addGlobalError("Erro ao Editar: " + usuario.getNome());
+
+		}
+
+	}
+
+	
 	// ----------------------------------------------------------------------
 
 	public Usuario getUsuario() {

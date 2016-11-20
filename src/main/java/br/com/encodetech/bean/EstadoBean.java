@@ -1,10 +1,13 @@
 package br.com.encodetech.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+
 import org.omnifaces.util.Messages;
+
 import br.com.encodetech.dao.localizacao.EstadoDAO;
 import br.com.encodetech.domain.localizacao.Estado;
 
@@ -16,10 +19,11 @@ import br.com.encodetech.domain.localizacao.Estado;
  *
  */
 
+@SuppressWarnings("serial")
 @ManagedBean
 @ViewScoped
 
-public class EstadoBean {
+public class EstadoBean implements Serializable{
 
 	private Estado estado;
 	private boolean validarInfos = false;
@@ -28,6 +32,7 @@ public class EstadoBean {
 
 	public void salvar() {
 
+		
 		try {
 
 			if (estado.getSigla().length() == 2) {

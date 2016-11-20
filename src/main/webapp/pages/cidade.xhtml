@@ -12,19 +12,42 @@
 
 
 <h:body>
-	<h:form>
+	<h:form id="cityform">
+		<p:growl id="msgGrowl" life="15000" />
 		<p:panel header="Cidades"></p:panel>
 
-		<p:dataTable emptyMessage="Nenhum Registro" paginator="true">
-			<f:facet name="footer">
-				<p:commandButton value="Adicionar"
-					oncomplete="PF('dialogo').show();" />
+		<p:dataTable id="dataTable" rowsPerPageTemplate="7,15,30,50,100"
+			emptyMessage="Nenhum Registro encontrado" rows="7" paginator="true"
+			var="city" value="#{cidadeBean.listaCidade}"
+			style=" text-align:center;">
 
+
+
+			<f:facet name="header">
+				<p:commandButton value="Listar Cidades"
+					action="#{cidadeBean.carregar()}"
+					update=":cityform:dataTable :cityform:msgGrowl" />
 			</f:facet>
 
-			<p:column headerText="ID"></p:column>
-			<p:column headerText="Cidade"></p:column>
-			<p:column headerText="Estado"></p:column>
+			<f:facet name="footer">
+				<p:commandButton value="Adicionar"
+					oncomplete="PF('dialogo').show();"
+					actionListener="#{cidadeBean.novo()}"
+					update=":formCadastro:dialogpanel" />
+			</f:facet>
+
+			<p:column headerText="ID" sortBy="#{city.codigo}" filterBy="#{city.codigo}">
+				<p:outputLabel value="#{city.codigo}" />
+			</p:column>
+
+			<p:column headerText="Cidade" sortBy="#{city.nome}" filterBy="#{city.nome}">
+				<p:outputLabel value="#{city.nome}" />
+			</p:column>
+
+			<p:column headerText="Estado" sortBy="#{city.estado.nome}" filterBy="#{city.estado.nome}">
+				<p:outputLabel value="#{city.estado.nome}" />
+			</p:column>
+
 			<p:column headerText="Opções"></p:column>
 		</p:dataTable>
 	</h:form>
@@ -33,15 +56,26 @@
      resizable=false ou true"mudar o tamanho a janela suspensa" |
      modal=false ou true "clicar foda da janela suspensa"|
      closable="true?" 'controla o botão fechar do dialogo'-->
-	<p:dialog header="Cadastro de Cidade" widgetVar="dialogo" modal="true" responsive="true">
-		<h:form>
-			<h:panelGrid columns="2">
+	<p:dialog header="Cadastro de Cidade" widgetVar="dialogo" modal="true"
+		responsive="true">
+
+		<p:messages id="msgdialog" autoUpdate="true" closable="true" />
+
+		<h:form id="formCadastro">
+
+			<h:panelGrid id="dialogpanel" columns="2">
 				<p:outputLabel value="Cidade: " />
-				<p:inputText maxlength="40" size="30" />
+				<p:inputText maxlength="40" size="30"
+					value="#{cidadeBean.cidade.nome}" />
 
 				<p:outputLabel value="Estado: " />
-				<p:selectOneMenu filter="true">
-					<f:selectItem itemValue="" itemLabel="Selecione um Estado" />
+
+				<p:selectOneMenu filter="true" value="#{cidadeBean.estado}">
+					<f:selectItem itemDisabled="true" noSelectionOption="true"	itemLabel="Selecione um estado" />
+					<f:selectItems value="#{cidadeBean.listaEstado}" var="estado"
+						itemValue="#{estado.toString()}" itemLabel="#{estado.nome} - #{estado.sigla}" />
+
+
 
 				</p:selectOneMenu>
 
