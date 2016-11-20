@@ -12,9 +12,6 @@
 
 
 
-<!-- _________________________________________________________________________________________________________________________________ -->
-<!-- Informações após expandir linha -->
-
 
 <h:body>
 
@@ -22,6 +19,11 @@
 		<p:growl id="msgGrowl" life="15000" />
 		<p:panel header="Usuários">
 		</p:panel>
+
+
+
+		<!-- _________________________________________________________________________________________________________________________________ -->
+		<!-- Informações de cabeçalho da tabela -->
 
 
 		<p:dataTable id="dataTable" rowsPerPageTemplate="7,15,30,50,100"
@@ -34,27 +36,24 @@
 
 				<p:panelGrid>
 
-
-
-
+					<p:dialog widgetVar="statusDialog" modal="true" draggable="false"
+						closable="false" resizable="false" showHeader="false">
+						<p:graphicImage value="/images/Loading.gif" />
+					</p:dialog>
 
 					<!-- Personalizar table -->
-					<p:commandButton id="toggler" type="button" value=""
-						icon="ui-icon-calculator"
-						style="float:right; height: 33px; width:34px; " />
+					<p:commandButton title="Filtrar Colunas" id="toggler" type="button"
+						value="" icon="ui-icon-calculator"
+						style="float:left; height: 33px; width:34px " />
 					<p:columnToggler datasource="dataTable" trigger="toggler" />
 
-					
-					
-					<!-- Adicionar  -->
-					<p:commandButton icon="ui-icon-plus " value="Add "
-						style="float:left; height:33px;"
-						oncomplete="PF('dialogo').show();" action="#{usuarioBean.novo()}"
-						update=":dialogform" />
 
+
+					<p:ajaxStatus onstart="PF('statusDialog').show()"
+						onsuccess="PF('statusDialog').hide()" />
 
 					<!-- Atualizar table -->
-					<p:commandButton value="Update" icon="ui-icon-refresh"
+					<p:commandButton value="Atualizar" icon="ui-icon-refresh"
 						action="#{usuarioBean.carregar()}"
 						style="float:left; height:33px;"
 						update=":userform:dataTable :userform:msgGrowl" />
@@ -64,24 +63,27 @@
 
 
 
+					<!-- Adicionar  -->
+					<p:commandButton icon="ui-icon-plus " value="Adicionar "
+						style="float:left; height:33px;"
+						oncomplete="PF('dialogo').show();" action="#{usuarioBean.novo()}"
+						update=":dialogform" />
+
 				</p:panelGrid>
 			</f:facet>
 
 
 			<f:facet name="footer">
-				<!-- Vazio ...  -->
-
-
+				<!--Vazio...-->
 			</f:facet>
 
-
+			<!-- _________________________________________________________________________________________________________________________________ -->
+			<!-- Informações das Colunas -->
 
 			<p:column headerText="Exp" width="4%">
 				<!-- Expandir infos -->
 				<p:rowToggler />
 			</p:column>
-
-
 
 			<p:column headerText="ID" width="11%" sortBy="#{users.codigo}"
 				filterBy="#{users.codigo}" filterOptions="icon:ui-icon-search ">
@@ -98,17 +100,16 @@
 				<p:outputLabel value="#{users.email}" />
 			</p:column>
 
+			<p:column headerText="RG" sortBy="#{users.rg}" filterBy="#{users.rg}">
+				<p:outputLabel value="#{users.rg}" />
+			</p:column>
+
 			<p:column headerText="Status" width="10%" sortBy="#{users.status}"
 				filterBy="#{users.status}">
 				<p:outputLabel value="#{users.status}" />
 			</p:column>
 
-
 			<p:column headerText="Opções" width="18%">
-
-
-
-
 				<!-- Excluir -->
 				<p:commandButton title="Excluir" icon="ui-icon-trash"
 					actionListener="#{usuarioBean.excluir}" update=":userform:msgGrowl">
@@ -133,13 +134,10 @@
 					<f:attribute name="selectUser" value="#{users}" />
 				</p:commandButton>
 
-
 				<!-- Gerar Curriculo -->
 				<p:commandButton title="Curriculo" icon="ui-icon-person">
 
 				</p:commandButton>
-
-
 
 				<!-- Dialogo Global -->
 				<p:confirmDialog global="true">
