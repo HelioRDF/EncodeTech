@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.event.ActionEvent;
 
 import org.omnifaces.util.Messages;
 
@@ -23,7 +24,7 @@ import br.com.encodetech.domain.localizacao.Estado;
 @ManagedBean
 @ViewScoped
 
-public class EstadoBean implements Serializable{
+public class EstadoBean implements Serializable {
 
 	private Estado estado;
 	private boolean validarInfos = false;
@@ -32,17 +33,20 @@ public class EstadoBean implements Serializable{
 
 	public void salvar() {
 
-		
 		try {
+
+			if (!(estado == null)) {
+				dao = new EstadoDAO();
+			}
 
 			if (estado.getSigla().length() == 2) {
 				validarInfos = true;
-				
+
 				if (estado.getNome().length() >= 3) {
-					
+
 				} else {
 					validarInfos = false;
-					
+
 					Messages.addGlobalWarn("O nome do estado não está correto");
 				}
 
@@ -50,8 +54,6 @@ public class EstadoBean implements Serializable{
 				Messages.addGlobalWarn("A sigla não está correta.(precisa ter  2 digítos)");
 
 			}
-
-			
 
 			if (validarInfos) {
 
@@ -90,6 +92,35 @@ public class EstadoBean implements Serializable{
 
 		} catch (Exception e) {
 			Messages.addGlobalError("Falha ao tentar  atualizadar a lista  ");
+		}
+
+	}
+
+	public void excluir(ActionEvent evento) {
+
+		try {
+
+			estado = (Estado) evento.getComponent().getAttributes().get("meuSelect");
+			EstadoDAO dao = new EstadoDAO();
+			Messages.addGlobalInfo("Nome Removido: " + estado.getNome());
+			dao.excluir(estado);
+
+		} catch (Exception e) {
+			Messages.addGlobalError("Erro ao Remover: " + estado.getNome());
+
+		}
+
+	}
+
+	public void getinstancia(ActionEvent evento) {
+
+		try {
+			estado = (Estado) evento.getComponent().getAttributes().get("meuSelect");
+			Messages.addGlobalInfo("Seleção: " + estado.getNome());
+
+		} catch (Exception e) {
+			Messages.addGlobalError("Erro ao Editar: " + estado.getNome());
+
 		}
 
 	}

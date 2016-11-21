@@ -81,7 +81,7 @@ public class UsuarioBean implements Serializable {
 
 		try {
 
-			usuario = (Usuario) evento.getComponent().getAttributes().get("select");
+			usuario = (Usuario) evento.getComponent().getAttributes().get("meuSelect");
 			UsuarioDAO dao = new UsuarioDAO();
 			Messages.addGlobalInfo("Nome Removido: " + usuario.getNome());
 			dao.excluir(usuario);
@@ -141,7 +141,7 @@ public class UsuarioBean implements Serializable {
 	public void getinstancia(ActionEvent evento) {
 
 		try {
-			usuario = (Usuario) evento.getComponent().getAttributes().get("selectUser");
+			usuario = (Usuario) evento.getComponent().getAttributes().get("meuSelect");
 			Messages.addGlobalInfo("Seleção: " + usuario.getNome());	
 
 		} catch (Exception e) {

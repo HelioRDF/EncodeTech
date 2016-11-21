@@ -38,7 +38,7 @@
 					
 					<!-- Animação de loading -->
 					<p:dialog widgetVar="statusDialog" modal="true" draggable="false"
-						closable="false" resizable="false" showHeader="false">
+						closable="false" resizable="false" showHeader="false" >
 						<p:graphicImage value="/images/loading6.gif" />
 					</p:dialog>
 
@@ -87,7 +87,7 @@
 			</p:column>
 
 			<p:column headerText="ID" width="11%" sortBy="#{users.codigo}"
-				filterBy="#{users.codigo}" filterOptions="icon:ui-icon-search ">
+				filterBy="#{users.codigo}" >
 				<p:outputLabel value="#{users.codigo}" />
 			</p:column>
 
@@ -111,20 +111,14 @@
 			</p:column>
 
 			<p:column headerText="Opções" width="18%">
-				<!-- Excluir -->
-				<p:commandButton title="Excluir" icon="ui-icon-trash"
-					actionListener="#{usuarioBean.excluir}" update=":userform:msgGrowl">
-					<p:confirm header="Confirmação" message="Deseja excluir o usuário"
-						icon="ui-icon-alert" />
-					<f:attribute name="select" value="#{users}" />
-				</p:commandButton>
+
 
 				<!-- Editar -->
 				<p:commandButton title="Editar" icon="ui-icon-pencil"
 					actionListener="#{usuarioBean.getinstancia}"
 					update=":dialogformEditor"
 					oncomplete="PF('dialogEditorPanel').show();">
-					<f:attribute name="selectUser" value="#{users}" />
+					<f:attribute name="meuSelect" value="#{users}" />
 				</p:commandButton>
 
 				<!-- Resetar Senha -->
@@ -132,12 +126,22 @@
 					actionListener="#{usuarioBean.getinstancia}"
 					update=":dialogformSenha"
 					oncomplete="PF('dialogSenhaPanel').show();">
-					<f:attribute name="selectUser" value="#{users}" />
+					<f:attribute name="meuSelect" value="#{users}" />
 				</p:commandButton>
+				
+
 
 				<!-- Gerar Curriculo -->
 				<p:commandButton title="Curriculo" icon="ui-icon-person">
 
+				</p:commandButton>
+				
+				<!-- Excluir -->
+				<p:commandButton title="Excluir" icon="ui-icon-trash"
+					actionListener="#{usuarioBean.excluir}" update=":userform:msgGrowl">
+					<p:confirm header="Confirmação" message="Deseja excluir o usuário"
+						icon="ui-icon-alert" />
+					<f:attribute name="meuSelect" value="#{users}" />
 				</p:commandButton>
 
 				<!-- Dialogo Global -->
