@@ -1,6 +1,7 @@
 package br.com.encodetech.domain.complementos;
 
 import java.io.Serializable;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -35,4 +36,12 @@ public class GenericDomain implements Serializable {
 		this.codigo = codigo;
 	}
 
+	@Override
+	public String toString() {
+		return "GenericDomain [codigo=" + codigo + ", getCodigo()=" + getCodigo() + ", getClass()=" + getClass()
+				+ ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
+	}
+
+	
+	
 }

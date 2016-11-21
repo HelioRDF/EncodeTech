@@ -6,57 +6,136 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 <h:head>
+	
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>Cidade</title>
 </h:head>
 
 
-<h:body>
-	<h:form id="cityform">
+<h:body >
+
+
+
+	<h:form id="cityform" >
 		<p:growl id="msgGrowl" life="15000" />
 		<p:panel header="Cidades"></p:panel>
-
+		
+		
+<!-- _________________________________________________________________________________________________________________________________ -->
+<!-- Informações de cabeçalho da tabela -->
+	
+			
 		<p:dataTable id="dataTable" rowsPerPageTemplate="7,15,30,50,100"
 			emptyMessage="Nenhum Registro encontrado" rows="7" paginator="true"
 			var="city" value="#{cidadeBean.listaCidade}"
 			style=" text-align:center;">
+						
+				<f:facet name="header">
+
+				<p:panelGrid>
+					
+					<!-- Animação de loading -->
+					<p:dialog widgetVar="statusDialog" modal="true" draggable="false"
+						closable="false" resizable="false" showHeader="false" >
+						<p:graphicImage value="/images/loading6.gif" />
+					</p:dialog>
+
+					<!-- Personalizar table -->
+					<p:commandButton title="Filtrar Colunas" id="toggler" type="button"
+						value="" icon="ui-icon-calculator"
+						style="float:left; height: 33px; width:34px " />
+					<p:columnToggler datasource="dataTable" trigger="toggler" />
 
 
 
-			<f:facet name="header">
-				<p:commandButton value="Listar Cidades"
-					action="#{cidadeBean.carregar()}"
-					update=":cityform:dataTable :cityform:msgGrowl" />
+					<p:ajaxStatus onstart="PF('statusDialog').show()"
+						onsuccess="PF('statusDialog').hide()"  />
+
+					<!-- Atualizar table -->
+					<p:commandButton value="Atualizar" icon="ui-icon-refresh"
+						action="#{cidadeBean.carregar()}"
+						style="float:left; height:33px;"
+						update=":cityform:dataTable :cityform:msgGrowl"/>
+						
+
+
+					<!-- Adicionar  -->
+					<p:commandButton icon="ui-icon-plus " value="Adicionar "
+						style="float:left; height:33px;"
+						actionListener="#{cidadeBean.novo}" oncomplete="PF('dialogo').show();" 
+						update=":formCadastro:dialogpanel"/>
+
+				</p:panelGrid>
 			</f:facet>
+
 
 			<f:facet name="footer">
-				<p:commandButton value="Adicionar"
-					oncomplete="PF('dialogo').show();"
-					actionListener="#{cidadeBean.novo()}"
-					update=":formCadastro:dialogpanel" />
+				<!--Vazio...-->
 			</f:facet>
 
-			<p:column headerText="ID" sortBy="#{city.codigo}" filterBy="#{city.codigo}">
+			<!-- _________________________________________________________________________________________________________________________________ -->
+			<!-- Informações das Colunas -->
+						
+
+			<p:column headerText="ID" sortBy="#{city.codigo}"
+				filterBy="#{city.codigo}" width="11%">
 				<p:outputLabel value="#{city.codigo}" />
 			</p:column>
 
-			<p:column headerText="Cidade" sortBy="#{city.nome}" filterBy="#{city.nome}">
+			<p:column headerText="Cidade" sortBy="#{city.nome}"
+				filterBy="#{city.nome}">
 				<p:outputLabel value="#{city.nome}" />
 			</p:column>
 
-			<p:column headerText="Estado" sortBy="#{city.estado.nome}" filterBy="#{city.estado.nome}">
+			<p:column headerText="Estado" sortBy="#{city.estado.nome}"
+				filterBy="#{city.estado.nome}">
 				<p:outputLabel value="#{city.estado.nome}" />
 			</p:column>
 
-			<p:column headerText="Opções"></p:column>
+			<p:column headerText="Opções">	
+							
+					<!-- Editar -->
+				<p:commandButton title="Editar" icon="ui-icon-pencil"
+					actionListener="#{cidadeBean.getinstancia}"
+					update="formCadastro:dialogpanel"
+					oncomplete="PF('dialogo').show();">
+					<f:attribute name="meuSelect" value="#{city}" />
+				</p:commandButton>		
+			
+			<!-- Excluir -->
+				<p:commandButton title="Excluir" icon="ui-icon-trash"
+					actionListener="#{cidadeBean.excluir}" update=":cityform:msgGrowl">
+					<p:confirm header="Confirmação" message="Deseja excluir a cidade ?"
+						icon="ui-icon-alert" />
+					<f:attribute name="meuSelect" value="#{city}" />
+				</p:commandButton>
+
+
+
+				<!-- Dialogo Global -->
+				<p:confirmDialog global="true">
+					<p:commandButton value="sim" type="button"
+						styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+					<p:commandButton value="não" type="button"
+						styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+				</p:confirmDialog>
+			
+			</p:column>
+
 		</p:dataTable>
 	</h:form>
+
+
+	<!-- _________________________________________________________________________________________________________________________________ -->
+	<!--   Dialog do Adicionar             -->
+			
+			
 
 	<!-- draggable = false ou true "mover a janela suspensa"| 
      resizable=false ou true"mudar o tamanho a janela suspensa" |
      modal=false ou true "clicar foda da janela suspensa"|
      closable="true?" 'controla o botão fechar do dialogo'-->
-	<p:dialog header="Cadastro de Cidade" widgetVar="dialogo" modal="true"
+	<p:dialog header="Cadastro de Estado" widgetVar="dialogo" modal="true"
 		responsive="true">
 
 		<p:messages id="msgdialog" autoUpdate="true" closable="true" />
@@ -65,24 +144,26 @@
 
 			<h:panelGrid id="dialogpanel" columns="2">
 				<p:outputLabel value="Cidade: " />
-				<p:inputText maxlength="40" size="30"
+				<p:inputText maxlength="50" size="20"
 					value="#{cidadeBean.cidade.nome}" />
 
-				<p:outputLabel value="Estado: " />
-
-				<p:selectOneMenu filter="true" value="#{cidadeBean.estado}">
+					
+			<p:outputLabel value="Estado: " />
+				<p:selectOneMenu filter="true" value="#{cidadeBean.cidade.estado}" 
+				 
+				converter="omnifaces.SelectItemsConverter">
 					<f:selectItem itemDisabled="true" noSelectionOption="true"	itemLabel="Selecione um estado" />
 					<f:selectItems value="#{cidadeBean.listaEstado}" var="estado"
-						itemValue="#{estado.toString()}" itemLabel="#{estado.nome} - #{estado.sigla}" />
-
-
-
+						itemValue="#{estado}" itemLabel="#{estado.nome} - #{estado.sigla}" />
 				</p:selectOneMenu>
+					
+					
 
 			</h:panelGrid>
 			<h:panelGrid columns="2">
+				<p:commandButton value="Salvar"
+					actionListener="#{cidadeBean.salvar()}" update="msgdialog" />
 
-				<p:commandButton value="Salvar" />
 				<p:commandButton value="Fechar" oncomplete="PF('dialogo').hide();" />
 
 			</h:panelGrid>

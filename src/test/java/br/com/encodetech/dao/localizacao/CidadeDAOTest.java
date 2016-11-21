@@ -6,8 +6,6 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import br.com.encodetech.dao.complementos.GenericDAO;
-import br.com.encodetech.dao.localizacao.CidadeDAO;
-import br.com.encodetech.dao.localizacao.EstadoDAO;
 import br.com.encodetech.domain.localizacao.Cidade;
 import br.com.encodetech.domain.localizacao.Estado;
 
@@ -18,7 +16,7 @@ import br.com.encodetech.domain.localizacao.Estado;
 public class CidadeDAOTest extends GenericDAO<Cidade> {
 
 	@Test
-	@Ignore
+	
 	public void salvar() {
 		Long codigoEstado = 1L;
 

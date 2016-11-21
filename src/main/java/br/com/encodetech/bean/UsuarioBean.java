@@ -52,6 +52,8 @@ public class UsuarioBean implements Serializable {
 	}
 
 	public void novo() {
+		
+		fechar();
 		usuario = new Usuario();
 		dao = new UsuarioDAO();
 	}

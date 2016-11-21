@@ -70,6 +70,10 @@ public class EstadoBean implements Serializable {
 	}
 
 	public void novo() {
+		
+
+		fechar();
+
 		estado = new Estado();
 		dao = new EstadoDAO();
 

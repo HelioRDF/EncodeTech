@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.event.ActionEvent;
 
 import org.omnifaces.util.Messages;
 
@@ -17,50 +18,84 @@ import br.com.encodetech.domain.localizacao.Estado;
 @ManagedBean
 @ViewScoped
 public class CidadeBean implements Serializable {
-
-	Cidade cidade;
-	CidadeDAO dao;
-	List<Cidade> listaCidade;
-	Estado estado;
-
-	EstadoDAO daoEstado;
-	List<Estado> listaEstado;
+	private List<Cidade> listaCidade;
+	private List<Estado> listaEstado;
+	
+	private Cidade cidade;
+	private CidadeDAO daoCidade;
+	
+	private Estado estado;
+	private EstadoDAO daoEstado;
+	
 
 	public void salvar() {
+		
+		if (!(cidade == null)) {
+			daoCidade = new CidadeDAO();
+		}
 
-		estado = new Estado();
-		cidade.setEstado(estado);
-
-		dao.merge(cidade);
+		
+		daoCidade.merge(cidade);
 		Messages.addGlobalInfo("Cidade salva com sucesso: " + cidade.getNome());
-
+		
+		cidade = new Cidade();
 	}
 
 	public void novo() {
-		daoEstado = new EstadoDAO();
-		listaEstado = daoEstado.listar();
+		
+		fechar();
+		
+		
+		try {
+			
+			daoEstado = new EstadoDAO();
+			listaEstado = daoEstado.listar();
 
-		cidade = new Cidade();
-		dao = new CidadeDAO();
+			cidade = new Cidade();
+			daoCidade = new CidadeDAO();
 
+			
+		} catch (Exception e) {
+			Messages.addGlobalError("Erro no metodo novo!!!");
+		}
+		
+	
 	}
 
 	public void fechar() {
 		cidade = null;
-		dao = null;
+		daoCidade = null;
 		daoEstado = null;
 		listaEstado = null;
 		estado = null;
 
 	}
+	
+	
+	public void excluir(ActionEvent evento) {
 
+		try {
+
+			cidade = (Cidade) evento.getComponent().getAttributes().get("meuSelect");
+			CidadeDAO dao = new CidadeDAO();
+			Messages.addGlobalInfo("Nome Removido: " + cidade.getNome());
+			dao.excluir(cidade);
+
+		} catch (Exception e) {
+			Messages.addGlobalError("Erro ao Remover: " + estado.getNome());
+
+		}
+
+	}
+	
 	public void carregar() {
 
 		try {
 			cidade = new Cidade();
-			dao = new CidadeDAO();
-			this.listaCidade = dao.listar();
-			dao = null;
+			daoCidade = new CidadeDAO();
+			listaCidade = daoCidade.listar();
+			
+			daoCidade = null;
 			cidade = null;
 			Messages.addGlobalInfo("Lista atualizada com sucesso ");
 
@@ -70,6 +105,25 @@ public class CidadeBean implements Serializable {
 
 	}
 
+	public void getinstancia(ActionEvent evento) {
+
+		try {
+			
+			daoEstado = new EstadoDAO();
+			listaEstado = daoEstado.listar();
+			cidade = (Cidade) evento.getComponent().getAttributes().get("meuSelect");
+			Messages.addGlobalInfo("Cidade: " + cidade.getNome());
+			Messages.addGlobalInfo("Estado: " + cidade.getEstado().getNome());
+		} catch (Exception e) {
+			Messages.addGlobalError("Erro ao Editar: " + cidade.getNome());
+
+		}
+
+	}
+	
+	//------------------------------------------------------------------------------------------
+	
+	
 	public Cidade getCidade() {
 		return cidade;
 	}
