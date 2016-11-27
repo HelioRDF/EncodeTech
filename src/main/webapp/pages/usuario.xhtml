@@ -293,7 +293,7 @@
 
 				<p:outputLabel value="Confirmar senha:" required="true" />
 				<p:password id="confirmar" maxlength="16" size="25"
-					value="#{usuarioBean.confirmar}" required="true"
+					value="#{usuarioBean.confirmar}" required="true" validator="warn"
 					requiredMessage="Verificar campo Confirmar Senha"
 					validatorMessage="Erro de validação: o comprimento é menor do que o mínimo permitido. '4 dígitos' ">
 					<f:validateLength minimum="4" />
