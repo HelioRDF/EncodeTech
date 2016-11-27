@@ -20,47 +20,51 @@ import br.com.encodetech.domain.localizacao.Estado;
 public class CidadeBean implements Serializable {
 	private List<Cidade> listaCidade;
 	private List<Estado> listaEstado;
-	
+
 	private Cidade cidade;
 	private CidadeDAO daoCidade;
-	
+
 	private Estado estado;
 	private EstadoDAO daoEstado;
-	
+
+	// Salvar
+	// -------------------------------------------------------------------------------------
 
 	public void salvar() {
-		
+
 		if (!(cidade == null)) {
 			daoCidade = new CidadeDAO();
 		}
 
-		
 		daoCidade.merge(cidade);
 		Messages.addGlobalInfo("Cidade salva com sucesso: " + cidade.getNome());
-		
+
 		cidade = new Cidade();
 	}
 
+	// Novo
+	// -------------------------------------------------------------------------------------
+
 	public void novo() {
-		
+
 		fechar();
-		
-		
+
 		try {
-			
+
 			daoEstado = new EstadoDAO();
 			listaEstado = daoEstado.listar();
 
 			cidade = new Cidade();
 			daoCidade = new CidadeDAO();
 
-			
 		} catch (Exception e) {
 			Messages.addGlobalError("Erro no metodo novo!!!");
 		}
-		
-	
+
 	}
+
+	// Fechar
+	// -------------------------------------------------------------------------------------
 
 	public void fechar() {
 		cidade = null;
@@ -70,8 +74,10 @@ public class CidadeBean implements Serializable {
 		estado = null;
 
 	}
-	
-	
+
+	// Excluir
+	// -------------------------------------------------------------------------------------
+
 	public void excluir(ActionEvent evento) {
 
 		try {
@@ -87,14 +93,17 @@ public class CidadeBean implements Serializable {
 		}
 
 	}
-	
+
+	// Carregar
+	// -------------------------------------------------------------------------------------
+
 	public void carregar() {
 
 		try {
 			cidade = new Cidade();
 			daoCidade = new CidadeDAO();
 			listaCidade = daoCidade.listar();
-			
+
 			daoCidade = null;
 			cidade = null;
 			Messages.addGlobalInfo("Lista atualizada com sucesso ");
@@ -105,10 +114,13 @@ public class CidadeBean implements Serializable {
 
 	}
 
+	// Instanciar
+	// -------------------------------------------------------------------------------------
+
 	public void getinstancia(ActionEvent evento) {
 
 		try {
-			
+
 			daoEstado = new EstadoDAO();
 			listaEstado = daoEstado.listar();
 			cidade = (Cidade) evento.getComponent().getAttributes().get("meuSelect");
@@ -120,10 +132,9 @@ public class CidadeBean implements Serializable {
 		}
 
 	}
-	
-	//------------------------------------------------------------------------------------------
-	
-	
+
+	// ------------------------------------------------------------------------------------------
+
 	public Cidade getCidade() {
 		return cidade;
 	}

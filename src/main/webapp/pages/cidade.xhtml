@@ -144,14 +144,17 @@
 
 			<h:panelGrid id="dialogpanel" columns="2">
 				<p:outputLabel value="Cidade: " />
-				<p:inputText maxlength="50" size="20"
-					value="#{cidadeBean.cidade.nome}" />
+				<p:inputText maxlength="50" size="20" required="true" requiredMessage="Informe a Cidade corretamente"
+					value="#{cidadeBean.cidade.nome}" > 
+					
+					<f:validateLength minimum="2" ></f:validateLength>
+					</p:inputText>
 
 					
 			<p:outputLabel value="Estado: " />
-				<p:selectOneMenu filter="true" value="#{cidadeBean.cidade.estado}" 
+				<p:selectOneMenu filter="true" value="#{cidadeBean.cidade.estado}"  
 				 
-				converter="omnifaces.SelectItemsConverter">
+				converter="omnifaces.SelectItemsConverter"  required="true" requiredMessage="Informe o Estado corretamente">
 					<f:selectItem itemDisabled="true" noSelectionOption="true"	itemLabel="Selecione um estado" />
 					<f:selectItems value="#{cidadeBean.listaEstado}" var="estado"
 						itemValue="#{estado}" itemLabel="#{estado.nome} - #{estado.sigla}" />

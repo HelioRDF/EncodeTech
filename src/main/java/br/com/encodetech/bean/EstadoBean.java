@@ -27,10 +27,13 @@ import br.com.encodetech.domain.localizacao.Estado;
 public class EstadoBean implements Serializable {
 
 	private Estado estado;
-	private boolean validarInfos = false;
 	private EstadoDAO dao;
 	private List<Estado> listaEstado;
 
+	
+
+	// Salvar
+	// -------------------------------------------------------------------------------------
 	public void salvar() {
 
 		try {
@@ -39,35 +42,22 @@ public class EstadoBean implements Serializable {
 				dao = new EstadoDAO();
 			}
 
-			if (estado.getSigla().length() == 2) {
-				validarInfos = true;
-
-				if (estado.getNome().length() >= 3) {
-
-				} else {
-					validarInfos = false;
-
-					Messages.addGlobalWarn("O nome do estado não está correto");
-				}
-
-			} else {
-				Messages.addGlobalWarn("A sigla não está correta.(precisa ter  2 digítos)");
-
-			}
-
-			if (validarInfos) {
 
 				dao.merge(estado);
 				Messages.addGlobalInfo("Estado salvo com sucesso: " + estado.getNome());
-			}
+
 
 		} catch (Exception e) {
 			Messages.addGlobalError("Não foi possível salvar o Estado, preencha todos os campos corretamente! ");
 		} finally {
-			validarInfos = false;
+		
 		}
 
 	}
+	
+
+	// Novo
+	// -------------------------------------------------------------------------------------
 
 	public void novo() {
 		
@@ -79,10 +69,17 @@ public class EstadoBean implements Serializable {
 
 	}
 
+
+	// Fechar
+	// -------------------------------------------------------------------------------------
 	public void fechar() {
 		estado = null;
 		dao = null;
 	}
+	
+
+	// Carregar
+	// -------------------------------------------------------------------------------------
 
 	public void carregar() {
 
@@ -100,6 +97,10 @@ public class EstadoBean implements Serializable {
 
 	}
 
+	
+
+	// Excluir
+	// -------------------------------------------------------------------------------------
 	public void excluir(ActionEvent evento) {
 
 		try {
@@ -115,6 +116,10 @@ public class EstadoBean implements Serializable {
 		}
 
 	}
+	
+
+	// Instaciar
+	// -------------------------------------------------------------------------------------
 
 	public void getinstancia(ActionEvent evento) {
 
