@@ -35,10 +35,10 @@
 			<f:facet name="header">
 
 				<p:panelGrid>
-					
+
 					<!-- Animação de loading -->
 					<p:dialog widgetVar="statusDialog" modal="true" draggable="false"
-						closable="false" resizable="false" showHeader="false" >
+						closable="false" resizable="false" showHeader="false">
 						<p:graphicImage value="/images/loading6.gif" />
 					</p:dialog>
 
@@ -87,7 +87,7 @@
 			</p:column>
 
 			<p:column headerText="ID" width="11%" sortBy="#{users.codigo}"
-				filterBy="#{users.codigo}" >
+				filterBy="#{users.codigo}">
 				<p:outputLabel value="#{users.codigo}" />
 			</p:column>
 
@@ -128,19 +128,19 @@
 					oncomplete="PF('dialogSenhaPanel').show();">
 					<f:attribute name="meuSelect" value="#{users}" />
 				</p:commandButton>
-				
+
 
 
 				<!-- Gerar Curriculo -->
 				<p:commandButton title="Curriculo" icon="ui-icon-person">
 
 				</p:commandButton>
-				
+
 				<!-- Excluir -->
 				<p:commandButton title="Excluir" icon="ui-icon-trash"
 					actionListener="#{usuarioBean.excluir}" update=":userform:msgGrowl">
-					<p:confirm header="Confirmação" message="Deseja excluir o usuário ?"
-						icon="ui-icon-alert" />
+					<p:confirm header="Confirmação"
+						message="Deseja excluir o usuário ?" icon="ui-icon-alert" />
 					<f:attribute name="meuSelect" value="#{users}" />
 				</p:commandButton>
 
@@ -192,73 +192,142 @@
      modal=false ou true "clicar foda da janela suspensa"|
      closable="true?" 'controla o botão fechar do dialogo'-->
 
-	<p:dialog header="Editar Usuário" widgetVar="dialogo" modal="true"
+	<p:dialog header="Adicionar Usuário" widgetVar="dialogo" modal="true"
 		responsive="true">
 
 		<h:form id="dialogform">
 
-			<p:messages id="msgdialog" autoUpdate="true" closable="true" />
-			<h:panelGrid columns="2" id="dialogpanel">
+
+
+			<p:messages globalOnly="true"></p:messages>
+			<p:growl globalOnly="true"></p:growl>
+
+			<h:panelGrid columns="3" id="dialogpanel">
+
 
 				<p:outputLabel value="Status: " />
 				<p:selectBooleanButton onLabel="Ativado" offLabel="Desativado"
-					value="#{usuarioBean.usuario.status}">
+					value="#{usuarioBean.usuario.status}" required="true"
+					requiredMessage="Verificar campo Status">
 				</p:selectBooleanButton>
+				<p></p>
 
 				<p:outputLabel value="Sexo: " />
-				<p:selectOneRadio value="#{usuarioBean.usuario.sexo}">
-
+				<p:selectOneRadio id="sexo" value="#{usuarioBean.usuario.sexo}"
+					required="false" requiredMessage="Verificar campo Sexo">
 					<f:selectItem itemValue="masculino" itemLabel="Masculino" />
 					<f:selectItem itemValue="feminino" itemLabel="Feminino" />
-
 				</p:selectOneRadio>
+				<p:message for="sexo" />
 
-				<p:outputLabel value="Nome: " required="true" />
-				<p:inputText maxlength="50" size="25"
-					value="#{usuarioBean.usuario.nome}" />
+				<p:outputLabel value="Nome  Completo: ">
+				</p:outputLabel>
+				<p:inputText id="nome" maxlength="50" size="25" label="nome"
+					value="#{usuarioBean.usuario.nome}" required="true"
+					requiredMessage="Verificar campo Nome"
+					validatorMessage="Erro de validação: Dígite seu nome completo">
+					<f:validateLength minimum="5" />
 
 
-				<p:outputLabel value="RG: " required="true" />
-				<p:inputText maxlength="50" size="25"
-					value="#{usuarioBean.usuario.rg}" />
+					<f:validateRegex disabled="false" for="nome"
+						validatorMessage="Erro de validação: o nome não é válido "
+						pattern="[ A-Za-z ]* + *[ A-Za-z ]*" />
 
-				<p:outputLabel value="CPF: " required="true" />
-				<p:inputText maxlength="50" size="25"
-					value="#{usuarioBean.usuario.cpf}" />
+				</p:inputText>
+				<p:message for="nome" />
 
-				<p:outputLabel value="Data de Nasc: " required="true" />
-				<p:calendar yearRange="c-60:c+1" navigator="true" pages="1"
-					value="#{usuarioBean.usuario.dataNascimento}" />
+
+				<p:outputLabel value="RG: " />
+				<p:inputText id="rg" maxlength="50" size="25"
+					value="#{usuarioBean.usuario.rg}" required="false"
+					requiredMessage="Verificar campo RG"
+					validatorMessage="Erro de validação: o comprimento é menor do que o mínimo permitido. '5 dígitos' ">
+					<f:validateLength minimum="5" disabled="true" />
+				</p:inputText>
+				<p:message for="rg" />
+
+				<p:outputLabel value="CPF: " />
+				<p:inputMask mask="999.999.999-99" id="cpf" maxlength="50" size="25"
+					value="#{usuarioBean.usuario.cpf}" required="false"
+					requiredMessage="Verificar campo CPF"
+					validatorMessage="Erro de validação: o comprimento é menor do que o mínimo permitido. '11 dígitos' ">
+					<f:validateLength minimum="11" disabled="true" />
+				</p:inputMask>
+				<p:message for="cpf" />
+
+				<p:outputLabel value="Data de Nasc: " />
+				<p:calendar id="calendario" yearRange="c-60:c+1" navigator="true"
+					pages="1" value="#{usuarioBean.usuario.dataNascimento}"
+					required="false"
+					requiredMessage="Verificar campo Data de Nascimento" />
+				<p:message for="calendario" />
 
 				<p:separator style="border: 1px solid #e6e6ff; height: 1px;"></p:separator>
 				<p:separator style="border: 1px solid #e6e6ff; height: 1px;"></p:separator>
+				<p></p>
 
 
-				<p:outputLabel value="E-mail:" required="true" />
-				<p:inputText maxlength="50" size="25"
-					value="#{usuarioBean.usuario.email}" />
 
-				<p:outputLabel value="Senha:" required="true" />
-				<p:password maxlength="16" size="25"
-					value="#{usuarioBean.usuario.senha}" />
+
+				<p:outputLabel value="E-mail:" />
+				<p:inputText id="email" maxlength="50" size="25"
+					value="#{usuarioBean.usuario.email}" required="false"
+					requiredMessage="Verificar campo E-Mail"
+					validatorMessage="Erro de validação: o e-mail não é válido ">
+					<f:validateRegex disabled="true" for="email"
+						validatorMessage="Erro de validação: o endereço de e-mail não é válido "
+						pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+				</p:inputText>
+				<p:message for="email" />
+
+
+				<p:outputLabel value="Digite uma Senha:" />
+				<p:password id="senha" match="confirmar" maxlength="16" size="25"
+					feedback="true" inline="true" value="#{usuarioBean.usuario.senha}"
+					required="true" requiredMessage="Verificar campo Senha"
+					validatorMessage="Erro de validação: o comprimento é menor do que o mínimo permitido. '4 dígitos' ">
+					<f:validateLength minimum="4" />
+				</p:password>
+				<p:message for="senha" />
+
 
 				<p:outputLabel value="Confirmar senha:" required="true" />
-				<p:password maxlength="16" size="25"
-					value="#{usuarioBean.confirmar}" />
+				<p:password id="confirmar" maxlength="16" size="25"
+					value="#{usuarioBean.confirmar}" required="true"
+					requiredMessage="Verificar campo Confirmar Senha"
+					validatorMessage="Erro de validação: o comprimento é menor do que o mínimo permitido. '4 dígitos' ">
+					<f:validateLength minimum="4" />
+				</p:password>
 
+				<p:message for="confirmar" />
+
+
+
+
+				<!-- h:outputText rendered="#{usuarioBean.confirmar == false}" value="Senha Incorreta" / -->
 
 			</h:panelGrid>
 
 
+			<p:messages id="global" globalOnly="true"></p:messages>
 
-			<h:panelGrid columns="2">
+
+
+			<h:panelGrid columns="3">
 
 				<p:commandButton value="Salvar"
-					actionListener="#{usuarioBean.salvar()}"
-					update=":dialogform:msgdialog" />
+					actionListener="#{usuarioBean.salvar()}" validateClient="true"
+					update=":dialogform:dialogpanel: dialogform:global ">
+				</p:commandButton>
+
+
+
+
+
 				<p:commandButton value="Fechar"
 					actionListener="#{usuarioBean.fechar()}"
 					oncomplete="PF('dialogo').hide();" />
+				<p></p>
 
 			</h:panelGrid>
 
@@ -276,42 +345,83 @@
 
 		<h:form id="dialogformEditor">
 
-			<p:messages id="msgdialogEditor" autoUpdate="true" closable="true" />
-			<h:panelGrid columns="2" id="dialogEditorPanel">
+			<p:messages id="msgdialogEditor" autoUpdate="true" globalOnly="true"
+				closable="true" />
+			<h:panelGrid columns="3" id="dialogEditorPanel">
 
 				<p:outputLabel value="Status: " />
 				<p:selectBooleanButton onLabel="Ativado" offLabel="Desativado"
 					value="#{usuarioBean.usuario.status}">
 				</p:selectBooleanButton>
+				<p></p>
 
 				<p:outputLabel value="Sexo: " />
 				<p:selectOneRadio value="#{usuarioBean.usuario.sexo}">
-
 					<f:selectItem itemValue="masculino" itemLabel="Masculino" />
 					<f:selectItem itemValue="feminino" itemLabel="Feminino" />
-
 				</p:selectOneRadio>
+				<p></p>
 
-				<p:outputLabel value="Nome: " required="true" />
-				<p:inputText maxlength="50" size="25"
-					value="#{usuarioBean.usuario.nome}" />
+				<p:outputLabel value="Nome  Completo: ">
+				</p:outputLabel>
+				<p:inputText id="nome" maxlength="50" size="25" label="nome"
+					value="#{usuarioBean.usuario.nome}" required="true"
+					requiredMessage="Verificar campo Nome"
+					validatorMessage="Erro de validação: Digite seu nome completo ">
+					<f:validateLength minimum="5" />
+
+					<f:validateRegex disabled="false" for="nome"
+						validatorMessage="Erro de validação: o nome não é válido "
+						pattern="[ A-Za-z ]* + *[ A-Za-z ]*" />
+				</p:inputText>
+				<p:message for="nome" />
 
 
-				<p:outputLabel value="RG: " required="true" />
-				<p:inputText maxlength="50" size="25"
-					value="#{usuarioBean.usuario.rg}" />
+				<p:outputLabel value="RG: " />
+				<p:inputText id="rg" maxlength="50" size="25"
+					value="#{usuarioBean.usuario.rg}" required="false"
+					requiredMessage="Verificar campo RG"
+					validatorMessage="Erro de validação: o comprimento é menor do que o mínimo permitido. '5 dígitos' ">
+					<f:validateLength minimum="5" disabled="true" />
+				</p:inputText>
+				<p:message for="rg" />
 
-				<p:outputLabel value="CPF: " required="true" />
-				<p:inputText maxlength="50" size="25"
-					value="#{usuarioBean.usuario.cpf}" />
+				<p:outputLabel value="CPF: " />
+				<p:inputMask mask="999.999.999-99" id="cpf" maxlength="50" size="25"
+					value="#{usuarioBean.usuario.cpf}" required="false"
+					requiredMessage="Verificar campo CPF"
+					validatorMessage="Erro de validação: o comprimento é menor do que o mínimo permitido. '11 dígitos' ">
+					<f:validateLength minimum="11" disabled="true" />
+				</p:inputMask>
+				<p:message for="cpf" />
 
-				<p:outputLabel value="Data de Nasc: " required="true" />
-				<p:calendar yearRange="c-60:c+1" navigator="true" pages="1"
-					value="#{usuarioBean.usuario.dataNascimento}" />
+				<p:outputLabel value="Data de Nasc: " />
+				<p:calendar id="calendario" yearRange="c-60:c+1" navigator="true"
+					pages="1" value="#{usuarioBean.usuario.dataNascimento}"
+					required="false"
+					requiredMessage="Verificar campo Data de Nascimento" />
+				<p:message for="calendario" />
 
-				<p:outputLabel value="E-mail:" required="true" />
-				<p:inputText maxlength="50" size="25"
-					value="#{usuarioBean.usuario.email}" />
+				<p:separator style="border: 1px solid #e6e6ff; height: 1px;"></p:separator>
+				<p:separator style="border: 1px solid #e6e6ff; height: 1px;"></p:separator>
+				<p></p>
+
+
+
+
+				<p:outputLabel value="E-mail:" />
+				<p:inputText id="email" maxlength="50" size="25"
+					value="#{usuarioBean.usuario.email}" required="false"
+					requiredMessage="Verificar campo E-Mail"
+					validatorMessage="Erro de validação: o e-mail não é válido ">
+					<f:validateRegex disabled="true" for="email"
+						validatorMessage="Erro de validação: o endereço de e-mail não é válido "
+						pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+				</p:inputText>
+				<p:message for="email" />
+
+
+
 
 			</h:panelGrid>
 
@@ -319,9 +429,11 @@
 
 			<h:panelGrid columns="2">
 
+
 				<p:commandButton value="Salvar"
-					actionListener="#{usuarioBean.editar}"
-					update=":dialogformEditor:msgdialogEditor" />
+					actionListener="#{usuarioBean.editar}" validateClient="true"
+					update=":dialogformEditor:dialogEditorPanel: ">
+				</p:commandButton>
 				<p:commandButton value="Fechar"
 					actionListener="#{usuarioBean.fechar()}"
 					oncomplete="PF('dialogEditorPanel').hide();" />
@@ -343,41 +455,64 @@
 		<h:form id="dialogformSenha">
 
 			<p:messages id="msgdialogSenha" autoUpdate="true" closable="true" />
+
 			<h:panelGrid columns="2" id="dialogSenhaPanelGrid">
 
 
+				<p:outputLabel value="Nome: " />
+				<p:outputLabel value="#{usuarioBean.usuario.nome}" />
 
-				<p:outputLabel value="Nome: " required="true" />
-				<p:inputText maxlength="50" size="25"
-					value="#{usuarioBean.usuario.nome}" />
 
 
 
 				<p:outputLabel value="CPF: " required="true" />
-				<p:inputText maxlength="50" size="25"
-					value="#{usuarioBean.usuario.cpf}" />
+				<p:outputLabel value="#{usuarioBean.usuario.cpf}" />
+
+
 
 
 				<p:outputLabel value="E-mail:" required="true" />
-				<p:inputText maxlength="50" size="25"
-					value="#{usuarioBean.usuario.email}" />
+				<p:outputLabel value="#{usuarioBean.usuario.email}" />
 
-				<p:outputLabel value="Senha:" required="true" />
-				<p:password maxlength="16" size="25"
-					value="#{usuarioBean.usuario.senha}" />
+
+
+
+
+				<p:separator style="border: 1px solid #e6e6ff; height: 1px;"></p:separator>
+				<p:separator style="border: 1px solid #e6e6ff; height: 1px;"></p:separator>
+
+
+
+				<p:outputLabel value="Digite uma Senha:" />
+				<p:password id="senha" maxlength="16" size="25" feedback="true"
+					inline="true" match="confirmar"
+					value="#{usuarioBean.usuario.senha}" required="true"
+					requiredMessage="Verificar campo Senha"
+					validatorMessage="Erro de validação: As senhas não conferem, ou o comprimento é menor do que o mínimo permitido. '4 dígitos' ">
+					<f:validateLength minimum="4" />
+				</p:password>
+
+
 
 				<p:outputLabel value="Confirmar senha:" required="true" />
-				<p:password maxlength="16" size="25"
-					value="#{usuarioBean.confirmar}" />
+				<p:password id="confirmar" maxlength="16" size="25"
+					value="#{usuarioBean.usuario.senha}" required="true"
+					requiredMessage="Verificar campo Confirmar Senha"
+					validatorMessage="Erro de validação: o comprimento é menor do que o mínimo permitido. '4 dígitos' ">
+					<f:validateLength minimum="4" />
+				</p:password>
 
 			</h:panelGrid>
+
+
+
 
 
 			<h:panelGrid columns="2">
 
 				<p:commandButton value="Salvar"
 					actionListener="#{usuarioBean.editarSenha()}"
-					update=":dialogformSenha:msgdialogSenha" />
+					update=":dialogformSenha:msgdialogSenha:" />
 				<p:commandButton value="Fechar"
 					actionListener="#{usuarioBean.fechar()}"
 					oncomplete="PF('dialogSenhaPanel').hide();" />
