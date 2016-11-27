@@ -68,15 +68,22 @@ public class Empresa extends GenericDomain {
 	@Column(length = 100, nullable = false)
 	private String descricao;
 
-	@Column(length = 14, nullable = false)
+	@Column(length = 18, nullable = false)
 	private String cnpj;
+	
+	@Column(length = 100, nullable = false)
+	private String email;
 	
 	@Column
 	private Endereco endereco;
+	
+	
 
 	// -------------------------------------------------------
 
 	public Boolean getStatus() {
+		
+		
 		return status;
 	}
 
@@ -139,6 +146,16 @@ public class Empresa extends GenericDomain {
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
 	}
+	
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
+	
 	
 	
 

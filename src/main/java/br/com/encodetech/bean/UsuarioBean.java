@@ -31,8 +31,6 @@ public class UsuarioBean implements Serializable {
 	private Usuario usuario;
 	private UsuarioDAO dao;
 	private List<Usuario> listaUsuario;
-	private String confirmar;
-	boolean validarInfos = false;
 
 	// Salvar usuário
 	// -------------------------------------------------------------------------------------
@@ -43,12 +41,11 @@ public class UsuarioBean implements Serializable {
 			usuario.setDataCadastro(new Date());
 			dao.merge(usuario);
 			Messages.addGlobalInfo("Usuário(a) " + usuario.getNome() + ", salvo com sucesso.");
-			fechar();
 
 		} catch (Exception e) {
 			Messages.addGlobalError("Não foi possível salvar o usuário, tente novamente mais tarde ... ");
 		} finally {
-			validarInfos = false;
+			fechar();
 
 		}
 	}
@@ -57,9 +54,11 @@ public class UsuarioBean implements Serializable {
 	// -------------------------------------------------------------------------------------------
 	public void novo() {
 
-		fechar();
+		usuario = null;
+		dao = null;
 		usuario = new Usuario();
 		dao = new UsuarioDAO();
+
 	}
 
 	// Fechar
@@ -117,13 +116,12 @@ public class UsuarioBean implements Serializable {
 			dao = new UsuarioDAO();
 			dao.merge(usuario);
 			Messages.addGlobalInfo("Usuário(a) ' " + usuario.getNome() + "' Editado com sucesso!!!");
-			fechar();
 
 		} catch (Exception e) {
 			Messages.addGlobalError("Erro ao Editar Usuário(a) '" + usuario.getNome() + "'");
 
 		} finally {
-
+			fechar();
 		}
 
 	}
@@ -137,14 +135,13 @@ public class UsuarioBean implements Serializable {
 			dao = new UsuarioDAO();
 			dao.merge(usuario);
 			Messages.addGlobalInfo("Usuário Editado com sucesso: " + usuario.getNome());
-			fechar();
 
 		} catch (Exception e) {
 			Messages.addGlobalError("Erro ao Editar: " + usuario.getNome());
 
 		} finally {
-			validarInfos = false;
 
+			fechar();
 		}
 
 	}
@@ -171,14 +168,6 @@ public class UsuarioBean implements Serializable {
 		return usuario;
 	}
 
-	public boolean isValidarInfos() {
-		return validarInfos;
-	}
-
-	public void setValidarInfos(boolean validarInfos) {
-		this.validarInfos = validarInfos;
-	}
-
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
@@ -193,14 +182,6 @@ public class UsuarioBean implements Serializable {
 
 	public void setListaUsuario(ArrayList<Usuario> listaUsuario) {
 		this.listaUsuario = listaUsuario;
-	}
-
-	public String getConfirmar() {
-		return confirmar;
-	}
-
-	public void setConfirmar(String confirmar) {
-		this.confirmar = confirmar;
 	}
 
 }

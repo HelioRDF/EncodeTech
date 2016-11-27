@@ -42,8 +42,6 @@ public class Endereco extends GenericDomain {
 	@Column(length = 14, nullable = false)
 	private String celular;
 
-	@Column(length = 100, nullable = false)
-	private String email;
 
 	// ----------------------------------------------
 
@@ -119,12 +117,15 @@ public class Endereco extends GenericDomain {
 		this.celular = celular;
 	}
 
-	public String getEmail() {
-		return email;
+	@Override
+	public String toString() {
+		return "Endereco [estado=" + estado + ", cidade=" + cidade + ", rua=" + rua + ", numero=" + numero + ", bairro="
+				+ bairro + ", cep=" + cep + ", complemento=" + complemento + ", telefone=" + telefone + ", celular="
+				+ celular + "]";
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+	
+	
+	
 
 }

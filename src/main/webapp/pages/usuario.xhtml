@@ -293,7 +293,7 @@
 
 				<p:outputLabel value="Confirmar senha:" required="true" />
 				<p:password id="confirmar" maxlength="16" size="25"
-					value="#{usuarioBean.confirmar}" required="true" validator="warn"
+					value="#{usuarioBean.usuario.senha}" required="true" 
 					requiredMessage="Verificar campo Confirmar Senha"
 					validatorMessage="Erro de validação: o comprimento é menor do que o mínimo permitido. '4 dígitos' ">
 					<f:validateLength minimum="4" />
@@ -303,10 +303,7 @@
 
 
 
-
-				<!-- h:outputText rendered="#{usuarioBean.confirmar == false}" value="Senha Incorreta" / -->
-
-			</h:panelGrid>
+		</h:panelGrid>
 
 
 			<p:messages id="global" globalOnly="true"></p:messages>
@@ -460,19 +457,19 @@
 
 
 				<p:outputLabel value="Nome: " />
-				<p:outputLabel value="#{usuarioBean.usuario.nome}" />
+				<p:inputText  readonly="true" value="#{usuarioBean.usuario.nome}" size="25" />
 
 
 
 
 				<p:outputLabel value="CPF: " required="true" />
-				<p:outputLabel value="#{usuarioBean.usuario.cpf}" />
+				<p:inputText readonly="true" value="#{usuarioBean.usuario.cpf}"  size="25"/>
 
 
 
 
 				<p:outputLabel value="E-mail:" required="true" />
-				<p:outputLabel value="#{usuarioBean.usuario.email}" />
+				<p:inputText readonly="true" value="#{usuarioBean.usuario.email}" size="25" />
 
 
 
