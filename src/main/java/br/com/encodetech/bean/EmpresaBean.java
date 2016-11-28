@@ -213,11 +213,26 @@ public class EmpresaBean implements Serializable {
 	// ------------------------------------------------------------------------------------------------------------------------------------------------------
 
 	public void listarInfos() {
+		
+		try {
+			
+			estadoDao = new EstadoDAO();
+			cidadeDao = new CidadeDAO();
+			
+			
+			
+			listaEstado = estadoDao.listar();
+			listaCidade = cidadeDao.listar();
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}finally {
+			
+		}
 
-		estadoDao = new EstadoDAO();
-		cidadeDao = new CidadeDAO();
-		listaEstado = estadoDao.listar();
-		listaCidade = cidadeDao.listar();
+
+		
+		
 
 	}
 

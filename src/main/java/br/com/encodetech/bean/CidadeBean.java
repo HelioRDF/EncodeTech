@@ -52,7 +52,7 @@ public class CidadeBean implements Serializable {
 		try {
 
 			daoEstado = new EstadoDAO();
-			listaEstado = daoEstado.listar();
+			listaEstado = daoEstado.listar("nome");
 
 			cidade = new Cidade();
 			daoCidade = new CidadeDAO();

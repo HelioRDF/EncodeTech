@@ -37,4 +37,10 @@
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>*.xhtml</url-pattern>
     </servlet-mapping>
+    
+    
+     <!-- Carregamento do hibernate com tom cat -->
+    <listener>
+    <listener-class>br.com.encodetech.util.HibernateContexto</listener-class>
+    </listener>
 </web-app>

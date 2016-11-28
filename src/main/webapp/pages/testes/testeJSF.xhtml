@@ -337,8 +337,10 @@
 
 
 						<p:outputLabel value="Número: "></p:outputLabel>
-						<p:inputNumber value="#{empresaBean.endereco.numero}"
-							required="false" requiredMessage="Preencha o campo Número"></p:inputNumber>
+						<p:inputText  value="#{empresaBean.endereco.numero}"
+							required="false" requiredMessage="Preencha o campo Número" converterMessage="Digite um número válido" validatorMessage="Digite um número válido">
+							<f:validateLongRange minimum="1" maximum="9999"></f:validateLongRange>
+							</p:inputText>
 
 						<p:outputLabel value="Bairro:"></p:outputLabel>
 						<p:inputText value="#{empresaBean.endereco.bairro}"
