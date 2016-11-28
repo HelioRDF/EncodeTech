@@ -1,6 +1,7 @@
 package br.com.encodetech.domain.localizacao;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 
 import br.com.encodetech.domain.complementos.GenericDomain;
 
@@ -13,56 +14,61 @@ import br.com.encodetech.domain.complementos.GenericDomain;
  */
 
 @SuppressWarnings("serial")
+@Entity
 public class Endereco extends GenericDomain {
 
 	@Column
-	private Estado estado;
+	private int estado;
 
 	@Column
-	private Cidade cidade;
+	private int cidade;
 
-	@Column(length = 100, nullable = false)
+	@Column()
 	private String rua;
 
-	@Column(nullable = false)
+	@Column()
 	private Short numero;
 
-	@Column(length = 30, nullable = false)
+	@Column()
 	private String bairro;
 
-	@Column(length = 10, nullable = false)
+	@Column()
 	private String cep;
 
-	@Column(length = 10, nullable = false)
+	@Column()
 	private String complemento;
 
-	@Column(length = 13, nullable = false)
+	@Column()
 	private String telefone;
 
-	@Column(length = 14, nullable = false)
+	@Column()
 	private String celular;
 
 
 	// ----------------------------------------------
 
-	public Estado getEstado() {
-		return estado;
-	}
 
-	public void setEstado(Estado estado) {
-		this.estado = estado;
-	}
 
-	public Cidade getCidade() {
-		return cidade;
-	}
-
-	public void setCidade(Cidade cidade) {
-		this.cidade = cidade;
-	}
+	
 
 	public String getRua() {
 		return rua;
+	}
+
+	public int getEstado() {
+		return estado;
+	}
+
+	public void setEstado(int estado) {
+		this.estado = estado;
+	}
+
+	public int getCidade() {
+		return cidade;
+	}
+
+	public void setCidade(int cidade) {
+		this.cidade = cidade;
 	}
 
 	public void setRua(String rua) {
@@ -116,6 +122,8 @@ public class Endereco extends GenericDomain {
 	public void setCelular(String celular) {
 		this.celular = celular;
 	}
+	
+	
 
 	@Override
 	public String toString() {

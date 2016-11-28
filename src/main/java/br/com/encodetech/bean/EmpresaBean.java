@@ -11,7 +11,13 @@ import javax.faces.event.ActionEvent;
 import org.omnifaces.util.Messages;
 
 import br.com.encodetech.dao.empresas.EmpresaDAO;
+import br.com.encodetech.dao.localizacao.CidadeDAO;
+import br.com.encodetech.dao.localizacao.EnderecoDAO;
+import br.com.encodetech.dao.localizacao.EstadoDAO;
 import br.com.encodetech.domain.empresas.Empresa;
+import br.com.encodetech.domain.localizacao.Cidade;
+import br.com.encodetech.domain.localizacao.Endereco;
+import br.com.encodetech.domain.localizacao.Estado;
 
 /**
  * [ Detalhes... ]
@@ -30,24 +36,44 @@ public class EmpresaBean implements Serializable {
 	private Empresa empresa;
 	private EmpresaDAO dao;
 	private List<Empresa> listaEmpresa;
+	private List<Cidade> listaCidade;
+	private List<Estado> listaEstado;
+	CidadeDAO cidadeDao;
+	EstadoDAO estadoDao;
+
+	Endereco endereco;
+	EnderecoDAO endDao;
 
 	// Salvar
 	// -------------------------------------------------------------------------------------
 	public void salvar() {
 
 		try {
-
+			
+			
+			
 			empresa.setDataCadastro(new Date());
+			endDao.merge(endereco);
+			empresa.setEndereco(endereco);	
 			dao.merge(empresa);
 			Messages.addGlobalInfo("Empresa " + empresa.getNomeEmpresa() + ", salva com sucesso.");
 
-		} catch (Exception e) {
-			System.out.println("Catch: " + e.getCause());
+		
 
-			System.out.println("Mensagem: " + e.getMessage());
+		} catch (Exception e) {
+			System.out.println("--------------- Catch: " + e.getCause());
+
+			System.out.println("--------------- Mensagem: " + e.getMessage());
+	
 			Messages.addGlobalError("Não foi possível salvar a empresa, tente novamente mais tarde ... ");
 		} finally {
-
+			
+		//	System.out.println("Endereço: "+endereco.toString());
+			System.out.println("Empresa: "+empresa.toString());
+			System.out.println("--------------- Endereço:  "+ endereco.toString());
+			
+			
+			System.out.println("Finally: ");
 			fechar();
 
 		}
@@ -57,17 +83,32 @@ public class EmpresaBean implements Serializable {
 	// -------------------------------------------------------------------------------------------
 	public void novo() {
 
+		listarInfos();
+
+		endereco = null;
+		endDao = null;
 		empresa = null;
 		dao = null;
+	
 		empresa = new Empresa();
 		dao = new EmpresaDAO();
+		endereco = new Endereco();
+		endDao = new EnderecoDAO();
+		
+		System.out.println("Método novo");
+
 	}
 
 	// Fechar
 	// -------------------------------------------------------------------------------------------
 	public void fechar() {
+	
+		endereco = null;
+		endDao = null;
 		empresa = null;
 		dao = null;
+	
+		
 	}
 
 	// Carregar
@@ -114,6 +155,8 @@ public class EmpresaBean implements Serializable {
 	public void editar() {
 
 		try {
+
+			listarInfos();
 
 			dao = new EmpresaDAO();
 			dao.merge(empresa);
@@ -169,6 +212,17 @@ public class EmpresaBean implements Serializable {
 
 	// ------------------------------------------------------------------------------------------------------------------------------------------------------
 
+	public void listarInfos() {
+
+		estadoDao = new EstadoDAO();
+		cidadeDao = new CidadeDAO();
+		listaEstado = estadoDao.listar();
+		listaCidade = cidadeDao.listar();
+
+	}
+
+	// ------------------------------------------------------------------------------------------------------------------------------------------------------
+
 	public Empresa getEmpresa() {
 		return empresa;
 	}
@@ -192,6 +246,32 @@ public class EmpresaBean implements Serializable {
 	public void setListaEmpresa(List<Empresa> listaEmpresa) {
 		this.listaEmpresa = listaEmpresa;
 	}
+
+	public List<Cidade> getListaCidade() {
+		return listaCidade;
+	}
+
+	public void setListaCidade(List<Cidade> listaCidade) {
+		this.listaCidade = listaCidade;
+	}
+
+	public List<Estado> getListaEstado() {
+		return listaEstado;
+	}
+
+	public void setListaEstado(List<Estado> listaEstado) {
+		this.listaEstado = listaEstado;
+	}
+
+	public Endereco getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
+	}
+	
+	
 
 	// ------------------------------------------------------------------------------------------------------------------------------------------------------
 

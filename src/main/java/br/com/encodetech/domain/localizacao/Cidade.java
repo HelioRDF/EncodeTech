@@ -29,7 +29,7 @@ import br.com.encodetech.domain.complementos.GenericDomain;
 @Entity
 public class Cidade extends GenericDomain{
 	
-	@Column(length =50, nullable=false)
+	@Column()
 	private String nome;
 	
 	@ManyToOne
@@ -51,6 +51,12 @@ public class Cidade extends GenericDomain{
 	public void setEstado(Estado estado) {
 		this.estado = estado;
 	}
+
+	@Override
+	public String toString() {
+		return "Cidade [nome=" + nome + ", estado=" + estado + "]";
+	}
+	
 	
 	
 

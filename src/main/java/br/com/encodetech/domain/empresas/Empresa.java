@@ -4,6 +4,8 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -49,32 +51,33 @@ import br.com.encodetech.domain.localizacao.Endereco;
 @Entity
 public class Empresa extends GenericDomain {
 
-	@Column(nullable = false)
+	@Column()
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataCadastro;
 
-	@Column(nullable = false)
+	@Column()
 	private Boolean status;
 
-	@Column(length = 50, nullable = false)
+	@Column()
 	private String nomeEmpresa;
 
-	@Column(length = 32)
+	@Column()
 	private String senha;
 
-	@Column(length = 50, nullable = false)
+	@Column()
 	private String seguimento;
 
-	@Column(length = 100, nullable = false)
+	@Column()
 	private String descricao;
 
-	@Column(length = 18, nullable = false)
+	@Column()
 	private String cnpj;
 	
-	@Column(length = 100, nullable = false)
+	@Column()
 	private String email;
 	
-	@Column
+	@OneToOne
+	@JoinColumn()
 	private Endereco endereco;
 	
 	
@@ -153,6 +156,15 @@ public class Empresa extends GenericDomain {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	
+	
+
+	@Override
+	public String toString() {
+		return "Empresa [dataCadastro=" + dataCadastro + ", status=" + status + ", nomeEmpresa=" + nomeEmpresa
+				+ ", senha=" + senha + ", seguimento=" + seguimento + ", descricao=" + descricao + ", cnpj=" + cnpj
+				+ ", email=" + email + ", endereco=" + endereco + "]";
 	}
 	
 	
