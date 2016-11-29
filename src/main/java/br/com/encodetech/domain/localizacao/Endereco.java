@@ -18,16 +18,16 @@ import br.com.encodetech.domain.complementos.GenericDomain;
 public class Endereco extends GenericDomain {
 
 	@Column
-	private int estado;
+	private Estado estado;
 
 	@Column
-	private int cidade;
+	private Cidade cidade;
 
 	@Column()
 	private String rua;
 
 	@Column()
-	private Short numero;
+	private String numero;
 
 	@Column()
 	private String bairro;
@@ -55,33 +55,49 @@ public class Endereco extends GenericDomain {
 		return rua;
 	}
 
-	public int getEstado() {
+
+
+	public Estado getEstado() {
 		return estado;
 	}
 
-	public void setEstado(int estado) {
+
+
+	public void setEstado(Estado estado) {
 		this.estado = estado;
 	}
 
-	public int getCidade() {
+
+
+	public Cidade getCidade() {
 		return cidade;
 	}
 
-	public void setCidade(int cidade) {
+
+
+	public void setCidade(Cidade cidade) {
 		this.cidade = cidade;
 	}
+
+
+
+	public String getNumero() {
+		return numero;
+	}
+
+
+
+	public void setNumero(String numero) {
+		this.numero = numero;
+	}
+
+
 
 	public void setRua(String rua) {
 		this.rua = rua;
 	}
 
-	public Short getNumero() {
-		return numero;
-	}
 
-	public void setNumero(Short numero) {
-		this.numero = numero;
-	}
 
 	public String getBairro() {
 		return bairro;

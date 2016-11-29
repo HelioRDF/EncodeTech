@@ -313,7 +313,7 @@
 							<f:selectItem itemDisabled="true" noSelectionOption="true"
 								itemLabel="Selecione o Estado" />
 							<f:selectItems value="#{empresaBean.listaEstado}" var="estado"
-								itemValue="#{estado.codigo}"
+								itemValue="#{estado}"
 								itemLabel="#{estado.nome} - #{estado.sigla}" />
 						</p:selectOneMenu>
 
@@ -325,7 +325,7 @@
 							<f:selectItem itemDisabled="true" noSelectionOption="true"
 								itemLabel="Selecione a Cidade" />
 							<f:selectItems value="#{empresaBean.listaCidade}" var="cidade"
-								itemValue="#{cidade.codigo}" itemLabel="#{cidade.nome}" />
+								itemValue="#{cidade}" itemLabel="#{cidade.nome}" />
 						</p:selectOneMenu>
 
 						<p:outputLabel value="Rua:">
