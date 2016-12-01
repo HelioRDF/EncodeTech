@@ -10,17 +10,12 @@
 	<title>Usuários</title>
 </h:head>
 
-
-
-
 <h:body>
 
 	<h:form id="userform">
 		<p:growl id="msgGrowl" life="15000" />
 		<p:panel header="Usuários">
 		</p:panel>
-
-
 
 		<!-- _________________________________________________________________________________________________________________________________ -->
 		<!-- Informações de cabeçalho da tabela -->
@@ -48,8 +43,6 @@
 						style="float:left; height: 33px; width:34px " />
 					<p:columnToggler datasource="dataTable" trigger="toggler" />
 
-
-
 					<p:ajaxStatus onstart="PF('statusDialog').show()"
 						onsuccess="PF('statusDialog').hide()" />
 
@@ -58,10 +51,6 @@
 						action="#{usuarioBean.carregar()}"
 						style="float:left; height:33px;"
 						update=":userform:dataTable :userform:msgGrowl" />
-
-
-
-
 
 
 					<!-- Adicionar  -->
@@ -293,7 +282,7 @@
 
 				<p:outputLabel value="Confirmar senha:" required="true" />
 				<p:password id="confirmar" maxlength="16" size="25"
-					value="#{usuarioBean.usuario.senha}" required="true" 
+					value="#{usuarioBean.usuario.senha}" required="true"
 					requiredMessage="Verificar campo Confirmar Senha"
 					validatorMessage="Erro de validação: o comprimento é menor do que o mínimo permitido. '4 dígitos' ">
 					<f:validateLength minimum="4" />
@@ -303,7 +292,7 @@
 
 
 
-		</h:panelGrid>
+			</h:panelGrid>
 
 
 			<p:messages id="global" globalOnly="true"></p:messages>
@@ -457,19 +446,22 @@
 
 
 				<p:outputLabel value="Nome: " />
-				<p:inputText  readonly="true" value="#{usuarioBean.usuario.nome}" size="25" />
+				<p:inputText readonly="true" value="#{usuarioBean.usuario.nome}"
+					size="25" />
 
 
 
 
 				<p:outputLabel value="CPF: " required="true" />
-				<p:inputText readonly="true" value="#{usuarioBean.usuario.cpf}"  size="25"/>
+				<p:inputText readonly="true" value="#{usuarioBean.usuario.cpf}"
+					size="25" />
 
 
 
 
 				<p:outputLabel value="E-mail:" required="true" />
-				<p:inputText readonly="true" value="#{usuarioBean.usuario.email}" size="25" />
+				<p:inputText readonly="true" value="#{usuarioBean.usuario.email}"
+					size="25" />
 
 
 

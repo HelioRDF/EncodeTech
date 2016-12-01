@@ -37,6 +37,8 @@ public class UsuarioBean implements Serializable {
 	public void salvar() {
 
 		try {
+			
+			System.out.println("Método salvar");
 
 			usuario.setDataCadastro(new Date());
 			dao.merge(usuario);
@@ -45,6 +47,7 @@ public class UsuarioBean implements Serializable {
 		} catch (Exception e) {
 			Messages.addGlobalError("Não foi possível salvar o usuário, tente novamente mais tarde ... ");
 		} finally {
+			
 			fechar();
 
 		}
@@ -54,8 +57,8 @@ public class UsuarioBean implements Serializable {
 	// -------------------------------------------------------------------------------------------
 	public void novo() {
 
-		usuario = null;
-		dao = null;
+		System.out.println("Método novo");
+		
 		usuario = new Usuario();
 		dao = new UsuarioDAO();
 
@@ -64,8 +67,10 @@ public class UsuarioBean implements Serializable {
 	// Fechar
 	// -------------------------------------------------------------------------------------------
 	public void fechar() {
-		usuario = null;
-		dao = null;
+		System.out.println("Método fechar");
+		
+		usuario = new Usuario();
+		dao = new UsuarioDAO();
 	}
 
 	// Carregar

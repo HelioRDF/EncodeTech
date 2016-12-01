@@ -2,6 +2,8 @@ package br.com.encodetech.domain.localizacao;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 import br.com.encodetech.domain.complementos.GenericDomain;
 
@@ -17,10 +19,12 @@ import br.com.encodetech.domain.complementos.GenericDomain;
 @Entity
 public class Endereco extends GenericDomain {
 
-	@Column
+	@JoinColumn
+	@OneToOne
 	private Estado estado;
 
-	@Column
+	@JoinColumn
+	@OneToOne
 	private Cidade cidade;
 
 	@Column()

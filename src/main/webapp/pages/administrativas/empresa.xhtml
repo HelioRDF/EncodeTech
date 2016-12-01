@@ -299,13 +299,13 @@
 			<h:panelGrid columns="3">
 
 				<p:commandButton value="Salvar"
-					actionListener="#{empresaBean.salvar}" validateClient="true"
+					actionListener="#{empresaBean.salvar()}" validateClient="true"
 					update=":dialogform:dialogpanel: dialogform:global ">
 				</p:commandButton>
 
 
 				<p:commandButton value="Fechar"
-					actionListener="#{empresaBean.fechar}"
+					actionListener="#{empresaBean.fechar()}" update=":dialogform"
 					oncomplete="PF('dialogo').hide();" />
 				<p></p>
 

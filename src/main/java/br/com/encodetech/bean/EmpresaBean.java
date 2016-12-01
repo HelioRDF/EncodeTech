@@ -9,6 +9,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
 
 import org.omnifaces.util.Messages;
+import org.primefaces.context.RequestContext;
 
 import br.com.encodetech.dao.empresas.EmpresaDAO;
 import br.com.encodetech.dao.localizacao.CidadeDAO;
@@ -53,9 +54,9 @@ public class EmpresaBean implements Serializable {
 			
 			
 			empresa.setDataCadastro(new Date());
-			endDao.merge(endereco);
+			endDao.salvar(endereco);
 			empresa.setEndereco(endereco);	
-			dao.merge(empresa);
+			dao.salvar(empresa);
 			Messages.addGlobalInfo("Empresa " + empresa.getNomeEmpresa() + ", salva com sucesso.");
 
 		
@@ -84,17 +85,11 @@ public class EmpresaBean implements Serializable {
 	public void novo() {
 
 		listarInfos();
-
-		endereco = null;
-		endDao = null;
-		empresa = null;
-		dao = null;
-	
 		empresa = new Empresa();
 		dao = new EmpresaDAO();
 		endereco = new Endereco();
 		endDao = new EnderecoDAO();
-		
+	
 		System.out.println("Método novo");
 
 	}
@@ -102,14 +97,21 @@ public class EmpresaBean implements Serializable {
 	// Fechar
 	// -------------------------------------------------------------------------------------------
 	public void fechar() {
-	
-		endereco = null;
-		endDao = null;
-		empresa = null;
-		dao = null;
-	
 		
+		empresa = new Empresa();
+		dao = new EmpresaDAO();
+		endereco = new Endereco();
+		endDao = new EnderecoDAO();
+	
+
+		System.out.println("Método Fechar");
+	
 	}
+	
+	  public void reset() {
+	        RequestContext.getCurrentInstance().reset("dialogform");
+	    }
+	
 
 	// Carregar
 	// -------------------------------------------------------------------------------------------
@@ -218,8 +220,6 @@ public class EmpresaBean implements Serializable {
 			
 			estadoDao = new EstadoDAO();
 			cidadeDao = new CidadeDAO();
-			
-			
 			
 			listaEstado = estadoDao.listar();
 			listaCidade = cidadeDao.listar();
