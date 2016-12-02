@@ -39,41 +39,39 @@ public class EmpresaBean implements Serializable {
 	private List<Empresa> listaEmpresa;
 	private List<Cidade> listaCidade;
 	private List<Estado> listaEstado;
-	CidadeDAO cidadeDao;
-	EstadoDAO estadoDao;
+	private CidadeDAO cidadeDao;
+	private EstadoDAO estadoDao;
+	
+	private Endereco endereco;
+	private EnderecoDAO endDao;
 
-	Endereco endereco;
-	EnderecoDAO endDao;
+	private Boolean botaoEditar =false;
+	private Boolean botaoSalvar =false;
 
 	// Salvar
 	// -------------------------------------------------------------------------------------
 	public void salvar() {
 
 		try {
-			
-			
-			
+
 			empresa.setDataCadastro(new Date());
 			endDao.salvar(endereco);
-			empresa.setEndereco(endereco);	
+			empresa.setEndereco(endereco);
 			dao.salvar(empresa);
 			Messages.addGlobalInfo("Empresa " + empresa.getNomeEmpresa() + ", salva com sucesso.");
-
-		
 
 		} catch (Exception e) {
 			System.out.println("--------------- Catch: " + e.getCause());
 
 			System.out.println("--------------- Mensagem: " + e.getMessage());
-	
+
 			Messages.addGlobalError("Não foi possível salvar a empresa, tente novamente mais tarde ... ");
 		} finally {
-			
-		//	System.out.println("Endereço: "+endereco.toString());
-			System.out.println("Empresa: "+empresa.toString());
-			System.out.println("--------------- Endereço:  "+ endereco.toString());
-			
-			
+
+			// System.out.println("Endereço: "+endereco.toString());
+			System.out.println("Empresa: " + empresa.toString());
+			System.out.println("--------------- Endereço:  " + endereco.toString());
+
 			System.out.println("Finally: ");
 			fechar();
 
@@ -85,11 +83,13 @@ public class EmpresaBean implements Serializable {
 	public void novo() {
 
 		listarInfos();
+		botaoEditar=false;
+		botaoSalvar=true;
 		empresa = new Empresa();
 		dao = new EmpresaDAO();
 		endereco = new Endereco();
 		endDao = new EnderecoDAO();
-	
+
 		System.out.println("Método novo");
 
 	}
@@ -97,23 +97,10 @@ public class EmpresaBean implements Serializable {
 	// Fechar
 	// -------------------------------------------------------------------------------------------
 	public void fechar() {
-		
-		empresa = new Empresa();
-		dao = new EmpresaDAO();
-		endereco = new Endereco();
-		endDao = new EnderecoDAO();
-	
-
+		RequestContext.getCurrentInstance().reset("dialogform");
 		System.out.println("Método Fechar");
-	
 	}
-	
-	  public void reset() {
-	        RequestContext.getCurrentInstance().reset("dialogform");
-	    }
-	
 
-	// Carregar
 	// -------------------------------------------------------------------------------------------
 	public void carregar() {
 
@@ -159,7 +146,7 @@ public class EmpresaBean implements Serializable {
 		try {
 
 			listarInfos();
-
+			
 			dao = new EmpresaDAO();
 			dao.merge(empresa);
 			Messages.addGlobalInfo("Usuário(a) ' " + empresa.getNomeEmpresa() + "' Editado com sucesso!!!");
@@ -202,6 +189,10 @@ public class EmpresaBean implements Serializable {
 	public void getinstancia(ActionEvent evento) {
 
 		try {
+			
+			botaoSalvar=false;
+			botaoEditar=true;
+			
 			empresa = (Empresa) evento.getComponent().getAttributes().get("meuSelect");
 			Messages.addGlobalInfo("Seleção: " + empresa.getNomeEmpresa());
 
@@ -215,24 +206,20 @@ public class EmpresaBean implements Serializable {
 	// ------------------------------------------------------------------------------------------------------------------------------------------------------
 
 	public void listarInfos() {
-		
+
 		try {
-			
+
 			estadoDao = new EstadoDAO();
 			cidadeDao = new CidadeDAO();
-			
+
 			listaEstado = estadoDao.listar();
 			listaCidade = cidadeDao.listar();
-			
+
 		} catch (Exception e) {
 			// TODO: handle exception
-		}finally {
-			
+		} finally {
+
 		}
-
-
-		
-		
 
 	}
 
@@ -246,6 +233,23 @@ public class EmpresaBean implements Serializable {
 		this.empresa = empresa;
 	}
 
+
+	public Boolean getBotaoEditar() {
+		return botaoEditar;
+	}
+
+	public void setBotaoEditar(Boolean botaoEditar) {
+		this.botaoEditar = botaoEditar;
+	}
+
+	public Boolean getBotaoSalvar() {
+		return botaoSalvar;
+	}
+
+	public void setBotaoSalvar(Boolean botaoSalvar) {
+		this.botaoSalvar = botaoSalvar;
+	}
+
 	public EmpresaDAO getDao() {
 		return dao;
 	}
@@ -253,6 +257,7 @@ public class EmpresaBean implements Serializable {
 	public void setDao(EmpresaDAO dao) {
 		this.dao = dao;
 	}
+	
 
 	public List<Empresa> getListaEmpresa() {
 		return listaEmpresa;
@@ -285,8 +290,6 @@ public class EmpresaBean implements Serializable {
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
 	}
-	
-	
 
 	// ------------------------------------------------------------------------------------------------------------------------------------------------------
 

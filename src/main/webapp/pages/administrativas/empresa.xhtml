@@ -10,9 +10,6 @@
 	<title>Empresa</title>
 </h:head>
 
-
-
-
 <h:body>
 
 	<h:form id="form">
@@ -20,17 +17,13 @@
 		<p:panel header="Empresas">
 		</p:panel>
 
-
-
 		<!-- _________________________________________________________________________________________________________________________________ -->
 		<!-- Informações de cabeçalho da tabela -->
-
 
 		<p:dataTable id="dataTable" rowsPerPageTemplate="7,15,30,50,100"
 			emptyMessage="Nenhum Registro encontrado" rows="7" paginator="true"
 			var="dataVar" value="#{empresaBean.listaEmpresa}"
 			style=" text-align:center;">
-
 
 			<f:facet name="header">
 
@@ -48,26 +41,20 @@
 						style="float:left; height: 33px; width:34px " />
 					<p:columnToggler datasource="dataTable" trigger="toggler" />
 
-
-
 					<p:ajaxStatus onstart="PF('statusDialog').show()"
 						onsuccess="PF('statusDialog').hide()" />
 
 					<!-- Atualizar table -->
 					<p:commandButton value="Atualizar" icon="ui-icon-refresh"
-						action="#{empresaBean.carregar()}" style="float:left; height:33px;"
+						action="#{empresaBean.carregar()}"
+						style="float:left; height:33px;"
 						update=":form:dataTable :form:msgGrowl" />
-
-
-
-
-
 
 					<!-- Adicionar  -->
 					<p:commandButton icon="ui-icon-plus " value="Adicionar "
 						style="float:left; height:33px;"
 						oncomplete="PF('dialogo').show();" action="#{empresaBean.novo()}"
-						update=":dialogform" />
+						update=":dialogform:dialogpanel :dialogform:dialogpanel2" />
 
 				</p:panelGrid>
 			</f:facet>
@@ -116,10 +103,11 @@
 				<!-- Editar -->
 				<p:commandButton title="Editar" icon="ui-icon-pencil"
 					actionListener="#{empresaBean.getinstancia}"
-					update=":dialogformEditor"
-					oncomplete="PF('dialogEditorPanel').show();">
+					update=":dialogform:dialogpanel :dialogform:dialogpanel2" 
+					oncomplete="PF('dialogo').show();">
 					<f:attribute name="meuSelect" value="#{dataVar}" />
 				</p:commandButton>
+				
 
 				<!-- Resetar Senha -->
 				<p:commandButton title="Resetar Senha" icon="ui-icon-key "
@@ -128,9 +116,6 @@
 					oncomplete="PF('dialogSenhaPanel').show();">
 					<f:attribute name="meuSelect" value="#{dataVar}" />
 				</p:commandButton>
-
-
-			
 
 				<!-- Excluir -->
 				<p:commandButton title="Excluir" icon="ui-icon-trash"
@@ -154,16 +139,29 @@
 			<!-- _________________________________________________________________________________________________________________________________ -->
 			<!-- Informações após expandir linha -->
 
-
 			<p:rowExpansion styleClass=" width=37%">
 
-				<p:panelGrid columns="1" columnClasses="label,value"
+				<p:panelGrid columns="2" columnClasses="label,value"
 					style="text-align:left;">
-
-					<h:outputText value="Senha: #{dataVar.senha}" />
-					<h:outputText value="Seguimento: #{dataVar.seguimento}" />
-					<h:outputText value="Endereço: #{dataVar.endereco.toString}" />
-					<p:inputTextarea  readonly="true" rows="7" cols="80"  value="Descrição: #{dataVar.descricao}"  />
+					<h:outputText value="Data de Cadastro: #{dataVar.dataCadastro}" />
+					<h:outputText value="Seguimento: #{dataVar.seguimento}" />		
+						
+					<h:outputText value="Telefone: #{dataVar.endereco.telefone}" />
+					<h:outputText value="Celular: #{dataVar.endereco.celular}" />
+					
+				
+					
+					<h:outputText value="Estado: #{dataVar.endereco.estado.nome}" />
+					<h:outputText value="Cidade: #{dataVar.endereco.cidade.nome}" />
+					<h:outputText value="Rua: #{dataVar.endereco.rua}" />
+					<h:outputText value="Número: #{dataVar.endereco.numero}" />
+					<h:outputText value="Bairro: #{dataVar.endereco.bairro}" />
+					<h:outputText value="Cep: #{dataVar.endereco.cep}" />
+					<h:outputText value="Complemento: #{dataVar.endereco.complemento}" />
+						<h:outputText value="Senha: #{dataVar.senha}" />
+					
+					<p:inputTextarea readonly="true" rows="7" cols="80"
+						value="Descrição: #{dataVar.descricao}" />
 
 				</p:panelGrid>
 
@@ -175,7 +173,6 @@
 
 		</p:dataTable>
 	</h:form>
-
 
 	<!-- _________________________________________________________________________________________________________________________________ -->
 	<!--   Dialog do Adicionar             -->
@@ -189,265 +186,237 @@
 	<p:dialog header="Adicionar Empresa" widgetVar="dialogo" modal="true"
 		responsive="true">
 
-		<h:form id="dialogform">
+	<h:form id="dialogform">
+	<p:layout id="layoutFull" onResize="false"
+	style="min-width:850px; min-height:500px; max-width:850px; max-height:500px; ">
+	<p:growl id="global" life="5000" />
+	<!-- _________________________________________________________________________________________________________________________________ -->
+	<!-- West -->
+
+	<p:layoutUnit id="West" position="west" size="400" minSize="210" maxSize="500">
+
+		<h:panelGrid columns="2" id="dialogpanel">
+
+		<p:outputLabel value="Status: " />
+		<p:selectBooleanButton onLabel="Ativado" offLabel="Desativado"
+		value="#{empresaBean.empresa.status}" required="true"
+		requiredMessage="Verificar campo Status">
+		</p:selectBooleanButton>
+
+		<p:outputLabel value="Nome da Empresa: ">
+		</p:outputLabel>
+		<p:inputText id="nome" maxlength="50" size="25" label="nome"
+		value="#{empresaBean.empresa.nomeEmpresa}" required="true"
+		requiredMessage="Verificar campo Nome"
+		validatorMessage="Erro de validação: Dígite o nome corretamente">
+		<f:validateLength minimum="2" />
+		</p:inputText>
+
+		<p:outputLabel value="Seguimento: " />
+		<p:inputText id="seguimento" maxlength="50" size="25"
+		value="#{empresaBean.empresa.seguimento}" required="true"
+		requiredMessage="Verificar campo seguimento"
+		validatorMessage="Erro de validação: o comprimento é menor do que o mínimo permitido. '2 dígitos' ">
+		<f:validateLength minimum="2" disabled="false" />
+		</p:inputText>
+
+		<p:outputLabel value="CNPJ: " />
+		<p:inputMask mask="99.999.999/9999-99" id="cnpj" maxlength="50"	size="25" value="#{empresaBean.empresa.cnpj}" required="true"
+		requiredMessage="Verificar campo CNPJ" validatorMessage="Erro de validação: o comprimento é menor do que o mínimo permitido. '14 dígitos' ">
+		<f:validateLength minimum="14" disabled="false" />
+		</p:inputMask>
+
+		<p:outputLabel value="Descrição: " />
+		<p:inputTextarea id="descricao" rows="3" cols="24" value="#{empresaBean.empresa.descricao}">
+		</p:inputTextarea>
+
+		<p:separator style="border: 1px solid #e6e6ff; height: 1px;"></p:separator>
+		<p:separator style="border: 1px solid #e6e6ff; height: 1px;"></p:separator>
 
 
+		<p:outputLabel value="E-mail:" />
+		<p:inputText id="email" maxlength="50" size="25"
+		value="#{empresaBean.empresa.email}" required="true"
+		requiredMessage="Verificar campo E-Mail"
+		validatorMessage="Erro de validação: o e-mail não é válido ">
+		<f:validateRegex disabled="false" for="email"
+		validatorMessage="Erro de validação: o endereço de e-mail não é válido "
+		pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+		</p:inputText>
 
-			<p:messages globalOnly="true"></p:messages>
-			<p:growl globalOnly="true"></p:growl>
+		<p:outputLabel value="Digite uma Senha:" />
+		<p:password id="senha" match="confirmar" maxlength="16" size="25"
+		feedback="true" inline="true"
+		value="#{empresaBean.empresa.senha}" required="true"
+		requiredMessage="Verificar campo Senha"
+		validatorMessage="Erro de validação: o comprimento é menor do que o mínimo permitido. '4 dígitos' ">
+		<f:validateLength minimum="4" />
+		</p:password>
 
-			<h:panelGrid columns="3" id="dialogpanel">
-
-
-				<p:outputLabel value="Status: " />
-				<p:selectBooleanButton onLabel="Ativado" offLabel="Desativado"
-					value="#{empresaBean.empresa.status}" required="true"
-					requiredMessage="Verificar campo Status">
-				</p:selectBooleanButton>
-				<p></p>
-
-
-
-				<p:outputLabel value="Nome da Empresa: ">
-				</p:outputLabel>
-				<p:inputText id="nome" maxlength="50" size="25" label="nome"
-					value="#{empresaBean.empresa.nomeEmpresa}" required="true"
-					requiredMessage="Verificar campo Nome"
-					validatorMessage="Erro de validação: Dígite o nome corretamente">
-					<f:validateLength minimum="2" />
-
-				</p:inputText>
-				<p:message for="nome" />
-
-
-				<p:outputLabel value="Seguimento: " />
-				<p:inputText id="seguimento" maxlength="50" size="25"
-					value="#{empresaBean.empresa.seguimento}" required="false"
-					requiredMessage="Verificar campo seguimento"
-					validatorMessage="Erro de validação: o comprimento é menor do que o mínimo permitido. '2 dígitos' ">
-					<f:validateLength minimum="2" disabled="true" />
-				</p:inputText>
-				<p:message for="seguimento" />
-
-				<p:outputLabel value="CNPJ: " />
-				<p:inputMask mask="99.999.999/9999-99" id="cnpj" maxlength="50"
-					size="25" value="#{empresaBean.empresa.cnpj}"
-					required="false" requiredMessage="Verificar campo CNPJ"
-					validatorMessage="Erro de validação: o comprimento é menor do que o mínimo permitido. '14 dígitos' ">
-					<f:validateLength minimum="14" disabled="true" />
-				</p:inputMask>
-				<p:message for="cnpj" />
-
-
-				<p:outputLabel value="Descrição: " />
-				<p:inputTextarea id="descricao" rows="5" cols="24"
-					value="#{empresaBean.empresa.descricao}" >
-				</p:inputTextarea>
-				<p:message for="seguimento" />
-
-
-
-				<p:separator style="border: 1px solid #e6e6ff; height: 1px;"></p:separator>
-				<p:separator style="border: 1px solid #e6e6ff; height: 1px;"></p:separator>
-				<p></p>
-
-
-
-
-				<p:outputLabel value="E-mail:" />
-				<p:inputText id="email" maxlength="50" size="25"
-					value="#{empresaBean.empresa.email}" required="false"
-					requiredMessage="Verificar campo E-Mail"
-					validatorMessage="Erro de validação: o e-mail não é válido ">
-					<f:validateRegex disabled="true" for="email"
-						validatorMessage="Erro de validação: o endereço de e-mail não é válido "
-						pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
-				</p:inputText>
-				<p:message for="email" />
-
-
-				<p:outputLabel value="Digite uma Senha:" />
-				<p:password id="senha" match="confirmar" maxlength="16" size="25"
-					feedback="true" inline="true" value="#{empresaBean.empresa.senha}"
-					required="true" requiredMessage="Verificar campo Senha"
-					validatorMessage="Erro de validação: o comprimento é menor do que o mínimo permitido. '4 dígitos' ">
-					<f:validateLength minimum="4" />
-				</p:password>
-				<p:message for="senha" />
-
-
-				<p:outputLabel value="Confirmar senha:" required="true" />
-				<p:password id="confirmar" maxlength="16" size="25"
-					value="#{empresaBean.empresa.senha}" required="true"
-					 requiredMessage="Verificar campo Confirmar Senha"
-					validatorMessage="Erro de validação: o comprimento é menor do que o mínimo permitido. '4 dígitos' ">
-					<f:validateLength minimum="4" />
-				</p:password>
-
-				<p:message for="confirmar" />
-
-
-
+		<p:outputLabel value="Confirmar senha:" required="true" />
+		<p:password id="confirmar" maxlength="16" size="25"
+		value="#{empresaBean.empresa.senha}" required="true"
+		requiredMessage="Verificar campo Confirmar Senha"
+		validatorMessage="Erro de validação: o comprimento é menor do que o mínimo permitido. '4 dígitos' ">
+		<f:validateLength minimum="4" />
+		</p:password>
 
 				</h:panelGrid>
 
-
-			<p:messages id="global" globalOnly="true"></p:messages>
-
-
-
-			<h:panelGrid columns="3">
-
-				<p:commandButton value="Salvar"
-					actionListener="#{empresaBean.salvar()}" validateClient="true"
-					update=":dialogform:dialogpanel: dialogform:global ">
-				</p:commandButton>
-
-
-				<p:commandButton value="Fechar"
-					actionListener="#{empresaBean.fechar()}" update=":dialogform"
-					oncomplete="PF('dialogo').hide();" />
-				<p></p>
-
-			</h:panelGrid>
-
-		</h:form>
-
-	</p:dialog>
-
-
-	<!-- _________________________________________________________________________________________________________________________________ -->
-	<!-- Dialogo do Editar -->
-
-
-	<p:dialog header="Editar Usuário" widgetVar="dialogEditorPanel"
-		modal="true" responsive="true">
-
-		<h:form id="dialogformEditor">
-
-			<p:messages id="msgdialogEditor" autoUpdate="true" globalOnly="true"
-				closable="true" />
-			<h:panelGrid columns="3" id="dialogEditorPanel">
-
-				<p:outputLabel value="Status: " />
-				<p:selectBooleanButton onLabel="Ativado" offLabel="Desativado"
-					value="#{empresaBean.empresa.status}" required="true"
-					requiredMessage="Verificar campo Status">
-				</p:selectBooleanButton>
-				<p></p>
+			</p:layoutUnit>
 
 
 
-				<p:outputLabel value="Nome da Empresa: ">
-				</p:outputLabel>
-				<p:inputText id="nome" maxlength="50" size="25" label="nome"
-					value="#{empresaBean.empresa.nomeEmpresa}" required="true"
-					requiredMessage="Verificar campo Nome"
-					validatorMessage="Erro de validação: Dígite o nome corretamente">
-					<f:validateLength minimum="2" />
+<!-- _________________________________________________________________________________________________________________________________ -->
 
-				</p:inputText>
-				<p:message for="nome" />
+<!-- Center -->
+		<p:layoutUnit id="Center" position="center" closable="true"
+		collapsible="true" size="400" minSize="210" maxSize="500">
 
 
-				<p:outputLabel value="Seguimento: " />
-				<p:inputText id="seguimento" maxlength="50" size="25"
-					value="#{empresaBean.empresa.seguimento}" required="false"
-					requiredMessage="Verificar campo seguimento"
-					validatorMessage="Erro de validação: o comprimento é menor do que o mínimo permitido. '2 dígitos' ">
-					<f:validateLength minimum="2" disabled="true" />
-				</p:inputText>
-				<p:message for="seguimento" />
-
-				<p:outputLabel value="CNPJ: " />
-				<p:inputMask mask="99.999.999/9999-99" id="cnpj" maxlength="50"
-					size="25" value="#{empresaBean.empresa.cnpj}"
-					required="false" requiredMessage="Verificar campo CNPJ"
-					validatorMessage="Erro de validação: o comprimento é menor do que o mínimo permitido. '14 dígitos' ">
-					<f:validateLength minimum="14" disabled="true" />
-				</p:inputMask>
-				<p:message for="cnpj" />
+		<h:panelGrid columns="2" id="dialogpanel2">
 
 
-				<p:outputLabel value="Descrição: " />
-				<p:inputTextarea id="descricao" rows="5"
-					value="#{empresaBean.empresa.descricao}" >
-				</p:inputTextarea>
-				<p:message for="seguimento" />
+		<p:outputLabel value="Estado: " />
+		<p:selectOneMenu filter="true"
+			value="#{empresaBean.empresa.endereco.estado}"
+			converter="omnifaces.SelectItemsConverter" required="true"
+			requiredMessage="Informe o Estado corretamente">
+			<f:selectItem itemDisabled="true" noSelectionOption="true"
+				itemLabel="Selecione o Estado" />
+			<f:selectItems value="#{empresaBean.listaEstado}" var="estado"
+				itemValue="#{estado}"
+				itemLabel="#{estado.nome} - #{estado.sigla}" />
+		</p:selectOneMenu>
+
+		<p:outputLabel value="Cidade: " />
+		<p:selectOneMenu filter="true"
+			value="#{empresaBean.empresa.endereco.cidade}"
+			converter="omnifaces.SelectItemsConverter" required="true"
+			requiredMessage="Informe a Cidade corretamente">
+			<f:selectItem itemDisabled="true" noSelectionOption="true"
+				itemLabel="Selecione a Cidade" />
+			<f:selectItems value="#{empresaBean.listaCidade}" var="cidade"
+				itemValue="#{cidade}" itemLabel="#{cidade.nome}" />
+		</p:selectOneMenu>
+
+		<p:outputLabel value="Rua:"/>
+		<p:inputText id="rua" size="30" label="rua"
+		value="#{empresaBean.empresa.endereco.rua}" required="true">
+		</p:inputText>
+
+		<p:outputLabel value="Número: "></p:outputLabel>
+		<p:inputText value="#{empresaBean.empresa.endereco.numero}"
+		required="true" requiredMessage="Preencha o campo Número"
+		converterMessage="Digite um número válido"
+		validatorMessage="Digite um número válido">
+		<f:validateLongRange minimum="1" maximum="9999"></f:validateLongRange>
+		</p:inputText>
+
+		<p:outputLabel value="Bairro:"></p:outputLabel>
+		<p:inputText value="#{empresaBean.empresa.endereco.bairro}"
+			required="true" requiredMessage="Preencha o campo bairro">
+		</p:inputText>
+
+		<p:outputLabel value="Complemento: " />
+		<p:inputText id="complemento" size="30" label="complemento"
+			value="#{empresaBean.empresa.endereco.complemento}" required="true"
+			requiredMessage="Preencha o campo complemento">
+		</p:inputText>
+
+		<p:outputLabel value="CEP: " />
+		<p:inputMask mask="99999-999" id="cep"
+			value="#{empresaBean.empresa.endereco.cep}" required="true"
+			requiredMessage="Preencha o campo CEP">
+		</p:inputMask>
+
+		<p:outputLabel value="Telefone: " />
+		<p:inputMask mask="(99) 9999-9999" id="tel"
+			value="#{empresaBean.empresa.endereco.telefone}" required="false"
+			requiredMessage="Preencha o campo telefone">
+			<f:validateLength minimum="8" maximum="18"></f:validateLength>
+		</p:inputMask>
+
+		<p:outputLabel value="Celular: " />
+		<p:inputMask mask="(99) 9 9999-9999" id="cel"
+			value="#{empresaBean.empresa.endereco.celular}" required="false"
+			requiredMessage="Preencha o campo celular">
+			<f:validateLength minimum="10" maximum="17"></f:validateLength>
+		</p:inputMask>
+
+	</h:panelGrid>
+
+</p:layoutUnit>
+
+
+<!-- _________________________________________________________________________________________________________________________________ -->
+
+<!-- South -->
+<p:layoutUnit id="South" position="south" resizable="true"
+	closable="true" collapsible="true" size="50">
+
+	<h:panelGrid columns="3">
+
+		<p:commandButton value="Salvar"
+			actionListener="#{empresaBean.salvar}" rendered="#{empresaBean.botaoSalvar}" validateClient="true"
+			update=":dialogform:">
+		</p:commandButton>
+		
+		<p:commandButton value="Editar"
+		actionListener="#{empresaBean.editar}" validateClient="true"
+		update=":dialogform:" rendered="#{empresaBean.botaoEditar}">
+		</p:commandButton>
+
+
+		<p:commandButton value="Fechar"
+			actionListener="#{empresaBean.fechar()}"
+			oncomplete="PF('dialogo').hide();" immediate="true" ajax="false"
+			style="margin-right:20px;">
+					</p:commandButton>
+
+				</h:panelGrid>
+
+			</p:layoutUnit>
+
+
+		</p:layout>
+
+	</h:form>
+
+</p:dialog>
 
 
 
-				<p:separator style="border: 1px solid #e6e6ff; height: 1px;"></p:separator>
-				<p:separator style="border: 1px solid #e6e6ff; height: 1px;"></p:separator>
-				<p></p>
+<!-- _________________________________________________________________________________________________________________________________ -->
+<!-- Dialogo do Reset de senha -->
 
 
+<p:dialog header="Resetar senha" widgetVar="dialogSenhaPanel"
+	modal="true" responsive="true">
+
+	<h:form id="dialogformSenha">
+
+		<p:messages id="msgdialogSenha" autoUpdate="true" closable="true" />
+
+		<h:panelGrid columns="2" id="dialogSenhaPanelGrid">
 
 
-				<p:outputLabel value="E-mail:" />
-				<p:inputText id="email" maxlength="50" size="25"
-					value="#{empresaBean.empresa.email}" required="false"
-					requiredMessage="Verificar campo E-Mail"
-					validatorMessage="Erro de validação: o e-mail não é válido ">
-					<f:validateRegex disabled="true" for="email"
-						validatorMessage="Erro de validação: o endereço de e-mail não é válido "
-						pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
-				</p:inputText>
-				<p:message for="email" />
+			<p:outputLabel value="Nome da Empresa: " />
+			<p:inputText readonly="true" label="nome"
+				value="#{empresaBean.empresa.nomeEmpresa}" size="25" />
+
+			<p:outputLabel value="CNPJ: " />
+			<p:inputText readonly="true" label="cnpj"
+				value="#{empresaBean.empresa.cnpj}" size="25" />
 
 
+			<p:outputLabel value="E-mail: " />
+			<p:inputText readonly="true" label="email"
+				value="#{empresaBean.empresa.email}" size="25" />
 
 
-			</h:panelGrid>
-
-
-
-			<h:panelGrid columns="2">
-
-
-				<p:commandButton value="Salvar"
-					actionListener="#{empresaBean.editar}" validateClient="true"
-					update=":dialogformEditor:dialogEditorPanel: ">
-				</p:commandButton>
-				<p:commandButton value="Fechar"
-					actionListener="#{empresaBean.fechar}"
-					oncomplete="PF('dialogEditorPanel').hide();" />
-
-			</h:panelGrid>
-
-		</h:form>
-
-	</p:dialog>
-
-
-	<!-- _________________________________________________________________________________________________________________________________ -->
-	<!-- Dialogo do Reset de senha -->
-
-
-	<p:dialog header="Resetar senha" widgetVar="dialogSenhaPanel"
-		modal="true" responsive="true">
-
-		<h:form id="dialogformSenha">
-
-			<p:messages id="msgdialogSenha" autoUpdate="true" closable="true" />
-
-			<h:panelGrid columns="2" id="dialogSenhaPanelGrid">
-
-
-				<p:outputLabel value="Nome da Empresa: " />
-				<p:inputText readonly="true" label="nome"
-					value="#{empresaBean.empresa.nomeEmpresa}" size="25"/>
-
-				<p:outputLabel value="CNPJ: " />
-				<p:inputText readonly="true" label="cnpj" value="#{empresaBean.empresa.cnpj}" size="25" />
-
-
-				<p:outputLabel value="E-mail: " />
-				<p:inputText readonly="true" label="email" value="#{empresaBean.empresa.email}"  size="25"/>
-
-
-				<p:separator style="border: 1px solid #e6e6ff; height: 1px;"></p:separator>
-				<p:separator style="border: 1px solid #e6e6ff; height: 1px;"></p:separator>
+			<p:separator style="border: 1px solid #e6e6ff; height: 1px;"></p:separator>
+			<p:separator style="border: 1px solid #e6e6ff; height: 1px;"></p:separator>
 
 
 				<p:outputLabel value="Digite uma Senha:" />
@@ -457,26 +426,17 @@
 					validatorMessage="Erro de validação: As senhas não conferem, ou o comprimento é menor do que o mínimo permitido. ">
 					<f:validateLength minimum="4" />
 				</p:password>
-				
-
 
 				<p:outputLabel value="Confirmar senha:" required="true" />
 				<p:password id="confirmar" maxlength="16" size="25"
 					value="#{empresaBean.empresa.senha}" required="true"
-					 requiredMessage="Verificar campo Confirmar Senha"
+					requiredMessage="Verificar campo Confirmar Senha"
 					validatorMessage="Erro de validação: o comprimento é menor do que o mínimo permitido. '4 dígitos' ">
 					<f:validateLength minimum="4" />
 				</p:password>
 
-		
-
-
 
 			</h:panelGrid>
-
-
-
-
 
 			<h:panelGrid columns="2">
 
@@ -492,9 +452,6 @@
 		</h:form>
 
 	</p:dialog>
-
-
-
 
 </h:body>
 </html>
