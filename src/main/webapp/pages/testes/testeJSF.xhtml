@@ -54,7 +54,7 @@
 					<p:commandButton icon="ui-icon-plus " value="Adicionar "
 						style="float:left; height:33px;"
 						oncomplete="PF('dialogo').show();" action="#{empresaBean.novo()}"
-						update=":dialogform:dialogpanel :dialogform:dialogpanel2" />
+						update=":dialogform:" />
 
 				</p:panelGrid>
 			</f:facet>
@@ -103,7 +103,7 @@
 				<!-- Editar -->
 				<p:commandButton title="Editar" icon="ui-icon-pencil"
 					actionListener="#{empresaBean.getinstancia}"
-					update=":dialogform:dialogpanel :dialogform:dialogpanel2" 
+					update=":dialogform:" 
 					oncomplete="PF('dialogo').show();">
 					<f:attribute name="meuSelect" value="#{dataVar}" />
 				</p:commandButton>
@@ -301,7 +301,7 @@
 		</p:selectOneMenu>
 
 		<p:outputLabel value="Rua:"/>
-		<p:inputText id="rua" size="30" label="rua"
+		<p:inputText  size="30" label="rua"
 		value="#{empresaBean.empresa.endereco.rua}" required="true">
 		</p:inputText>
 

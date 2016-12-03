@@ -43,7 +43,8 @@ public class EmpresaBean implements Serializable {
 	private EstadoDAO estadoDao;
 	
 	private Endereco endereco;
-	private EnderecoDAO endDao;
+	private EnderecoDAO enderecoDAO;
+	
 
 	private Boolean botaoEditar =false;
 	private Boolean botaoSalvar =false;
@@ -55,22 +56,19 @@ public class EmpresaBean implements Serializable {
 		try {
 
 			empresa.setDataCadastro(new Date());
-			endDao.salvar(endereco);
+			enderecoDAO.salvar(endereco);
 			empresa.setEndereco(endereco);
+			
 			dao.salvar(empresa);
 			Messages.addGlobalInfo("Empresa " + empresa.getNomeEmpresa() + ", salva com sucesso.");
 
 		} catch (Exception e) {
 			System.out.println("--------------- Catch: " + e.getCause());
-
 			System.out.println("--------------- Mensagem: " + e.getMessage());
-
 			Messages.addGlobalError("Não foi possível salvar a empresa, tente novamente mais tarde ... ");
 		} finally {
 
-			// System.out.println("Endereço: "+endereco.toString());
-			System.out.println("Empresa: " + empresa.toString());
-			System.out.println("--------------- Endereço:  " + endereco.toString());
+
 
 			System.out.println("Finally: ");
 			fechar();
@@ -86,10 +84,10 @@ public class EmpresaBean implements Serializable {
 		botaoEditar=false;
 		botaoSalvar=true;
 		empresa = new Empresa();
-		dao = new EmpresaDAO();
 		endereco = new Endereco();
-		endDao = new EnderecoDAO();
-
+		enderecoDAO = new EnderecoDAO();
+		dao = new EmpresaDAO();
+	
 		System.out.println("Método novo");
 
 	}
@@ -195,6 +193,8 @@ public class EmpresaBean implements Serializable {
 			
 			empresa = (Empresa) evento.getComponent().getAttributes().get("meuSelect");
 			Messages.addGlobalInfo("Seleção: " + empresa.getNomeEmpresa());
+			endereco=empresa.getEndereco();
+			listarInfos();
 
 		} catch (Exception e) {
 			Messages.addGlobalError("Erro ao Editar: " + empresa.getNomeEmpresa());
@@ -290,6 +290,9 @@ public class EmpresaBean implements Serializable {
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
 	}
+
+	
+
 
 	// ------------------------------------------------------------------------------------------------------------------------------------------------------
 

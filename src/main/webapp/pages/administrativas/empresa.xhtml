@@ -54,7 +54,7 @@
 					<p:commandButton icon="ui-icon-plus " value="Adicionar "
 						style="float:left; height:33px;"
 						oncomplete="PF('dialogo').show();" action="#{empresaBean.novo()}"
-						update=":dialogform:dialogpanel :dialogform:dialogpanel2" />
+						update=":dialogform:" />
 
 				</p:panelGrid>
 			</f:facet>
@@ -103,7 +103,7 @@
 				<!-- Editar -->
 				<p:commandButton title="Editar" icon="ui-icon-pencil"
 					actionListener="#{empresaBean.getinstancia}"
-					update=":dialogform:dialogpanel :dialogform:dialogpanel2" 
+					update=":dialogform:" 
 					oncomplete="PF('dialogo').show();">
 					<f:attribute name="meuSelect" value="#{dataVar}" />
 				</p:commandButton>
@@ -175,7 +175,7 @@
 	</h:form>
 
 	<!-- _________________________________________________________________________________________________________________________________ -->
-	<!--   Dialog do Adicionar             -->
+	<!--   Dialog do Adicionar    e Editar       -->
 
 
 	<!-- draggable = false ou true "mover a janela suspensa"| 
@@ -257,7 +257,7 @@
 		<p:password id="confirmar" maxlength="16" size="25"
 		value="#{empresaBean.empresa.senha}" required="true"
 		requiredMessage="Verificar campo Confirmar Senha"
-		validatorMessage="Erro de validação: o comprimento é menor do que o mínimo permitido. '4 dígitos' ">
+		validatorMessage="Senha: Erro de validação: o comprimento é menor do que o mínimo permitido. '4 dígitos' ">
 		<f:validateLength minimum="4" />
 		</p:password>
 
@@ -268,7 +268,6 @@
 
 
 <!-- _________________________________________________________________________________________________________________________________ -->
-
 <!-- Center -->
 		<p:layoutUnit id="Center" position="center" closable="true"
 		collapsible="true" size="400" minSize="210" maxSize="500">
@@ -279,7 +278,7 @@
 
 		<p:outputLabel value="Estado: " />
 		<p:selectOneMenu filter="true"
-			value="#{empresaBean.empresa.endereco.estado}"
+			value="#{empresaBean.endereco.estado}"
 			converter="omnifaces.SelectItemsConverter" required="true"
 			requiredMessage="Informe o Estado corretamente">
 			<f:selectItem itemDisabled="true" noSelectionOption="true"
@@ -291,7 +290,7 @@
 
 		<p:outputLabel value="Cidade: " />
 		<p:selectOneMenu filter="true"
-			value="#{empresaBean.empresa.endereco.cidade}"
+			value="#{empresaBean.endereco.cidade}"
 			converter="omnifaces.SelectItemsConverter" required="true"
 			requiredMessage="Informe a Cidade corretamente">
 			<f:selectItem itemDisabled="true" noSelectionOption="true"
@@ -302,11 +301,13 @@
 
 		<p:outputLabel value="Rua:"/>
 		<p:inputText id="rua" size="30" label="rua"
-		value="#{empresaBean.empresa.endereco.rua}" required="true">
+		value="#{empresaBean.endereco.rua}" required="true" requiredMessage="Preencha o campo Rua"
+		validatorMessage="Preencha o campo Rua corretamente">
+		<f:validateLength minimum="2"></f:validateLength>
 		</p:inputText>
 
 		<p:outputLabel value="Número: "></p:outputLabel>
-		<p:inputText value="#{empresaBean.empresa.endereco.numero}"
+		<p:inputText value="#{empresaBean.endereco.numero}"
 		required="true" requiredMessage="Preencha o campo Número"
 		converterMessage="Digite um número válido"
 		validatorMessage="Digite um número válido">
@@ -314,32 +315,32 @@
 		</p:inputText>
 
 		<p:outputLabel value="Bairro:"></p:outputLabel>
-		<p:inputText value="#{empresaBean.empresa.endereco.bairro}"
+		<p:inputText value="#{empresaBean.endereco.bairro}"
 			required="true" requiredMessage="Preencha o campo bairro">
 		</p:inputText>
 
 		<p:outputLabel value="Complemento: " />
 		<p:inputText id="complemento" size="30" label="complemento"
-			value="#{empresaBean.empresa.endereco.complemento}" required="true"
+			value="#{empresaBean.endereco.complemento}" required="true"
 			requiredMessage="Preencha o campo complemento">
 		</p:inputText>
 
 		<p:outputLabel value="CEP: " />
 		<p:inputMask mask="99999-999" id="cep"
-			value="#{empresaBean.empresa.endereco.cep}" required="true"
-			requiredMessage="Preencha o campo CEP">
+			value="#{empresaBean.endereco.cep}" required="true"
+			requiredMessage="Preencha o campo CEP corretamente">
 		</p:inputMask>
 
 		<p:outputLabel value="Telefone: " />
 		<p:inputMask mask="(99) 9999-9999" id="tel"
-			value="#{empresaBean.empresa.endereco.telefone}" required="false"
+			value="#{empresaBean.endereco.telefone}" required="false"
 			requiredMessage="Preencha o campo telefone">
 			<f:validateLength minimum="8" maximum="18"></f:validateLength>
 		</p:inputMask>
 
 		<p:outputLabel value="Celular: " />
 		<p:inputMask mask="(99) 9 9999-9999" id="cel"
-			value="#{empresaBean.empresa.endereco.celular}" required="false"
+			value="#{empresaBean.endereco.celular}" required="false"
 			requiredMessage="Preencha o campo celular">
 			<f:validateLength minimum="10" maximum="17"></f:validateLength>
 		</p:inputMask>
@@ -358,8 +359,8 @@
 	<h:panelGrid columns="3">
 
 		<p:commandButton value="Salvar"
-			actionListener="#{empresaBean.salvar}" rendered="#{empresaBean.botaoSalvar}" validateClient="true"
-			update=":dialogform:">
+			actionListener="#{empresaBean.salvar()}" rendered="#{empresaBean.botaoSalvar}" validateClient="true"
+			update=":dialogform: ">
 		</p:commandButton>
 		
 		<p:commandButton value="Editar"
@@ -371,7 +372,7 @@
 		<p:commandButton value="Fechar"
 			actionListener="#{empresaBean.fechar()}"
 			oncomplete="PF('dialogo').hide();" immediate="true" ajax="false"
-			style="margin-right:20px;">
+			style="margin-right:20px;"  update=":dialogform:" > 
 					</p:commandButton>
 
 				</h:panelGrid>
