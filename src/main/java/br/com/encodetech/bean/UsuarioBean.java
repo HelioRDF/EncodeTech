@@ -11,7 +11,13 @@ import javax.faces.event.ActionEvent;
 
 import org.omnifaces.util.Messages;
 
+import br.com.encodetech.dao.localizacao.CidadeDAO;
+import br.com.encodetech.dao.localizacao.EnderecoDAO;
+import br.com.encodetech.dao.localizacao.EstadoDAO;
 import br.com.encodetech.dao.usuarios.UsuarioDAO;
+import br.com.encodetech.domain.localizacao.Cidade;
+import br.com.encodetech.domain.localizacao.Endereco;
+import br.com.encodetech.domain.localizacao.Estado;
 import br.com.encodetech.domain.usuarios.Usuario;
 
 /**
@@ -31,6 +37,17 @@ public class UsuarioBean implements Serializable {
 	private Usuario usuario;
 	private UsuarioDAO dao;
 	private List<Usuario> listaUsuario;
+	private List<Cidade> listaCidade;
+	private List<Estado> listaEstado;
+	private CidadeDAO cidadeDao;
+	private EstadoDAO estadoDao;
+	
+	private Endereco endereco;
+	private EnderecoDAO enderecoDAO;
+	
+	private Boolean botaoEditar =false;
+	private Boolean botaoSalvar =false;
+	
 
 	// Salvar usuário
 	// -------------------------------------------------------------------------------------
@@ -39,9 +56,12 @@ public class UsuarioBean implements Serializable {
 		try {
 			
 			System.out.println("Método salvar");
-
+			
+			enderecoDAO.salvar(endereco);
+			usuario.setEndereco(endereco);
 			usuario.setDataCadastro(new Date());
-			dao.merge(usuario);
+			dao.salvar(usuario);
+			
 			Messages.addGlobalInfo("Usuário(a) " + usuario.getNome() + ", salvo com sucesso.");
 
 		} catch (Exception e) {
@@ -56,9 +76,14 @@ public class UsuarioBean implements Serializable {
 	// Novo
 	// -------------------------------------------------------------------------------------------
 	public void novo() {
+		
+		botaoEditar=false;
+		botaoSalvar=true;
 
 		System.out.println("Método novo");
-		
+		listarInfos();
+		endereco = new Endereco();
+		enderecoDAO = new EnderecoDAO();
 		usuario = new Usuario();
 		dao = new UsuarioDAO();
 
@@ -117,7 +142,8 @@ public class UsuarioBean implements Serializable {
 	public void editar() {
 
 		try {
-
+			
+			listarInfos();
 			dao = new UsuarioDAO();
 			dao.merge(usuario);
 			Messages.addGlobalInfo("Usuário(a) ' " + usuario.getNome() + "' Editado com sucesso!!!");
@@ -157,8 +183,13 @@ public class UsuarioBean implements Serializable {
 	public void getinstancia(ActionEvent evento) {
 
 		try {
+			
+			
+			botaoSalvar=false;
+			botaoEditar=true;
 			usuario = (Usuario) evento.getComponent().getAttributes().get("meuSelect");
 			Messages.addGlobalInfo("Seleção: " + usuario.getNome());
+			endereco=usuario.getEndereco();
 
 		} catch (Exception e) {
 			Messages.addGlobalError("Erro ao Editar: " + usuario.getNome());
@@ -168,7 +199,29 @@ public class UsuarioBean implements Serializable {
 	}
 
 	// ------------------------------------------------------------------------------------------------------------------------------------------------------
+	
+	
+	public void listarInfos() {
 
+		try {
+
+			estadoDao = new EstadoDAO();
+			cidadeDao = new CidadeDAO();
+
+			listaEstado = estadoDao.listar();
+			listaCidade = cidadeDao.listar();
+
+		} catch (Exception e) {
+			// TODO: handle exception
+		} finally {
+
+		}
+
+	}
+
+	// ------------------------------------------------------------------------------------------------------------------------------------------------------
+
+	
 	public Usuario getUsuario() {
 		return usuario;
 	}
@@ -188,5 +241,47 @@ public class UsuarioBean implements Serializable {
 	public void setListaUsuario(ArrayList<Usuario> listaUsuario) {
 		this.listaUsuario = listaUsuario;
 	}
+
+	public Endereco getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
+	}
+
+	public List<Cidade> getListaCidade() {
+		return listaCidade;
+	}
+
+	public void setListaCidade(List<Cidade> listaCidade) {
+		this.listaCidade = listaCidade;
+	}
+
+	public List<Estado> getListaEstado() {
+		return listaEstado;
+	}
+
+	public void setListaEstado(List<Estado> listaEstado) {
+		this.listaEstado = listaEstado;
+	}
+
+	public Boolean getBotaoEditar() {
+		return botaoEditar;
+	}
+
+	public void setBotaoEditar(Boolean botaoEditar) {
+		this.botaoEditar = botaoEditar;
+	}
+
+	public Boolean getBotaoSalvar() {
+		return botaoSalvar;
+	}
+
+	public void setBotaoSalvar(Boolean botaoSalvar) {
+		this.botaoSalvar = botaoSalvar;
+	}
+	
+	
 
 }

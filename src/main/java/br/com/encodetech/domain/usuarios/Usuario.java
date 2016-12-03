@@ -5,10 +5,13 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import br.com.encodetech.domain.complementos.GenericDomain;
+import br.com.encodetech.domain.localizacao.Endereco;
 
 
 /**
@@ -69,6 +72,10 @@ public class Usuario extends GenericDomain {
 
 	@Column(length = 20, nullable = false)
 	private String sexo;
+	
+	@OneToOne
+	@JoinColumn()
+	private Endereco endereco;
 
 	@Column
 	private Curriculo curriculo;
@@ -154,5 +161,14 @@ public class Usuario extends GenericDomain {
 	public void setSexo(String sexo) {
 		this.sexo = sexo;
 	}
+
+	public Endereco getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
+	}
+	
 
 }
