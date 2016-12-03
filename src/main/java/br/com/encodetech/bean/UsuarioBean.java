@@ -10,6 +10,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
 
 import org.omnifaces.util.Messages;
+import org.primefaces.context.RequestContext;
 
 import br.com.encodetech.dao.localizacao.CidadeDAO;
 import br.com.encodetech.dao.localizacao.EnderecoDAO;
@@ -55,8 +56,6 @@ public class UsuarioBean implements Serializable {
 
 		try {
 			
-			System.out.println("Método salvar");
-			
 			enderecoDAO.salvar(endereco);
 			usuario.setEndereco(endereco);
 			usuario.setDataCadastro(new Date());
@@ -94,8 +93,11 @@ public class UsuarioBean implements Serializable {
 	public void fechar() {
 		System.out.println("Método fechar");
 		
+		RequestContext.getCurrentInstance().reset("dialogform");
+			
 		usuario = new Usuario();
 		dao = new UsuarioDAO();
+		endereco=new Endereco();
 	}
 
 	// Carregar
@@ -106,6 +108,10 @@ public class UsuarioBean implements Serializable {
 			usuario = new Usuario();
 			dao = new UsuarioDAO();
 			listaUsuario = dao.listar();
+			
+		
+		
+			
 
 			Messages.addGlobalInfo("Lista atualizada com sucesso ");
 
@@ -146,12 +152,15 @@ public class UsuarioBean implements Serializable {
 			listarInfos();
 			dao = new UsuarioDAO();
 			dao.merge(usuario);
+			
+			
 			Messages.addGlobalInfo("Usuário(a) ' " + usuario.getNome() + "' Editado com sucesso!!!");
 
 		} catch (Exception e) {
 			Messages.addGlobalError("Erro ao Editar Usuário(a) '" + usuario.getNome() + "'");
 
 		} finally {
+			
 			fechar();
 		}
 
@@ -190,6 +199,7 @@ public class UsuarioBean implements Serializable {
 			usuario = (Usuario) evento.getComponent().getAttributes().get("meuSelect");
 			Messages.addGlobalInfo("Seleção: " + usuario.getNome());
 			endereco=usuario.getEndereco();
+			listarInfos();
 
 		} catch (Exception e) {
 			Messages.addGlobalError("Erro ao Editar: " + usuario.getNome());

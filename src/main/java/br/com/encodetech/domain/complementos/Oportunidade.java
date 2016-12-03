@@ -1,11 +1,14 @@
 package br.com.encodetech.domain.complementos;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import br.com.encodetech.domain.empresas.Empresa;
 
@@ -31,6 +34,11 @@ import br.com.encodetech.domain.empresas.Empresa;
 @Entity
 public class Oportunidade extends GenericDomain {
 	
+	
+	
+	@Column()
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date dataCadastro;
 	
 	@Column(nullable = false)
 	private String cargo;
@@ -135,6 +143,25 @@ public class Oportunidade extends GenericDomain {
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
+
+	public Date getDataCadastro() {
+		return dataCadastro;
+	}
+
+	public void setDataCadastro(Date dataCadastro) {
+		this.dataCadastro = dataCadastro;
+	}
+
+	@Override
+	public String toString() {
+		return "Oportunidade [dataCadastro=" + dataCadastro + ", cargo=" + cargo + ", nivel=" + nivel + ", descricao="
+				+ descricao + ", preRequisitos=" + preRequisitos + ", quantidade=" + quantidade + ", salario=" + salario
+				+ ", empresa=" + empresa + ", tipo=" + tipo + ", setor=" + setor + "]";
+	}
+	
+	
+	
+	
 	
 	
 
