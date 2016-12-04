@@ -101,6 +101,11 @@
 				filterBy="#{dataVar.tipo}">
 				<p:outputLabel value="#{dataVar.tipo}" />
 			</p:column>
+			
+			<p:column headerText="Nível" sortBy="#{dataVar.nivel}"
+				filterBy="#{dataVar.nivel}">
+				<p:outputLabel value="#{dataVar.nivel}" />
+			</p:column>
 
 
 
@@ -154,14 +159,22 @@
 
 			<p:rowExpansion styleClass=" width=37%">
 
-				<p:panelGrid columns="1" columnClasses="label,value"
-					style="text-align:left;">
-
+				<p:panelGrid columns="2" columnClasses="label,value" style="text-align:left;">
+					
+					
 					<h:outputText value="Quantidades de Vagas: #{dataVar.quantidade}" />
+					
 					<h:outputText value="Setor: #{dataVar.setor}" />
-					<h:outputText value="Descrição: #{dataVar.descricao}" />
-					<h:outputText value="Pré-Requisito: #{dataVar.preRequisitos}" />
-
+					
+					<p:panelGrid columns="1">
+					<p:outputLabel  value="Descrição:"></p:outputLabel>
+					<p:inputTextarea cols="75" rows="8" readonly="true" value="#{dataVar.descricao}" />
+					</p:panelGrid>
+					
+					<p:panelGrid columns="1">
+					<p:outputLabel  value="Pré-Requisito:"></p:outputLabel>
+					<p:inputTextarea  cols="75" rows="8" readonly="true" value="#{dataVar.preRequisitos}" />
+					</p:panelGrid>
 
 
 
@@ -189,155 +202,186 @@
    closable="true?" 'controla o botão fechar do dialogo'-->
 
 	<p:dialog header="Adicionar Oportunidade" widgetVar="dialogo"
-		modal="true" responsive="true" width="800">
+		modal="true" responsive="true">
 
 		<h:form id="dialogform">
 
-<h:panelGrid columns="2">
-			<h:panelGrid columns="2" id="dialogpanel">
+			<p:layout id="layoutFull" onResize="false"
+				style="min-width:850px; min-height:400px; max-width:850px; max-height:400px; ">
+				<p:growl id="global2" life="5000" />
+<!-- _________________________________________________________________________________________________________________________________ -->
+<!-- West -->
+
+				<p:layoutUnit id="West" position="west" size="400" minSize="210"
+					maxSize="500">
+
+					<h:panelGrid columns="2" id="dialogpanel">
 
 
-				<p:outputLabel value="Cargo: ">
-				</p:outputLabel>
-				<p:inputText id="cargo" maxlength="25" size="24" label="nome"
-					value="#{oportunidadeBean.oportunidade.cargo}" required="true"
-					requiredMessage="Preencha o campo Cargo corretamente">
-					<f:validateLength minimum="2" />
-				</p:inputText>
-
-
-
-
-				<p:outputLabel value="Empresa " />
-				<p:selectOneMenu filter="true"
-					value="#{oportunidadeBean.oportunidade.empresa}"
-					converter="omnifaces.SelectItemsConverter" required="true"
-					requiredMessage="Informe a Empresa corretamente">
-					<f:selectItem itemDisabled="true" noSelectionOption="true"
-						itemLabel="Selecione uma empresa" />
-					<f:selectItems value="#{oportunidadeBean.listaEmpresas}"
-						var="empresa" itemValue="#{empresa}"
-						itemLabel="#{empresa.nomeEmpresa}" />
-				</p:selectOneMenu>
-
-
-				<p:outputLabel value="Salario:" />
-				<h:panelGrid columns="2" >
-					<p:inputNumber symbol="R$ " maxValue="99999" decimalSeparator=","
-						thousandSeparator="." maxlength="50" size="12"
-						value="#{oportunidadeBean.oportunidade.salario}" required="true"
-						requiredMessage="Preencha o campo Salário corretamente" />
-					<p:selectBooleanButton onLabel="Visível" offLabel="Oculto"></p:selectBooleanButton>
-				</h:panelGrid>
+						<p:outputLabel value="Cargo: ">
+						</p:outputLabel>
+						<p:inputText id="cargo" maxlength="25" size="24" label="nome"
+							value="#{oportunidadeBean.oportunidade.cargo}" required="true"
+							requiredMessage="Preencha o campo Cargo corretamente">
+							<f:validateLength minimum="2" />
+						</p:inputText>
 
 
 
-				<p:outputLabel value="Nº de Vagas: " />
-				<p:inputNumber maxValue="999" decimalPlaces="0" maxlength="50"
-					size="10" value="#{oportunidadeBean.oportunidade.quantidade}"
-					required="true"
-					requiredMessage="Preencha o campo Nº de Vagas corretamente">
-					<f:convertNumber pattern="##" minIntegerDigits="3" />
-				</p:inputNumber>
-				<p:outputLabel value="Nível: " />
-				<p:selectOneMenu filter="true"
-					value="#{oportunidadeBean.oportunidade.nivel}" required="true"
-					requiredMessage="Preencha o campo Nível corretamente">
-					<f:selectItem itemValue="" itemLabel="Selecione uma modalidade" />
 
-					<f:selectItem itemValue="Trainee" itemLabel="Trainee" />
-					<f:selectItem itemValue="Junior" itemLabel="Junior" />
-					<f:selectItem itemValue="Pleno" itemLabel="Pleno" />
-					<f:selectItem itemValue="Senior" itemLabel="Senior" />
-					<f:selectItem itemValue="Master" itemLabel="Master" />
-					<f:selectItem itemValue="Especialista" itemLabel="Especialista" />
-					<f:selectItem itemValue="Todos" itemLabel="Todos" />
-					<f:selectItem itemValue="N/A" itemLabel="N/A" />
-				</p:selectOneMenu>
-
-				<p:outputLabel value="Tipo: " />
-				<p:selectOneMenu filter="true"
-					value="#{oportunidadeBean.oportunidade.tipo}" required="true"
-					requiredMessage="Preencha o campo Tipo corretamente">
-					<f:selectItem itemValue="" itemLabel="Selecione uma modalidade" />
-					<f:selectItem itemValue="CLT" itemLabel="CLT" />
-					<f:selectItem itemValue="PJ" itemLabel="PJ" />
-					<f:selectItem itemValue="Empreita" itemLabel="Empreita" />
-					<f:selectItem itemValue="Estágio" itemLabel="Estágio" />
-
-					<f:selectItem itemValue="CLT-PcD" itemLabel="CLT-PcD" />
-					<f:selectItem itemValue="PJ-PcD" itemLabel="PJ-PcD" />
-					<f:selectItem itemValue="Empreita-PcD" itemLabel="Empreita-PcD" />
-					<f:selectItem itemValue="Estágio-PcD" itemLabel="Estágio-PcD" />
-
-					<f:selectItem itemValue="Outros" itemLabel="Outros" />
+						<p:outputLabel value="Empresa " />
+						<p:selectOneMenu filter="true"
+							value="#{oportunidadeBean.oportunidade.empresa}"
+							converter="omnifaces.SelectItemsConverter" required="true"
+							requiredMessage="Informe a Empresa corretamente">
+							<f:selectItem itemDisabled="true" noSelectionOption="true"
+								itemLabel="Selecione uma empresa" />
+							<f:selectItems value="#{oportunidadeBean.listaEmpresas}"
+								var="empresa" itemValue="#{empresa}"
+								itemLabel="#{empresa.nomeEmpresa}" />
+						</p:selectOneMenu>
 
 
-				</p:selectOneMenu>
-
-
-				<p:outputLabel value="Setor: " />
-				<p:selectOneMenu filter="true"
-					value="#{oportunidadeBean.oportunidade.setor}" required="true"
-					requiredMessage="Preencha o campo Setor corretamente">
-					<f:selectItem itemValue="" itemLabel="Selecione uma modalidade" />
-					<f:selectItem itemValue="Humanas" itemLabel="Humanas" />
-					<f:selectItem itemValue="Exatas" itemLabel="Exatas" />
-					<f:selectItem itemValue="Biologicas" itemLabel="Biologicas" />
-
-				</p:selectOneMenu>
+						<p:outputLabel value="Salario:" />
+						<h:panelGrid columns="2">
+							<p:inputNumber symbol="R$ " maxValue="99999" decimalSeparator=","
+								thousandSeparator="." maxlength="50" size="12"
+								value="#{oportunidadeBean.oportunidade.salario}" required="true"
+								requiredMessage="Preencha o campo Salário corretamente" />
+							<p:selectBooleanButton onLabel="Visível" offLabel="Oculto"></p:selectBooleanButton>
+						</h:panelGrid>
 
 
 
-			</h:panelGrid>
-			
-			<h:panelGrid>
-			
-				<p:outputLabel value="Descrição: " />
-				<p:inputTextarea maxlength="250" rows="3" cols="30"
-					value="#{oportunidadeBean.oportunidade.descricao}" required="true"
-					requiredMessage="Preencha o campo Descrição corretamente" />
+						<p:outputLabel value="Nº de Vagas: " />
+						<p:inputNumber maxValue="999" decimalPlaces="0" maxlength="50"
+							size="10" value="#{oportunidadeBean.oportunidade.quantidade}"
+							required="true"
+							requiredMessage="Preencha o campo Nº de Vagas corretamente">
+							<f:convertNumber pattern="##" minIntegerDigits="3" />
+						</p:inputNumber>
+						<p:outputLabel value="Nível: " />
+						<p:selectOneMenu filter="true"
+							value="#{oportunidadeBean.oportunidade.nivel}" required="true"
+							requiredMessage="Preencha o campo Nível corretamente">
+							<f:selectItem itemValue="" itemLabel="Selecione uma modalidade" />
 
-				<p:outputLabel value="Pré-Requisitos: " />
-				<p:inputTextarea maxlength="250" rows="3" cols="30"
-					value="#{oportunidadeBean.oportunidade.preRequisitos}" />
-			
-			</h:panelGrid>
+							<f:selectItem itemValue="Trainee" itemLabel="Trainee" />
+							<f:selectItem itemValue="Junior" itemLabel="Junior" />
+							<f:selectItem itemValue="Pleno" itemLabel="Pleno" />
+							<f:selectItem itemValue="Senior" itemLabel="Senior" />
+							<f:selectItem itemValue="Master" itemLabel="Master" />
+							<f:selectItem itemValue="Especialista" itemLabel="Especialista" />
+							<f:selectItem itemValue="Todos" itemLabel="Todos" />
+							<f:selectItem itemValue="N/A" itemLabel="N/A" />
+						</p:selectOneMenu>
+
+						<p:outputLabel value="Tipo: " />
+						<p:selectOneMenu filter="true"
+							value="#{oportunidadeBean.oportunidade.tipo}" required="true"
+							requiredMessage="Preencha o campo Tipo corretamente">
+							<f:selectItem itemValue="" itemLabel="Selecione uma modalidade" />
+							<f:selectItem itemValue="CLT" itemLabel="CLT" />
+							<f:selectItem itemValue="PJ" itemLabel="PJ" />
+							<f:selectItem itemValue="Empreita" itemLabel="Empreita" />
+							<f:selectItem itemValue="Estágio" itemLabel="Estágio" />
+
+							<f:selectItem itemValue="CLT-PcD" itemLabel="CLT-PcD" />
+							<f:selectItem itemValue="PJ-PcD" itemLabel="PJ-PcD" />
+							<f:selectItem itemValue="Empreita-PcD" itemLabel="Empreita-PcD" />
+							<f:selectItem itemValue="Estágio-PcD" itemLabel="Estágio-PcD" />
+
+							<f:selectItem itemValue="Outros" itemLabel="Outros" />
+
+
+						</p:selectOneMenu>
+
+
+						<p:outputLabel value="Setor: " />
+						<p:selectOneMenu filter="true"
+							value="#{oportunidadeBean.oportunidade.setor}" required="true"
+							requiredMessage="Preencha o campo Setor corretamente">
+							<f:selectItem itemValue="" itemLabel="Selecione uma modalidade" />
+							<f:selectItem itemValue="Humanas" itemLabel="Humanas" />
+							<f:selectItem itemValue="Exatas" itemLabel="Exatas" />
+							<f:selectItem itemValue="Biologicas" itemLabel="Biologicas" />
+
+						</p:selectOneMenu>
 
 
 
-</h:panelGrid>
+					</h:panelGrid>
+				</p:layoutUnit>
 
-			<h:panelGrid columns="3">
+				<!-- _________________________________________________________________________________________________________________________________ -->
 
-				<p:commandButton value="Salvar"
-					actionListener="#{oportunidadeBean.salvar}"
-					rendered="#{oportunidadeBean.botaoSalvar}" validateClient="true"
-					update=":dialogform:">
-				</p:commandButton>
-
-				<p:commandButton value="Editar"
-					actionListener="#{oportunidadeBean.editar}" validateClient="true"
-					update=":dialogform:" rendered="#{oportunidadeBean.botaoEditar}">
-				</p:commandButton>
+				<!-- Center -->
 
 
-				<p:commandButton value="Fechar"
-					actionListener="#{oportunidadeBean.fechar()}"
-					oncomplete="PF('dialogo').hide();" immediate="true" ajax="false"
-					style="margin-right:20px;">
-				</p:commandButton>
+				<p:layoutUnit id="Center" position="center" closable="true"
+					collapsible="true" size="400" minSize="210" maxSize="500">
 
-				<p:growl id="global" life="5000" />
 
-			</h:panelGrid>
+
+					<h:panelGrid columns="2" id="dialogpanel2">
+
+						<p:outputLabel value="Descrição: " />
+						<p:inputTextarea maxlength="250" rows="3" cols="30"
+							value="#{oportunidadeBean.oportunidade.descricao}"
+							required="true"
+							requiredMessage="Preencha o campo Descrição corretamente" />
+
+						<p:outputLabel value="Pré-Requisitos: " />
+						<p:inputTextarea maxlength="250" rows="3" cols="30"
+							value="#{oportunidadeBean.oportunidade.preRequisitos}" />
+
+
+
+					</h:panelGrid>
+
+				</p:layoutUnit>
+
+
+				<!-- _________________________________________________________________________________________________________________________________ -->
+
+				<!-- South -->
+
+
+				<p:layoutUnit id="South" position="south" resizable="true"
+					closable="true" collapsible="true" size="50">
+
+
+
+					<h:panelGrid columns="3">
+
+						<p:commandButton value="Salvar"
+							actionListener="#{oportunidadeBean.salvar}"
+							rendered="#{oportunidadeBean.botaoSalvar}" validateClient="true"
+							update=":dialogform:">
+						</p:commandButton>
+
+						<p:commandButton value="Editar"
+							actionListener="#{oportunidadeBean.editar}" validateClient="true"
+							update=":dialogform:" rendered="#{oportunidadeBean.botaoEditar}">
+						</p:commandButton>
+
+
+						<p:commandButton value="Fechar"
+							actionListener="#{oportunidadeBean.fechar()}"
+							oncomplete="PF('dialogo').hide();" immediate="true" ajax="false"
+							style="margin-right:20px;">
+						</p:commandButton>
+
+						<p:growl id="global" life="5000" />
+
+					</h:panelGrid>
+
+				</p:layoutUnit>
+			</p:layout>
 
 		</h:form>
 
 	</p:dialog>
-
-
-
 
 </h:body>
 </html>
