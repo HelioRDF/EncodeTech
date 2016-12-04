@@ -129,7 +129,7 @@ public class OportunidadeBean implements Serializable {
 
 		try {
 
-			listarInfos();
+			
 			dao = new OportunidadeDAO();
 			dao.merge(oportunidade);
 			Messages.addGlobalInfo(" Editado com sucesso!!!");
@@ -154,6 +154,7 @@ public class OportunidadeBean implements Serializable {
 
 			botaoSalvar = false;
 			botaoEditar = true;
+			listarInfos();
 			oportunidade = (Oportunidade) evento.getComponent().getAttributes().get("meuSelect");
 			Messages.addGlobalInfo("Seleção: ");
 
