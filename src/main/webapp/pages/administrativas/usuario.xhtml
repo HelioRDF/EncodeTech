@@ -210,7 +210,40 @@ oncomplete="PF('dialogo').show();" action="#{usuarioBean.novo()}"
 			value="#{usuarioBean.usuario.status}" required="true"
 			requiredMessage="Verificar campo Status">
 		</p:selectBooleanButton>
+		
+		
 
+		<p:outputLabel value="E-mail:" />
+		<p:inputText id="email" maxlength="20" size="22"
+			value="#{usuarioBean.usuario.email}" required="true"
+			requiredMessage="Verificar campo E-Mail"
+			validatorMessage="Erro de validação: o e-mail não é válido ">
+			<f:validateRegex disabled="true" for="email"
+				validatorMessage="Erro de validação: o endereço de e-mail não é válido "
+				pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+		</p:inputText>
+
+		<p:outputLabel value="Digite uma Senha:" />
+		<p:password id="senha" match="confirmar" maxlength="13" size="18"
+			feedback="true" inline="true"
+			value="#{usuarioBean.usuario.senha}" required="true"
+			requiredMessage="Verificar campo Senha"
+			validatorMessage="Erro de validação: o comprimento é menor do que o mínimo permitido. '4 dígitos' ">
+			<f:validateLength minimum="4" />
+		</p:password>
+
+		<p:outputLabel value="Confirmar senha:" required="true" />
+		<p:password id="confirmar" maxlength="13" size="18"
+			value="#{usuarioBean.usuario.senha}" required="true"
+			requiredMessage="Verificar campo Confirmar Senha"
+			validatorMessage="Erro de validação: o comprimento é menor do que o mínimo permitido. '4 dígitos' ">
+			<f:validateLength minimum="4" />
+		</p:password>
+
+
+		
+<p:separator style="border: 1px solid #e6e6ff; height: 1px;"></p:separator>
+<p:separator style="border: 1px solid #e6e6ff; height: 1px;"></p:separator>
 
 		<p:outputLabel value="Sexo: " />
 		<p:selectOneRadio id="sexo" value="#{usuarioBean.usuario.sexo}"
@@ -222,7 +255,7 @@ oncomplete="PF('dialogo').show();" action="#{usuarioBean.novo()}"
 
 		<p:outputLabel value="Nome  Completo: ">
 		</p:outputLabel>
-		<p:inputText id="nome" maxlength="50" size="25" label="nome"
+		<p:inputText id="nome" maxlength="30" size="25" label="nome"
 			value="#{usuarioBean.usuario.nome}" required="true"
 			requiredMessage="Verificar campo Nome"
 			validatorMessage="Erro de validação: Dígite seu nome completo">
@@ -246,7 +279,7 @@ oncomplete="PF('dialogo').show();" action="#{usuarioBean.novo()}"
 		</p:inputMask>
 
 		<p:outputLabel value="RG: " />
-		<p:inputText id="rg" maxlength="50" size="15"
+		<p:inputText id="rg" maxlength="15" size="16"
 			value="#{usuarioBean.usuario.rg}" required="true"
 			requiredMessage="Verificar campo RG"
 			validatorMessage="Erro de validação: o comprimento é menor do que o mínimo permitido. '5 dígitos' ">
@@ -267,35 +300,6 @@ oncomplete="PF('dialogo').show();" action="#{usuarioBean.novo()}"
 value="/images/calendar (3).png" />
 </h:panelGrid>
 
-<p:separator style="border: 1px solid #e6e6ff; height: 1px;"></p:separator>
-<p:separator style="border: 1px solid #e6e6ff; height: 1px;"></p:separator>
-
-		<p:outputLabel value="E-mail:" />
-		<p:inputText id="email" maxlength="50" size="22"
-			value="#{usuarioBean.usuario.email}" required="true"
-			requiredMessage="Verificar campo E-Mail"
-			validatorMessage="Erro de validação: o e-mail não é válido ">
-			<f:validateRegex disabled="true" for="email"
-				validatorMessage="Erro de validação: o endereço de e-mail não é válido "
-				pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
-		</p:inputText>
-
-		<p:outputLabel value="Digite uma Senha:" />
-		<p:password id="senha" match="confirmar" maxlength="16" size="18"
-			feedback="true" inline="true"
-			value="#{usuarioBean.usuario.senha}" required="true"
-			requiredMessage="Verificar campo Senha"
-			validatorMessage="Erro de validação: o comprimento é menor do que o mínimo permitido. '4 dígitos' ">
-			<f:validateLength minimum="4" />
-		</p:password>
-
-		<p:outputLabel value="Confirmar senha:" required="true" />
-		<p:password id="confirmar" maxlength="16" size="18"
-			value="#{usuarioBean.usuario.senha}" required="true"
-			requiredMessage="Verificar campo Confirmar Senha"
-			validatorMessage="Erro de validação: o comprimento é menor do que o mínimo permitido. '4 dígitos' ">
-			<f:validateLength minimum="4" />
-		</p:password>
 
 
 	</h:panelGrid>
@@ -335,31 +339,29 @@ value="/images/calendar (3).png" />
 		</p:selectOneMenu>
 
 		<p:outputLabel value="Rua:" />
-		<p:inputText size="23" label="rua"
+		<p:inputText maxlength="30" size="23" label="rua"
 			value="#{usuarioBean.endereco.rua}" required="true">
 		</p:inputText>
 
 		<p:outputLabel value="Número: "></p:outputLabel>
-		<p:inputText size="10" value="#{usuarioBean.endereco.numero}"
+		<p:inputText maxlength="5" size="10" value="#{usuarioBean.endereco.numero}"
 			required="true" requiredMessage="Preencha o campo Número"
-			converterMessage="Digite um número válido"
-			validatorMessage="Digite um número válido">
-			<f:validateLongRange minimum="1" maximum="9999"></f:validateLongRange>
+			>
 		</p:inputText>
 
 		<p:outputLabel value="Bairro:"></p:outputLabel>
-		<p:inputText size="20" value="#{usuarioBean.endereco.bairro}"
+		<p:inputText maxlength="20" size="20" value="#{usuarioBean.endereco.bairro}"
 			required="true" requiredMessage="Preencha o campo bairro">
 		</p:inputText>
 
 		<p:outputLabel value="Complemento: " />
-		<p:inputText id="complemento" size="20" label="complemento"
+		<p:inputText maxlength="20" id="complemento" size="20" label="complemento"
 			value="#{usuarioBean.endereco.complemento}" required="true"
 			requiredMessage="Preencha o campo complemento">
 		</p:inputText>
 
 		<p:outputLabel value="CEP: " />
-		<p:inputMask size="18" mask="99999-999" id="cep"
+		<p:inputMask  size="18" mask="99999-999" id="cep"
 			value="#{usuarioBean.endereco.cep}" required="true"
 			requiredMessage="Preencha o campo CEP">
 		</p:inputMask>

@@ -6,6 +6,7 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -47,9 +48,11 @@ public class Oportunidade extends GenericDomain {
 	private String nivel;	//Junior | Senior | Pleno | Trainee
 
 	@Column(nullable = false)
+	@Lob
 	private String descricao;
 	
 	@Column
+	@Lob
 	private String preRequisitos;
 
 	@Column(nullable = false)
