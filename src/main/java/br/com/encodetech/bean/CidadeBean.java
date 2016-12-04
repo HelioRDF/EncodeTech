@@ -8,6 +8,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
 
 import org.omnifaces.util.Messages;
+import org.primefaces.context.RequestContext;
 
 import br.com.encodetech.dao.localizacao.CidadeDAO;
 import br.com.encodetech.dao.localizacao.EstadoDAO;
@@ -47,10 +48,9 @@ public class CidadeBean implements Serializable {
 
 	public void novo() {
 
-		fechar();
-
+		
 		try {
-
+			RequestContext.getCurrentInstance().reset("formCadastro");
 			daoEstado = new EstadoDAO();
 			listaEstado = daoEstado.listar("nome");
 
@@ -67,11 +67,15 @@ public class CidadeBean implements Serializable {
 	// -------------------------------------------------------------------------------------
 
 	public void fechar() {
-		cidade = null;
-		daoCidade = null;
-		daoEstado = null;
-		listaEstado = null;
-		estado = null;
+		
+		RequestContext.getCurrentInstance().reset("formCadastro");
+		cidade = new Cidade();
+		estado = new Estado();
+		daoCidade = new CidadeDAO();
+		daoEstado = new EstadoDAO();
+
+	
+	
 
 	}
 
@@ -104,8 +108,8 @@ public class CidadeBean implements Serializable {
 			daoCidade = new CidadeDAO();
 			listaCidade = daoCidade.listar();
 
-			daoCidade = null;
-			cidade = null;
+			daoCidade = new CidadeDAO();
+			cidade = new Cidade();
 			Messages.addGlobalInfo("Lista atualizada com sucesso ");
 
 		} catch (Exception e) {
@@ -134,7 +138,28 @@ public class CidadeBean implements Serializable {
 	}
 
 	// ------------------------------------------------------------------------------------------
+	
+	
+/*	public void listarInfos() {
 
+		try {
+
+			listaEstado = daoEstado.listar();
+
+		} catch (Exception e) {
+			// TODO: handle exception
+		} finally {
+
+		}
+
+	}*/
+
+	// ------------------------------------------------------------------------------------------------------------------------------------------------------
+
+	
+	
+	
+	
 	public Cidade getCidade() {
 		return cidade;
 	}

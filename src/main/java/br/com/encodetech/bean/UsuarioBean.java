@@ -78,6 +78,7 @@ public class UsuarioBean implements Serializable {
 		
 		botaoEditar=false;
 		botaoSalvar=true;
+		
 
 		System.out.println("Método novo");
 		listarInfos();

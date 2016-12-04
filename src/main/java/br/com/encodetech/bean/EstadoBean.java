@@ -8,6 +8,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
 
 import org.omnifaces.util.Messages;
+import org.primefaces.context.RequestContext;
 
 import br.com.encodetech.dao.localizacao.EstadoDAO;
 import br.com.encodetech.domain.localizacao.Estado;
@@ -60,9 +61,7 @@ public class EstadoBean implements Serializable {
 	// -------------------------------------------------------------------------------------
 
 	public void novo() {
-		
-
-		fechar();
+		RequestContext.getCurrentInstance().reset("formCadastro");
 
 		estado = new Estado();
 		dao = new EstadoDAO();
@@ -73,6 +72,7 @@ public class EstadoBean implements Serializable {
 	// Fechar
 	// -------------------------------------------------------------------------------------
 	public void fechar() {
+		RequestContext.getCurrentInstance().reset("formCadastro");
 		estado = null;
 		dao = null;
 	}
@@ -107,8 +107,8 @@ public class EstadoBean implements Serializable {
 
 			estado = (Estado) evento.getComponent().getAttributes().get("meuSelect");
 			EstadoDAO dao = new EstadoDAO();
-			Messages.addGlobalInfo("Nome Removido: " + estado.getNome());
 			dao.excluir(estado);
+			Messages.addGlobalInfo("Estado Removido: " );
 
 		} catch (Exception e) {
 			Messages.addGlobalError("Erro ao Remover: " + estado.getNome());

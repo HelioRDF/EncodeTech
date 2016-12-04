@@ -9,6 +9,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
 
 import org.omnifaces.util.Messages;
+import org.primefaces.context.RequestContext;
 
 import br.com.encodetech.dao.complementos.OportunidadeDAO;
 import br.com.encodetech.dao.empresas.EmpresaDAO;
@@ -78,7 +79,7 @@ public class OportunidadeBean implements Serializable {
 	// -------------------------------------------------------------------------------------------
 	public void fechar() {
 		System.out.println("Método fechar");
-
+		RequestContext.getCurrentInstance().reset("dialogform");
 		oportunidade = new Oportunidade();
 		dao = new OportunidadeDAO();
 	}

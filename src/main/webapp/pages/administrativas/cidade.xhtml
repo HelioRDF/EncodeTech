@@ -45,9 +45,6 @@
 						value="" icon="ui-icon-calculator"
 						style="float:left; height: 33px; width:34px " />
 					<p:columnToggler datasource="dataTable" trigger="toggler" />
-
-
-
 					<p:ajaxStatus onstart="PF('statusDialog').show()"
 						onsuccess="PF('statusDialog').hide()"  />
 
@@ -101,11 +98,13 @@
 					oncomplete="PF('dialogo').show();">
 					<f:attribute name="meuSelect" value="#{city}" />
 				</p:commandButton>		
-			
-			<!-- Excluir -->
+		
+				
+				<!-- Excluir -->
 				<p:commandButton title="Excluir" icon="ui-icon-trash"
-					actionListener="#{cidadeBean.excluir}" update=":cityform:msgGrowl">
-					<p:confirm header="Confirmação" message="Deseja excluir a cidade ?"
+					actionListener="#{cidadeBean.excluir}"
+					update=":cityform:msgGrowl">
+					<p:confirm header="Confirmação" message="Deseja excluir a Cidade ?"
 						icon="ui-icon-alert" />
 					<f:attribute name="meuSelect" value="#{city}" />
 				</p:commandButton>
@@ -167,7 +166,8 @@
 				<p:commandButton value="Salvar"
 					actionListener="#{cidadeBean.salvar()}" update="msgdialog" />
 
-				<p:commandButton value="Fechar" oncomplete="PF('dialogo').hide();" />
+				<p:commandButton value="Fechar" oncomplete="PF('dialogo').hide();" 
+				actionListener="#{cidadeBean.fechar()}"  />
 
 			</h:panelGrid>
 
