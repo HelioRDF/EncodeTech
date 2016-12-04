@@ -218,7 +218,7 @@ oncomplete="PF('dialogo').show();" action="#{usuarioBean.novo()}"
 			value="#{usuarioBean.usuario.email}" required="true"
 			requiredMessage="Verificar campo E-Mail"
 			validatorMessage="Erro de validação: o e-mail não é válido ">
-			<f:validateRegex disabled="true" for="email"
+			<f:validateRegex disabled="false" for="email"
 				validatorMessage="Erro de validação: o endereço de e-mail não é válido "
 				pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
 		</p:inputText>
@@ -279,7 +279,7 @@ oncomplete="PF('dialogo').show();" action="#{usuarioBean.novo()}"
 		</p:inputMask>
 
 		<p:outputLabel value="RG: " />
-		<p:inputText id="rg" maxlength="15" size="16"
+		<p:inputText id="rg" maxlength="11" size="16"
 			value="#{usuarioBean.usuario.rg}" required="true"
 			requiredMessage="Verificar campo RG"
 			validatorMessage="Erro de validação: o comprimento é menor do que o mínimo permitido. '5 dígitos' ">

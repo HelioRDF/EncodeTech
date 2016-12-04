@@ -58,8 +58,11 @@ public class Oportunidade extends GenericDomain {
 	@Column(nullable = false)
 	private Short quantidade;
 
-	@Column(nullable = false, precision = 8, scale = 2)
+	@Column(nullable = false)
 	private BigDecimal salario;
+	
+	@Column
+	private Boolean mostrarSalario;
 
 	@ManyToOne
 	@JoinColumn(nullable = false)
@@ -68,6 +71,7 @@ public class Oportunidade extends GenericDomain {
 	@Column
 	private String tipo; //CLT | CLT PCD | PJ | Estágio ???
 	
+	@Column
 	private String setor; //MKT | Engenharia | ???
 	
 	
@@ -153,6 +157,16 @@ public class Oportunidade extends GenericDomain {
 
 	public void setDataCadastro(Date dataCadastro) {
 		this.dataCadastro = dataCadastro;
+	}
+	
+	
+
+	public Boolean getMostrarSalario() {
+		return mostrarSalario;
+	}
+
+	public void setMostrarSalario(Boolean mostrarSalario) {
+		this.mostrarSalario = mostrarSalario;
 	}
 
 	@Override

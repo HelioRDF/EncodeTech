@@ -113,6 +113,12 @@
 				sortBy="#{dataVar.salario}" filterBy="#{dataVar.salario}">
 				<p:outputLabel value="#{dataVar.salario}" />
 			</p:column>
+			
+			
+			<p:column headerText="Mostrar" width="10%"
+				sortBy="#{dataVar.mostrarSalario}" filterBy="#{dataVar.mostrarSalario}">
+				<p:outputLabel value="#{dataVar.mostrarSalario}" />
+			</p:column>
 
 
 
@@ -248,7 +254,7 @@
 								thousandSeparator="." maxlength="50" size="12"
 								value="#{oportunidadeBean.oportunidade.salario}" required="true"
 								requiredMessage="Preencha o campo Salário corretamente" />
-							<p:selectBooleanButton onLabel="Visível" offLabel="Oculto"></p:selectBooleanButton>
+							<p:selectBooleanButton value="#{oportunidadeBean.oportunidade.mostrarSalario}" onLabel="Visível" offLabel="Oculto"></p:selectBooleanButton>
 						</h:panelGrid>
 
 
