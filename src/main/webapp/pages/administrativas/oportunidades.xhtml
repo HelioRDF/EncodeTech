@@ -108,9 +108,12 @@
 			</p:column>
 
 
-			<p:column headerText="Salario" width="10%"
+			<p:column headerText="Salario" width="10%" 
 				sortBy="#{dataVar.salario}" filterBy="#{dataVar.salario}">
-				<p:outputLabel value="#{dataVar.salario}" />
+				<p:outputLabel value="#{dataVar.salario}">
+				<f:convertNumber locale="pt_BR" minFractionDigits="2"></f:convertNumber>
+				
+				 </p:outputLabel>
 			</p:column>
 			
 			
