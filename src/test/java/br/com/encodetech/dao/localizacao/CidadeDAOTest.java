@@ -16,7 +16,7 @@ import br.com.encodetech.domain.localizacao.Estado;
 public class CidadeDAOTest extends GenericDAO<Cidade> {
 
 	@Test
-	
+	@Ignore
 	public void salvar() {
 		Long codigoEstado = 1L;
 
@@ -89,14 +89,14 @@ public class CidadeDAOTest extends GenericDAO<Cidade> {
 		Long codigoEstado = 11L;
 		EstadoDAO estadoDAO = new EstadoDAO();
 		Estado estado = estadoDAO.buscar(codigoEstado);
-		
+
 		System.out.println("Código do Estado: " + estado.getCodigo());
 		System.out.println("Sigla do Estado: " + estado.getSigla());
 		System.out.println("Nome do Estado: " + estado.getNome());
-		
+
 		CidadeDAO cidadeDAO = new CidadeDAO();
 		Cidade cidade = cidadeDAO.buscar(codigoCidade);
-		
+
 		System.out.println("Cidade A Ser Editada");
 		System.out.println("Código da Cidade: " + cidade.getCodigo());
 		System.out.println("Nome da Cidade: " + cidade.getNome());
@@ -117,4 +117,22 @@ public class CidadeDAOTest extends GenericDAO<Cidade> {
 		System.out.println("Nome do  Estado: " + cidade.getEstado().getNome());
 	}
 
-}
+	@Test
+	public void buscarPorEstado() {
+		
+	Long estadoCodigo = 2l;
+
+		CidadeDAO dao = new CidadeDAO();
+		List<Cidade> resultado = dao.buscarPorEstado(estadoCodigo);
+
+		for (Cidade cidade : resultado) {
+
+			System.out.print("\nCod:" + cidade.getCodigo());
+			System.out.print("\tCidade Nome:" + cidade.getNome());
+
+			System.out.print("\tEstado Nome:" + cidade.getEstado().getNome());
+			System.out.print("\tSigla Estado:" + cidade.getEstado().getSigla());
+
+		}
+
+}}
