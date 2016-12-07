@@ -41,6 +41,7 @@ public class UsuarioBean implements Serializable {
 	private List<Cidade> listaCidade;
 	private List<Estado> listaEstado;
 	private CidadeDAO cidadeDao;
+	private Estado estado;
 	private EstadoDAO estadoDao;
 	
 	private Endereco endereco;
@@ -50,9 +51,11 @@ public class UsuarioBean implements Serializable {
 	private Boolean botaoSalvar =false;
 	
 
+	
+
 	// Salvar usuário
 	// -------------------------------------------------------------------------------------
-	public void salvar() {
+		public void salvar() {
 
 		try {
 			
@@ -217,7 +220,7 @@ public class UsuarioBean implements Serializable {
 		try {
 
 			estadoDao = new EstadoDAO();
-			cidadeDao = new CidadeDAO();
+			
 
 			listaEstado = estadoDao.listar("nome");
 			listaCidade = cidadeDao.listar("nome");
@@ -229,6 +232,23 @@ public class UsuarioBean implements Serializable {
 		}
 
 	}
+
+	// ------------------------------------------------------------------------------------------------------------------------------------------------------
+
+	public void filtrarCidade(){
+		
+		try {
+			
+			System.out.println("Filtrar Cidade");
+			cidadeDao = new CidadeDAO();
+			listaCidade = cidadeDao.buscarPorEstado(estado.getCodigo());	
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+	}
+		
 
 	// ------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -292,6 +312,15 @@ public class UsuarioBean implements Serializable {
 	public void setBotaoSalvar(Boolean botaoSalvar) {
 		this.botaoSalvar = botaoSalvar;
 	}
+
+	public Estado getEstado() {
+		return estado;
+	}
+
+	public void setEstado(Estado estado) {
+		this.estado = estado;
+	}
+	
 	
 	
 

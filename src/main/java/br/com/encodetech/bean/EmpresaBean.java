@@ -41,6 +41,7 @@ public class EmpresaBean implements Serializable {
 	private List<Estado> listaEstado;
 	private CidadeDAO cidadeDao;
 	private EstadoDAO estadoDao;
+	private Estado estado;
 	
 	private Endereco endereco;
 	private EnderecoDAO enderecoDAO;
@@ -210,7 +211,7 @@ public class EmpresaBean implements Serializable {
 		try {
 
 			estadoDao = new EstadoDAO();
-			cidadeDao = new CidadeDAO();
+			
 
 			listaEstado = estadoDao.listar("nome");
 			listaCidade = cidadeDao.listar("nome");
@@ -225,6 +226,28 @@ public class EmpresaBean implements Serializable {
 
 	// ------------------------------------------------------------------------------------------------------------------------------------------------------
 
+	
+	
+	public void filtrarCidade(){
+		
+		try {
+			
+			System.out.println("Filtrar Cidade");
+			cidadeDao = new CidadeDAO();
+			listaCidade = cidadeDao.buscarPorEstado(estado.getCodigo());	
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+	}
+		
+
+	// ------------------------------------------------------------------------------------------------------------------------------------------------------
+
+	
+	
+	
 	public Empresa getEmpresa() {
 		return empresa;
 	}
@@ -289,6 +312,14 @@ public class EmpresaBean implements Serializable {
 
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
+	}
+
+	public Estado getEstado() {
+		return estado;
+	}
+
+	public void setEstado(Estado estado) {
+		this.estado = estado;
 	}
 
 	

@@ -120,7 +120,7 @@ public class CidadeDAOTest extends GenericDAO<Cidade> {
 	@Test
 	public void buscarPorEstado() {
 		
-	Long estadoCodigo = 2l;
+	Long estadoCodigo = 4l;
 
 		CidadeDAO dao = new CidadeDAO();
 		List<Cidade> resultado = dao.buscarPorEstado(estadoCodigo);

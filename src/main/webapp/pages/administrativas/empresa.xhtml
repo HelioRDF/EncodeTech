@@ -287,7 +287,7 @@
 
 		<p:outputLabel value="Estado: " />
 		<p:selectOneMenu filter="true"
-			value="#{empresaBean.endereco.estado}"
+			value="#{empresaBean.estado}"
 			converter="omnifaces.SelectItemsConverter" required="true"
 			requiredMessage="Informe o Estado corretamente">
 			<f:selectItem itemDisabled="true" noSelectionOption="true"
@@ -295,10 +295,11 @@
 			<f:selectItems value="#{empresaBean.listaEstado}" var="estado"
 				itemValue="#{estado}"
 				itemLabel="#{estado.nome} - #{estado.sigla}" />
+				<p:ajax listener="#{empresaBean.filtrarCidade}" update=":dialogform:cidade"></p:ajax>
 		</p:selectOneMenu>
 
 		<p:outputLabel value="Cidade: " />
-		<p:selectOneMenu filter="true"
+		<p:selectOneMenu id="cidade" filter="true"
 			value="#{empresaBean.endereco.cidade}"
 			converter="omnifaces.SelectItemsConverter" required="true"
 			requiredMessage="Informe a Cidade corretamente">

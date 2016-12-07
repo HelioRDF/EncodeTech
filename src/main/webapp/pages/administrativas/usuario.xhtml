@@ -97,6 +97,7 @@ oncomplete="PF('dialogo').show();" action="#{usuarioBean.novo()}"
 	<p:outputLabel value="#{dataVar.status}" />
 </p:column>
 
+
 <p:column headerText="Opções" width="18%">
 
 
@@ -153,8 +154,12 @@ oncomplete="PF('dialogo').show();" action="#{usuarioBean.novo()}"
 	<h:outputText value="Senha: #{dataVar.senha}" />
 	<h:outputText value="CPF: #{dataVar.cpf}" />
 	<h:outputText value="RG: #{dataVar.rg}" />
-	<h:outputText value="Data de Nascimento: #{dataVar.dataNascimento}" />
-	<h:outputText value="Cadastrado dia: #{dataVar.dataCadastro}" />
+	<h:outputText value="Data de Nascimento: #{dataVar.dataNascimento}">
+	<f:convertDateTime  locale="pt_BR"/>
+	</h:outputText>
+	<h:outputText  value="Cadastrado dia: #{dataVar.dataCadastro}">
+    <f:convertDateTime  locale="pt_BR"/>
+	</h:outputText>
 
 	<h:outputText value="Telefone: #{dataVar.endereco.telefone}" />
 	<h:outputText value="Celular: #{dataVar.endereco.celular}" />
@@ -290,10 +295,12 @@ oncomplete="PF('dialogo').show();" action="#{usuarioBean.novo()}"
 		<p:outputLabel value="Data de Nasc: " />
 
 		<h:panelGrid columns="2">
-			<p:calendar showButtonPanel="true" id="calendario"
+			<p:calendar locale="pt_BR" showButtonPanel="true" id="calendario"
 				yearRange="c-60:c+1" navigator="true" pages="1"
 				value="#{usuarioBean.usuario.dataNascimento}" required="true"
-				size="10" requiredMessage="Verificar campo Data de Nascimento" />
+				size="10" requiredMessage="Verificar campo Data de Nascimento" > 
+			
+				</p:calendar>
 
 
 			<p:graphicImage style="float:center;"
@@ -317,7 +324,7 @@ value="/images/calendar (3).png" />
 
 		<p:outputLabel value="Estado: " />
 		<p:selectOneMenu filter="true"
-			value="#{usuarioBean.endereco.estado}"
+			value="#{usuarioBean.estado}"
 			converter="omnifaces.SelectItemsConverter" required="true"
 			requiredMessage="Informe o Estado corretamente">
 			<f:selectItem itemDisabled="true" noSelectionOption="true"
@@ -325,10 +332,11 @@ value="/images/calendar (3).png" />
 			<f:selectItems value="#{usuarioBean.listaEstado}" var="estado"
 				itemValue="#{estado}"
 				itemLabel="#{estado.nome} - #{estado.sigla}" />
+				<p:ajax listener="#{usuarioBean.filtrarCidade}" update=":dialogform:cidade"></p:ajax>
 		</p:selectOneMenu>
 
 		<p:outputLabel value="Cidade: " />
-		<p:selectOneMenu filter="true"
+		<p:selectOneMenu id="cidade" filter="true"
 			value="#{usuarioBean.endereco.cidade}"
 			converter="omnifaces.SelectItemsConverter" required="true"
 			requiredMessage="Informe a Cidade corretamente">
