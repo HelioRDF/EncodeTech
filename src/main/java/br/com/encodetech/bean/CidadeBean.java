@@ -107,6 +107,7 @@ public class CidadeBean implements Serializable {
 			cidade = new Cidade();
 			daoCidade = new CidadeDAO();
 			listaCidade = daoCidade.listar();
+			
 
 			daoCidade = new CidadeDAO();
 			cidade = new Cidade();
@@ -126,7 +127,7 @@ public class CidadeBean implements Serializable {
 		try {
 
 			daoEstado = new EstadoDAO();
-			listaEstado = daoEstado.listar();
+			listaEstado = daoEstado.listar("nome");
 			cidade = (Cidade) evento.getComponent().getAttributes().get("meuSelect");
 			Messages.addGlobalInfo("Cidade: " + cidade.getNome());
 			Messages.addGlobalInfo("Estado: " + cidade.getEstado().getNome());

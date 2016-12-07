@@ -219,8 +219,8 @@ public class UsuarioBean implements Serializable {
 			estadoDao = new EstadoDAO();
 			cidadeDao = new CidadeDAO();
 
-			listaEstado = estadoDao.listar();
-			listaCidade = cidadeDao.listar();
+			listaEstado = estadoDao.listar("nome");
+			listaCidade = cidadeDao.listar("nome");
 
 		} catch (Exception e) {
 			// TODO: handle exception
