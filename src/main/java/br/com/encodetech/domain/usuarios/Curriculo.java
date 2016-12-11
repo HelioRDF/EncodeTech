@@ -4,7 +4,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 
 import br.com.encodetech.domain.complementos.GenericDomain;
-import br.com.encodetech.domain.localizacao.Endereco;
 
 
 /**
@@ -20,25 +19,37 @@ public class Curriculo extends GenericDomain {
 	// Objetivo
 	@Column(length = 30, nullable = false)
 	private String cargoPretendido;
+	
+	//Pretenção Salarial
+	@Column
+	private String pretensaoSalarial;
 
 	// Formação
+
+	// -----------------------------------------------------------------------------
 	@Column
 	private FormacaoAcademica formacao;
 
+
+
 	// Experiencia Profissional
+
+	// -----------------------------------------------------------------------------
 	@Column
 	private ExperienciaProfissional experiencia;
 
 	// Atividades Profissionais
+	// -----------------------------------------------------------------------------
+	
 	@Column
 	private AtividadesProfissionais atividades;
 
 	// Informações adicionais
+	// -----------------------------------------------------------------------------
 	@Column
 	private InformacoesAdicionais info;
 	
-	@Column
-	private Endereco endereco;
+
 
 	// ------------------------------------------------------------------
 
@@ -82,13 +93,20 @@ public class Curriculo extends GenericDomain {
 		this.info = info;
 	}
 
-	public Endereco getEndereco() {
-		return endereco;
+
+
+	public String getPretensaoSalarial() {
+		return pretensaoSalarial;
 	}
 
-	public void setEndereco(Endereco endereco) {
-		this.endereco = endereco;
+	public void setPretensaoSalarial(String pretensaoSalarial) {
+		this.pretensaoSalarial = pretensaoSalarial;
 	}
+
+
+	
+	
+	
 
 	
 }

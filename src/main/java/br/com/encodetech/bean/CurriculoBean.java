@@ -19,11 +19,6 @@ import br.com.encodetech.dao.usuarios.UsuarioDAO;
 import br.com.encodetech.domain.localizacao.Cidade;
 import br.com.encodetech.domain.localizacao.Endereco;
 import br.com.encodetech.domain.localizacao.Estado;
-import br.com.encodetech.domain.usuarios.AtividadesProfissionais;
-import br.com.encodetech.domain.usuarios.Curriculo;
-import br.com.encodetech.domain.usuarios.ExperienciaProfissional;
-import br.com.encodetech.domain.usuarios.FormacaoAcademica;
-import br.com.encodetech.domain.usuarios.InformacoesAdicionais;
 import br.com.encodetech.domain.usuarios.Usuario;
 
 /**
@@ -38,7 +33,7 @@ import br.com.encodetech.domain.usuarios.Usuario;
 @SuppressWarnings("serial")
 @ManagedBean
 @ViewScoped
-public class UsuarioBean implements Serializable {
+public class CurriculoBean implements Serializable {
 
 	private Usuario usuario;
 	private UsuarioDAO dao;
@@ -54,26 +49,6 @@ public class UsuarioBean implements Serializable {
 	
 	private Boolean botaoEditar =false;
 	private Boolean botaoSalvar =false;
-	
-	private Curriculo curriculo;
-	private FormacaoAcademica formacaoAcademicaUm;
-	private FormacaoAcademica formacaoAcademicaDois;
-	private FormacaoAcademica formacaoAcademicaTres;
-	
-	private ExperienciaProfissional experienciaProfissionalUm;
-	private ExperienciaProfissional experienciaProfissionalDois;
-	private ExperienciaProfissional experienciaProfissionalTres;
-	
-	private AtividadesProfissionais atividadesProfissionaisUm;
-	private AtividadesProfissionais atividadesProfissionaisDois;
-	private AtividadesProfissionais atividadesProfissionaisTres;
-	private AtividadesProfissionais atividadesProfissionaisQuatro;
-	private AtividadesProfissionais atividadesProfissionaisCinco;
-	private AtividadesProfissionais atividadesProfissionaisSeis;
-	
-	private InformacoesAdicionais informacoesAdicionaisUm;
-	private InformacoesAdicionais informacoesAdicionaisDois;
-
 	
 
 	
@@ -239,58 +214,12 @@ public class UsuarioBean implements Serializable {
 
 	// ------------------------------------------------------------------------------------------------------------------------------------------------------
 	
-
-	public void getinstanciaCurriculo(ActionEvent evento) {
-
-		try {
-			
-			
-			botaoSalvar=false;
-			botaoEditar=true;
-			usuario = (Usuario) evento.getComponent().getAttributes().get("meuSelect");
-			Messages.addGlobalInfo("Seleção: " + usuario.getNome());
-			
-			
-			curriculo = new Curriculo();
-			
-			formacaoAcademicaUm = new FormacaoAcademica();
-			formacaoAcademicaDois = new FormacaoAcademica();
-			formacaoAcademicaTres = new FormacaoAcademica();
-			
-			 experienciaProfissionalUm = new ExperienciaProfissional();
-			 experienciaProfissionalDois = new ExperienciaProfissional();
-			 experienciaProfissionalTres = new ExperienciaProfissional();
-			 
-			 
-			 atividadesProfissionaisUm = new AtividadesProfissionais();
-			 atividadesProfissionaisDois = new AtividadesProfissionais();
-			 atividadesProfissionaisTres = new AtividadesProfissionais();
-			 atividadesProfissionaisQuatro = new AtividadesProfissionais();
-			 atividadesProfissionaisCinco = new AtividadesProfissionais();
-			 atividadesProfissionaisSeis = new AtividadesProfissionais();
-			 
-			 informacoesAdicionaisUm = new InformacoesAdicionais();
-			 informacoesAdicionaisDois = new InformacoesAdicionais();
-	
-
-		} catch (Exception e) {
-			Messages.addGlobalError("Erro ao Editar: " + usuario.getNome());
-
-		}
-
-	}
-
-	// ------------------------------------------------------------------------------------------------------------------------------------------------------
-	
 	
 	public void listarInfos() {
 
 		try {
 
 			estadoDao = new EstadoDAO();
-			
-			
-
 			
 
 			listaEstado = estadoDao.listar("nome");
@@ -391,131 +320,6 @@ public class UsuarioBean implements Serializable {
 	public void setEstado(Estado estado) {
 		this.estado = estado;
 	}
-
-	public Curriculo getCurriculo() {
-		return curriculo;
-	}
-
-	public void setCurriculo(Curriculo curriculo) {
-		this.curriculo = curriculo;
-	}
-
-	public FormacaoAcademica getFormacaoAcademicaUm() {
-		return formacaoAcademicaUm;
-	}
-
-	public void setFormacaoAcademicaUm(FormacaoAcademica formacaoAcademicaUm) {
-		this.formacaoAcademicaUm = formacaoAcademicaUm;
-	}
-
-	public FormacaoAcademica getFormacaoAcademicaDois() {
-		return formacaoAcademicaDois;
-	}
-
-	public void setFormacaoAcademicaDois(FormacaoAcademica formacaoAcademicaDois) {
-		this.formacaoAcademicaDois = formacaoAcademicaDois;
-	}
-
-	public FormacaoAcademica getFormacaoAcademicaTres() {
-		return formacaoAcademicaTres;
-	}
-
-	public void setFormacaoAcademicaTres(FormacaoAcademica formacaoAcademicaTres) {
-		this.formacaoAcademicaTres = formacaoAcademicaTres;
-	}
-
-	public ExperienciaProfissional getExperienciaProfissionalUm() {
-		return experienciaProfissionalUm;
-	}
-
-	public void setExperienciaProfissionalUm(ExperienciaProfissional experienciaProfissionalUm) {
-		this.experienciaProfissionalUm = experienciaProfissionalUm;
-	}
-
-	public ExperienciaProfissional getExperienciaProfissionalDois() {
-		return experienciaProfissionalDois;
-	}
-
-	public void setExperienciaProfissionalDois(ExperienciaProfissional experienciaProfissionalDois) {
-		this.experienciaProfissionalDois = experienciaProfissionalDois;
-	}
-
-	public ExperienciaProfissional getExperienciaProfissionalTres() {
-		return experienciaProfissionalTres;
-	}
-
-	public void setExperienciaProfissionalTres(ExperienciaProfissional experienciaProfissionalTres) {
-		this.experienciaProfissionalTres = experienciaProfissionalTres;
-	}
-
-	public AtividadesProfissionais getAtividadesProfissionaisUm() {
-		return atividadesProfissionaisUm;
-	}
-
-	public void setAtividadesProfissionaisUm(AtividadesProfissionais atividadesProfissionaisUm) {
-		this.atividadesProfissionaisUm = atividadesProfissionaisUm;
-	}
-
-	public AtividadesProfissionais getAtividadesProfissionaisDois() {
-		return atividadesProfissionaisDois;
-	}
-
-	public void setAtividadesProfissionaisDois(AtividadesProfissionais atividadesProfissionaisDois) {
-		this.atividadesProfissionaisDois = atividadesProfissionaisDois;
-	}
-
-	public AtividadesProfissionais getAtividadesProfissionaisTres() {
-		return atividadesProfissionaisTres;
-	}
-
-	public void setAtividadesProfissionaisTres(AtividadesProfissionais atividadesProfissionaisTres) {
-		this.atividadesProfissionaisTres = atividadesProfissionaisTres;
-	}
-
-	public AtividadesProfissionais getAtividadesProfissionaisQuatro() {
-		return atividadesProfissionaisQuatro;
-	}
-
-	public void setAtividadesProfissionaisQuatro(AtividadesProfissionais atividadesProfissionaisQuatro) {
-		this.atividadesProfissionaisQuatro = atividadesProfissionaisQuatro;
-	}
-
-	public AtividadesProfissionais getAtividadesProfissionaisCinco() {
-		return atividadesProfissionaisCinco;
-	}
-
-	public void setAtividadesProfissionaisCinco(AtividadesProfissionais atividadesProfissionaisCinco) {
-		this.atividadesProfissionaisCinco = atividadesProfissionaisCinco;
-	}
-
-	public AtividadesProfissionais getAtividadesProfissionaisSeis() {
-		return atividadesProfissionaisSeis;
-	}
-
-	public void setAtividadesProfissionaisSeis(AtividadesProfissionais atividadesProfissionaisSeis) {
-		this.atividadesProfissionaisSeis = atividadesProfissionaisSeis;
-	}
-
-	public InformacoesAdicionais getInformacoesAdicionaisUm() {
-		return informacoesAdicionaisUm;
-	}
-
-	public void setInformacoesAdicionaisUm(InformacoesAdicionais informacoesAdicionaisUm) {
-		this.informacoesAdicionaisUm = informacoesAdicionaisUm;
-	}
-
-	public InformacoesAdicionais getInformacoesAdicionaisDois() {
-		return informacoesAdicionaisDois;
-	}
-
-	public void setInformacoesAdicionaisDois(InformacoesAdicionais informacoesAdicionaisDois) {
-		this.informacoesAdicionaisDois = informacoesAdicionaisDois;
-	}
-
-
-	
-	
-	
 	
 	
 	

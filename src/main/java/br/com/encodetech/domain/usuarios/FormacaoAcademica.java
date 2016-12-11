@@ -27,7 +27,10 @@ public class FormacaoAcademica extends GenericDomain {
 	@Column(length = 30, nullable = false)
 	private String titulo; // Graduação | Técnico | Primeiro Grau| Segundo
 							// Grau|?
-
+	
+	@Column(length = 30, nullable = false)
+	private String status; 
+	
 	@Column(length = 30, nullable = false)
 	private String nomeCurso;// Analise de Sistemasng
 
@@ -39,11 +42,9 @@ public class FormacaoAcademica extends GenericDomain {
 	@Temporal(TemporalType.DATE)
 	private Date fim;
 
-	@Column(length = 5, nullable = false)
-	private int cargaHoraria;
 
-	@Column(length = 30, nullable = false)
-	private String descricao;
+
+
 
 	// -------------------------------------------------------
 
@@ -87,20 +88,17 @@ public class FormacaoAcademica extends GenericDomain {
 		this.fim = fim;
 	}
 
-	public int getCargaHoraria() {
-		return cargaHoraria;
+
+
+
+	public String getStatus() {
+		return status;
 	}
 
-	public void setCargaHoraria(int cargaHoraria) {
-		this.cargaHoraria = cargaHoraria;
+	public void setStatus(String status) {
+		this.status = status;
 	}
-
-	public String getDescricao() {
-		return descricao;
-	}
-
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
+	
+	
 
 }
