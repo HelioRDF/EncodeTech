@@ -1,0 +1,60 @@
+@CHARSET "UTF-8";
+
+h1 {
+	font-size: 20px;
+	color: #ffffff;
+	background-image: url("../images/banner02.png");
+	margin: 5px auto 0 auto;
+	padding: 18px;
+	border-style: solid;
+	border-color: #C2C1D4;
+	border-width: 1px;
+	border-radius: 8px;
+}
+
+h2 {
+	color: white;
+	font-size: 26px;
+}
+
+h3 {
+	background-color: #E5E4F7;
+	background-color: #E9E7F8;
+}
+
+body {
+	/* 	background-image: url("../images/d1.jpg"); */
+	border-style: solid;
+	border-color: black;
+	border-width: 0px;
+	height: auto;
+	width: auto;
+}
+
+#login-dialog {
+	width: 260px;
+	margin: auto;
+	margin-top: 150px;
+}
+
+.grid-login {
+	background-color: #f2f2f2;
+	border-radius: 8px;
+	border: 1px solid #ccc;
+	margin-top: 10px;
+	padding: 20px 10px 10px 10px;
+	width: 110%
+}
+
+.menu {
+	margin: auto auto 25px auto;
+	border-radius: 8px;
+}
+
+.nameheader {
+	font-size: 22px;
+	color: #182170;
+	font-family: Garamond, serif;
+	margin-left: auto;
+	margin-right: 25%;
+}

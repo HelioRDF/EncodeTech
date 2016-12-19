@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>Login</title>
+	<h:outputStylesheet library="css" name="estilos.css"></h:outputStylesheet>
+
+</h:head>
+
+<h:body>
+
+<h1>@ Encodetech</h1>
+
+
+	<div id="login-dialog">
+		 
+		<h:form id="frm">
+			<p:messages autoUpdate="true" />
+			
+			<h2 >Login:</h2>
+			<h:panelGrid columns="2" styleClass="grid-login">
+			
+		<p:outputLabel style="margin-bottom:15px;"  /><p:outputLabel />
+			
+				<p:outputLabel style="padding-top:15px;" value="Usuário" for="usuario" />
+				<p:inputText id="usuario" size="20" value="#{loginBean.nomeUsuario}" />
+				<p:outputLabel value="Senha" for="senha" />
+				<p:password id="senha" size="20"
+					value="#{loginBean.senha}" />
+					<p:separator/> <p:separator/>
+				<p:outputLabel />
+				<p:commandButton style="margin-top:5px;" value="Acessar" action="#{loginBean.login}" />
+			</h:panelGrid>
+		</h:form>
+	</div>
+	
+
+</h:body>
+</html>
