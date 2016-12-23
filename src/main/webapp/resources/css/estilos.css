@@ -10,16 +10,18 @@ h1 {
 	border-color: #C2C1D4;
 	border-width: 1px;
 	border-radius: 8px;
+	font-family:Times New Roman, serif;
 }
 
 h2 {
-	color: white;
-	font-size: 26px;
+	color: orange;
+	font-size: 28px;
+	margin:auto auto auto 90px;
+	font-family:Times New Roman, serif;
 }
 
 h3 {
-	background-color: #E5E4F7;
-	background-color: #E9E7F8;
+	
 }
 
 body {
@@ -52,9 +54,8 @@ body {
 }
 
 .nameheader {
-	font-size: 22px;
-	color: #182170;
-	font-family: Garamond, serif;
-	margin-left: auto;
-	margin-right: 25%;
+	font-size: 20px;
+	color: orange;
+	font-family:Courier New, monospace;
+	margin:auto 25% auto auto;
 }

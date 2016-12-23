@@ -9,6 +9,7 @@
 	
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>Cidade</title>
+	<h:outputStylesheet library="css" name="estilos.css"></h:outputStylesheet>
 </h:head>
 
 
@@ -18,7 +19,33 @@
 
 	<h:form id="cityform" >
 		<p:growl id="msgGrowl" life="15000" />
-		<p:panel header="Cidades"></p:panel>
+		
+		
+		
+		
+		<h1>@ Encodetech</h1>
+	 	<p:menubar styleClass="menu">
+	        <p:submenu label="Menu Principal" icon="ui-icon-arrow-4-diag">
+		    	<p:menuitem value="Usuários" outcome="/pages/administrativas/usuario.xhtml" icon="fa-bars" update="messages"/>
+		        <p:menuitem value="Empresas" outcome="/pages/administrativas/empresa.xhtml" icon="fa-bars" update="messages"/>
+	        <p:menuitem value="Oportunidades" outcome="/pages/administrativas/usuario.xhtml" icon="fa-bars" update="messages"/>	         
+	        </p:submenu>
+        
+            <p:submenu label="Localidade" icon="ui-icon-star">
+	    	     <p:menuitem value="Estados" outcome="/pages/administrativas/estado.xhtml"  icon="fa-bars" update="messages"/>
+	        	 <p:menuitem value="Cidades" outcome="/pages/administrativas/cidade.xhtml" icon="fa-bars" update="messages"/>
+	        </p:submenu>
+	 
+	        <p:submenu label="Ajuda" icon="ui-icon-help">
+	            <p:menuitem value="Versão" url="#" />
+	            <p:menuitem value="Sobre" url="#" />           
+	        </p:submenu>
+	 	       
+	        <f:facet name="options">
+	            <p:inputText style="margin-right:10px" placeholder="Search"/>
+	            <p:commandButton type="button" value="Logout" icon="ui-icon-extlink" />
+	        </f:facet>
+    </p:menubar>
 		
 		
 <!-- _________________________________________________________________________________________________________________________________ -->
@@ -61,6 +88,9 @@
 						style="float:left; height:33px;"
 						actionListener="#{cidadeBean.novo}" oncomplete="PF('dialogo').show();" 
 						update=":formCadastro:dialogpanel"/>
+						
+								<!-- Header -->
+					<h:outputLabel styleClass="nameheader" value="Cidades"></h:outputLabel>
 
 				</p:panelGrid>
 			</f:facet>
