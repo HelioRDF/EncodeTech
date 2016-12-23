@@ -10,14 +10,14 @@ h1 {
 	border-color: #C2C1D4;
 	border-width: 1px;
 	border-radius: 8px;
-	font-family:Times New Roman, serif;
+	font-family: Times New Roman, serif;
 }
 
 h2 {
 	color: orange;
 	font-size: 28px;
-	margin:auto auto auto 90px;
-	font-family:Times New Roman, serif;
+	margin: auto auto auto 90px;
+	font-family: Times New Roman, serif;
 }
 
 h3 {
@@ -56,6 +56,6 @@ body {
 .nameheader {
 	font-size: 20px;
 	color: orange;
-	font-family:Courier New, monospace;
-	margin:auto 25% auto auto;
+	font-family: Courier New, monospace;
+	margin: auto 25% auto auto;
 }
