@@ -57,17 +57,10 @@ public class UsuarioBean implements Serializable {
 	private Boolean botaoEditar =false;
 	private Boolean botaoSalvar =false;
 	
-	
-
 	private FormacaoAcademica formacaoAcademica;
 	private List<FormacaoAcademica> listaFormacao;
 	private FormacaoAcademicaDAO daoFormacao;
-	
-	
-	
-	
-	
-	
+		
 	private Curriculo curriculo;
 	private FormacaoAcademica formacaoAcademicaUm;
 	private FormacaoAcademica formacaoAcademicaDois;
@@ -120,7 +113,7 @@ public class UsuarioBean implements Serializable {
 
 			try {
 
-				//formacaoAcademica.setUsuario(usuario);
+				formacaoAcademica.setUsuario(usuario);
 				daoFormacao.salvar(formacaoAcademica);
 
 				Messages.addGlobalInfo("Formação  salva com sucesso.");
@@ -299,11 +292,11 @@ public class UsuarioBean implements Serializable {
 
 		try {
 			
+			carregarCurriculo();
 			
-			botaoSalvar=false;
-			botaoEditar=true;
 			usuario = (Usuario) evento.getComponent().getAttributes().get("meuSelect");
 			Messages.addGlobalInfo("Seleção: " + usuario.getNome());
+			
 			
 			
 			curriculo = new Curriculo();

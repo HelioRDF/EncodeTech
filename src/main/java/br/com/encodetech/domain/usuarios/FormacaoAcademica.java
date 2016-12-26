@@ -4,6 +4,8 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -42,6 +44,10 @@ public class FormacaoAcademica extends GenericDomain {
 	@Temporal(TemporalType.DATE)
 	private Date fim;
 	
+	@ManyToOne
+	@JoinColumn
+	private Usuario usuario;
+	
 
 
 
@@ -49,9 +55,18 @@ public class FormacaoAcademica extends GenericDomain {
 
 
 	// -------------------------------------------------------
+	
 
 	public String getInstituicao() {
 		return instituicao;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 	public void setInstituicao(String instituicao) {
