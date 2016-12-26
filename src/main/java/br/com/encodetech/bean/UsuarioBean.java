@@ -16,6 +16,7 @@ import org.primefaces.context.RequestContext;
 import br.com.encodetech.dao.localizacao.CidadeDAO;
 import br.com.encodetech.dao.localizacao.EnderecoDAO;
 import br.com.encodetech.dao.localizacao.EstadoDAO;
+import br.com.encodetech.dao.usuarios.FormacaoAcademicaDAO;
 import br.com.encodetech.dao.usuarios.UsuarioDAO;
 import br.com.encodetech.domain.localizacao.Cidade;
 import br.com.encodetech.domain.localizacao.Endereco;
@@ -55,6 +56,17 @@ public class UsuarioBean implements Serializable {
 	
 	private Boolean botaoEditar =false;
 	private Boolean botaoSalvar =false;
+	
+	
+
+	private FormacaoAcademica formacaoAcademica;
+	private List<FormacaoAcademica> listaFormacao;
+	private FormacaoAcademicaDAO daoFormacao;
+	
+	
+	
+	
+	
 	
 	private Curriculo curriculo;
 	private FormacaoAcademica formacaoAcademicaUm;
@@ -100,6 +112,28 @@ public class UsuarioBean implements Serializable {
 
 		}
 	}
+		
+		// Salvar formação
+		// -------------------------------------------------------------------------------------
+		public void salvarFormacao() {
+			System.out.println("Salvar Formação");
+
+			try {
+
+				//formacaoAcademica.setUsuario(usuario);
+				daoFormacao.salvar(formacaoAcademica);
+
+				Messages.addGlobalInfo("Formação  salva com sucesso.");
+
+			} catch (Exception e) {
+				Messages.addGlobalError("Não foi possível salvar a formação, tente novamente mais tarde ... ");
+			} finally {
+
+				fechar();
+
+			}
+		}
+
 
 	// Novo
 	// -------------------------------------------------------------------------------------------
@@ -152,6 +186,26 @@ public class UsuarioBean implements Serializable {
 		}
 
 	}
+	
+	// Carregar Curriculo
+			// -------------------------------------------------------------------------------------------
+			public void carregarCurriculo() {
+
+				try {
+					formacaoAcademica = new FormacaoAcademica();
+					daoFormacao = new FormacaoAcademicaDAO();
+					listaFormacao = daoFormacao.listar();
+					
+					Messages.addGlobalInfo("Lista atualizada com sucesso ");
+
+				} catch (Exception e) {
+					Messages.addGlobalError("Falha ao tentar  atualizadar a lista  ");
+				} finally {
+					fechar();
+				}
+
+			}
+		
 
 	// Excluir usuário
 	// -------------------------------------------------------------------------------------------
@@ -511,6 +565,22 @@ public class UsuarioBean implements Serializable {
 
 	public void setInformacoesAdicionaisDois(InformacoesAdicionais informacoesAdicionaisDois) {
 		this.informacoesAdicionaisDois = informacoesAdicionaisDois;
+	}
+
+	public FormacaoAcademica getFormacaoAcademica() {
+		return formacaoAcademica;
+	}
+
+	public void setFormacaoAcademica(FormacaoAcademica formacaoAcademica) {
+		this.formacaoAcademica = formacaoAcademica;
+	}
+
+	public List<FormacaoAcademica> getListaFormacao() {
+		return listaFormacao;
+	}
+
+	public void setListaFormacao(List<FormacaoAcademica> listaFormacao) {
+		this.listaFormacao = listaFormacao;
 	}
 
 

@@ -525,9 +525,12 @@ value="/images/calendar (3).png" />
  </p:tab>
 
 <!-- _________________________________________________________________________________________________________________________________ -->
-       
+         
                
 <p:tab title="Formação Acadêmica" >
+
+
+<p:fieldset legend="Adicionar"  toggleable="true"  collapsed="true" toggleSpeed="880"> 
 
 <!-- Formação 01 -->
  
@@ -538,12 +541,12 @@ value="/images/calendar (3).png" />
        <h:panelGrid columns="4">
   <p:outputLabel value="Curso:" style="margin-right:30px;" />
 <p:inputText  style="margin-right:20px" maxlength="40" size="32" 
-	value="#{usuarioBean.formacaoAcademicaUm.nomeCurso}" required="false" requiredMessage="Preencha o campo Curso corretamente">
+	value="#{usuarioBean.formacaoAcademica.nomeCurso}" required="false" requiredMessage="Preencha o campo Curso corretamente">
 </p:inputText>          
         
   <p:outputLabel value="Instituição:"  />
  <p:inputText maxlength="30" size="25" style="margin:auto;"
-	value="#{usuarioBean.formacaoAcademicaUm.instituicao}" required="false" requiredMessage="Preencha o campo Instituição corretamente">
+	value="#{usuarioBean.formacaoAcademica.instituicao}" required="false" requiredMessage="Preencha o campo Instituição corretamente">
 </p:inputText>
       </h:panelGrid>           
   
@@ -554,7 +557,7 @@ value="/images/calendar (3).png" />
 <p:outputLabel value="Nível:" style="margin-right:30px;"/>
     <h:panelGrid columns="3">
 <p:selectOneMenu   maxlength="25" size="20" label="rua"
-	value="#{usuarioBean.formacaoAcademicaUm.titulo}" required="false" requiredMessage="Preencha o campo Nível corretamente" >
+	value="#{usuarioBean.formacaoAcademica.titulo}" required="false" requiredMessage="Preencha o campo Nível corretamente" >
 <f:selectItem  itemDisabled="true" noSelectionOption="true" itemLabel="Selecionar"> </f:selectItem>
 
 <f:selectItem itemValue="Outros" itemLabel="Outros"> </f:selectItem>
@@ -569,7 +572,7 @@ value="/images/calendar (3).png" />
 </p:selectOneMenu>
 
   <p:selectBooleanButton onLabel="Concluído" offLabel="Incompleto"
-	value="#{usuarioBean.formacaoAcademicaUm.status}" required="true"
+	value="#{usuarioBean.formacaoAcademica.status}" required="true"
 	requiredMessage="Verificar campo Status">
 </p:selectBooleanButton>
 	
@@ -581,7 +584,7 @@ value="/images/calendar (3).png" />
 <p:outputLabel value="Inicio: " style="margin:auto 33px;" />
  	<p:calendar locale="pt_BR"  
 		navigator="true" pages="1"
-		value="#{usuarioBean.formacaoAcademicaUm.inicio}" required="false"
+		value="#{usuarioBean.formacaoAcademica.inicio}" required="false"
 		size="8" requiredMessage="Preencha o campo início do curso" > 
 </p:calendar>
 	<p:graphicImage style="float:center;" value="/images/calendar (3).png" />
@@ -590,7 +593,7 @@ value="/images/calendar (3).png" />
  <p:outputLabel value="Fim: " style="margin-left:15px" />	
 		<p:calendar locale="pt_BR" 
 		navigator="true" pages="1"
-		value="#{usuarioBean.formacaoAcademicaUm.fim}" required="false"
+		value="#{usuarioBean.formacaoAcademica.fim}" required="false"
 		size="8" requiredMessage="Preencha o campo fim do curso" > 
 	
 </p:calendar>
@@ -603,13 +606,18 @@ value="/images/calendar (3).png" />
 </h:panelGrid>	
  </h:panelGrid>
  </h:panelGrid>
-<p:button value="Adicionar" style="margin:10px auto;"></p:button>
-   
+<p:commandButton actionListener="#{usuarioBean.salvarFormacao()}" 
+value="Incluir" style="margin:10px auto;" icon="ui-icon-squaresmall-plus"
+update=":dialogformCurriculo:" validateClient="true" ></p:commandButton>
+
+
+
+   </p:fieldset>
    <p:separator></p:separator>
 
 		<!-- Data Table -->
 		<p:dataTable id="dataTableFormacao" emptyMessage="Nenhum Registro encontrado" rows="6" 	var="dataVarFormacao" 
-		value=""
+		value="#{usuarioBean.listaFormacao}"
 			style=" text-align:center;">
 
 			<!-- _________________________________________________________________________________________________________________________________ -->
@@ -621,15 +629,15 @@ value="/images/calendar (3).png" />
 			</p:column>
 
 			<p:column headerText="ID" width="11%" >
-				<p:outputLabel value=""   />
+				<p:outputLabel value="#{dataVarFormacao.codigo}"   />
 			</p:column>
 
 			<p:column headerText="Curso" >
-			<p:outputLabel value=""   />
+			<p:outputLabel value="#{dataVarFormacao.nomeCurso}"   />
 			</p:column>
 
 			<p:column headerText="Instituição" >
-			<p:outputLabel value=""   />
+			<p:outputLabel value="#{dataVarFormacao.instituicao}"   />
 			</p:column>
 			
 
@@ -641,7 +649,7 @@ value="/images/calendar (3).png" />
 				<p:commandButton title="Editar" icon="ui-icon-pencil"
 					actionListener="#{usuarioBean.getinstancia}" update=":dialogform:"
 					oncomplete="PF('dialogo').show();">
-					<f:attribute name="meuSelect" value="#{dataVar}" />
+					<f:attribute name="meuSelect" value="" />
 				</p:commandButton>
 
 
@@ -651,7 +659,7 @@ value="/images/calendar (3).png" />
 					actionListener="#{usuarioBean.excluir}" update=":form:msgGrowl">
 					<p:confirm header="Confirmação"
 						message="Deseja excluir o usuário ?" icon="ui-icon-alert" />
-					<f:attribute name="meuSelect" value="#{dataVar}" />
+					<f:attribute name="meuSelect" value="" />
 				</p:commandButton>
 
 
@@ -663,13 +671,12 @@ value="/images/calendar (3).png" />
 
 			<p:rowExpansion styleClass=" width=37%">
 
-				<p:panelGrid columns="2" columnClasses="label,value"
-					style="text-align:left;">
+				<p:panelGrid columns="2" columnClasses="label,value" style="text-align:left;">
 
-					<h:outputText value="Nivel: #{dataVar.sexo}" />
-					<h:outputText value="Status: #{dataVar.senha}" />
-					<h:outputText value="Inicio: #{dataVar.cpf}" />
-					<h:outputText value="Fim: #{dataVar.rg}" />
+					<h:outputText value="Nivel: #{dataVarFormacao.titulo}" />
+					<h:outputText value="Status: #{dataVarFormacao.status}" />
+					<h:outputText value="Inicio: #{dataVarFormacao.inicio}" />
+					<h:outputText value="Fim: #{dataVarFormacao.fim}" />
 					
 				</p:panelGrid>
 
@@ -679,6 +686,8 @@ value="/images/calendar (3).png" />
 
 
 </p:tab>
+
+
 
 <!-- _________________________________________________________________________________________________________________________________ -->
    
