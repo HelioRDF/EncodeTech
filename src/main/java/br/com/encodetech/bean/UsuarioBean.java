@@ -1,3 +1,4 @@
+
 package br.com.encodetech.bean;
 
 import java.io.Serializable;

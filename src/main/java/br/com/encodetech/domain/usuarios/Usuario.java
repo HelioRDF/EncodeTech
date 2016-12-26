@@ -76,9 +76,13 @@ public class Usuario extends GenericDomain {
 	@OneToOne
 	@JoinColumn()
 	private Endereco endereco;
-
-	@Column
+	
+	@OneToOne
+	@JoinColumn
 	private Curriculo curriculo;
+
+		
+	
 
 	// -------------------------------------------------------
 
@@ -145,6 +149,9 @@ public class Usuario extends GenericDomain {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
+
+	
 
 	public Curriculo getCurriculo() {
 		return curriculo;

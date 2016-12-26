@@ -2,6 +2,7 @@ package br.com.encodetech.domain.usuarios;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 
 import br.com.encodetech.domain.complementos.GenericDomain;
 
@@ -27,7 +28,9 @@ public class Curriculo extends GenericDomain {
 	// Formação
 
 	// -----------------------------------------------------------------------------
+	
 	@Column
+	
 	private FormacaoAcademica formacao;
 
 

@@ -59,3 +59,22 @@ body {
 	font-family: Courier New, monospace;
 	margin: auto 25% auto auto;
 }
+
+
+.cabecalho{
+	font-size: 18px;
+	color: orange;
+	font-family: Courier New, monospace;
+	margin: 0 auto auto 15px;
+	
+
+
+}
+
+.visualizar{
+	
+	margin-top:15px;
+	
+}
+
+
