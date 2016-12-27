@@ -115,6 +115,7 @@ public class UsuarioBean implements Serializable {
 
 				formacaoAcademica.setUsuario(usuario);
 				daoFormacao.salvar(formacaoAcademica);
+				carregarCurriculo();
 
 				Messages.addGlobalInfo("Formação  salva com sucesso.");
 

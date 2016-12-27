@@ -154,7 +154,7 @@
 				<!-- Gerar Curriculo -->
 				<p:commandButton title="Curriculo" icon="ui-icon-person"
 					actionListener="#{usuarioBean.getinstanciaCurriculo}"
-					update=":dialogformCurriculo:"
+					update=":dialogformCurriculoObjetivos:"
 					oncomplete="PF('dialogoCurriculo').show();">
 					<f:attribute name="meuSelect" value="#{dataVar}" />
 				</p:commandButton>
@@ -475,11 +475,11 @@ value="/images/calendar (3).png" />
 <!--   Dialog do Curriculo             -->
 
 
-<p:dialog header="Curriculo: #{usuarioBean.usuario.nome}"   widgetVar="dialogoCurriculo" modal="true"
+<p:dialog id="dialogCurriculo" header="Curriculo: #{usuarioBean.usuario.nome}"   widgetVar="dialogoCurriculo" modal="true"
 	responsive="true">
-
 	
-	<h:form id="dialogformCurriculo">
+	
+	
 	<p:growl  id="msgCurriculo" life="8000" />
 	
 		<p:layout id="fulllayout" onResize="false" 
@@ -489,6 +489,8 @@ value="/images/calendar (3).png" />
 <!-- West -->
 
 <p:layoutUnit id="West" visible="false" position="west" >
+<h:form id="dialogformWest">
+</h:form>
 	
 </p:layoutUnit>
 
@@ -498,10 +500,12 @@ value="/images/calendar (3).png" />
 <p:layoutUnit visible="true" id="central" position="center" closable="true"
 	collapsible="true" size="520" minSize="450" maxSize="600" >
 	
-		
+	
 	<p:tabView>
+	
+	
         <p:tab title="Objetivos" >
-        
+        <h:form id="dialogformCurriculoObjetivos">
     	    <h:panelGrid columns="2" >
         
         
@@ -523,13 +527,17 @@ value="/images/calendar (3).png" />
 		          
 	
  </h:panelGrid>
+ </h:form>	
  </p:tab>
+ 
 
 <!-- _________________________________________________________________________________________________________________________________ -->
          
-               
+              
 <p:tab id="tableFormacao" title="Formação Acadêmica" >
- 
+
+
+<h:form id="dialogformCurriculoFormacao" >  
  
 <p:fieldset   legend="Adicionar"  toggleable="true"  collapsed="true" toggleSpeed="880"> 
 
@@ -609,7 +617,7 @@ value="/images/calendar (3).png" />
  </h:panelGrid>
 <p:commandButton actionListener="#{usuarioBean.salvarFormacao()}"
 value="Incluir" style="margin:10px auto;" icon="ui-icon-squaresmall-plus"
-update=":dialogformCurriculo:" validateClient="true" ></p:commandButton>
+update=":fulllayout: " validateClient="true" ></p:commandButton>
 
 
 
@@ -687,7 +695,7 @@ update=":dialogformCurriculo:" validateClient="true" ></p:commandButton>
 
 		</p:dataTable>
 		</h:panelGrid>
-		
+		</h:form>
 
 </p:tab>
 
@@ -696,46 +704,6 @@ update=":dialogformCurriculo:" validateClient="true" ></p:commandButton>
 <!-- _________________________________________________________________________________________________________________________________ -->
    
    
-<p:tab title="Experiência ">
-  
-<br></br><br></br><br></br><br></br> <br></br>
-     
- </p:tab>
-<!-- _________________________________________________________________________________________________________________________________ -->
-
-   
-   <p:tab title="Qualificações ">
-       
-
-
-
-
-<br></br><br></br><br></br><br></br> <br></br>
-
-
-
-
-
-
-
-   </p:tab>
-
-
-
-
-
-
-
-
-<!-- _________________________________________________________________________________________________________________________________ -->
-
-        <p:tab title="Informações Adicionais">
-      
-            
-            
-        </p:tab>
-        
-        <br></br><br></br><br></br><br></br> <br></br>
     </p:tabView>
 		
 		
@@ -753,18 +721,18 @@ update=":dialogformCurriculo:" validateClient="true" ></p:commandButton>
 <!-- South -->
 <p:layoutUnit id="South" position="south" resizable="true"
 	closable="true" collapsible="true" size="50">
-
+<h:form>
 	<h:panelGrid columns="3">
 
 		<p:commandButton value="Salvar"
 			actionListener="#{usuarioBean.salvar}"
 			 validateClient="true"
-			update=":dialogformCurriculo:">
+			update="">
 		</p:commandButton>
 
 		<p:commandButton value="Editar"
 			actionListener="#{usuarioBean.editar}" validateClient="true"
-				update=":dialogformCurriculo:">
+				update="">
 		</p:commandButton>
 
 
@@ -775,15 +743,15 @@ update=":dialogformCurriculo:" validateClient="true" ></p:commandButton>
 					</p:commandButton>
 
 				</h:panelGrid>
-
+</h:form>
 			</p:layoutUnit>
 
 
 		</p:layout>
 
-	</h:form>
 
 </p:dialog>
+
 
 
 
@@ -876,8 +844,7 @@ update=":dialogformCurriculo:" validateClient="true" ></p:commandButton>
 					oncomplete="PF('dialogSenhaPanel').hide();" />
 
 			</h:panelGrid>
-
-		</h:form>
+</h:form>
 
 	</p:dialog>
 
