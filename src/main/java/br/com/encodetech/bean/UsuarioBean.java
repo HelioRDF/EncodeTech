@@ -5,14 +5,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.event.ActionEvent;
-
 import org.omnifaces.util.Messages;
 import org.primefaces.context.RequestContext;
-
 import br.com.encodetech.dao.localizacao.CidadeDAO;
 import br.com.encodetech.dao.localizacao.EnderecoDAO;
 import br.com.encodetech.dao.localizacao.EstadoDAO;
@@ -39,7 +36,7 @@ import br.com.encodetech.domain.usuarios.Usuario;
 
 @SuppressWarnings("serial")
 @ManagedBean
-@ViewScoped
+@SessionScoped
 public class UsuarioBean implements Serializable {
 
 	private Usuario usuario;
@@ -288,8 +285,8 @@ public class UsuarioBean implements Serializable {
 
 	// ------------------------------------------------------------------------------------------------------------------------------------------------------
 	
-
 	public void getinstanciaCurriculo(ActionEvent evento) {
+		System.out.println("Método Curriculo: "+usuario.getNome());
 
 		try {
 			
@@ -298,6 +295,8 @@ public class UsuarioBean implements Serializable {
 			usuario = (Usuario) evento.getComponent().getAttributes().get("meuSelect");
 			Messages.addGlobalInfo("Seleção: " + usuario.getNome());
 			
+			
+			System.out.println("Usuario selecionado: "+usuario.getNome());
 			
 			
 			curriculo = new Curriculo();
@@ -324,6 +323,7 @@ public class UsuarioBean implements Serializable {
 
 		} catch (Exception e) {
 			Messages.addGlobalError("Erro ao Editar: " + usuario.getNome());
+			System.out.println("catch do Método Curriculo: "+usuario.getNome());
 
 		}
 
