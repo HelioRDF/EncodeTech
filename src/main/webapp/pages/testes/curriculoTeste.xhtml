@@ -65,12 +65,12 @@
 				<p:inputText size="25" 	value="#{usuarioBean.usuario.nome}" readonly="true"></p:inputText>
                    
 				<p:outputLabel value="Cargo Pretendido" />
-				<p:inputText maxlength="35" size="28" label="Cargo Pretendido" value="#{usuarioBean.curriculo.cargoPretendido}" required="false"
+				<p:inputText maxlength="35" size="28" label="Cargo Pretendido" value="#{usuarioBean.usuario.cargoPretendido}" required="false"
 				 requiredMessage="Preencha o Campo cargo pretendito"></p:inputText>
 		
 				<p:outputLabel value="Pretensão Salarial" />
 				<p:inputNumber placeholder="R$" symbol="R$ " maxValue="99999" decimalSeparator="," thousandSeparator="." maxlength="50" size="12"
-			value="#{usuarioBean.curriculo.pretensaoSalarial}" required="false" requiredMessage="Preencha o campo Pretensão Salarial corretamente">
+			value="#{usuarioBean.usuario.pretensaoSalarial}" required="false" requiredMessage="Preencha o campo Pretensão Salarial corretamente">
 		
 		</p:inputNumber>
 		
@@ -163,9 +163,9 @@
 </h:panelGrid>	
  </h:panelGrid>
  </h:panelGrid>
-<p:commandButton actionListener="#{usuarioBean.salvarFormacao()}"
+<p:commandButton action="#{usuarioBean.salvarFormacao()}"
 value="Incluir" style="margin:10px auto;" icon="ui-icon-squaresmall-plus"
-update=":dialogformCurriculo:" validateClient="true" ></p:commandButton>
+ validateClient="true" ></p:commandButton>
 
 
 
@@ -204,22 +204,7 @@ value="#{usuarioBean.listaFormacao}"
 			<p:column headerText="Opções" width="18%">
 
 
-				<!-- Editar -->
-				<p:commandButton title="Editar" icon="ui-icon-pencil"
-					actionListener="#{usuarioBean.getinstancia}" update=":dialogform:"
-					oncomplete="PF('dialogo').show();">
-					<f:attribute name="meuSelect" value="" />
-				</p:commandButton>
-
-
-
-				<!-- Excluir -->
-				<p:commandButton title="Excluir" icon="ui-icon-trash"
-					actionListener="#{usuarioBean.excluir}" update=":form:msgGrowl">
-					<p:confirm header="Confirmação"
-						message="Deseja excluir o usuário ?" icon="ui-icon-alert" />
-					<f:attribute name="meuSelect" value="" />
-				</p:commandButton>
+			
 
 
 			</p:column>
@@ -309,23 +294,9 @@ value="#{usuarioBean.listaFormacao}"
 
 	<h:panelGrid columns="3">
 
-		<p:commandButton value="Salvar"
-			actionListener="#{usuarioBean.salvar}"
-			 validateClient="true"
-			update=":dialogformCurriculo:">
-		</p:commandButton>
-
-		<p:commandButton value="Editar"
-			actionListener="#{usuarioBean.editar}" validateClient="true"
-				update=":dialogformCurriculo:">
-		</p:commandButton>
 
 
-		<p:commandButton value="Fechar"
-			actionListener="#{usuarioBean.fechar()}"
-			oncomplete="PF('dialogo').hide();" immediate="true" ajax="false"
-			style="margin-right:20px;">
-					</p:commandButton>
+
 
 				</h:panelGrid>
 

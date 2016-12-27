@@ -82,12 +82,37 @@ public class Usuario extends GenericDomain {
 	private Curriculo curriculo;
 
 		
+	// Objetivo
+	@Column(length = 30, nullable = false)
+	private String cargoPretendido;
 	
+	//Pretenção Salarial
+	@Column
+	private String pretensaoSalarial;
 
 	// -------------------------------------------------------
+	
+	
+	
 
 	public Boolean getStatus() {
 		return status;
+	}
+
+	public String getCargoPretendido() {
+		return cargoPretendido;
+	}
+
+	public void setCargoPretendido(String cargoPretendido) {
+		this.cargoPretendido = cargoPretendido;
+	}
+
+	public String getPretensaoSalarial() {
+		return pretensaoSalarial;
+	}
+
+	public void setPretensaoSalarial(String pretensaoSalarial) {
+		this.pretensaoSalarial = pretensaoSalarial;
 	}
 
 	public void setStatus(Boolean status) {

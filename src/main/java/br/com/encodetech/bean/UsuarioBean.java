@@ -107,6 +107,7 @@ public class UsuarioBean implements Serializable {
 		// -------------------------------------------------------------------------------------
 		public void salvarFormacao() {
 			System.out.println("Salvar Formação");
+			System.out.println("Usuário: " +usuario.getNome());
 
 			try {
 

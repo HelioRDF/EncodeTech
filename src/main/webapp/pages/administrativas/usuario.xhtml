@@ -149,15 +149,14 @@
 					<f:attribute name="meuSelect" value="#{dataVar}" />
 				</p:commandButton>
 
-
-				
-				
-				<!-- Gerar Curriculo -->
-				<p:button title="Curriculo" icon="ui-icon-person" outcome="/pages/testes/curriculoTeste.xhtml" >
-					<f:param name="codigousuario" value="#{dataVar.codigo}" ></f:param>
-				</p:button>
-				
-
+			
+					<!-- Gerar Curriculo -->
+					<p:commandButton title="Curriculo" icon="ui-icon-person"
+					actionListener="#{usuarioBean.getinstanciaCurriculo}"				
+					action="/pages/testes/curriculoTeste.xhtml?faces-redirect=true">
+					<f:attribute name="meuSelect" value="#{dataVar}" />
+					
+				</p:commandButton>
 
 
 				<!-- Excluir -->
