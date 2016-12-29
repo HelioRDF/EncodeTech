@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.event.ActionEvent;
 
 import org.omnifaces.util.Messages;
@@ -39,7 +39,7 @@ import br.com.encodetech.domain.usuarios.Usuario;
 
 @SuppressWarnings("serial")
 @ManagedBean
-@ViewScoped
+@SessionScoped
 public class UsuarioBean implements Serializable {
 
 	private Usuario usuario;
@@ -115,15 +115,16 @@ public class UsuarioBean implements Serializable {
 
 				formacaoAcademica.setUsuario(usuario);
 				daoFormacao.salvar(formacaoAcademica);
-				carregarCurriculo();
+			
 
 				Messages.addGlobalInfo("Formação  salva com sucesso.");
 
 			} catch (Exception e) {
-				Messages.addGlobalError("Não foi possível salvar a formação, tente novamente mais tarde ... ");
+				Messages.addGlobalError("Não foi possível salvar a formação, Preencha os campos corretamente. " );
+				System.out.println("Erro no método salvarFormação: "+ e.getMessage());
 			} finally {
 
-				fechar();
+				
 
 			}
 		}
