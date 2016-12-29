@@ -17,99 +17,60 @@
 
 
 <!-- _________________________________________________________________________________________________________________________________ -->
-<!--    Curriculo             -->
+<!--   Curriculo             -->
 
 
-	<h:form id="dialogformCurriculo">
-	<p:messages  id="msgCurriculo" life="8000" />
+
+	
+	<h:form id="dialogformCurriculo" >
+	
+	
+	<p:growl  id="msgCurriculo" life="8000" />
+	
+		<p:layout id="fulllayout" onResize="false" 
+			fullPage="true" > 
 
 
-<p:layout id="layoutFull" fullPage="true">
 
 <!-- _________________________________________________________________________________________________________________________________ -->
-
 <!-- North -->
- 
-    <p:layoutUnit position="north" size="auto"   collapsible="true">
-      <h1>@ Encodetech</h1>
+    <p:layoutUnit position="north" size="100" header="Top" resizable="true" closable="true" collapsible="true" visible="true">
+        <h:outputLabel value="Nome: #{usuarioBean.usuario.nome}" > </h:outputLabel>
     </p:layoutUnit>
-    
- 
-<!-- _________________________________________________________________________________________________________________________________ -->
-
-<!-- South -->
-    <p:layoutUnit  position="south" size="auto" closable="true" collapsible="true">
-
-	<h:panelGrid styleClass="botoes" columns="3" >
-
-		<p:commandButton value="Salvar"
-			actionListener="#{usuarioBean.salvar}"
-			 validateClient="true"
-			update=":dialogformCurriculo:">
-		</p:commandButton>
-
-		<p:commandButton value="Editar"
-			actionListener="#{usuarioBean.editar}" validateClient="true"
-				update=":dialogformCurriculo:">
-		</p:commandButton>
 
 
-		<p:commandButton value="Fechar"
-			actionListener="#{usuarioBean.fechar()}"
-			oncomplete="PF('dialogo').hide();" immediate="true" ajax="false"
-			style="margin-right:20px;">
-					</p:commandButton>
-
-				</h:panelGrid>
-
-    </p:layoutUnit>
- 
- 
 <!-- _________________________________________________________________________________________________________________________________ -->
 <!-- West -->
- 
- 
-    <p:layoutUnit visible="false" position="west" size="200" header="Left" resizable="true" closable="true" collapsible="true">
-        <h:outputText value="West unit content." />
-    </p:layoutUnit>
-<!-- _________________________________________________________________________________________________________________________________ -->
 
- 
-    <p:layoutUnit visible="false" position="east" size="200" header="Right" resizable="true" closable="true" collapsible="true" effect="drop">
-        <h:outputText value="Right unit content." />
-    </p:layoutUnit>
- <!-- _________________________________________________________________________________________________________________________________ -->
+<p:layoutUnit id="West" visible="false" position="west" >
+	
+	
+	
+</p:layoutUnit>
+
+<!-- _________________________________________________________________________________________________________________________________ -->
 
 <!-- Center -->
-    <p:layoutUnit position="center" visible="true" id="center"   >
-    
+<p:layoutUnit visible="true" id="central" position="center" closable="true"
+	collapsible="true" size="520" minSize="450" maxSize="600" >
+	
+		
+	<p:tabView>
+        <p:tab title="Objetivos" >
         
-<!-- Header -->
-<h:outputLabel styleClass="cabecalho" value="Currículo"></h:outputLabel>	
-
-
-
-	<p:tabView >
-         
-
-<!-- _________________________________________________________________________________________________________________________________ -->
-
- <p:tab title="Objetivos Profissionais" >
- 
- 
-   	    <h:panelGrid style="margin-top:30px;" columns="2" >
+    	    <h:panelGrid columns="2" >
         
         
-        		<p:outputLabel  value="Nome: "/>
+        		<p:outputLabel value="Nome: "/>
 				<p:inputText size="25" 	value="#{usuarioBean.usuario.nome}" readonly="true"></p:inputText>
                    
-				<p:outputLabel value="Cargo Pretendido:"  />
-				<p:inputText maxlength="35" size="28" label="Cargo Pretendido" value="#{usuarioBean.curriculo.cargoPretendido}" required="true"
+				<p:outputLabel value="Cargo Pretendido" />
+				<p:inputText maxlength="35" size="28" label="Cargo Pretendido" value="#{usuarioBean.usuario.cargoPretendido}" required="false"
 				 requiredMessage="Preencha o Campo cargo pretendito"></p:inputText>
 		
-				<p:outputLabel value="Pretensão Salarial:"/>
+				<p:outputLabel value="Pretensão Salarial" />
 				<p:inputNumber placeholder="R$" symbol="R$ " maxValue="99999" decimalSeparator="," thousandSeparator="." maxlength="50" size="12"
-			value="#{usuarioBean.curriculo.pretensaoSalarial}" required="true" requiredMessage="Preencha o campo Pretensão Salarial corretamente">
+			value="#{usuarioBean.usuario.pretensaoSalarial}" required="false" requiredMessage="Preencha o campo Pretensão Salarial corretamente">
 		
 		</p:inputNumber>
 		
@@ -118,40 +79,42 @@
 		          
 	
  </h:panelGrid>
- 
- 
- 
-</p:tab>
-        
- <!-- _________________________________________________________________________________________________________________________________ -->
-   
+ </p:tab>
+
+<!-- _________________________________________________________________________________________________________________________________ -->
          
-<p:tab title="Formação Acadêmica" >
+               
+<p:tab id="tableFormacao" title="Formação Acadêmica" >
+ 
+ 
+<p:fieldset   legend="Adicionar"  toggleable="true"  collapsed="true" toggleSpeed="880"> 
 
 <!-- Formação 01 -->
- <p:fieldset legend="Formação 01"  toggleable="true"  toggleSpeed="400">  
+
+       
+        <h:panelGrid columns="1" >
         
-        <h:panelGrid columns="4" >
         
-        
-        
-  <p:outputLabel value="Curso:"  />
+       <h:panelGrid columns="4">
+  <p:outputLabel value="Curso:" style="margin-right:30px;" />
 <p:inputText  style="margin-right:20px" maxlength="40" size="32" 
-	value="#{usuarioBean.formacaoAcademicaUm.nomeCurso}" required="false" requiredMessage="Preencha o campo Curso corretamente">
+	value="#{usuarioBean.formacaoAcademica.nomeCurso}" required="false" requiredMessage="Preencha o campo Curso corretamente">
 </p:inputText>          
         
-        <p:outputLabel value="Instituição:"  />
- <p:inputText maxlength="30" size="25" 
-	value="#{usuarioBean.formacaoAcademicaUm.instituicao}" required="false" requiredMessage="Preencha o campo Instituição corretamente">
+  <p:outputLabel value="Instituição:"  />
+ <p:inputText maxlength="30" size="25" style="margin:auto;"
+	value="#{usuarioBean.formacaoAcademica.instituicao}" required="false" requiredMessage="Preencha o campo Instituição corretamente">
 </p:inputText>
-                                
+      </h:panelGrid>           
+  
+  
   
             
-               
-<p:outputLabel value="Nível:" style="margin-right:30px"/>
-    <h:panelGrid columns="2">
+ <h:panelGrid columns="3">           
+<p:outputLabel value="Nível:" style="margin-right:30px;"/>
+    <h:panelGrid columns="3">
 <p:selectOneMenu   maxlength="25" size="20" label="rua"
-	value="#{usuarioBean.formacaoAcademicaUm.titulo}" required="false" requiredMessage="Preencha o campo Nível corretamente" >
+	value="#{usuarioBean.formacaoAcademica.titulo}" required="false" requiredMessage="Preencha o campo Nível corretamente" >
 <f:selectItem  itemDisabled="true" noSelectionOption="true" itemLabel="Selecionar"> </f:selectItem>
 
 <f:selectItem itemValue="Outros" itemLabel="Outros"> </f:selectItem>
@@ -166,100 +129,117 @@
 </p:selectOneMenu>
 
   <p:selectBooleanButton onLabel="Concluído" offLabel="Incompleto"
-	value="#{usuarioBean.formacaoAcademicaUm.status}" required="true"
+	value="#{usuarioBean.formacaoAcademica.status}" required="true"
 	requiredMessage="Verificar campo Status">
 </p:selectBooleanButton>
 	
-       </h:panelGrid>
-        
-               
-        
       
 
 </h:panelGrid>
 
     <h:panelGrid columns="6" >	
-<p:outputLabel value="Inicio: " style="margin-right:30px" />
+<p:outputLabel value="Inicio: " style="margin:auto 33px;" />
  	<p:calendar locale="pt_BR"  
 		navigator="true" pages="1"
-		value="#{usuarioBean.formacaoAcademicaUm.inicio}" required="false"
+		value="#{usuarioBean.formacaoAcademica.inicio}" required="false"
 		size="8" requiredMessage="Preencha o campo início do curso" > 
 </p:calendar>
 	<p:graphicImage style="float:center;" value="/images/calendar (3).png" />
 	
 	
- <p:outputLabel value="Fim: " style="margin-left:10px" />	
+ <p:outputLabel value="Fim: " style="margin-left:15px" />	
 		<p:calendar locale="pt_BR" 
 		navigator="true" pages="1"
-		value="#{usuarioBean.formacaoAcademicaUm.fim}" required="false"
+		value="#{usuarioBean.formacaoAcademica.fim}" required="false"
 		size="8" requiredMessage="Preencha o campo fim do curso" > 
 	
 </p:calendar>
 
 		<p:graphicImage style="float:center;" value="/images/calendar (3).png" />
+		
+		
+		
 	
 </h:panelGrid>	
-        
-    </p:fieldset>
+ </h:panelGrid>
+ </h:panelGrid>
+<p:commandButton action="#{usuarioBean.salvarFormacao()}"
+value="Incluir" style="margin:10px auto;" icon="ui-icon-squaresmall-plus"
+ validateClient="true" ></p:commandButton>
 
 
 
+   </p:fieldset>
+   <p:separator></p:separator>
+   
+   <h:panelGrid id="grid">
+
+<!-- Data Table -->
+<p:dataTable id="dataTableFormacao" emptyMessage="Nenhum Registro encontrado" rows="6" 	var="dataVarFormacao" 
+value="#{usuarioBean.listaFormacao}"
+	style=" text-align:center;">
+
+<!-- _________________________________________________________________________________________________________________________________ -->
+<!-- Informações das Colunas -->
+
+			<p:column headerText="Exp" width="6%">
+				<!-- Expandir infos -->
+				<p:rowToggler />
+			</p:column>
+
+			<p:column headerText="ID" width="11%" >
+				<p:outputLabel value="#{dataVarFormacao.codigo}"   />
+			</p:column>
+
+			<p:column headerText="Curso" >
+			<p:outputLabel value="#{dataVarFormacao.nomeCurso}"   />
+			</p:column>
+
+			<p:column headerText="Instituição" >
+			<p:outputLabel value="#{dataVarFormacao.instituicao}"   />
+			</p:column>
+			
+
+
+			<p:column headerText="Opções" width="18%">
+
+
+			
+
+
+			</p:column>
+
+
+<!-- _________________________________________________________________________________________________________________________________ -->
+<!-- Informações após expandir linha -->
+
+			<p:rowExpansion styleClass=" width=37%">
+
+				<p:panelGrid columns="2" columnClasses="label,value" style="text-align:left;">
+
+					<h:outputText value="Nivel: #{dataVarFormacao.titulo}" />
+					<h:outputText value="Status: #{dataVarFormacao.status}" />
+					<h:outputText value="Inicio: #{dataVarFormacao.inicio}" />
+					<h:outputText value="Fim: #{dataVarFormacao.fim}" />
+					
+				</p:panelGrid>
+
+			</p:rowExpansion>
+
+		</p:dataTable>
+		</h:panelGrid>
+		
 
 </p:tab>
+
+
 
 <!-- _________________________________________________________________________________________________________________________________ -->
    
    
 <p:tab title="Experiência ">
-       
-       
-       <!-- Experiencia  01 -->
- <p:fieldset legend="Experiencia 01"  toggleable="true"  toggleSpeed="400">  
-        
- <h:panelGrid columns="4" >
- 
- 
-<p:outputLabel value="Empresa: " style="margin-right:68px" />
-<p:inputText maxlength="35" size="25" value="#{usuarioBean.experienciaProfissionalUm.nomeEmpresa}" 
-></p:inputText>
-
-<p:outputLabel value="Cargo: " style="margin-left:45px" />
-<p:inputText maxlength="35" size="25" value="#{usuarioBean.experienciaProfissionalUm.cargo}" 
-></p:inputText>
-
-</h:panelGrid>
-
-    <h:panelGrid columns="6" >	
-<p:outputLabel value="Inicio: " style="margin-right:90px" />
- 	<p:calendar locale="pt_BR"  
-		navigator="true" pages="1"
-		value="#{usuarioBean.experienciaProfissionalUm.entrada}"
-		size="10"  > 
-</p:calendar>
-	<p:graphicImage style="float:center;" value="/images/calendar (3).png" />
-	
-	
-	
- <p:outputLabel value="Saída: " style="margin-left:140px" />	
-		<p:calendar locale="pt_BR" 
-		navigator="true" pages="1"
-		value="#{usuarioBean.experienciaProfissionalUm.saida}"
-		size="10" requiredMessage="Preencha o campo saída do curso" > 
-	
-</p:calendar>
-
-		<p:graphicImage style="float:center;" value="/images/calendar (3).png" />
-	
-</h:panelGrid>	
-<h:panelGrid columns="2">
-<p:outputLabel value="Atividade: " style="margin-right:60px; " />
-<p:inputTextarea maxlength="250"  rows="5" cols="65" value="#{usuarioBean.experienciaProfissionalUm.principaisAtividades}" 
-></p:inputTextarea>
-</h:panelGrid>
-
-    </p:fieldset>
-       
-
+  
+<br></br><br></br><br></br><br></br> <br></br>
      
  </p:tab>
 <!-- _________________________________________________________________________________________________________________________________ -->
@@ -271,48 +251,10 @@
 
 
 
-<!-- QUALIFICAÇÕES  01 -->
- <p:fieldset legend="Qualificação 01"  toggleable="true"  toggleSpeed="400">  
-        
-        <h:panelGrid columns="2" >
-        
-<p:outputLabel value="Instituição" style="margin-right:30px" />       
- 
-<p:inputText maxlength="30" size="25" 
-	value="#{usuarioBean.atividadesProfissionaisDois.instituicao}" >
-</p:inputText>
-                                
- <p:outputLabel value="Curso"  />
-<p:inputText style="margin-left:2px" maxlength="40" size="35" 
-	value="#{usuarioBean.atividadesProfissionaisDois.nomeCurso}" >
-</p:inputText>     
-            
+<br></br><br></br><br></br><br></br> <br></br>
 
-</h:panelGrid>
 
-    <h:panelGrid columns="6" >	
-<p:outputLabel value="Conclusão: " style="margin-right:30px" />
- 	<p:calendar locale="pt_BR"  
-		navigator="true" pages="1"
-		value="#{usuarioBean.atividadesProfissionaisDois.anoCurso}"
-		size="8"  > 
-</p:calendar>
-	<p:graphicImage style="float:center;" value="/images/calendar (3).png" />
-	
-	
-	<p:outputLabel  value="Carga Horária: " style="margin-left:8px" />
-<p:inputNumber   maxValue="9999"  minValue="0" decimalPlaces="0" maxlength="50"
-	size="5" value="#{usuarioBean.atividadesProfissionaisDois.cargaHoraria}"
-	>
-	<f:convertNumber locale="pt_BR" pattern="##" minIntegerDigits="4" />
 
-</p:inputNumber>
-<p:outputLabel  value="Hrs" />
-
-</h:panelGrid>	
-
-       
-    </p:fieldset>
 
 
 
@@ -323,52 +265,48 @@
 
 
 
+
+
+
 <!-- _________________________________________________________________________________________________________________________________ -->
 
         <p:tab title="Informações Adicionais">
-        
-        
-                  
+      
             
-            
-           
-<!-- Informações Adicionais -->
-
-	
-<p:fieldset legend="Informação 01"  toggleable="true"  toggleSpeed="400">  
- <h:panelGrid columns="2" >
-<p:outputLabel  value="Descrição:" style="margin-right:8px" />
-<p:inputTextarea maxlength="250"  rows="4" cols="95"
- value="#{usuarioBean.informacoesAdicionaisUm.descricao}" 
-></p:inputTextarea>
-           
-    
-          
-          
-           
-            </h:panelGrid>
-                  </p:fieldset> 
-                  
             
         </p:tab>
-      
-    
-    
+        
+        <br></br><br></br><br></br><br></br> <br></br>
     </p:tabView>
-    </p:layoutUnit>
-    
-    
- <!-- _________________________________________________________________________________________________________________________________ -->
-
-
- 
-</p:layout>
-
-
-
+		
+		
+		
+		
+</p:layoutUnit>
 		
 
+<!-- _________________________________________________________________________________________________________________________________ -->
+
+
+<!-- South -->
+<p:layoutUnit id="South" position="south" resizable="true"
+	closable="true" collapsible="true" size="50">
+
+	<h:panelGrid columns="3">
+
+
+
+
+
+				</h:panelGrid>
+
+			</p:layoutUnit>
+
+
+		</p:layout>
+
 	</h:form>
+
 
 
 </h:body>

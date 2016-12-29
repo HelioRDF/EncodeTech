@@ -95,9 +95,18 @@ public class Usuario extends GenericDomain {
 	// -----------------------------------------------------------------------------
 	
 		
+	// Objetivo
+	@Column(length = 30, nullable = false)
+	private String cargoPretendido;
 	
+	//Pretenção Salarial
+	@Column
+	private String pretensaoSalarial;
 
 	// -------------------------------------------------------
+	
+	
+	
 
 		
 	
