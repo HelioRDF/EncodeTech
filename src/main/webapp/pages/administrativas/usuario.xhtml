@@ -48,7 +48,7 @@
 <!-- Informações de cabeçalho da tabela -->
 
 		<!-- Data Table -->
-		<p:dataTable id="dataTable" rowsPerPageTemplate="7,15,30,50"
+		<p:dataTable  id="dataTable" rowsPerPageTemplate="7,15,30,50"
 			emptyMessage="Nenhum Registro encontrado" rows="7" paginator="true"
 			var="dataVar" value="#{usuarioBean.listaUsuario}"
 			style=" text-align:center;">
@@ -149,23 +149,15 @@
 					<f:attribute name="meuSelect" value="#{dataVar}" />
 				</p:commandButton>
 
-<<<<<<< HEAD
 
+			
 
-
-
-				<!-- Gerar Curriculo -->
-				<p:commandButton title="Curriculo" icon="ui-icon-person"
-					actionListener="#{usuarioBean.getinstanciaCurriculo}" 
-					action="/pages/testes/teste.xhtml?faces-redirect=true" 
-					update=":dialogform:" >
-=======
 			
 					<!-- Gerar Curriculo -->
 					<p:commandButton title="Curriculo" icon="ui-icon-person"
 					actionListener="#{usuarioBean.getinstanciaCurriculo}"				
 					action="/pages/testes/curriculoTeste.xhtml?faces-redirect=true">
->>>>>>> origin/master
+
 					<f:attribute name="meuSelect" value="#{dataVar}" />
 					
 				</p:commandButton>
@@ -481,41 +473,8 @@ value="/images/calendar (3).png" />
 
 
 
-<<<<<<< HEAD
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-=======
 <!-- _________________________________________________________________________________________________________________________________ -->
 <!--   Dialog do Curriculo             -->
->>>>>>> origin/master
-
-
 
 
 

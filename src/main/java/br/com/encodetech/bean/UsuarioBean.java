@@ -96,6 +96,9 @@ public class UsuarioBean implements Serializable {
 
 		} catch (Exception e) {
 			Messages.addGlobalError("Não foi possível salvar o usuário, tente novamente mais tarde ... ");
+			
+			System.out.println("Erro" + e);
+			
 		} finally {
 			
 			fechar();
@@ -113,6 +116,7 @@ public class UsuarioBean implements Serializable {
 
 				formacaoAcademica.setUsuario(usuario);
 				daoFormacao.salvar(formacaoAcademica);
+				carregarCurriculo();
 			
 
 				Messages.addGlobalInfo("Formação  salva com sucesso.");
@@ -188,13 +192,11 @@ public class UsuarioBean implements Serializable {
 					formacaoAcademica = new FormacaoAcademica();
 					daoFormacao = new FormacaoAcademicaDAO();
 					listaFormacao = daoFormacao.listar();
-					
-					Messages.addGlobalInfo("Lista atualizada com sucesso ");
 
 				} catch (Exception e) {
 					Messages.addGlobalError("Falha ao tentar  atualizadar a lista  ");
 				} finally {
-					fechar();
+					
 				}
 
 			}

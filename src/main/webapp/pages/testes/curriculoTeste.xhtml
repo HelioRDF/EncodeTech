@@ -20,42 +20,17 @@
 <!--   Curriculo             -->
 
 
-
-	
-	<h:form id="dialogformCurriculo" >
-	
-	
+<h:form id="dialogformCurriculo"  >
 	<p:growl  id="msgCurriculo" life="8000" />
 	
-		<p:layout id="fulllayout" onResize="false" 
-			fullPage="true" > 
 
 
 
 <!-- _________________________________________________________________________________________________________________________________ -->
-<!-- North -->
-    <p:layoutUnit position="north" size="100" header="Top" resizable="true" closable="true" collapsible="true" visible="true">
-        <h:outputLabel value="Nome: #{usuarioBean.usuario.nome}" > </h:outputLabel>
-    </p:layoutUnit>
 
-
-<!-- _________________________________________________________________________________________________________________________________ -->
-<!-- West -->
-
-<p:layoutUnit id="West" visible="false" position="west" >
-	
-	
-	
-</p:layoutUnit>
-
-<!-- _________________________________________________________________________________________________________________________________ -->
-
-<!-- Center -->
-<p:layoutUnit visible="true" id="central" position="center" closable="true"
-	collapsible="true" size="520" minSize="450" maxSize="600" >
 	
 		
-	<p:tabView>
+	<p:tabView  id="IDtabView">
         <p:tab title="Objetivos" >
         
     	    <h:panelGrid columns="2" >
@@ -84,12 +59,14 @@
 <!-- _________________________________________________________________________________________________________________________________ -->
          
                
-<p:tab id="tableFormacao" title="Formação Acadêmica" >
+<p:tab id="IDtab" title="Formação Acadêmica"  >
+
  
  
 <p:fieldset   legend="Adicionar"  toggleable="true"  collapsed="true" toggleSpeed="880"> 
 
 <!-- Formação 01 -->
+
 
        
         <h:panelGrid columns="1" >
@@ -165,19 +142,20 @@
  </h:panelGrid>
 <p:commandButton action="#{usuarioBean.salvarFormacao()}"
 value="Incluir" style="margin:10px auto;" icon="ui-icon-squaresmall-plus"
- validateClient="true" ></p:commandButton>
+ validateClient="true"  update=":dialogformCurriculo: dialogformCurriculo:IDtabView:dataTableFormacao"></p:commandButton>
 
 
 
    </p:fieldset>
    <p:separator></p:separator>
    
-   <h:panelGrid id="grid">
-
+  
+   
+<p:message id="msgForm" for="dataTableFormacao" globalOnly="false" />
 <!-- Data Table -->
 <p:dataTable id="dataTableFormacao" emptyMessage="Nenhum Registro encontrado" rows="6" 	var="dataVarFormacao" 
 value="#{usuarioBean.listaFormacao}"
-	style=" text-align:center;">
+	style=" text-align:center;"  paginator="true" paginatorPosition="top">
 
 <!-- _________________________________________________________________________________________________________________________________ -->
 <!-- Informações das Colunas -->
@@ -227,7 +205,7 @@ value="#{usuarioBean.listaFormacao}"
 			</p:rowExpansion>
 
 		</p:dataTable>
-		</h:panelGrid>
+		
 		
 
 </p:tab>
@@ -257,11 +235,7 @@ value="#{usuarioBean.listaFormacao}"
 
 
 
-
-
    </p:tab>
-
-
 
 
 
@@ -280,33 +254,16 @@ value="#{usuarioBean.listaFormacao}"
     </p:tabView>
 		
 		
+
+	
+
+
+
+
 		
-		
-</p:layoutUnit>
-		
 
-<!-- _________________________________________________________________________________________________________________________________ -->
-
-
-<!-- South -->
-<p:layoutUnit id="South" position="south" resizable="true"
-	closable="true" collapsible="true" size="50">
-
-	<h:panelGrid columns="3">
-
-
-
-
-
-				</h:panelGrid>
-
-			</p:layoutUnit>
-
-
-		</p:layout>
-
-	</h:form>
-
+	
+</h:form>
 
 
 </h:body>
