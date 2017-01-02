@@ -53,6 +53,11 @@ body {
 	border-radius: 8px;
 }
 
+.menuBasico {
+	margin: auto auto auto auto;
+	border-radius: 8px;
+}
+
 .nameheader {
 	font-size: 20px;
 	color: orange;
@@ -66,6 +71,20 @@ body {
 	color: orange;
 	font-family: Courier New, monospace;
 	margin: 0 auto auto 15px;
+	
+
+
+}
+
+.cabecalhoInfo{
+	font-size: 20px;
+	color: orange;
+	
+	
+	font-family: Courier New, monospace;
+	margin: 0px 15px auto 0px;
+	vertical-align: middle;	
+	
 	
 
 

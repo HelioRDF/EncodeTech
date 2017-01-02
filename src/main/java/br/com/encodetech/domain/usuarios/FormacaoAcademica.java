@@ -45,7 +45,7 @@ public class FormacaoAcademica extends GenericDomain {
 	private Date fim;
 	
 	@ManyToOne
-	@JoinColumn
+	@JoinColumn(name="usuarioCodigo")
 	private Usuario usuario;
 	
 
@@ -61,13 +61,19 @@ public class FormacaoAcademica extends GenericDomain {
 		return instituicao;
 	}
 
+	
+
 	public Usuario getUsuario() {
 		return usuario;
 	}
 
+
+
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
+
+
 
 	public void setInstituicao(String instituicao) {
 		this.instituicao = instituicao;

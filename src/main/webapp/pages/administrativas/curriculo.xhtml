@@ -215,11 +215,11 @@
  
  
 <p:outputLabel value="Empresa: " style="margin-right:68px" />
-<p:inputText maxlength="35" size="25" value="#{usuarioBean.experienciaProfissionalUm.nomeEmpresa}" 
+<p:inputText maxlength="35" size="25" value="#{usuarioBean.experienciaProfissional.nomeEmpresa}" 
 ></p:inputText>
 
 <p:outputLabel value="Cargo: " style="margin-left:45px" />
-<p:inputText maxlength="35" size="25" value="#{usuarioBean.experienciaProfissionalUm.cargo}" 
+<p:inputText maxlength="35" size="25" value="#{usuarioBean.experienciaProfissional.cargo}" 
 ></p:inputText>
 
 </h:panelGrid>
@@ -228,7 +228,7 @@
 <p:outputLabel value="Inicio: " style="margin-right:90px" />
  	<p:calendar locale="pt_BR"  
 		navigator="true" pages="1"
-		value="#{usuarioBean.experienciaProfissionalUm.entrada}"
+		value="#{usuarioBean.experienciaProfissional.entrada}"
 		size="10"  > 
 </p:calendar>
 	<p:graphicImage style="float:center;" value="/images/calendar (3).png" />
@@ -238,7 +238,7 @@
  <p:outputLabel value="Saída: " style="margin-left:140px" />	
 		<p:calendar locale="pt_BR" 
 		navigator="true" pages="1"
-		value="#{usuarioBean.experienciaProfissionalUm.saida}"
+		value="#{usuarioBean.experienciaProfissional.saida}"
 		size="10" requiredMessage="Preencha o campo saída do curso" > 
 	
 </p:calendar>
@@ -248,7 +248,7 @@
 </h:panelGrid>	
 <h:panelGrid columns="2">
 <p:outputLabel value="Atividade: " style="margin-right:60px; " />
-<p:inputTextarea maxlength="250"  rows="3" cols="75" value="#{usuarioBean.experienciaProfissionalUm.principaisAtividades}" 
+<p:inputTextarea maxlength="250"  rows="3" cols="75" value="#{usuarioBean.experienciaProfissional.principaisAtividades}" 
 ></p:inputTextarea>
 </h:panelGrid>
 

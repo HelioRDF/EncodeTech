@@ -148,18 +148,16 @@
 					oncomplete="PF('dialogSenhaPanel').show();">
 					<f:attribute name="meuSelect" value="#{dataVar}" />
 				</p:commandButton>
-
-
-			
+		
 
 			
-					<!-- Gerar Curriculo -->
-					<p:commandButton title="Curriculo" icon="ui-icon-person"
-					actionListener="#{usuarioBean.getinstanciaCurriculo}"				
-					action="/pages/testes/curriculoTeste.xhtml?faces-redirect=true">
+				<!-- Gerar Curriculo -->
+				<p:commandButton title="Curriculo" icon="ui-icon-person"
+				actionListener="#{usuarioBean.getinstanciaCurriculo}"				
+				action="/pages/testes/curriculoTeste.xhtml?faces-redirect=true">
 
-					<f:attribute name="meuSelect" value="#{dataVar}" />
-					
+				<f:attribute name="meuSelect" value="#{dataVar}" />
+				
 				</p:commandButton>
 				
 		

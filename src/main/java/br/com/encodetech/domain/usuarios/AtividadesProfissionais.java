@@ -2,6 +2,8 @@ package br.com.encodetech.domain.usuarios;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import br.com.encodetech.domain.complementos.GenericDomain;
 
@@ -11,27 +13,43 @@ import br.com.encodetech.domain.complementos.GenericDomain;
  * 
  * 
  */
-
+//QUALIFICAÇÕES E ATIVIDADES PROFISSIONAIS
 @SuppressWarnings("serial")
 @Entity
 public class AtividadesProfissionais extends GenericDomain {
 
-	@Column(length = 30, nullable = false)
+	@Column(length = 60)
 	private String nomeCurso;
 
-	@Column(length = 30, nullable = false)
+	@Column(length = 60)
 	private String instituicao;
 
-	@Column(length = 6, nullable = false)
+	@Column()
 	private String anoCurso;
 
-	@Column(length = 5, nullable = false)
+	@Column(length = 7)
 	private String cargaHoraria;
+	
+	@ManyToOne
+	@JoinColumn(name="usuarioCodigo")
+	private Usuario usuario;
 
 	// ----------------------------------------------------------
-
+	
+	
+	
+	
+	
 	public String getNomeCurso() {
 		return nomeCurso;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 	public void setNomeCurso(String nomeCurso) {
