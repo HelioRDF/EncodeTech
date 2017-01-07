@@ -23,24 +23,24 @@ public class FormacaoAcademica extends GenericDomain {
 
 	// Graduação | Técnico | Primeiro Grau| Segundo Grau| ???
 
-	@Column(length = 30, nullable = false)
+	@Column(length = 55)
 	private String instituicao; // Anhembi Morumbi
 
-	@Column(length = 30, nullable = false)
+	@Column(length = 55)
 	private String titulo; // Graduação | Técnico | Primeiro Grau| Segundo
 							// Grau|?
 	
-	@Column(length = 30, nullable = false)
+	@Column
 	private String status; 
 	
-	@Column(length = 30, nullable = false)
+	@Column
 	private String nomeCurso;// Analise de Sistemas
 
-	@Column(nullable = false)
+	@Column
 	@Temporal(TemporalType.DATE)
 	private Date inicio;
 
-	@Column(nullable = false)
+	@Column
 	@Temporal(TemporalType.DATE)
 	private Date fim;
 	

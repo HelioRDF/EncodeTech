@@ -14,8 +14,6 @@
 <h:body>
 
 
-
-
 <!-- _________________________________________________________________________________________________________________________________ -->
 <!--   Curriculo             -->
 
@@ -23,59 +21,60 @@
 <h:form id="dialogformCurriculo"  >
 	<p:growl  id="msgCurriculo" life="8000" />
 	
-	
-			
 		<h1>@ Encodetech</h1>
 
 	 	<p:menubar styleClass="menuBasico"> 
  	
-	        <f:facet name="options">
-	         <p:outputLabel styleClass="cabecalhoInfo"  value="#{usuarioBean.usuario.nome}"/>  
-	        <p:button type="button" value="Voltar" icon="ui-icon-extlink" outcome="/pages/administrativas/usuario.xhtml" />
-	        </f:facet>
+        <f:facet name="options">
+         <p:outputLabel styleClass="cabecalhoInfo"  value="#{usuarioBean.usuario.nome}"/>  
+        <p:button type="button" value="Voltar" icon="ui-icon-extlink" outcome="/pages/administrativas/usuario.xhtml" />
+        </f:facet>
     </p:menubar>
 
 
 <!-- _________________________________________________________________________________________________________________________________ -->
 <!-- Informações de cabeçalho da tabela -->
-	
-	
-
-
-
-<!-- _________________________________________________________________________________________________________________________________ -->
-
-	
-		
 	<p:tabView  id="IDtabView">
-        <p:tab title="Objetivos" >
-        
-    	    <h:panelGrid columns="2" >
-        
-        
-        
-        		<p:outputLabel value="Codigo: "/>
-				<p:inputText size="6" 	value="#{usuarioBean.usuario.codigo}" readonly="true"></p:inputText>
-				
-        		<p:outputLabel value="Nome: "/>
-				<p:inputText size="25" 	value="#{usuarioBean.usuario.nome}" readonly="true"></p:inputText>
-				
-                   
-				<p:outputLabel value="Cargo Pretendido" />
-				<p:inputText maxlength="35" size="28" label="Cargo Pretendido" value="#{usuarioBean.usuario.cargoPretendido}" required="false"
-				 requiredMessage="Preencha o Campo cargo pretendito"></p:inputText>
-		
-				<p:outputLabel value="Pretensão Salarial" />
-				<p:inputNumber placeholder="R$" symbol="R$ " maxValue="99999" decimalSeparator="," thousandSeparator="." maxlength="50" size="12"
-			value="#{usuarioBean.usuario.pretensaoSalarial}" required="false" requiredMessage="Preencha o campo Pretensão Salarial corretamente">
+  
+ <!-- _________________________________________________________________________________________________________________________________ -->     
+  <!-- Informações Adicionais -->
+  <p:tab title="Objetivos" >
+
+     <h:panelGrid columns="4" >	             
+	<p:outputLabel value="Cargo Pretendido:" />
+	<p:inputText  style= "margin-left:45px;"   maxlength="35" size="28" label="Cargo Pretendido"
+	 value="#{usuarioBean.usuario.cargoPretendido}" required="false"
+	 requiredMessage="Preencha o Campo cargo pretendito"></p:inputText>
+
+	<p:outputLabel style="margin-left:25px;" value="Pretensão Salarial:" />
+	<p:inputNumber placeholder="R$" symbol="R$ " maxValue="99999" decimalSeparator="," thousandSeparator="." maxlength="50" size="12"
+value="#{usuarioBean.usuario.pretensaoSalarial}" required="false" requiredMessage="Preencha o campo Pretensão Salarial corretamente">
 		
 		</p:inputNumber>
-		
-		
-		
-		          
-	
+</h:panelGrid>	
+		 
+<h:panelGrid columns="2" >	       
+ 
+<p:outputLabel  value="Informações Adicionais:" style="margin-right:8px" />
+<p:inputTextarea   maxlength="250"  rows="4" cols="95"
+ value="#{usuarioBean.usuario.descricao}" 
+></p:inputTextarea>
+               
+          
  </h:panelGrid>
+            
+            
+            
+<p:commandButton action="#{usuarioBean.editar()}"
+value="Salvar"  style="margin:10px auto;" icon="ui-icon-squaresmall-plus"
+ validateClient="true"  update=":dialogformCurriculo:">
+</p:commandButton>
+ 
+            
+  
+   
+ 
+ 
  </p:tab>
 
 <!-- _________________________________________________________________________________________________________________________________ -->
@@ -96,7 +95,7 @@
         
        <h:panelGrid columns="4">
   <p:outputLabel value="Curso:" style="margin-right:30px;" />
-<p:inputText  style="margin-right:20px" maxlength="40" size="32" 
+<p:inputText  style="margin-right:20px" maxlength="60" size="33" 
 	value="#{usuarioBean.formacaoAcademica.nomeCurso}" required="false" requiredMessage="Preencha o campo Curso corretamente">
 </p:inputText>          
         
@@ -127,8 +126,8 @@
 <f:selectItem itemValue="PHD" itemLabel="PHD"> </f:selectItem>
 </p:selectOneMenu>
 
-  <p:selectBooleanButton onLabel="Concluído" offLabel="Incompleto"
-	value="#{usuarioBean.formacaoAcademica.status}" required="true"
+  <p:selectBooleanButton onLabel="Concluído" offLabel="Incompleto" 
+	value="#{usuarioBean.statusBoolean}" required="true" 
 	requiredMessage="Verificar campo Status">
 </p:selectBooleanButton>
 	
@@ -472,10 +471,7 @@ value="#{usuarioBean.listaAtividades}"	style=" text-align:center;"  >
 <!-- _________________________________________________________________________________________________________________________________ -->
 <!-- Informações das Colunas -->
 
-			<p:column headerText="Exp" width="6%">
-				<!-- Expandir infos -->
-				<p:rowToggler />
-			</p:column>
+	
 
 			<p:column headerText="ID" width="11%" sortBy="#{dataVarQualificacoes.codigo}"  >
 				<p:outputLabel value="#{dataVarQualificacoes.codigo}"  />
@@ -554,24 +550,13 @@ value="#{usuarioBean.listaAtividades}"	style=" text-align:center;"  >
 
 <!-- _________________________________________________________________________________________________________________________________ -->
 
-        <p:tab title="Informações Adicionais">
-      
+
+ 
             
             
-        </p:tab>
-        
-        <br></br><br></br><br></br><br></br> <br></br>
-    </p:tabView>
+    
+      </p:tabView>
 		
-		
-
-	
-
-
-
-
-		
-
 	
 </h:form>
 

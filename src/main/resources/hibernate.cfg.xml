@@ -30,7 +30,7 @@
 		<property name="show_sql">true</property>
 		
 		<!-- Cria as tabelas do banco de dados "Create|Update|Validade" -->
-		<property name="hbm2ddl.auto">update</property>
+		<property name="hbm2ddl.auto">create</property>
 		
 		<!-- Mapeamento das entidades -->
 		<mapping class="br.com.encodetech.domain.localizacao.Estado"/>
@@ -40,7 +40,6 @@
 		<mapping class="br.com.encodetech.domain.usuarios.Usuario"/>
 		<mapping class="br.com.encodetech.domain.localizacao.Endereco"/>
 		
-		<mapping class="br.com.encodetech.domain.usuarios.Curriculo"/>
 		<mapping class="br.com.encodetech.domain.usuarios.FormacaoAcademica"/>
 		<mapping class="br.com.encodetech.domain.usuarios.ExperienciaProfissional"/>
 		<mapping class="br.com.encodetech.domain.usuarios.AtividadesProfissionais"/>

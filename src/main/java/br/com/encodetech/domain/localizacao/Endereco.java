@@ -27,25 +27,25 @@ public class Endereco extends GenericDomain {
 	@OneToOne
 	private Cidade cidade;
 
-	@Column()
+	@Column(length = 95)
 	private String rua;
 
-	@Column()
+	@Column(length = 6)
 	private String numero;
 
-	@Column()
+	@Column(length = 95)
 	private String bairro;
 
-	@Column()
+	@Column(length = 11)
 	private String cep;
 
-	@Column()
+	@Column(length = 90)
 	private String complemento;
 
-	@Column()
+	@Column(length = 20)
 	private String telefone;
 
-	@Column()
+	@Column(length = 20)
 	private String celular;
 
 

@@ -19,6 +19,7 @@ import br.com.encodetech.dao.localizacao.EstadoDAO;
 import br.com.encodetech.dao.usuarios.AtividadesProfissionaisDAO;
 import br.com.encodetech.dao.usuarios.ExperienciaProfissionalDAO;
 import br.com.encodetech.dao.usuarios.FormacaoAcademicaDAO;
+import br.com.encodetech.dao.usuarios.InformacoesAdicionaisDAO;
 import br.com.encodetech.dao.usuarios.UsuarioDAO;
 import br.com.encodetech.domain.localizacao.Cidade;
 import br.com.encodetech.domain.localizacao.Endereco;
@@ -26,6 +27,7 @@ import br.com.encodetech.domain.localizacao.Estado;
 import br.com.encodetech.domain.usuarios.AtividadesProfissionais;
 import br.com.encodetech.domain.usuarios.ExperienciaProfissional;
 import br.com.encodetech.domain.usuarios.FormacaoAcademica;
+import br.com.encodetech.domain.usuarios.InformacoesAdicionais;
 import br.com.encodetech.domain.usuarios.Usuario;
 
 /**
@@ -61,26 +63,31 @@ public class UsuarioBean implements Serializable {
 	private List<FormacaoAcademica> listaFormacao;
 	private FormacaoAcademicaDAO daoFormacao;
 	private Boolean botaoFormacao = false;
+	private Boolean statusBoolean = false;
 
 	private ExperienciaProfissional experienciaProfissional;
 	private List<ExperienciaProfissional> listaExperiencia;
 	private ExperienciaProfissionalDAO daoExperiencia;
 	private Boolean botaoExperiencia = false;
-	
-	
+
 	private AtividadesProfissionais atividadesProfissionais;
 	private List<AtividadesProfissionais> listaAtividades;
 	private AtividadesProfissionaisDAO daoAtividades;
 	private Boolean botaoAtividades = false;
 	
+	private InformacoesAdicionais informacoesAdicionais;
+	private List<InformacoesAdicionais> listInfo;
+	private InformacoesAdicionaisDAO daoInfo;
+	private Boolean botaoInfo;
 	
-	
+
 
 	// Salvar usuário
 	// -------------------------------------------------------------------------------------
 	public void salvar() {
 
 		try {
+			
 
 			enderecoDAO.salvar(endereco);
 			usuario.setEndereco(endereco);
@@ -107,6 +114,13 @@ public class UsuarioBean implements Serializable {
 
 		try {
 			if (botaoFormacao = true) {
+
+				if (statusBoolean.equals(true)) {
+					formacaoAcademica.setStatus("Concluído");
+				} else {
+					formacaoAcademica.setStatus("Incompleto");
+				}
+
 				formacaoAcademica.setUsuario(usuario);
 				daoFormacao.merge(formacaoAcademica);
 
@@ -131,7 +145,7 @@ public class UsuarioBean implements Serializable {
 				experienciaProfissional.setUsuario(usuario);
 				daoExperiencia.merge(experienciaProfissional);
 				Messages.addGlobalInfo("Experiencia  salva com sucesso: " + experienciaProfissional.getCargo());
-				carregarExperiencia();
+				carregarCurriculo();
 			}
 
 		} catch (Exception e) {
@@ -142,27 +156,50 @@ public class UsuarioBean implements Serializable {
 		}
 	}
 
+	// Salvar Atividades
+	// -------------------------------------------------------------------------------------
+	public void salvarAtividades() {
+
+		try {
+			if (botaoAtividades = true) {
+				atividadesProfissionais.setUsuario(usuario);
+				daoAtividades.merge(atividadesProfissionais);
+				Messages.addGlobalInfo("Qualificação  salva com sucesso: " + atividadesProfissionais.getNomeCurso());
+				carregarCurriculo();
+			}
+
+		} catch (Exception e) {
+			Messages.addGlobalError("Não foi possível salvar a Qualificação, Preencha os campos corretamente. ");
+
+		} finally {
+
+		}
+	}
+
 	
-	// Salvar formação
+	
+	// Salvar Infos
 		// -------------------------------------------------------------------------------------
-		public void salvarAtividades() {
+		public void salvarInfo() {
 
 			try {
-				if (botaoAtividades = true) {
-					atividadesProfissionais.setUsuario(usuario);
-					daoAtividades.merge(atividadesProfissionais);
-					Messages.addGlobalInfo("Qualificação  salva com sucesso: " + atividadesProfissionais.getNomeCurso());
-					carregarAtividade();
+				if (botaoInfo = true) {
+					informacoesAdicionais.setUsuario(usuario);
+					daoInfo.merge(informacoesAdicionais);
+					Messages.addGlobalInfo("Informação salva com sucesso: ");
+					carregarCurriculo();
 				}
 
 			} catch (Exception e) {
-				Messages.addGlobalError("Não foi possível salvar a Qualificação, Preencha os campos corretamente. ");
+				Messages.addGlobalError("Não foi possível salvar as Informações, Preencha os campos corretamente. ");
 
 			} finally {
 
 			}
 		}
 
+	
+	
 	
 	// Novo
 	// -------------------------------------------------------------------------------------------
@@ -215,37 +252,36 @@ public class UsuarioBean implements Serializable {
 	// -------------------------------------------------------------------------------------------
 	public void carregarCurriculo() {
 		
-		
-		carregarExperiencia();
-		carregarAtividade();
 
+		
+			
+		// Atividades Profissionais  ----------------------------------------------------------
+		
 		try {
 
-			formacaoAcademica = new FormacaoAcademica();
-			daoFormacao = new FormacaoAcademicaDAO();
-			listaFormacao = daoFormacao.buscarPorUsuario(usuario.getCodigo());
+			atividadesProfissionais = new AtividadesProfissionais();
+			daoAtividades = new AtividadesProfissionaisDAO();
+			listaAtividades = daoAtividades.buscarPorUsuario(usuario.getCodigo());
 
-			if (listaFormacao.size() < 7) {
-				botaoFormacao = true;
+			if (listaAtividades.size() < 10) {
+				botaoAtividades = true;
 
 			} else {
-				botaoFormacao = false;
-				Messages.addGlobalWarn("Numéro maximo de Formações atingido. (max = 7)");
+				botaoAtividades = false;
+				Messages.addGlobalWarn("Numéro maximo de Qualificações atingido. (max = 10)");
 
 			}
 
 		} catch (Exception e) {
 			Messages.addGlobalError("Falha ao tentar  atualizadar a lista  ");
-		} finally {
-
-		}
-
-	}
-
-	// Carregar Experiência
-	// -------------------------------------------------------------------------------------------
-	public void carregarExperiencia() {
-
+		} 
+		
+		// Fim Atividades Profissionais  ----------------------------------------------------------
+		
+		
+		
+		
+		// Experiência  ----------------------------------------------------------
 		try {
 
 			experienciaProfissional = new ExperienciaProfissional();
@@ -263,39 +299,36 @@ public class UsuarioBean implements Serializable {
 
 		} catch (Exception e) {
 			Messages.addGlobalError("Falha ao tentar  atualizadar a lista  ");
-		} finally {
-
-		}
-
-	}
-	
-	
-	// Carregar Qualificação Profissional
-	// -------------------------------------------------------------------------------------------
-	public void carregarAtividade() {
-
+		} 
+		// Fim Experiência  ----------------------------------------------------------
+		
+			
+		// Formação Academica  ----------------------------------------------------------
 		try {
+			formacaoAcademica = new FormacaoAcademica();
+			daoFormacao = new FormacaoAcademicaDAO();
+			listaFormacao = daoFormacao.buscarPorUsuario(usuario.getCodigo());
 
-			atividadesProfissionais = new AtividadesProfissionais();
-			daoAtividades = new AtividadesProfissionaisDAO();
-			listaAtividades = daoAtividades.buscarPorUsuario(usuario.getCodigo());
-
-			if (listaAtividades.size() < 10) {
-				botaoAtividades = true;
+			if (listaFormacao.size() < 7) {
+				botaoFormacao = true;
 
 			} else {
-				botaoExperiencia = false;
-				Messages.addGlobalWarn("Numéro maximo de Qualificações atingido. (max = 10)");
+				botaoFormacao = false;
+				Messages.addGlobalWarn("Numéro maximo de Formações atingido. (max = 7)");
 
 			}
 
 		} catch (Exception e) {
 			Messages.addGlobalError("Falha ao tentar  atualizadar a lista  ");
-		} finally {
-
 		}
+		
+		// Fim Formação Academica  ----------------------------------------------------------
 
+	
+	
 	}
+
+
 
 	// Excluir usuário
 	// -------------------------------------------------------------------------------------------
@@ -350,7 +383,7 @@ public class UsuarioBean implements Serializable {
 			ExperienciaProfissionalDAO dao = new ExperienciaProfissionalDAO();
 			Messages.addGlobalInfo("Experiência removida com sucesso: " + experienciaProfissional.getCargo());
 			dao.excluir(experienciaProfissional);
-			carregarExperiencia();
+			carregarCurriculo();
 
 		} catch (Exception e) {
 			Messages.addGlobalError("Erro ao Remover: " + experienciaProfissional.getCargo());
@@ -361,31 +394,52 @@ public class UsuarioBean implements Serializable {
 
 	}
 
-	
-	
 	// Excluir Qualificação
 	// -------------------------------------------------------------------------------------------
 	public void excluirQualificacao(ActionEvent evento) {
 
 		try {
 
-		atividadesProfissionais = (AtividadesProfissionais) evento.getComponent().getAttributes().get("meuSelect");
+			atividadesProfissionais = (AtividadesProfissionais) evento.getComponent().getAttributes().get("meuSelect");
 
-		AtividadesProfissionaisDAO dao = new AtividadesProfissionaisDAO();
+			AtividadesProfissionaisDAO dao = new AtividadesProfissionaisDAO();
 			Messages.addGlobalInfo("Qualificação removida com sucesso: " + atividadesProfissionais.getNomeCurso());
 			dao.excluir(atividadesProfissionais);
-			carregarAtividade();
+			carregarCurriculo();
 
 		} catch (Exception e) {
-			Messages.addGlobalError("Erro ao Remover: " +  atividadesProfissionais.getNomeCurso());
+			Messages.addGlobalError("Erro ao Remover: " + atividadesProfissionais.getNomeCurso());
 
 		} finally {
 
 		}
 
 	}
+	
+	// Excluir Info
+	// -------------------------------------------------------------------------------------------
+	public void excluirInfo(ActionEvent evento) {
 
-		
+		try {
+
+			informacoesAdicionais = (InformacoesAdicionais) evento.getComponent().getAttributes().get("meuSelect");
+
+			InformacoesAdicionaisDAO daoinf = new InformacoesAdicionaisDAO();
+			Messages.addGlobalInfo("Qualificação removida com sucesso: " + informacoesAdicionais.getCargoPretendido());
+			daoinf.excluir(informacoesAdicionais);
+			carregarCurriculo();
+
+		} catch (Exception e) {
+			Messages.addGlobalError("Erro ao Remover: "  + informacoesAdicionais.getCargoPretendido());
+
+		} finally {
+
+		}
+
+	}
+	
+	
+
 	// Editar usuário
 	// -------------------------------------------------------------------------------------------
 	public void editar() {
@@ -403,7 +457,7 @@ public class UsuarioBean implements Serializable {
 
 		} finally {
 
-			fechar();
+			
 		}
 
 	}
@@ -452,7 +506,7 @@ public class UsuarioBean implements Serializable {
 	// ------------------------------------------------------------------------------------------------------------------------------------------------------
 
 	public void getinstanciaCurriculo(ActionEvent evento) {
-		System.out.println("Método Curriculo: " + usuario.getNome());
+	
 
 		try {
 
@@ -461,7 +515,7 @@ public class UsuarioBean implements Serializable {
 
 			carregarCurriculo();
 
-			System.out.println("Usuario selecionado: " + usuario.getNome());
+			
 
 		} catch (Exception e) {
 			Messages.addGlobalError("Erro ao Editar: " + usuario.getNome());
@@ -507,9 +561,6 @@ public class UsuarioBean implements Serializable {
 
 	}
 
-	
-	
-
 	// Instancia de Qualificações
 	// ------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -528,10 +579,29 @@ public class UsuarioBean implements Serializable {
 
 	}
 
-
+	
+	
+	// Instancia de Infos
 	// ------------------------------------------------------------------------------------------------------------------------------------------------------
 
+	public void getinstanciaInfo(ActionEvent evento) {
+
+		try {
+			botaoInfo = true;
+
+			informacoesAdicionais = (InformacoesAdicionais) evento.getComponent().getAttributes().get("meuSelect");
+			Messages.addGlobalInfo("Seleção: " + informacoesAdicionais.getCargoPretendido());
+
+		} catch (Exception e) {
+			Messages.addGlobalError("Erro ao Editar: " + informacoesAdicionais.getCargoPretendido());
+		}
+
+	}
 	
+	
+	
+	// ------------------------------------------------------------------------------------------------------------------------------------------------------
+
 	public void listarInfos() {
 
 		try {
@@ -706,6 +776,40 @@ public class UsuarioBean implements Serializable {
 	public void setBotaoAtividades(Boolean botaoAtividades) {
 		this.botaoAtividades = botaoAtividades;
 	}
+
+	public Boolean getStatusBoolean() {
+		return statusBoolean;
+	}
+
+	public void setStatusBoolean(Boolean statusBoolean) {
+		this.statusBoolean = statusBoolean;
+	}
+
+	public InformacoesAdicionais getInformacoesAdicionais() {
+		return informacoesAdicionais;
+	}
+
+	public void setInformacoesAdicionais(InformacoesAdicionais informacoesAdicionais) {
+		this.informacoesAdicionais = informacoesAdicionais;
+	}
+
+	public List<InformacoesAdicionais> getListInfo() {
+		return listInfo;
+	}
+
+	public void setListInfo(List<InformacoesAdicionais> listInfo) {
+		this.listInfo = listInfo;
+	}
+
+	public Boolean getBotaoInfo() {
+		return botaoInfo;
+	}
+
+	public void setBotaoInfo(Boolean botaoInfo) {
+		this.botaoInfo = botaoInfo;
+	}
 	
+	
+
 	
 }

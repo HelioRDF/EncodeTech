@@ -22,10 +22,10 @@ import br.com.encodetech.domain.complementos.GenericDomain;
 @Entity
 public class ExperienciaProfissional extends GenericDomain {
 
-	@Column(length = 35)
+	@Column(length = 55)
 	private String nomeEmpresa;
 
-	@Column(length = 35)
+	@Column(length = 55)
 	private String cargo;
 
 	@Column(nullable = false)

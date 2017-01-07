@@ -59,23 +59,23 @@ public class Empresa extends GenericDomain {
 	@Column()
 	private Boolean status;
 
-	@Column()
+	@Column(length = 65)
 	private String nomeEmpresa;
 
-	@Column()
+	@Column(length = 15)
 	private String senha;
 
-	@Column()
+	@Column(length = 30)
 	private String seguimento;
 
-	@Column()
+	@Column(length = 2000)
 	@Lob
 	private String descricao;
 
-	@Column()
+	@Column(length = 22)
 	private String cnpj;
 	
-	@Column()
+	@Column(length = 33)
 	private String email;
 	
 	@OneToOne

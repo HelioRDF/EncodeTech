@@ -77,18 +77,16 @@ public class Usuario extends GenericDomain {
 	@JoinColumn()
 	private Endereco endereco;
 	
-	@OneToOne
-	@JoinColumn
-	private Curriculo curriculo;
-	
-	// Formação
-	// Objetivo
-	@Column
+	@Column(length = 100)
 	private String cargoPretendido;
-	
-	//Pretenção Salarial
-	@Column
+
+	@Column(length = 20)
 	private String pretensaoSalarial;
+	
+	@Column(length = 250)
+	private String descricao;
+	
+	
 
 	
 
@@ -104,21 +102,36 @@ public class Usuario extends GenericDomain {
 		return status;
 	}
 
+
 	public String getCargoPretendido() {
 		return cargoPretendido;
 	}
+
 
 	public void setCargoPretendido(String cargoPretendido) {
 		this.cargoPretendido = cargoPretendido;
 	}
 
+
 	public String getPretensaoSalarial() {
 		return pretensaoSalarial;
 	}
 
+
 	public void setPretensaoSalarial(String pretensaoSalarial) {
 		this.pretensaoSalarial = pretensaoSalarial;
 	}
+
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
 
 	public void setStatus(Boolean status) {
 		this.status = status;
@@ -183,13 +196,6 @@ public class Usuario extends GenericDomain {
 
 	
 
-	public Curriculo getCurriculo() {
-		return curriculo;
-	}
-
-	public void setCurriculo(Curriculo curriculo) {
-		this.curriculo = curriculo;
-	}
 
 	public String getSexo() {
 		return sexo;
