@@ -86,6 +86,12 @@
 						oncomplete="PF('dialogo').show();" action="#{usuarioBean.novo()}"
 						update=":dialogform:" />
 
+
+
+	
+		
+		
+		
 					<!-- Header -->
 					<h:outputLabel styleClass="nameheader" value="Usuários"></h:outputLabel>
 
@@ -154,7 +160,7 @@
 				<!-- Gerar Curriculo -->
 				<p:commandButton title="Curriculo" icon="ui-icon-person"
 				actionListener="#{usuarioBean.getinstanciaCurriculo}"				
-				action="/pages/testes/curriculoTeste.xhtml?faces-redirect=true">
+				action="/pages/administrativas/curriculo.xhtml?faces-redirect=true">
 
 				<f:attribute name="meuSelect" value="#{dataVar}" />
 				
@@ -205,7 +211,7 @@
 
 
 
-					<h:outputText value="Estado: #{dataVar.endereco.estado.nome}" />
+					<h:outputText value="Estado: #{dataVar.endereco.cidade.estado.nome}" />
 					<h:outputText value="Cidade: #{dataVar.endereco.cidade.nome}" />
 					<h:outputText value="Rua: #{dataVar.endereco.rua}" />
 					<h:outputText value="Número: #{dataVar.endereco.numero}" />
@@ -261,7 +267,7 @@
 		
 
 		<p:outputLabel value="E-mail:" />
-		<p:inputText  id="email" maxlength="20" size="22"
+		<p:inputText  id="email" maxlength="40" size="22"
 			value="#{usuarioBean.usuario.email}" required="true"
 			requiredMessage="Verificar campo E-Mail"
 			validatorMessage="Erro de validação: o e-mail não é válido ">
@@ -311,7 +317,7 @@
 
 	<f:validateRegex disabled="false" for="nome"
 	
-		pattern="[ A-Za-z ]* + *[ A-Za-z ]*" />
+		pattern="[ A-ZãÃáÁàÀâÂäÄéÉèÈêÊëËÚúíÍóÓõÕôÔöÖüÜñÑçÇa-z ]* + *[ A-ZãÃáÁàÀâÂäÄéÉèÈêÊëËÚúíÍóÓõÕôÔöÖüÜñÑçÇa-z ]*" />
 
 </p:inputText>
 
@@ -362,17 +368,22 @@ value="/images/calendar (3).png" />
 	<h:panelGrid columns="2" id="dialogpanel2">
 
 		<p:outputLabel value="Estado: " />
-		<p:selectOneMenu filter="true"
+		<p:selectOneMenu filter="true" 
 			value="#{usuarioBean.estado}"
 			converter="omnifaces.SelectItemsConverter" required="true"
 			requiredMessage="Informe o Estado corretamente">
-			<f:selectItem itemDisabled="true" noSelectionOption="true"
+			<f:selectItem itemDisabled="false" noSelectionOption="true" 
 				itemLabel="Selecione o Estado" />
+		
 			<f:selectItems value="#{usuarioBean.listaEstado}" var="estado"
 				itemValue="#{estado}"
 				itemLabel="#{estado.nome} - #{estado.sigla}" />
 				<p:ajax listener="#{usuarioBean.filtrarCidade}" update=":dialogform:cidade"></p:ajax>
 		</p:selectOneMenu>
+		
+
+		
+		
 
 		<p:outputLabel value="Cidade: " />
 		<p:selectOneMenu id="cidade" filter="true"

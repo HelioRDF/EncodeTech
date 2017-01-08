@@ -51,7 +51,7 @@ public class Usuario extends GenericDomain {
 	@Column(nullable = false)
 	private Boolean status;
 
-	@Column(length = 50, nullable = false)
+	@Column(length = 60, nullable = false)
 	private String nome;
 
 	@Column(length = 32)

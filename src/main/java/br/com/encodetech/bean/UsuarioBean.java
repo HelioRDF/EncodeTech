@@ -205,16 +205,17 @@ public class UsuarioBean implements Serializable {
 	// -------------------------------------------------------------------------------------------
 	public void novo() {
 
+
+		listarInfos();
 		botaoEditar = false;
 		botaoSalvar = true;
 
-		System.out.println("Método novo");
-		listarInfos();
+		usuario = new Usuario();
 		endereco = new Endereco();
 		enderecoDAO = new EnderecoDAO();
-		usuario = new Usuario();
 		dao = new UsuarioDAO();
 
+		
 	}
 
 	// Fechar

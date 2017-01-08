@@ -182,7 +182,7 @@
 					
 				
 					
-					<h:outputText value="Estado: #{dataVar.endereco.estado.nome}" />
+					<h:outputText value="Estado: #{dataVar.endereco.cidade.estado.nome}" />
 					<h:outputText value="Cidade: #{dataVar.endereco.cidade.nome}" />
 					<h:outputText value="Rua: #{dataVar.endereco.rua}" />
 					<h:outputText value="Número: #{dataVar.endereco.numero}" />
@@ -241,7 +241,7 @@
 		
 		
 		<p:outputLabel value="E-mail:" />
-		<p:inputText id="email" maxlength="30" size="22"
+		<p:inputText id="email" maxlength="50" size="22"
 		value="#{empresaBean.empresa.email}" required="true"
 		requiredMessage="Verificar campo E-Mail"
 		validatorMessage="Erro de validação: o e-mail não é válido ">
@@ -272,7 +272,7 @@
 
 		<p:outputLabel value="Nome da Empresa: ">
 		</p:outputLabel>
-		<p:inputText id="nome" maxlength="20" size="26" label="nome"
+		<p:inputText id="nome" maxlength="40" size="26" label="nome"
 		value="#{empresaBean.empresa.nomeEmpresa}" required="true"
 		requiredMessage="Verificar campo Nome"
 		validatorMessage="Erro de validação: Dígite o nome corretamente">
@@ -321,7 +321,7 @@
 			value="#{empresaBean.estado}"
 			converter="omnifaces.SelectItemsConverter" required="true"
 			requiredMessage="Informe o Estado corretamente">
-			<f:selectItem itemDisabled="true" noSelectionOption="true"
+			<f:selectItem itemDisabled="false" noSelectionOption="true"
 				itemLabel="Selecione o Estado" />
 			<f:selectItems value="#{empresaBean.listaEstado}" var="estado"
 				itemValue="#{estado}"
