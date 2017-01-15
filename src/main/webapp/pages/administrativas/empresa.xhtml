@@ -6,6 +6,7 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 <h:head>
+
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>Empresa</title>
 	<h:outputStylesheet library="css" name="estilos.css"></h:outputStylesheet>
@@ -250,8 +251,8 @@
 		pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
 		</p:inputText>
 
-		<p:outputLabel value="Digite uma Senha:" />
-		<p:password id="senha" match="confirmar" maxlength="13" size="18"
+		<p:outputLabel rendered="#{!empresaBean.telaEditar}" value="Digite uma Senha:" />
+		<p:password rendered="#{!empresaBean.telaEditar}" id="senha" match="confirmar" maxlength="13" size="18"
 		feedback="true" inline="true"
 		value="#{empresaBean.empresa.senha}" required="true"
 		requiredMessage="Verificar campo Senha"
@@ -259,8 +260,8 @@
 		<f:validateLength minimum="4" />
 		</p:password>
 
-		<p:outputLabel value="Confirmar senha:" required="true" />
-		<p:password id="confirmar" maxlength="13" size="18"
+		<p:outputLabel rendered="#{!empresaBean.telaEditar}" value="Confirmar senha:" required="true" />
+		<p:password rendered="#{!empresaBean.telaEditar}" id="confirmar" maxlength="13" size="18"
 		value="#{empresaBean.empresa.senha}" required="true"
 		requiredMessage="Verificar campo Confirmar Senha"
 		validatorMessage="Senha: Erro de validação: o comprimento é menor do que o mínimo permitido. '4 dígitos' ">
@@ -334,7 +335,7 @@
 			value="#{empresaBean.endereco.cidade}"
 			converter="omnifaces.SelectItemsConverter" required="true"
 			requiredMessage="Informe a Cidade corretamente">
-			<f:selectItem itemDisabled="true" noSelectionOption="true"
+			<f:selectItem itemDisabled="false" noSelectionOption="true"
 				itemLabel="Selecione a Cidade" />
 			<f:selectItems value="#{empresaBean.listaCidade}" var="cidade"
 				itemValue="#{cidade}" itemLabel="#{cidade.nome}" />

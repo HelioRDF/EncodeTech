@@ -13,8 +13,6 @@
 
 <h:body>
 
-
-
 	<h:form id="form">
 		<p:growl id="msgGrowl"  life="10000" globalOnly="true" />
 			
@@ -142,7 +140,7 @@
 
 				<!-- Editar -->
 				<p:commandButton title="Editar" icon="ui-icon-pencil"
-					actionListener="#{usuarioBean.getinstancia}" update=":dialogform:"
+					actionListener="#{usuarioBean.getinstancia}" update=":dialogform"
 					oncomplete="PF('dialogo').show();">
 					<f:attribute name="meuSelect" value="#{dataVar}" />
 				</p:commandButton>
@@ -163,10 +161,8 @@
 				action="/pages/administrativas/curriculo.xhtml?faces-redirect=true">
 
 				<f:attribute name="meuSelect" value="#{dataVar}" />
-				
-				</p:commandButton>
-				
-		
+								</p:commandButton>
+						
 
 				<!-- Excluir -->
 				<p:commandButton title="Excluir" icon="ui-icon-trash"
@@ -276,8 +272,8 @@
 				pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
 		</p:inputText>
 
-		<p:outputLabel value="Digite uma Senha:" />
-		<p:password autocomplete="false"  id="senha" match="confirmar" maxlength="13" size="18"
+		<p:outputLabel rendered="#{!usuarioBean.telaEditar}"  value="Digite uma Senha:" />
+		<p:password rendered="#{!usuarioBean.telaEditar}" autocomplete="false"  id="senha" match="confirmar" maxlength="13" size="18"
 			feedback="true" inline="true"
 			value="#{usuarioBean.usuario.senha}" required="true"
 			requiredMessage="Verificar campo Senha"
@@ -285,8 +281,8 @@
 			<f:validateLength minimum="4" />
 		</p:password>
 
-		<p:outputLabel value="Confirmar senha:" required="true" />
-		<p:password id="confirmar" maxlength="13" size="18"
+		<p:outputLabel  rendered="#{!usuarioBean.telaEditar}" value="Confirmar senha:" required="true" />
+		<p:password rendered="#{!usuarioBean.telaEditar}" id="confirmar" maxlength="13" size="18"
 			value="#{usuarioBean.usuario.senha}" required="true"
 			requiredMessage="Verificar campo Confirmar Senha"
 			validatorMessage="Erro de validação: o comprimento é menor do que o mínimo permitido. '4 dígitos' ">
@@ -368,21 +364,22 @@ value="/images/calendar (3).png" />
 	<h:panelGrid columns="2" id="dialogpanel2">
 
 		<p:outputLabel value="Estado: " />
-		<p:selectOneMenu filter="true" 
+		<p:selectOneMenu filter="true"  
 			value="#{usuarioBean.estado}"
 			converter="omnifaces.SelectItemsConverter" required="true"
-			requiredMessage="Informe o Estado corretamente">
-			<f:selectItem itemDisabled="false" noSelectionOption="true" 
-				itemLabel="Selecione o Estado" />
+			requiredMessage="Informe o Estado corretamente"  >
+			
 		
+				<f:selectItem   itemDisabled="false"  noSelectionOption="false" 
+				itemLabel="#{usuarioBean.auxEstado}" 
+				itemValue="#{usuarioBean.usuario.endereco.cidade.estado}" />
+			
+			
 			<f:selectItems value="#{usuarioBean.listaEstado}" var="estado"
 				itemValue="#{estado}"
 				itemLabel="#{estado.nome} - #{estado.sigla}" />
 				<p:ajax listener="#{usuarioBean.filtrarCidade}" update=":dialogform:cidade"></p:ajax>
-		</p:selectOneMenu>
-		
-
-		
+		</p:selectOneMenu>	
 		
 
 		<p:outputLabel value="Cidade: " />
@@ -390,8 +387,12 @@ value="/images/calendar (3).png" />
 			value="#{usuarioBean.endereco.cidade}"
 			converter="omnifaces.SelectItemsConverter" required="true"
 			requiredMessage="Informe a Cidade corretamente">
-			<f:selectItem itemDisabled="true" noSelectionOption="true"
-				itemLabel="Selecione a Cidade" />
+			
+				<f:selectItem itemDisabled="false"  noSelectionOption="false" 
+				itemLabel="#{usuarioBean.auxCidade}" 
+				itemValue="#{usuarioBean.usuario.endereco.cidade}"  />
+			
+
 			<f:selectItems value="#{usuarioBean.listaCidade}" var="cidade"
 				itemValue="#{cidade}" itemLabel="#{cidade.nome}" />
 		</p:selectOneMenu>
@@ -458,7 +459,7 @@ value="/images/calendar (3).png" />
 
 		<p:commandButton value="Editar"
 			actionListener="#{usuarioBean.editar}" validateClient="true"
-			update=":dialogform:" rendered="#{usuarioBean.botaoEditar}">
+			update=":dialogform: " rendered="#{usuarioBean.botaoEditar}">
 		</p:commandButton>
 
 
@@ -515,7 +516,7 @@ value="/images/calendar (3).png" />
 			<p:separator style="border: 1px solid #e6e6ff; height: 1px;"></p:separator>
 <p:separator style="border: 1px solid #e6e6ff; height: 1px;"></p:separator>
 
-				<p:outputLabel value="Digite uma Senha:" />
+				<p:outputLabel  value="Digite uma Senha:" />
 				<p:password id="senha" maxlength="16" size="25" feedback="true"
 					inline="true" match="confirmar"
 					value="#{usuarioBean.usuario.senha}" required="true"

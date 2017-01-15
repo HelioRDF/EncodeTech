@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.event.ActionEvent;
 
 import org.omnifaces.util.Messages;
@@ -31,7 +31,7 @@ import br.com.encodetech.domain.localizacao.Estado;
 
 @SuppressWarnings("serial")
 @ManagedBean
-@ViewScoped
+@SessionScoped
 public class EmpresaBean implements Serializable {
 
 	private Empresa empresa;
@@ -49,6 +49,7 @@ public class EmpresaBean implements Serializable {
 
 	private Boolean botaoEditar =false;
 	private Boolean botaoSalvar =false;
+	private Boolean telaEditar =false;
 
 	// Salvar
 	// -------------------------------------------------------------------------------------
@@ -84,6 +85,7 @@ public class EmpresaBean implements Serializable {
 		listarInfos();
 		botaoEditar=false;
 		botaoSalvar=true;
+		telaEditar = false;
 		empresa = new Empresa();
 		endereco = new Endereco();
 		enderecoDAO = new EnderecoDAO();
@@ -191,6 +193,7 @@ public class EmpresaBean implements Serializable {
 			
 			botaoSalvar=false;
 			botaoEditar=true;
+			telaEditar = true;
 			
 			empresa = (Empresa) evento.getComponent().getAttributes().get("meuSelect");
 			Messages.addGlobalInfo("Seleção: " + empresa.getNomeEmpresa());
@@ -322,6 +325,15 @@ public class EmpresaBean implements Serializable {
 		this.estado = estado;
 	}
 
+	public Boolean getTelaEditar() {
+		return telaEditar;
+	}
+
+	public void setTelaEditar(Boolean telaEditar) {
+		this.telaEditar = telaEditar;
+	}
+	 
+	
 	
 
 

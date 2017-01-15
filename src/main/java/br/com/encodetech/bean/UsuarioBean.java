@@ -50,8 +50,13 @@ public class UsuarioBean implements Serializable {
 	private List<Cidade> listaCidade;
 	private List<Estado> listaEstado;
 	private CidadeDAO cidadeDao;
+	private String auxCidade="Selecione uma Cidade";
+	
 	private Estado estado;
 	private EstadoDAO estadoDao;
+	private String auxEstado=" Selecione um Estado";
+	
+	private Boolean telaEditar =false;
 
 	private Endereco endereco;
 	private EnderecoDAO enderecoDAO;
@@ -204,11 +209,14 @@ public class UsuarioBean implements Serializable {
 	// Novo
 	// -------------------------------------------------------------------------------------------
 	public void novo() {
-
-
+		
+		telaEditar=false;
 		listarInfos();
 		botaoEditar = false;
 		botaoSalvar = true;
+		auxCidade="Selecione uma Cidade";
+		auxEstado=" Selecione um Estado";
+		
 
 		usuario = new Usuario();
 		endereco = new Endereco();
@@ -447,6 +455,7 @@ public class UsuarioBean implements Serializable {
 
 		try {
 
+			
 			listarInfos();
 			dao = new UsuarioDAO();
 			dao.merge(usuario);
@@ -490,12 +499,22 @@ public class UsuarioBean implements Serializable {
 
 		try {
 
+			telaEditar = true;
 			botaoSalvar = false;
 			botaoEditar = true;
+
 			usuario = (Usuario) evento.getComponent().getAttributes().get("meuSelect");
 			Messages.addGlobalInfo("Seleção: " + usuario.getNome());
+
 			endereco = usuario.getEndereco();
+			
+			auxCidade=usuario.getEndereco().getCidade().getNome() ;
+			auxEstado=usuario.getEndereco().getCidade().getEstado().getNome();
+			
+			
 			listarInfos();
+			cidadeDao = new CidadeDAO();
+			listaCidade = cidadeDao.buscarPorEstado(estado.getCodigo());
 
 		} catch (Exception e) {
 			Messages.addGlobalError("Erro ao Editar: " + usuario.getNome());
@@ -626,9 +645,11 @@ public class UsuarioBean implements Serializable {
 
 		try {
 
-			System.out.println("Filtrar Cidade");
+		
 			cidadeDao = new CidadeDAO();
 			listaCidade = cidadeDao.buscarPorEstado(estado.getCodigo());
+			auxCidade="Selecione uma Cidade";
+			
 
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -808,6 +829,30 @@ public class UsuarioBean implements Serializable {
 
 	public void setBotaoInfo(Boolean botaoInfo) {
 		this.botaoInfo = botaoInfo;
+	}
+
+	public Boolean getTelaEditar() {
+		return telaEditar;
+	}
+
+	public void setTelaEditar(Boolean telaEditar) {
+		this.telaEditar = telaEditar;
+	}
+
+	public String getAuxCidade() {
+		return auxCidade;
+	}
+
+	public void setAuxCidade(String auxCidade) {
+		this.auxCidade = auxCidade;
+	}
+
+	public String getAuxEstado() {
+		return auxEstado;
+	}
+
+	public void setAuxEstado(String auxEstado) {
+		this.auxEstado = auxEstado;
 	}
 	
 	
