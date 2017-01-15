@@ -650,6 +650,7 @@ public class UsuarioBean implements Serializable {
 			listaCidade = cidadeDao.buscarPorEstado(estado.getCodigo());
 			auxCidade="Selecione uma Cidade";
 			
+			
 
 		} catch (Exception e) {
 			// TODO: handle exception

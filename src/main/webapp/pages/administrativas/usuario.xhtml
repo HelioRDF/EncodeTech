@@ -363,6 +363,7 @@ value="/images/calendar (3).png" />
 
 	<h:panelGrid columns="2" id="dialogpanel2">
 
+
 		<p:outputLabel value="Estado: " />
 		<p:selectOneMenu filter="true"  
 			value="#{usuarioBean.estado}"
@@ -371,8 +372,7 @@ value="/images/calendar (3).png" />
 			
 		
 				<f:selectItem   itemDisabled="false"  noSelectionOption="false" 
-				itemLabel="#{usuarioBean.auxEstado}" 
-				itemValue="#{usuarioBean.usuario.endereco.cidade.estado}" />
+				itemLabel="#{usuarioBean.auxEstado}"  />
 			
 			
 			<f:selectItems value="#{usuarioBean.listaEstado}" var="estado"
@@ -389,8 +389,7 @@ value="/images/calendar (3).png" />
 			requiredMessage="Informe a Cidade corretamente">
 			
 				<f:selectItem itemDisabled="false"  noSelectionOption="false" 
-				itemLabel="#{usuarioBean.auxCidade}" 
-				itemValue="#{usuarioBean.usuario.endereco.cidade}"  />
+				itemLabel="#{usuarioBean.auxCidade}"  />
 			
 
 			<f:selectItems value="#{usuarioBean.listaCidade}" var="cidade"
