@@ -482,6 +482,34 @@ public class UsuarioBean implements Serializable {
 		}
 
 	}
+	
+	// Editar Objetivos
+		// -------------------------------------------------------------------------------------------
+		public void editarObjetivos() {
+
+			try {
+
+				
+				listarInfos();
+				
+				dao = new UsuarioDAO();
+				
+				dao.merge(usuario);
+				
+				
+				Messages.addGlobalInfo("Usuário(a) ' " + usuario.getNome() + "' Editado com sucesso!!!");
+
+			} catch (Exception e) {
+				Messages.addGlobalError("Erro ao Editar Usuário(a) '" + usuario.getNome() + "'");
+				System.out.println("Editar Erro:"+ e.getMessage());
+
+			} finally {
+
+				
+			}
+
+		}
+	
 
 	// Salvar Senha
 	// -------------------------------------------------------------------------------------------
