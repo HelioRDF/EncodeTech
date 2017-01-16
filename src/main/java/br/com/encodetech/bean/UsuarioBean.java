@@ -457,13 +457,24 @@ public class UsuarioBean implements Serializable {
 
 			
 			listarInfos();
+			
+			enderecoDAO= new EnderecoDAO();
 			dao = new UsuarioDAO();
+			
+			endereco.setEstado(estado);
+			usuario.setEndereco(endereco);
+			
+			enderecoDAO.merge(endereco);
 			dao.merge(usuario);
+			
+			auxCidade=usuario.getEndereco().getCidade().getNome() ;
+			auxEstado=usuario.getEndereco().getCidade().getEstado().getNome();
 
 			Messages.addGlobalInfo("Usuário(a) ' " + usuario.getNome() + "' Editado com sucesso!!!");
 
 		} catch (Exception e) {
 			Messages.addGlobalError("Erro ao Editar Usuário(a) '" + usuario.getNome() + "'");
+			System.out.println("Editar Erro:"+ e.getMessage());
 
 		} finally {
 
@@ -505,21 +516,24 @@ public class UsuarioBean implements Serializable {
 
 			usuario = (Usuario) evento.getComponent().getAttributes().get("meuSelect");
 			Messages.addGlobalInfo("Seleção: " + usuario.getNome());
-
-			endereco = usuario.getEndereco();
 			
+			endereco = usuario.getEndereco();
+						
 			auxCidade=usuario.getEndereco().getCidade().getNome() ;
 			auxEstado=usuario.getEndereco().getCidade().getEstado().getNome();
-			
-			
+					
 			listarInfos();
-			cidadeDao = new CidadeDAO();
-			listaCidade = cidadeDao.buscarPorEstado(estado.getCodigo());
+			filtrarCidadeTwo();
+	
 
 		} catch (Exception e) {
 			Messages.addGlobalError("Erro ao Editar: " + usuario.getNome());
+			System.out.println("Erro getinstancia"+ e.getMessage());
 
 		}
+		
+		
+	
 
 	}
 
@@ -638,7 +652,8 @@ public class UsuarioBean implements Serializable {
 		}
 
 	}
-
+	
+	//Filtrar Cidade
 	// ------------------------------------------------------------------------------------------------------------------------------------------------------
 
 	public void filtrarCidade() {
@@ -648,7 +663,10 @@ public class UsuarioBean implements Serializable {
 		
 			cidadeDao = new CidadeDAO();
 			listaCidade = cidadeDao.buscarPorEstado(estado.getCodigo());
-			auxCidade="Selecione uma Cidade";
+			
+			
+			auxCidade="Selecione uma Cidade";			
+			usuario.setEndereco(null);
 			
 			
 
@@ -658,8 +676,26 @@ public class UsuarioBean implements Serializable {
 
 	}
 
+	//Filtrar Cidade  2, precisei replicar o método, devido a um erro na linha quando chamada dentro do getinstance, por conta do param (actionevent)
 	// ------------------------------------------------------------------------------------------------------------------------------------------------------
 
+	public void filtrarCidadeTwo() {
+
+		try {
+	
+			cidadeDao = new CidadeDAO();
+			listaCidade = cidadeDao.buscarPorEstado(estado.getCodigo());		
+			
+
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+	}
+
+	
+	
+	
 	public Usuario getUsuario() {
 		return usuario;
 	}

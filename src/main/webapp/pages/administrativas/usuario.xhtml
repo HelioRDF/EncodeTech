@@ -372,7 +372,8 @@ value="/images/calendar (3).png" />
 			
 		
 				<f:selectItem   itemDisabled="false"  noSelectionOption="false" 
-				itemLabel="#{usuarioBean.auxEstado}"  />
+				itemLabel="#{usuarioBean.auxEstado}" 
+				itemValue="#{usuarioBean.usuario.endereco.cidade.estado}" />
 			
 			
 			<f:selectItems value="#{usuarioBean.listaEstado}" var="estado"
@@ -389,7 +390,8 @@ value="/images/calendar (3).png" />
 			requiredMessage="Informe a Cidade corretamente">
 			
 				<f:selectItem itemDisabled="false"  noSelectionOption="false" 
-				itemLabel="#{usuarioBean.auxCidade}"  />
+				itemLabel="#{usuarioBean.auxCidade}" 
+				itemValue="#{usuarioBean.usuario.endereco.cidade}"  />
 			
 
 			<f:selectItems value="#{usuarioBean.listaCidade}" var="cidade"
