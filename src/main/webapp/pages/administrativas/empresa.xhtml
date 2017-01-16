@@ -322,8 +322,12 @@
 			value="#{empresaBean.estado}"
 			converter="omnifaces.SelectItemsConverter" required="true"
 			requiredMessage="Informe o Estado corretamente">
-			<f:selectItem itemDisabled="false" noSelectionOption="true"
-				itemLabel="Selecione o Estado" />
+			
+		
+				<f:selectItem   itemDisabled="false"  noSelectionOption="false" 
+				itemLabel="#{empresaBean.auxEstado}" 
+				itemValue="#{empresaBean.empresa.endereco.cidade.estado}" />
+				
 			<f:selectItems value="#{empresaBean.listaEstado}" var="estado"
 				itemValue="#{estado}"
 				itemLabel="#{estado.nome} - #{estado.sigla}" />
@@ -335,8 +339,12 @@
 			value="#{empresaBean.endereco.cidade}"
 			converter="omnifaces.SelectItemsConverter" required="true"
 			requiredMessage="Informe a Cidade corretamente">
-			<f:selectItem itemDisabled="false" noSelectionOption="true"
-				itemLabel="Selecione a Cidade" />
+			
+	
+				<f:selectItem   itemDisabled="false"  noSelectionOption="false" 
+				itemLabel="#{empresaBean.auxCidade}" 
+				itemValue="#{empresaBean.empresa.endereco.cidade}" />
+				
 			<f:selectItems value="#{empresaBean.listaCidade}" var="cidade"
 				itemValue="#{cidade}" itemLabel="#{cidade.nome}" />
 		</p:selectOneMenu>

@@ -40,8 +40,11 @@ public class EmpresaBean implements Serializable {
 	private List<Cidade> listaCidade;
 	private List<Estado> listaEstado;
 	private CidadeDAO cidadeDao;
+	private String auxCidade="Selecione uma Cidade";
 	private EstadoDAO estadoDao;
 	private Estado estado;
+	private String auxEstado=" Selecione um Estado";
+	
 	
 	private Endereco endereco;
 	private EnderecoDAO enderecoDAO;
@@ -50,6 +53,7 @@ public class EmpresaBean implements Serializable {
 	private Boolean botaoEditar =false;
 	private Boolean botaoSalvar =false;
 	private Boolean telaEditar =false;
+	
 
 	// Salvar
 	// -------------------------------------------------------------------------------------
@@ -83,6 +87,7 @@ public class EmpresaBean implements Serializable {
 	public void novo() {
 
 		listarInfos();
+		telaEditar=false;
 		botaoEditar=false;
 		botaoSalvar=true;
 		telaEditar = false;
@@ -90,7 +95,8 @@ public class EmpresaBean implements Serializable {
 		endereco = new Endereco();
 		enderecoDAO = new EnderecoDAO();
 		dao = new EmpresaDAO();
-	
+		auxCidade="Selecione uma Cidade";
+		auxEstado=" Selecione um Estado";
 		System.out.println("Método novo");
 
 	}
@@ -148,8 +154,19 @@ public class EmpresaBean implements Serializable {
 
 			listarInfos();
 			
+			enderecoDAO= new EnderecoDAO();
 			dao = new EmpresaDAO();
+			
+			endereco.setEstado(estado);
+			empresa.setEndereco(endereco);
+			
+			enderecoDAO.merge(endereco);
 			dao.merge(empresa);
+			
+
+			auxCidade=empresa.getEndereco().getCidade().getNome() ;
+			auxEstado=empresa.getEndereco().getCidade().getEstado().getNome();
+			
 			Messages.addGlobalInfo("Usuário(a) ' " + empresa.getNomeEmpresa() + "' Editado com sucesso!!!");
 
 		} catch (Exception e) {
@@ -198,7 +215,12 @@ public class EmpresaBean implements Serializable {
 			empresa = (Empresa) evento.getComponent().getAttributes().get("meuSelect");
 			Messages.addGlobalInfo("Seleção: " + empresa.getNomeEmpresa());
 			endereco=empresa.getEndereco();
+			
+			auxCidade=empresa.getEndereco().getCidade().getNome() ;
+			auxEstado=empresa.getEndereco().getCidade().getEstado().getNome();
+			
 			listarInfos();
+			filtrarCidadeTwo();
 
 		} catch (Exception e) {
 			Messages.addGlobalError("Erro ao Editar: " + empresa.getNomeEmpresa());
@@ -235,9 +257,12 @@ public class EmpresaBean implements Serializable {
 		
 		try {
 			
-			System.out.println("Filtrar Cidade");
 			cidadeDao = new CidadeDAO();
 			listaCidade = cidadeDao.buscarPorEstado(estado.getCodigo());	
+			
+			
+			auxCidade="Selecione uma Cidade";			
+			empresa.setEndereco(null);
 			
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -249,6 +274,24 @@ public class EmpresaBean implements Serializable {
 	// ------------------------------------------------------------------------------------------------------------------------------------------------------
 
 	
+	public void filtrarCidadeTwo() {
+
+		try {
+	
+			cidadeDao = new CidadeDAO();
+			listaCidade = cidadeDao.buscarPorEstado(estado.getCodigo());		
+			
+
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+	}
+
+	
+	
+	// ------------------------------------------------------------------------------------------------------------------------------------------------------
+
 	
 	
 	public Empresa getEmpresa() {
@@ -332,7 +375,25 @@ public class EmpresaBean implements Serializable {
 	public void setTelaEditar(Boolean telaEditar) {
 		this.telaEditar = telaEditar;
 	}
+
+	public String getAuxCidade() {
+		return auxCidade;
+	}
+
+	public void setAuxCidade(String auxCidade) {
+		this.auxCidade = auxCidade;
+	}
+
+	public String getAuxEstado() {
+		return auxEstado;
+	}
+
+	public void setAuxEstado(String auxEstado) {
+		this.auxEstado = auxEstado;
+	}
 	 
+	
+	
 	
 	
 
