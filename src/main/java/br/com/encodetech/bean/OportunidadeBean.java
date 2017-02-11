@@ -13,16 +13,39 @@ import org.primefaces.context.RequestContext;
 
 import br.com.encodetech.dao.complementos.OportunidadeDAO;
 import br.com.encodetech.dao.empresas.EmpresaDAO;
+import br.com.encodetech.dao.localizacao.CidadeDAO;
+import br.com.encodetech.dao.localizacao.EstadoDAO;
 import br.com.encodetech.domain.complementos.Oportunidade;
 import br.com.encodetech.domain.empresas.Empresa;
+import br.com.encodetech.domain.localizacao.Cidade;
+import br.com.encodetech.domain.localizacao.Estado;
 
 @ManagedBean
 @ViewScoped
 public class OportunidadeBean implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Oportunidade oportunidade;
 	private OportunidadeDAO dao;
 	private List<Oportunidade> listaOportunidade;
+	
+	
+	private Estado estado;
+	private EstadoDAO estadoDAO;
+	private List<Estado> listaEstado;
+	private String auxEstado=" Selecione um Estado";
+	
+	
+	private CidadeDAO cidadeDAO;
+	private String auxCidade="Selecione uma Cidade";
+	private List<Cidade> listaCidade;
+	
+	
+	
+	
 	
 	private EmpresaDAO empresaDAO;
 	private List<Empresa> listaEmpresas;
@@ -176,6 +199,12 @@ public class OportunidadeBean implements Serializable {
 	listaEmpresas = empresaDAO.listar();
 	
 	
+	
+	estadoDAO = new EstadoDAO();
+	listaEstado = estadoDAO.listar("nome");
+	listaCidade = cidadeDAO.listar("nome");
+	
+	
 	for (Empresa empresa : listaEmpresas) {
 		
 		System.out.println(empresa.getNomeEmpresa());
@@ -191,9 +220,50 @@ public class OportunidadeBean implements Serializable {
 
 	}
 	
+	
+	
+	//Filtrar Cidade
 	// ------------------------------------------------------------------------------------------------------------------------------------------------------
 
+	public void filtrarCidade() {
+
+		try {
+
+		
+			cidadeDAO = new CidadeDAO();
+			listaCidade = cidadeDAO.buscarPorEstado(estado.getCodigo());
+			
+			
+			auxCidade="Selecione uma Cidade";			
 	
+			
+
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+	}
+
+	//Filtrar Cidade  2, precisei replicar o método, devido a um erro na linha quando chamada dentro do getinstance, por conta do param (actionevent)
+	// ------------------------------------------------------------------------------------------------------------------------------------------------------
+
+	public void filtrarCidadeTwo() {
+
+		try {
+	
+			cidadeDAO = new CidadeDAO();
+			listaCidade = cidadeDAO.buscarPorEstado(estado.getCodigo());		
+			
+
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+	}
+
+	// ------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
 	
 	public Boolean getBotaoEditar() {
 		return botaoEditar;
@@ -234,6 +304,48 @@ public class OportunidadeBean implements Serializable {
 	public void setListaEmpresas(List<Empresa> listaEmpresas) {
 		this.listaEmpresas = listaEmpresas;
 	}
+
+	public Estado getEstado() {
+		return estado;
+	}
+
+	public void setEstado(Estado estado) {
+		this.estado = estado;
+	}
+
+	public List<Estado> getListaEstado() {
+		return listaEstado;
+	}
+
+	public void setListaEstado(List<Estado> listaEstado) {
+		this.listaEstado = listaEstado;
+	}
+
+	public String getAuxEstado() {
+		return auxEstado;
+	}
+
+	public void setAuxEstado(String auxEstado) {
+		this.auxEstado = auxEstado;
+	}
+
+	public String getAuxCidade() {
+		return auxCidade;
+	}
+
+	public void setAuxCidade(String auxCidade) {
+		this.auxCidade = auxCidade;
+	}
+
+	public List<Cidade> getListaCidade() {
+		return listaCidade;
+	}
+
+	public void setListaCidade(List<Cidade> listaCidade) {
+		this.listaCidade = listaCidade;
+	}
+	
+	
 	
 	
 

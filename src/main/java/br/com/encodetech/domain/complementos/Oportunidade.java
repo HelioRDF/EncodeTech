@@ -8,10 +8,13 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import br.com.encodetech.domain.empresas.Empresa;
+import br.com.encodetech.domain.localizacao.Cidade;
+import br.com.encodetech.domain.localizacao.Estado;
 
 
 
@@ -44,6 +47,18 @@ public class Oportunidade extends GenericDomain {
 	@Column(nullable = false)
 	private String cargo;
 	
+	
+	@JoinColumn
+	@OneToOne
+	private Estado estado;
+
+	@JoinColumn
+	@OneToOne
+	private Cidade cidade;
+	
+	@Column(nullable = false)
+	private String horario;
+	
 	@Column
 	private String nivel;	//Junior | Senior | Pleno | Trainee
 
@@ -54,6 +69,10 @@ public class Oportunidade extends GenericDomain {
 	@Column
 	@Lob
 	private String preRequisitos;
+	
+	@Column(nullable = false)
+	@Lob
+	private String beneficios;
 
 	@Column(nullable = false)
 	private Short quantidade;
@@ -81,6 +100,22 @@ public class Oportunidade extends GenericDomain {
 
 	public String getDescricao() {
 		return descricao;
+	}
+
+	public Estado getEstado() {
+		return estado;
+	}
+
+	public void setEstado(Estado estado) {
+		this.estado = estado;
+	}
+
+	public Cidade getCidade() {
+		return cidade;
+	}
+
+	public void setCidade(Cidade cidade) {
+		this.cidade = cidade;
 	}
 
 	public String getNivel() {
@@ -167,6 +202,25 @@ public class Oportunidade extends GenericDomain {
 
 	public void setMostrarSalario(Boolean mostrarSalario) {
 		this.mostrarSalario = mostrarSalario;
+	}
+	
+	
+
+
+	public String getHorario() {
+		return horario;
+	}
+
+	public void setHorario(String horario) {
+		this.horario = horario;
+	}
+
+	public String getBeneficios() {
+		return beneficios;
+	}
+
+	public void setBeneficios(String beneficios) {
+		this.beneficios = beneficios;
 	}
 
 	@Override

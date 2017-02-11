@@ -385,14 +385,14 @@ value="#{usuarioBean.listaExperiencia}"	style=" text-align:center;"  >
 
 			<p:rowExpansion styleClass=" width=37%">
 
-				<p:panelGrid columns="2" columnClasses="label,value" style="text-align:left;">
+				<p:panelGrid columns="1" columnClasses="label,value" style="text-align:left;">
 
 					<h:outputText value="Nivel: #{dataVarExperiencia.entrada}" />
 					<h:outputText value="Status: #{dataVarExperiencia.saida}" />
 					
 					
-					<h:outputLabel value="Principais Atividades:"></h:outputLabel>
-					<h:inputTextarea cols="75" rows="8"  readonly="true" value="#{dataVarExperiencia.principaisAtividades}" />
+				
+					<h:inputTextarea cols="100" rows="5"  readonly="true" value="Principais Atividades: #{dataVarExperiencia.principaisAtividades}" />
 					
 					
 				</p:panelGrid>

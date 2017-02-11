@@ -8,14 +8,44 @@
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>Oportunidades</title>
+	<h:outputStylesheet library="css" name="estilos.css"></h:outputStylesheet>
 </h:head>
 
 <h:body>
 
 	<h:form id="form">
 		<p:growl id="msgGrowl" life="10000" />
-		<p:panel header="Oportunidades">
-		</p:panel>
+	
+
+
+		<h1>@ Encodetech</h1>
+	 	<p:menubar styleClass="menu">
+	        <p:submenu label="Menu Principal" icon="ui-icon-arrow-4-diag">
+		    	<p:menuitem value="Usuários" outcome="/pages/administrativas/usuario.xhtml" icon="fa-bars" update="messages"/>
+		        <p:menuitem value="Empresas" outcome="/pages/administrativas/empresa.xhtml" icon="fa-bars" update="messages"/>
+	        <p:menuitem value="Oportunidades" outcome="/pages/administrativas/oportunidades.xhtml" icon="fa-bars" update="messages"/>	         
+	        </p:submenu>
+        
+            <p:submenu label="Localidade" icon="ui-icon-star">
+	    	     <p:menuitem value="Estados" outcome="/pages/administrativas/estado.xhtml"  icon="fa-bars" update="messages"/>
+	        	 <p:menuitem value="Cidades" outcome="/pages/administrativas/cidade.xhtml" icon="fa-bars" update="messages"/>
+	        </p:submenu>
+	 
+	        <p:submenu label="Ajuda" icon="ui-icon-help">
+	            <p:menuitem value="Versão" url="#" />
+	            <p:menuitem value="Sobre" url="#" />           
+	        </p:submenu>
+	 	       
+	        <f:facet name="options">
+	            <p:inputText style="margin-right:10px" placeholder="Search"/>
+	            <p:commandButton type="button" value="Logout" icon="ui-icon-extlink" />
+	        </f:facet>
+    </p:menubar>
+		
+
+		
+
+
 
 		<!-- _________________________________________________________________________________________________________________________________ -->
 		<!-- Informações de cabeçalho da tabela -->
@@ -55,6 +85,9 @@
 						style="float:left; height:33px;"
 						oncomplete="PF('dialogo').show();"
 						action="#{oportunidadeBean.novo()}" update=":dialogform:" />
+						
+						<!-- Header -->
+					<h:outputLabel styleClass="nameheader" value="Oportunidades"></h:outputLabel>
 
 				</p:panelGrid>
 			</f:facet>
@@ -117,6 +150,15 @@
 			</p:column>
 			
 			
+			<p:column headerText="Nº Vagas" width="10%" 
+				sortBy="#{dataVar.quantidade}" filterBy="#{dataVar.quantidade}">
+				<p:outputLabel value="#{dataVar.quantidade}">
+				
+			
+				</p:outputLabel>
+			</p:column>
+	
+			
 			<p:column headerText="Mostrar" width="10%"
 				sortBy="#{dataVar.mostrarSalario}" filterBy="#{dataVar.mostrarSalario}">
 				<p:outputLabel value="#{dataVar.mostrarSalario}" />
@@ -136,10 +178,7 @@
 				</p:commandButton>
 
 
-				<!-- Gerar PDF -->
-				<p:commandButton title="Curriculo" icon="ui-icon-person">
-
-				</p:commandButton>
+			
 
 				<!-- Excluir -->
 				<p:commandButton title="Excluir" icon="ui-icon-trash"
@@ -167,23 +206,24 @@
 
 			<p:rowExpansion styleClass=" width=37%">
 
-				<p:panelGrid columns="2" columnClasses="label,value" style="text-align:left;">
+				<p:panelGrid columns="1" columnClasses="label,value" style="text-align:left;">
 					
 					
-					<h:outputText value="Quantidades de Vagas: #{dataVar.quantidade}" />
+					
 					
 					<h:outputText value="Setor: #{dataVar.setor}" />
 					
-					<p:panelGrid columns="1">
-					<p:outputLabel  value="Descrição:"></p:outputLabel>
-					<p:inputTextarea cols="75" rows="8" readonly="true" value="#{dataVar.descricao}" />
-					</p:panelGrid>
+					<h:outputText value="local: #{dataVar.cidade.nome} - #{dataVar.cidade.estado.sigla}" />
 					
-					<p:panelGrid columns="1">
-					<p:outputLabel  value="Pré-Requisito:"></p:outputLabel>
-					<p:inputTextarea  cols="75" rows="8" readonly="true" value="#{dataVar.preRequisitos}" />
-					</p:panelGrid>
-
+					<h:outputText value="Horário: #{dataVar.horario}" />
+					
+					
+				
+				
+					<h:inputTextarea cols="100" rows="4" readonly="true" value="Descrição: #{dataVar.descricao}" />
+					<h:inputTextarea  cols="100" rows="4" readonly="true" value="Pré-Requisito: #{dataVar.preRequisitos}" />
+					<h:inputTextarea  cols="100" rows="4" readonly="true" value="Benefícios: #{dataVar.beneficios}" />
+				
 
 
 				</p:panelGrid>
@@ -268,6 +308,15 @@
 							requiredMessage="Preencha o campo Nº de Vagas corretamente">
 							<f:convertNumber pattern="##" minIntegerDigits="3" />
 						</p:inputNumber>
+						
+						<p:outputLabel value="Horário: ">
+						</p:outputLabel>
+						<p:inputText id="horario" maxlength="25" size="24" label="horario"
+							value="#{oportunidadeBean.oportunidade.horario}" required="true"
+							requiredMessage="Preencha o campo horário corretamente">
+							<f:validateLength minimum="2" />
+						</p:inputText>
+						
 						<p:outputLabel value="Nível: " />
 						<p:selectOneMenu filter="true"
 							value="#{oportunidadeBean.oportunidade.nivel}" required="true"
@@ -332,13 +381,55 @@
 
 
 					<h:panelGrid columns="2" id="dialogpanel2">
+					
+					
+					
+		<p:outputLabel value="Estado: " />
+		<p:selectOneMenu filter="true"  
+			value="#{oportunidadeBean.estado}"
+			converter="omnifaces.SelectItemsConverter" required="true"
+			requiredMessage="Informe o Estado corretamente"  >
+			
+		
+				<f:selectItem   itemDisabled="false"  noSelectionOption="false" 
+				itemLabel="#{oportunidadeBean.auxEstado}" 
+				itemValue="#{oportunidadeBean.oportunidade.cidade.estado}" />
+			
+			
+			<f:selectItems value="#{oportunidadeBean.listaEstado}" var="estado"
+				itemValue="#{estado}"
+				itemLabel="#{estado.nome} - #{estado.sigla}" />
+				<p:ajax listener="#{oportunidadeBean.filtrarCidade}" update=":dialogform:cidade"></p:ajax>
+		</p:selectOneMenu>	
+		
+
+		<p:outputLabel value="Cidade: " />
+		<p:selectOneMenu id="cidade" filter="true"
+			value="#{oportunidadeBean.oportunidade.cidade}"
+			converter="omnifaces.SelectItemsConverter" required="true"
+			requiredMessage="Informe a Cidade corretamente">
+			
+				<f:selectItem itemDisabled="false"  noSelectionOption="false" 
+				itemLabel="#{oportunidadeBean.auxCidade}" 
+				itemValue="#{oportunidadeBean.oportunidade.cidade}"  />
+			
+
+			<f:selectItems value="#{oportunidadeBean.listaCidade}" var="cidade"
+				itemValue="#{cidade}" itemLabel="#{cidade.nome}" />
+		</p:selectOneMenu>
 
 						<p:outputLabel value="Descrição: " />
 						<p:inputTextarea maxlength="250" rows="3" cols="30"
 							value="#{oportunidadeBean.oportunidade.descricao}"
 							required="true"
 							requiredMessage="Preencha o campo Descrição corretamente" />
-
+						
+						<p:outputLabel value="Benefícios: " />
+						<p:inputTextarea maxlength="250" rows="3" cols="30"
+							value="#{oportunidadeBean.oportunidade.beneficios}"
+							required="true"
+							requiredMessage="Preencha o campo benefícios corretamente" />
+						
 						<p:outputLabel value="Pré-Requisitos: " />
 						<p:inputTextarea maxlength="250" rows="3" cols="30"
 							value="#{oportunidadeBean.oportunidade.preRequisitos}" />
