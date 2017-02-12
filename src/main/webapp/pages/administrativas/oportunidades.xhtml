@@ -266,19 +266,12 @@
 					<h:panelGrid columns="2" id="dialogpanel">
 
 
-						<p:outputLabel value="Cargo: ">
-						</p:outputLabel>
-						<p:inputText id="cargo" maxlength="25" size="24" label="nome"
-							value="#{oportunidadeBean.oportunidade.cargo}" required="true"
-							requiredMessage="Preencha o campo Cargo corretamente">
-							<f:validateLength minimum="2" />
-						</p:inputText>
-
 
 
 
 						<p:outputLabel value="Empresa " />
-						<p:selectOneMenu filter="true"
+						<h:panelGrid columns="2">
+						<p:selectOneMenu filter="true" autoWidth="true"
 							value="#{oportunidadeBean.oportunidade.empresa}"
 							converter="omnifaces.SelectItemsConverter" required="true"
 							requiredMessage="Informe a Empresa corretamente">
@@ -288,7 +281,19 @@
 								var="empresa" itemValue="#{empresa}"
 								itemLabel="#{empresa.nomeEmpresa}" />
 						</p:selectOneMenu>
-
+						<p:selectBooleanButton value="#{oportunidadeBean.oportunidade.mostrarEmpresa}" onLabel="Visível" offLabel="Oculto"></p:selectBooleanButton>
+							</h:panelGrid>
+	
+		
+						<p:outputLabel value="Cargo: ">
+						</p:outputLabel>
+						<p:inputText id="cargo" maxlength="25" size="24" label="nome"
+							value="#{oportunidadeBean.oportunidade.cargo}" required="true"
+							requiredMessage="Preencha o campo Cargo corretamente">
+							<f:validateLength minimum="2" />
+						</p:inputText>
+		
+							
 
 						<p:outputLabel value="Salario:" />
 						<h:panelGrid columns="2">

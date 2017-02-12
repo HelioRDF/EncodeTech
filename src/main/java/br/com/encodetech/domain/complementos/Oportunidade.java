@@ -82,6 +82,9 @@ public class Oportunidade extends GenericDomain {
 	
 	@Column
 	private Boolean mostrarSalario;
+	
+	@Column
+	private Boolean mostrarEmpresa;
 
 	@ManyToOne
 	@JoinColumn(nullable = false)
@@ -205,7 +208,15 @@ public class Oportunidade extends GenericDomain {
 	}
 	
 	
+	 
 
+	public Boolean getMostrarEmpresa() {
+		return mostrarEmpresa;
+	}
+
+	public void setMostrarEmpresa(Boolean mostrarEmpresa) {
+		this.mostrarEmpresa = mostrarEmpresa;
+	}
 
 	public String getHorario() {
 		return horario;
