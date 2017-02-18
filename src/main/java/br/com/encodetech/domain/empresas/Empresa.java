@@ -9,6 +9,7 @@ import javax.persistence.Lob;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 import br.com.encodetech.domain.complementos.GenericDomain;
 import br.com.encodetech.domain.localizacao.Endereco;
@@ -62,8 +63,11 @@ public class Empresa extends GenericDomain {
 	@Column(length = 65)
 	private String nomeEmpresa;
 
-	@Column(length = 15)
+	@Column(length = 32)
 	private String senha;
+	
+	@Transient
+	private String senhaSemCriptografia;
 
 	@Column(length = 30)
 	private String seguimento;
@@ -86,10 +90,22 @@ public class Empresa extends GenericDomain {
 
 	// -------------------------------------------------------
 
+	
+	
+	
+		
 	public Boolean getStatus() {
 		
 		
 		return status;
+	}
+
+	public String getSenhaSemCriptografia() {
+		return senhaSemCriptografia;
+	}
+
+	public void setSenhaSemCriptografia(String senhaSemCriptografia) {
+		this.senhaSemCriptografia = senhaSemCriptografia;
 	}
 
 	public String getSenha() {

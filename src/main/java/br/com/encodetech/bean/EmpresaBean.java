@@ -8,6 +8,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.event.ActionEvent;
 
+import org.apache.shiro.crypto.hash.SimpleHash;
 import org.omnifaces.util.Messages;
 import org.primefaces.context.RequestContext;
 
@@ -60,7 +61,11 @@ public class EmpresaBean implements Serializable {
 	public void salvar() {
 
 		try {
-
+			
+			//Cria um hash e criptografa a senha
+			SimpleHash hash = new SimpleHash("md5", empresa.getSenhaSemCriptografia());
+			empresa.setSenha(hash.toHex());
+			
 			empresa.setDataCadastro(new Date());
 			enderecoDAO.salvar(endereco);
 			empresa.setEndereco(endereco);
@@ -185,7 +190,12 @@ public class EmpresaBean implements Serializable {
 	public void editarSenha() {
 
 		try {
-
+			
+			
+			//Cria um hash e criptografa a senha
+			SimpleHash hash = new SimpleHash("md5", empresa.getSenhaSemCriptografia());
+			empresa.setSenha(hash.toHex());
+			
 			dao = new EmpresaDAO();
 			dao.merge(empresa);
 			Messages.addGlobalInfo("Usuário Editado com sucesso: " + empresa.getNomeEmpresa());
