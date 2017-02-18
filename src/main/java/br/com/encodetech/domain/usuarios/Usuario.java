@@ -9,6 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 import br.com.encodetech.domain.complementos.GenericDomain;
 import br.com.encodetech.domain.localizacao.Endereco;
@@ -56,6 +57,9 @@ public class Usuario extends GenericDomain {
 
 	@Column(length = 32)
 	private String senha;
+	
+	@Transient
+	private String senhaSemCriptografia;
 
 	@Column(length = 14, nullable = false)
 	private String cpf;
@@ -100,6 +104,16 @@ public class Usuario extends GenericDomain {
 	
 	public Boolean getStatus() {
 		return status;
+	}
+
+
+	public String getSenhaSemCriptografia() {
+		return senhaSemCriptografia;
+	}
+
+
+	public void setSenhaSemCriptografia(String senhaSemCriptografia) {
+		this.senhaSemCriptografia = senhaSemCriptografia;
 	}
 
 

@@ -35,8 +35,11 @@
 					value="#{loginBean.senha}" />
 					<p:separator/> <p:separator/>
 				<p:outputLabel />
-				<p:commandButton style="margin-top:5px;" value="Acessar" action="#{loginBean.login}" />
+				<p:commandButton style="margin-top:5px; width:130px;" value="Entrar" action="#{loginBean.login}" />
 			</h:panelGrid>
+			
+			<h:link id="lembrarsenha" value="Esqueci minha senha."></h:link>
+			
 		</h:form>
 	</div>
 	

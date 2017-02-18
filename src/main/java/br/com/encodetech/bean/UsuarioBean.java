@@ -10,6 +10,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.event.ActionEvent;
 
+import org.apache.shiro.crypto.hash.SimpleHash;
 import org.omnifaces.util.Messages;
 import org.primefaces.context.RequestContext;
 
@@ -95,6 +96,13 @@ public class UsuarioBean implements Serializable {
 			
 
 			enderecoDAO.salvar(endereco);
+			
+			
+			//Cria um hash e criptografa a senha
+			SimpleHash hash = new SimpleHash("md5", usuario.getSenhaSemCriptografia());
+			usuario.setSenha(hash.toHex());
+			
+			
 			usuario.setEndereco(endereco);
 			usuario.setDataCadastro(new Date());
 			dao.salvar(usuario);
@@ -510,14 +518,18 @@ public class UsuarioBean implements Serializable {
 
 		}
 	
-
 	// Salvar Senha
 	// -------------------------------------------------------------------------------------------
 	public void editarSenha() {
 
 		try {
 
+			//Cria um hash e criptografa a senha
+			SimpleHash hash = new SimpleHash("md5", usuario.getSenhaSemCriptografia());
+			usuario.setSenha(hash.toHex());
+
 			dao = new UsuarioDAO();
+
 			dao.merge(usuario);
 			Messages.addGlobalInfo("Usuário Editado com sucesso: " + usuario.getNome());
 
