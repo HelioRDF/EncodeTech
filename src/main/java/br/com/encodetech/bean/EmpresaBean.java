@@ -55,6 +55,9 @@ public class EmpresaBean implements Serializable {
 	private Boolean botaoSalvar =false;
 	private Boolean telaEditar =false;
 	
+	
+	
+	
 
 	// Salvar
 	// -------------------------------------------------------------------------------------

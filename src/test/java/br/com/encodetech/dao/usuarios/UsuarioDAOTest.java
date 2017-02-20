@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import br.com.encodetech.domain.usuarios.Usuario;
@@ -12,6 +13,7 @@ public class UsuarioDAOTest {
 
 	
 	@Test
+	@Ignore
 	public void salvar() throws ParseException{
 		String aniversario="23/03/1989";
 		UsuarioDAO dao = new UsuarioDAO();
@@ -31,4 +33,21 @@ public class UsuarioDAOTest {
 		
 	}
 	
+	
+	@Test
+	public void autenticar(){
+		
+		String email="teste@bol.com.br";
+		String senha="xxxx";
+		
+		UsuarioDAO dao = new UsuarioDAO();
+		Usuario usuario = dao.autenticar(email, senha);
+		
+		System.out.println("Saida: "+usuario.getNome());
+				
+				
+		
+	}
+	
+
 }

@@ -115,12 +115,12 @@
 			</p:column>
 
 			<p:column headerText="Nome" sortBy="#{dataVar.nome}"
-				filterBy="#{dataVar.nome}">
+				filterBy="#{dataVar.nome}"  filterMatchMode="contains">
 				<p:outputLabel value="#{dataVar.nome}" />
 			</p:column>
 
 			<p:column headerText="Email" sortBy="#{dataVar.email}"
-				filterBy="#{dataVar.email}" >
+				filterBy="#{dataVar.email}"  filterMatchMode="contains">
 				<p:outputLabel value="#{dataVar.email}" />
 			</p:column>
 
@@ -243,7 +243,7 @@
 	<h:form id="dialogform" >
 		<p:layout id="layoutFull" onResize="false"
 			style="min-width:770px; min-height:470px; max-width:790px; max-height:490px; ">
-<p:growl id="global" life="6500" />
+
 
 
 <!-- _________________________________________________________________________________________________________________________________ -->
@@ -251,6 +251,8 @@
 
 <p:layoutUnit id="West" position="west" size="400" minSize="210"
 	maxSize="500">
+	
+	<p:messages id="global" autoUpdate="true" closable="true" />
 
 	<h:panelGrid columns="2" id="dialogpanel">
 
