@@ -135,7 +135,7 @@
 				<!-- Editar -->
 				<p:commandButton title="Editar" icon="ui-icon-pencil"
 					actionListener="#{empresaBean.getinstancia}"
-					update=":dialogform:" 
+					update=":dialogform:global:" 
 					oncomplete="PF('dialogo').show();">
 					<f:attribute name="meuSelect" value="#{dataVar}" />
 				</p:commandButton>
@@ -232,7 +232,7 @@
 
 	<p:layoutUnit id="West" position="west" size="470" minSize="210" maxSize="570">
 	
-		<p:messages id="global" autoUpdate="true" closable="true" />
+		<p:growl id="global" autoUpdate="true" closable="true"  />
 
 		<h:panelGrid columns="2" id="dialogpanel">
 
