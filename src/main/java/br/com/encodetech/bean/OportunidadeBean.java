@@ -7,7 +7,6 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
 
 import org.omnifaces.util.Messages;
@@ -33,58 +32,47 @@ public class OportunidadeBean implements Serializable {
 	private Oportunidade oportunidade;
 	private OportunidadeDAO dao;
 	private List<Oportunidade> listaOportunidade;
-	
-	
-	
+	private String filtrarCargo = "";
+
 	private Estado estado;
 	private EstadoDAO estadoDAO;
 	private List<Estado> listaEstado;
-	private String auxEstado=" Selecione um Estado";
-	
+	private String auxEstado = " Selecione um Estado";
+	private Long filtrarEstado;
+
 	
 	private CidadeDAO cidadeDAO;
-	private String auxCidade="Selecione uma Cidade";
+	private String auxCidade = "Selecione uma Cidade";
 	private List<Cidade> listaCidade;
-	
-	
-	
-	
-	
+	private Long comboCidade;
+
 	private EmpresaDAO empresaDAO;
 	private List<Empresa> listaEmpresas;
-	
 
 	private Boolean botaoEditar = false;
 	private Boolean botaoSalvar = false;
+
 	
 	
-	private String filtrarCargo="";
-	private String filtrarEstado="";	
-	private String filtrarCidade="";	
+	
 
 	// Salvar usuário
 	// -------------------------------------------------------------------------------------
 	public void salvar() {
 
 		try {
-		
 
-	
 			System.out.println("Método salvar");
-			
-			
+
 			oportunidade.setDataCadastro(new Date());
 			oportunidade.setEstado(estado);
 			dao.salvar(oportunidade);
-
 			Messages.addGlobalInfo("Salvo com sucesso.");
-			
-			
 
 		} catch (Exception e) {
 			Messages.addGlobalError("Não foi possível salvar o usuário, tente novamente mais tarde ... ");
 		} finally {
-			System.out.println("finally: "+oportunidade.toString());
+			System.out.println("finally: " + oportunidade.toString());
 
 			fechar();
 
@@ -93,16 +81,14 @@ public class OportunidadeBean implements Serializable {
 
 	// Novo
 	// -------------------------------------------------------------------------------------------
+
 	public void novo() {
 
-
 		System.out.println("Método novo");
-		
+
 		botaoEditar = false;
 		botaoSalvar = true;
 		listarInfos();
-
-
 		oportunidade = new Oportunidade();
 		dao = new OportunidadeDAO();
 
@@ -115,58 +101,31 @@ public class OportunidadeBean implements Serializable {
 		RequestContext.getCurrentInstance().reset("dialogform");
 		oportunidade = new Oportunidade();
 		dao = new OportunidadeDAO();
+		auxCidade = "Selecione uma Cidade";
+        auxEstado = " Selecione um Estado";
 	}
 
-	// Carregar
-	// -------------------------------------------------------------------------------------------
-		
-	public void carregar() {
-
-		try {
-			oportunidade = new Oportunidade();
-			dao = new OportunidadeDAO();
-			listaOportunidade = dao.buscarVagasCargo(filtrarCargo);
-			System.out.println("Filtro ="+filtrarCargo);
-			Messages.addGlobalInfo("Lista atualizada com sucesso ");
-
-		} catch (Exception e) {
-			Messages.addGlobalError("Falha ao tentar  atualizadar a lista  ");
-		} finally {
-			fechar();
-		}
-
-	}
 	
 	// CarregarFiltrando
-		// -------------------------------------------------------------------------------------------
-			
-		public void carregarFiltrando() {
-			
-			System.out.println("\nCargo: "+filtrarCargo);
+	// -------------------------------------------------------------------------------------------
 
-			try {
-				dao = new OportunidadeDAO();
-							
-				listaOportunidade = dao.buscarVagasCargo(filtrarCargo);
+	public void carregarFiltrando() {
 
-				Messages.addGlobalInfo("Lista atualizada com sucesso ");
-				
-				for (Oportunidade oportunidadeList : listaOportunidade) {
-					System.out.println("Oportunidade: "+oportunidadeList.getCargo());
-				}
-				
+		try {
+			dao = new OportunidadeDAO();
+			
+			
+			listaOportunidade = dao.buscarVagas(filtrarCargo, filtrarEstado,comboCidade);
+			Messages.addGlobalInfo("Lista atualizada com sucesso ");
 
 			} catch (Exception e) {
-				Messages.addGlobalError("Falha ao tentar  atualizadar a lista  ");
-			} finally {
-				
-			}
+			Messages.addGlobalError("Falha ao tentar  atualizadar a lista  ");
+		} finally {
 
 		}
-		
-		public void testar(){
-			System.out.println("Método teste" );
-		}
+
+	}
+
 
 	// Excluir usuário
 	// -------------------------------------------------------------------------------------------
@@ -194,7 +153,6 @@ public class OportunidadeBean implements Serializable {
 
 		try {
 
-			
 			dao = new OportunidadeDAO();
 			oportunidade.setEstado(estado);
 			dao.merge(oportunidade);
@@ -209,8 +167,6 @@ public class OportunidadeBean implements Serializable {
 
 	}
 
-	
-
 	// Instanciar
 	// -------------------------------------------------------------------------------------------
 
@@ -221,8 +177,12 @@ public class OportunidadeBean implements Serializable {
 			botaoSalvar = false;
 			botaoEditar = true;
 			listarInfos();
+			
 			oportunidade = (Oportunidade) evento.getComponent().getAttributes().get("meuSelect");
-			Messages.addGlobalInfo("Vaga de ID:  "+ oportunidade.getCodigo());
+			auxEstado = oportunidade.getEstado().getNome();
+			auxCidade = oportunidade.getCidade().getNome();
+			
+			Messages.addGlobalInfo("Vaga de ID:  " + oportunidade.getCodigo());
 
 		} catch (Exception e) {
 			Messages.addGlobalError("Erro ao Editar: ");
@@ -233,28 +193,41 @@ public class OportunidadeBean implements Serializable {
 
 	// Lista as empresas
 	// ------------------------------------------------------------------------------------------------------------------------------------------------------
-	
-		
+
 	public void listarInfos() {
 
 		try {
 
-	empresaDAO = new EmpresaDAO();
-	listaEmpresas = empresaDAO.listar();
-	
-	
-	
-	estadoDAO = new EstadoDAO();
-	listaEstado = estadoDAO.listar("nome");
-	listaCidade = cidadeDAO.listar("nome");
-	
-	
-	for (Empresa empresa : listaEmpresas) {
-		
-		System.out.println(empresa.getNomeEmpresa());
-		
+			empresaDAO = new EmpresaDAO();
+			listaEmpresas = empresaDAO.listar();
+
+			estadoDAO = new EstadoDAO();
+			listaEstado = estadoDAO.listar("nome");
+			//listaCidade = cidadeDAO.listar("nome");
+
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		} finally {
+
+		}
+
 	}
-		
+
+	
+
+	// Listar Estado
+	// ------------------------------------------------------------------------------------------------------------------------------------------------------
+
+	@PostConstruct
+	public void BuscarEstados() {
+
+		try {
+
+			System.out.println("Listando estados...");
+
+			estadoDAO = new EstadoDAO();
+			listaEstado = estadoDAO.listar("nome");
 
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -263,31 +236,18 @@ public class OportunidadeBean implements Serializable {
 		}
 
 	}
-	
-	
-	
-	// Listar Estado e Cidade
+
+	// Listar de Cidade
 	// ------------------------------------------------------------------------------------------------------------------------------------------------------
 
-	@PostConstruct
-	public void listarLocal() {
+	public void BuscarCidade() {
 
 		try {
-			
-			System.out.println("Listando...");
 
-			empresaDAO = new EmpresaDAO();
-			listaEmpresas = empresaDAO.listar();
+			System.out.println("Listando Cidade...");
 
-			estadoDAO = new EstadoDAO();
-			listaEstado = estadoDAO.listar("nome");
-			listaCidade = cidadeDAO.listar("nome");
-
-			for (Empresa empresa : listaEmpresas) {
-
-				System.out.println(empresa.getNomeEmpresa());
-
-			}
+			CidadeDAO cidadeDAO = new CidadeDAO();
+			listaCidade = cidadeDAO.buscarPorEstado(filtrarEstado);
 
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -299,19 +259,15 @@ public class OportunidadeBean implements Serializable {
 
 	// Filtrar Cidade
 	// ------------------------------------------------------------------------------------------------------------------------------------------------------
-	
+
 	public void filtrarCidade() {
 
 		try {
 
-		
+
 			cidadeDAO = new CidadeDAO();
 			listaCidade = cidadeDAO.buscarPorEstado(estado.getCodigo());
-			
-			
-			auxCidade="Selecione uma Cidade";			
-	
-			
+			auxCidade = "Selecione uma Cidade";
 
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -319,32 +275,16 @@ public class OportunidadeBean implements Serializable {
 
 	}
 
-	//Filtrar Cidade  2, precisei replicar o método, devido a um erro na linha quando chamada dentro do getinstance, por conta do param (actionevent)
+	// Filtrar Cidade 2, precisei replicar o método, devido a um erro na linha
+	// quando chamada dentro do getinstance, por conta do param (actionevent)
 	// ------------------------------------------------------------------------------------------------------------------------------------------------------
 
-	public void filtrarCidadeTwo() {
-
-		try {
 	
-			cidadeDAO = new CidadeDAO();
-			listaCidade = cidadeDAO.buscarPorEstado(estado.getCodigo());		
-			
-
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-
-	}
-
-	// ------------------------------------------------------------------------------------------------------------------------------------------------------
-
-
+	
 	
 	public Boolean getBotaoEditar() {
 		return botaoEditar;
 	}
-
-
 
 	public Oportunidade getOportunidade() {
 		return oportunidade;
@@ -430,24 +370,20 @@ public class OportunidadeBean implements Serializable {
 		this.filtrarCargo = filtrarCargo;
 	}
 
-	public String getFiltrarEstado() {
+	public Long getComboCidade() {
+		return comboCidade;
+	}
+
+	public void setComboCidade(Long comboCidade) {
+		this.comboCidade = comboCidade;
+	}
+
+	public Long getFiltrarEstado() {
 		return filtrarEstado;
 	}
 
-	public void setFiltrarEstado(String filtrarEstado) {
+	public void setFiltrarEstado(Long filtrarEstado) {
 		this.filtrarEstado = filtrarEstado;
 	}
-
-	public String getFiltrarCidade() {
-		return filtrarCidade;
-	}
-
-	public void setFiltrarCidade(String filtrarCidade) {
-		this.filtrarCidade = filtrarCidade;
-	}
-
-
-	
-	
 
 }

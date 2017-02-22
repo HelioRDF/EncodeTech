@@ -85,67 +85,85 @@
  	<!-- Layout east (Right) -->
     <p:layoutUnit position="east" size="280" header="Filtrar"  resizable="true" closable="true" collapsible="true" effect="drop">
 			<h:form id="formFiltro">
-			
-			
+
+
 				<!-- Campo cargo -->
-				<p:inputText placeholder="Nome do Cargo" 
+				<p:inputText placeholder="Nome do Cargo"
 					value="#{oportunidadeBean.filtrarCargo}"
 					style="  margin: 25px 10px 5px 5px; vertical-align: left;	width:90%;">
-					
+
 				</p:inputText>
-				
-				
+
+
 				<!-- Atualizar table -->
 				<p:commandButton value="Buscar Oportunidades" icon="ui-icon-search"
-					iconPos="left" action="#{oportunidadeBean.carregarFiltrando}" update=":form:"
+					iconPos="left" action="#{oportunidadeBean.carregarFiltrando}"
+					update=":form: :formFiltro:"
 					style="  word-spacing:8px; text-align:left; height:33px; margin: 5px 10px 0px 5px; width:95%; " />
 
 
-			
-	<p:separator style=" margin:15px auto 15px auto; height:10px;background-color:#bdc1d9"> </p:separator>
-	
-			<p:panelMenu>
+
+				<p:separator
+					style=" margin:15px auto 15px auto; height:10px;background-color:#bdc1d9">
+				</p:separator>
 				
-				<p:submenu label="Estado">
+
+				<p:panelMenu>
+
+
+
+					<p:submenu label="Localidade">
+					
+					
+
 						<p:menuitem>
-							<p:selectOneMenu filter="true" id="estadoMenu"
-								value="#{oportunidadeBean.filtrarEstado}"
-								converter="omnifaces.SelectItemsConverter" required="true"
-								requiredMessage="Para melhorar sua busca, Selecione um  Estado">
+							<p:selectOneMenu filter="true" id="EstadoFiltro"
+								value="#{oportunidadeBean.filtrarEstado}" required="true"
+								requiredMessage="Selecione um Estado!"
+								converter="omnifaces.SelectItemsConverter">
 
 
-								<f:selectItem itemDisabled="false" noSelectionOption="false"
-									itemLabel="#{oportunidadeBean.auxEstado}"
-									itemValue="#{oportunidadeBean.oportunidade.cidade.estado}" />
-
+								<f:selectItem itemLabel="#{oportunidadeBean.auxEstado}"
+									noSelectionOption="false" itemDisabled="false"></f:selectItem>
 
 								<f:selectItems value="#{oportunidadeBean.listaEstado}"
-									var="estado" itemValue="#{estado}"
-									itemLabel="#{estado.nome} - #{estado.sigla}" />
-								<p:ajax listener="#{oportunidadeBean.filtrarCidade}"
-									update=":formFiltro:cidadeMenu:"></p:ajax>
+									var="estado" itemValue="#{estado.codigo}"
+									itemLabel="#{estado.nome} - #{estado.sigla}">
+
+								</f:selectItems>
+
+								<p:ajax listener="#{oportunidadeBean.BuscarCidade}"
+									update=":formFiltro:cidadeFiltro:"></p:ajax>
+
 							</p:selectOneMenu>
 
+
+
+
+
+							<p:outputLabel title="xxx"  value="#{oportunidadeBean.filtrarEstado}" id="cidadeMenu"></p:outputLabel>
+
+						
+						<p:selectOneMenu filter="true" id="cidadeFiltro"
+								value="#{oportunidadeBean.comboCidade}" required="true"
+								requiredMessage="Selecione uma Cidade!"
+								converter="omnifaces.SelectItemsConverter">
+								
+									<f:selectItem itemLabel="#{oportunidadeBean.auxCidade}"
+									noSelectionOption="false" itemDisabled="false"></f:selectItem>
+									
+									<f:selectItems value="#{oportunidadeBean.listaCidade}" 
+									var="cidade" itemValue="#{cidade.codigo}"
+									itemLabel="#{cidade.nome}" >
+									
+									</f:selectItems>
+						
+						
+						</p:selectOneMenu>
+						
+						
 						</p:menuitem>
-					</p:submenu>
-					
-					
-					<p:submenu label="Cidade">
-						<p:menuitem >
-							<p:selectOneMenu id="cidadeMenu" filter="true" required="true"
-								value="#{oportunidadeBean.filtrarCidade}"
-								converter="omnifaces.SelectItemsConverter"
-								requiredMessage="Para melhorar sua busca, Selecione uma  Cidade">
 
-								<f:selectItem itemDisabled="false" noSelectionOption="false"
-									itemLabel="#{oportunidadeBean.auxCidade}"
-									itemValue="#{oportunidadeBean.oportunidade.cidade}" />
-
-
-								<f:selectItems value="#{oportunidadeBean.listaCidade}"
-									var="cidade" itemValue="#{cidade}" itemLabel="#{cidade.nome}" />
-							</p:selectOneMenu>
-						</p:menuitem>
 					</p:submenu>
 
 					<p:submenu label="Salário">
@@ -162,7 +180,7 @@
 
 
 				</p:panelMenu>
-    
+
 
 			</h:form>
 		</p:layoutUnit>
@@ -189,7 +207,7 @@
 				<p:panelGrid>
 
 					<!-- Animação de loading -->
-					<p:dialog widgetVar="statusDialog" modal="true" draggable="false"
+					<p:dialog widgetVar="statusDialog"  modal="true" draggable="false"
 						closable="false" resizable="false" showHeader="false">
 						<p:graphicImage value="/images/loading6.gif" />
 					</p:dialog>
@@ -200,7 +218,7 @@
 						style="float:left; margin-right:5px; height: 33px; width:34px " />
 					<p:columnToggler datasource="dataTable" trigger="toggler" />
 
-					<p:ajaxStatus onstart="PF('statusDialog').show()"
+					<p:ajaxStatus onstart="PF('statusDialog').show()" 
 						onsuccess="PF('statusDialog').hide()" />
 
 
@@ -390,7 +408,7 @@
 				<p:layoutUnit id="West" position="west" size="400" minSize="210"
 					maxSize="500">
 					
-					<p:messages id="msgDialog"></p:messages>
+					<p:growl id="msgDialog"></p:growl>
 
 					<h:panelGrid columns="2" id="dialogpanel">
 

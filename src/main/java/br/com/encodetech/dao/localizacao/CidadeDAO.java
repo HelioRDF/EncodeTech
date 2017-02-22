@@ -34,5 +34,23 @@ public class CidadeDAO extends GenericDAO<Cidade> {
 		
 		
 	}
+	
+	public String buscarCidadePorCodigo(Long codigo){
+		
+		
+		Session sessao = HibernateUtil.getFabricadeSessoes().openSession();
+		
+		Criteria consulta = sessao.createCriteria(Cidade.class);
+		consulta.add(Restrictions.eq("codigo", codigo));
+		
+		
+		Cidade obj = (Cidade) consulta.uniqueResult();
+		String resultado = obj.getNome();
+		System.out.println("Retornando Cidade: "+resultado);
+		
+		return resultado;
+		
+		
+	}
 
 }

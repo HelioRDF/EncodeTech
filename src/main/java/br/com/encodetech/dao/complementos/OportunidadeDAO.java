@@ -1,16 +1,9 @@
 package br.com.encodetech.dao.complementos;
 
-import java.math.BigDecimal;
 import java.util.List;
-
-import javax.persistence.criteria.Order;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
-import org.hibernate.criterion.MatchMode;
-import org.hibernate.criterion.Projection;
-import org.hibernate.criterion.ProjectionList;
-import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
 import br.com.encodetech.domain.complementos.Oportunidade;
@@ -177,16 +170,18 @@ import br.com.encodetech.util.HibernateUtil;
 public class OportunidadeDAO extends GenericDAO<Oportunidade>{
 	
 	
-	public List <Oportunidade> buscarVagas(String cargo, String estado, String cidade){
+	public List <Oportunidade> buscarVagas(String cargo, Long estado, Long cidade){
 		
 		
 		Session sessao = HibernateUtil.getFabricadeSessoes().openSession();
 		
 		Criteria consulta = sessao.createCriteria(Oportunidade.class);
 		consulta.add(Restrictions.ilike("cargo", "%"+cargo+"%"));
-		consulta.add(Restrictions.ilike("cargo", "%"+estado+"%"));
-		consulta.add(Restrictions.ilike("cargo", "%"+cidade+"%"));
+		consulta.add(Restrictions.eq("estado.codigo", estado));
+		consulta.add(Restrictions.eq("cidade.codigo", cidade));
 		
+		
+		@SuppressWarnings("unchecked")
 		List <Oportunidade> resultado = consulta.list();
 		
 		return resultado;
@@ -203,6 +198,7 @@ public class OportunidadeDAO extends GenericDAO<Oportunidade>{
 		Criteria consulta = sessao.createCriteria(Oportunidade.class);
 		consulta.add(Restrictions.ilike("cargo", "%"+cargo+"%"));
 		
+		@SuppressWarnings("unchecked")
 		List <Oportunidade> resultado = consulta.list();
 		
 		return resultado;
@@ -211,4 +207,5 @@ public class OportunidadeDAO extends GenericDAO<Oportunidade>{
 	}
 	
 
+			
 }

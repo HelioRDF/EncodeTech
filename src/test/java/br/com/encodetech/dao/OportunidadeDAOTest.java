@@ -18,15 +18,16 @@ public class OportunidadeDAOTest {
 		
 		
 
-	Oportunidade oportunidade = new Oportunidade();
+	//Oportunidade oportunidade = new Oportunidade();
 	List <Oportunidade> lista;
 	OportunidadeDAO dao = new OportunidadeDAO();
 		
-	 //lista =dao.buscarVagasCargo();
+	 lista =dao.buscarVagasEstado("sp");
 	 
-//	 for (Oportunidade oportunidade2 : lista) {
-//		System.out.println("Array:"+oportunidade2);
-//	}
+	 for (Oportunidade oportunidade2 : lista) {
+	System.out.println("Array:"+oportunidade2);
+	System.out.println("lista tem:"+lista.size());
+	}
 		
 	}
 	

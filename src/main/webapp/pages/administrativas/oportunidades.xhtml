@@ -7,347 +7,393 @@
 
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>Oportunidades</title>
+	<title>Oportunidades Teste</title>
 	<h:outputStylesheet library="css" name="estilos.css"></h:outputStylesheet>
 </h:head>
+
 
 <h:body>
 
 
 
-<p:layout fullPage="true">
- 
- 
-  
-<!-- Cabeçalho -->
-<!-- ______________________________________________________________________________ -->
-    <p:layoutUnit position="north" size="auto"  resizable="true" visible="true">
-    <h:form>
-       	<h1>@ Encodetech</h1>
-	 	<p:menubar styleClass="menu"  >
-	        <p:submenu label="Menu Principal" icon="ui-icon-arrow-4-diag">
-		    	<p:menuitem value="Usuários" outcome="/pages/administrativas/usuario.xhtml" icon="fa-bars" update="messages"/>
-		        <p:menuitem value="Empresas" outcome="/pages/administrativas/empresa.xhtml" icon="fa-bars" update="messages"/>
-	        <p:menuitem value="Oportunidades" outcome="/pages/administrativas/oportunidades.xhtml" icon="fa-bars" update="messages"/>	         
-	        </p:submenu>
-        
-            <p:submenu label="Localidade" icon="ui-icon-star">
-	    	     <p:menuitem value="Estados" outcome="/pages/administrativas/estado.xhtml"  icon="fa-bars" update="messages"/>
-	        	 <p:menuitem value="Cidades" outcome="/pages/administrativas/cidade.xhtml" icon="fa-bars" update="messages"/>
-	        </p:submenu>
-	 
-	        <p:submenu label="Ajuda" icon="ui-icon-help">
-	            <p:menuitem value="Versão" url="#" />
-	            <p:menuitem value="Sobre" url="#" />           
-	        </p:submenu>
-	 	       
-	        <f:facet name="options">
-	            <p:inputText style="margin-right:10px" placeholder="Search"/>
-	            <p:commandButton type="button" value="Logout" icon="ui-icon-extlink" />
-	        </f:facet>
-    </p:menubar>
-    
-    </h:form>
-		
-    </p:layoutUnit>
- 
- 
-  
-<!-- Esquerda -->
-<!-- ______________________________________________________________________________ -->
-    <p:layoutUnit  position="east" size="280"  minSize="280" maxSize="450"  header="Filtrar Busca" resizable="true" closable="false" collapsible="true">
-    <h:form id="formWest">
 
 
 
 
 
-<!-- Campo cargo -->
- <p:inputText  placeholder="Nome do Cargo"  value="#{oportunidadeBean.filtrarCargo}"
- style="  margin: 25px 10px 5px 5px; vertical-align: left;	width:90%;"> 
- </p:inputText>
- 
- 
- 
-	<!-- Atualizar table -->
-	<p:commandButton value="Buscar Oportunidades" icon="ui-icon-search" iconPos="left" 
-		action="#{oportunidadeBean.carregar}" 
-		style="  word-spacing:8px; text-align:left; height:33px; margin: 5px 10px 0px 5px; width:95%; "
-		update=":form:dataTable :form:msgGrowl :formWest"   />
+	<!-- _________________________________________________________________________________________________________________________________ -->
+	<!-- Layout -->
+	<p:layout fullPage="true">
 
-
-
-				<p:separator style=" margin:15px auto 15px auto; height:10px;background-color:#1c5b8c"></p:separator>
-    <p:panelMenu >
-    
-    <p:submenu label="Estado" >
-    <p:menuitem >
-    
-    
-      <p:selectOneMenu  filter="true"  id="estadoMenu" 
-            value="#{oportunidadeBean.estado}"
-            converter="omnifaces.SelectItemsConverter" required="true"
-            requiredMessage="Para melhorar sua busca, Selecione um  Estado"    >
-            
-        
-                <f:selectItem   itemDisabled="false"  noSelectionOption="false" 
-                itemLabel="#{oportunidadeBean.auxEstado}" 
-                itemValue="#{oportunidadeBean.oportunidade.cidade.estado}" />
-            
-            
-            <f:selectItems  value="#{oportunidadeBean.listaEstado}" var="estado"
-                itemValue="#{estado}"
-                itemLabel="#{estado.nome} - #{estado.sigla}" />
-                <p:ajax listener="#{oportunidadeBean.filtrarCidade}" update=":formWest:cidadeMenu"></p:ajax>
-        </p:selectOneMenu>  
-    
-    
-    </p:menuitem>
-    </p:submenu>
-    
-    <p:submenu label="Cidade">
-    <p:menuitem  >
-    
-    <p:selectOneMenu    id="cidadeMenu" filter="true" required="true"
-            value="#{oportunidadeBean.oportunidade.cidade}"
-            converter="omnifaces.SelectItemsConverter"
-             requiredMessage="Para melhorar sua busca, Selecione uma  Cidade"    >
-            
-                <f:selectItem itemDisabled="false"  noSelectionOption="false" 
-                itemLabel="#{oportunidadeBean.auxCidade}" 
-                itemValue="#{oportunidadeBean.oportunidade.cidade}"  />
-            
-
-            <f:selectItems value="#{oportunidadeBean.listaCidade}" var="cidade"
-                itemValue="#{cidade}" itemLabel="#{cidade.nome}" />
-        </p:selectOneMenu>
-    
-    </p:menuitem>
-    </p:submenu>
-    
-    <p:submenu label="Salário">
-    <p:menuitem value="item"/>
-    </p:submenu>
-    
-       <p:submenu label="Nível">
-    <p:menuitem value="item"/>
-    </p:submenu>
-    
-           <p:submenu label="Tipo">
-    <p:menuitem value="item"/>
-    </p:submenu>
-    
-    
-    </p:panelMenu>
-    
-        </h:form>
-    </p:layoutUnit>
-    
-    
- 
-<!-- Centro -->
-<!-- ______________________________________________________________________________ -->
-    <p:layoutUnit position="center" >
-        <h:form id="form">
-		<p:growl id="msgGrowl" life="10000" />
 
 		<!-- _________________________________________________________________________________________________________________________________ -->
-		<!-- Informações de cabeçalho da tabela -->
-
-		<p:dataTable id="dataTable" rowsPerPageTemplate="7,15,30,50,100"
-			emptyMessage="Nenhum Registro encontrado" rows="7" paginator="true"
-			var="dataVar" value="#{oportunidadeBean.listaOportunidade}" 
-			style=" text-align:center;" >
-
-			<f:facet name="header">
-
-				<p:panelGrid>
-
-					<!-- Animação de loading -->
-					<p:dialog widgetVar="statusDialog" modal="true" draggable="false"
-						closable="false" resizable="false" showHeader="false">
-						<p:graphicImage value="/images/loading6.gif" />
-					</p:dialog>
-
-					<!-- Personalizar table -->
-					<p:commandButton title="Filtrar Colunas" id="toggler" type="button"
-						value="" icon="ui-icon-calculator"
-						style="float:left; margin-right:5px; height: 33px; width:34px " />
-					<p:columnToggler datasource="dataTable" trigger="toggler" />
-
-					<p:ajaxStatus onstart="PF('statusDialog').show()"
-						onsuccess="PF('statusDialog').hide()" />
+		<!-- Layout TOP (North) -->
+		<p:layoutUnit position="north" size="auto" resizable="true"
+			closable="true" collapsible="true" visible="true">
 
 
-<!-- 					<p:commandButton value="Atualizar" icon="ui-icon-refresh" -->
-<!-- 						action="#{oportunidadeBean.carregar()}" -->
-<!-- 						style="float:left; height:33px;" -->
-<!-- 						update=":form:dataTable :form:msgGrowl" /> -->
+			<!-- Rodapé da Página -->
+			<h:form>
+				<h1>@ Encodetech</h1>
 
-					<!-- Adicionar  -->
-					<p:commandButton icon="ui-icon-plus " value="Adicionar "
-						style="margin-right:6%; float:left; height:33px;"
-						oncomplete="PF('dialogo').show();"
-						action="#{oportunidadeBean.novo()}" update=":dialogform:" />
-						
-						<!-- Header -->
-					<h:outputLabel styleClass="nameheader" value="Oportunidades"></h:outputLabel>
+				<p:menubar styleClass="menu">
+					<p:submenu label="Menu Principal" icon="ui-icon-arrow-4-diag">
+						<p:menuitem value="Usuários"
+							outcome="/pages/administrativas/usuario.xhtml" icon="fa-bars"
+							update="messages" />
+						<p:menuitem value="Empresas"
+							outcome="/pages/administrativas/empresa.xhtml" icon="fa-bars"
+							update="messages" />
+						<p:menuitem value="Oportunidades"
+							outcome="/pages/administrativas/oportunidades.xhtml"
+							icon="fa-bars" update="messages" />
+					</p:submenu>
 
-				</p:panelGrid>
-			</f:facet>
+					<p:submenu label="Localidade" icon="ui-icon-star">
+						<p:menuitem value="Estados"
+							outcome="/pages/administrativas/estado.xhtml" icon="fa-bars"
+							update="messages" />
+						<p:menuitem value="Cidades"
+							outcome="/pages/administrativas/cidade.xhtml" icon="fa-bars"
+							update="messages" />
+					</p:submenu>
 
+					<p:submenu label="Ajuda" icon="ui-icon-help">
+						<p:menuitem value="Versão" url="#" />
+						<p:menuitem value="Sobre" url="#" />
+					</p:submenu>
 
-			<f:facet name="footer">
-				<!--Vazio...-->
-			</f:facet>
+					<f:facet name="options">
+						<p:inputText style="margin-right:10px" placeholder="Buscar" />
+						<p:commandButton type="button" value="Logout"
+							icon="ui-icon-extlink" />
+					</f:facet>
+				</p:menubar>
 
-			<!-- _________________________________________________________________________________________________________________________________ -->
-			<!-- Informações das Colunas -->
+			</h:form>
 
-			<p:column headerText="Exp" width="4%">
-				<!-- Expandir infos -->
-				<p:rowToggler />
-			</p:column>
-
-
-
-			<p:column headerText="ID" width="11%" sortBy="#{dataVar.codigo}"
-				filterBy="#{dataVar.codigo}">
-				<p:outputLabel value="#{dataVar.codigo}" />
-			</p:column>
-
-
-
-			<p:column  filterBy="#{dataVar.cargo}" headerText="Cargo" 
-				 filterMatchMode="contains" sortBy="#{dataVar.cargo}">
-		
-				 
-				<p:outputLabel value="#{dataVar.cargo}" />
-			</p:column>
-
-	
-
-			<p:column headerText="Salario" width="10%" 
-				sortBy="#{dataVar.salario}" filterBy="#{dataVar.salario}">
-				<p:outputLabel value="#{dataVar.salario}">
-				<f:convertNumber locale="pt_BR" minFractionDigits="2"></f:convertNumber>
-				
-				 </p:outputLabel>
-			</p:column>
-			
+			<!--Fim do Rodapé da Página -->
 
 
-			<p:column headerText="Tipo" sortBy="#{dataVar.tipo}"
-				filterBy="#{dataVar.tipo}">
-				<p:outputLabel value="#{dataVar.tipo}" />
-			</p:column>
-			
-			<p:column headerText="Nível" sortBy="#{dataVar.nivel}"
-				filterBy="#{dataVar.nivel}">
-				<p:outputLabel value="#{dataVar.nivel}" />
-			</p:column>
+		</p:layoutUnit>
+		<!-- Fim Layout TOP (North) -->
 
 
-			
-			
+		<!-- _________________________________________________________________________________________________________________________________ -->
+		<!-- Layout Bottom (South) -->
+		<p:layoutUnit position="south" size="100" header="Bottom"
+			resizable="true" visible="false" closable="true" collapsible="true">
+			<h:outputText value="South unit content." />
+		</p:layoutUnit>
+		<!--Fim Layout Bottom (South) -->
 
-				<p:column headerText="Estado" sortBy="#{dataVar.cidade.estado.nome}"
-				filterBy="#{dataVar.cidade.estado.nome}"  filterMatchMode="contains">
-				<p:outputLabel value="#{dataVar.cidade.estado.nome} (#{dataVar.cidade.estado.sigla})"/>
-			</p:column>
-				
-					<p:column headerText="Cidade" sortBy="#{dataVar.cidade.nome}"
-				filterBy="#{dataVar.cidade.nome}"  filterMatchMode="contains">
-				<p:outputLabel value="#{dataVar.cidade.nome}"/>
-			</p:column>
-			
-			
+		<!-- _________________________________________________________________________________________________________________________________ -->
+		<!-- Layout West (Left) -->
+		<p:layoutUnit position="west" size="200" header="Left"
+			resizable="true" closable="true" collapsible="true" visible="false">
+			<h:outputText value="West unit content." />
+		</p:layoutUnit>
+		<!-- Fim Layout West (Left) -->
 
-
-			<p:column headerText="Opções" width="18%">
-
-
-				<!-- Editar -->
-				<p:commandButton title="Editar" icon="ui-icon-pencil"
-					actionListener="#{oportunidadeBean.getinstancia}"
-					update=":dialogform: " oncomplete="PF('dialogo').show();">
-					<f:attribute name="meuSelect" value="#{dataVar}" />
-				</p:commandButton>
+		<!-- _________________________________________________________________________________________________________________________________ -->
+		<!-- Layout east (Right) -->
+		<p:layoutUnit position="east" size="280" header="Filtrar"
+			resizable="true" closable="true" collapsible="true" effect="drop">
+			<h:form id="formFiltro">
 
 
-			
+				<!-- Campo cargo -->
+				<p:inputText placeholder="Nome do Cargo"
+					value="#{oportunidadeBean.filtrarCargo}"
+					style="  margin: 25px 10px 5px 5px; vertical-align: left;	width:90%;">
 
-				<!-- Excluir -->
-				<p:commandButton title="Excluir" icon="ui-icon-trash"
-					actionListener="#{oportunidadeBean.excluir}"
-					update=":form:msgGrowl">
-					<p:confirm header="Confirmação" message="Deseja excluir a vaga ?"
-						icon="ui-icon-alert" />
-					<f:attribute name="meuSelect" value="#{dataVar}" />
-				</p:commandButton>
+				</p:inputText>
 
-				<!-- Dialogo Global -->
-				<p:confirmDialog global="true">
-					<p:commandButton value="sim" type="button"
-						styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
-					<p:commandButton value="não" type="button"
-						styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
-				</p:confirmDialog>
 
-			</p:column>
+				<!-- Atualizar table -->
+				<p:commandButton value="Buscar Oportunidades" icon="ui-icon-search"
+					iconPos="left" action="#{oportunidadeBean.carregarFiltrando}"
+					update=":form: :formFiltro:"
+					style="  word-spacing:8px; text-align:left; height:33px; margin: 5px 10px 0px 5px; width:95%; " />
 
 
 
-			<!-- _________________________________________________________________________________________________________________________________ -->
-			<!-- Informações após expandir linha -->
-
-			<p:rowExpansion styleClass=" width=37%">
-
-				<p:panelGrid columns="1" columnClasses="label,value" style="text-align:left;">
-					
-					
-					<h:outputText value="Empresa: #{dataVar.empresa.nomeEmpresa}" />
-					
-					<h:outputText value="Setor: #{dataVar.setor}" />
-					
-					<h:outputText value="Número de Vagas: #{dataVar.quantidade}" />
-					
-					<h:outputText value="Mostrar Salário: #{dataVar.mostrarSalario}" />
-									
-					<h:outputText value="Horário: #{dataVar.horario}" />
-					
-					
-				
-				
-					<h:inputTextarea cols="100" rows="4" readonly="true" value="Descrição: #{dataVar.descricao}" />
-					<h:inputTextarea  cols="100" rows="4" readonly="true" value="Pré-Requisito: #{dataVar.preRequisitos}" />
-					<h:inputTextarea  cols="100" rows="4" readonly="true" value="Benefícios: #{dataVar.beneficios}" />
-				
-
-
-				</p:panelGrid>
-
-				<!-- <p:separator style="border: 2px solid #999966; border-radius: 100px/9px; background-color:  #6666ff; height:10px;"> </p:separator>  -->
 				<p:separator
-					style=" height:7px;border-radius: 100px/9px; background-color:#ffffff"></p:separator>
-				<p:separator style=" height:10px;background-color:#e6e6ff"></p:separator>
-			</p:rowExpansion>
-
-		</p:dataTable>
-	</h:form>
+					style=" margin:15px auto 15px auto; height:10px;background-color:#bdc1d9">
+				</p:separator>
 
 
-
-	
-    </p:layoutUnit>
- 
+				<p:panelMenu>
 
 
-	
+
+					<p:submenu label="Localidade" expanded="true">
+						<p:menuitem>
+							<p:selectOneMenu style="margin-bottom:10px" filter="true" id="EstadoFiltro"
+								value="#{oportunidadeBean.filtrarEstado}" required="true"
+								requiredMessage="Selecione um Estado!"
+								converter="omnifaces.SelectItemsConverter">
+
+
+								<f:selectItem itemLabel="#{oportunidadeBean.auxEstado}"
+									noSelectionOption="false" itemDisabled="false"></f:selectItem>
+
+								<f:selectItems value="#{oportunidadeBean.listaEstado}"
+									var="estado" itemValue="#{estado.codigo}"
+									itemLabel="#{estado.nome} - #{estado.sigla}">
+
+								</f:selectItems>
+
+								<p:ajax listener="#{oportunidadeBean.BuscarCidade}"
+									update=":formFiltro:cidadeFiltro:"></p:ajax>
+							</p:selectOneMenu>
+
+							<p:selectOneMenu filter="true" id="cidadeFiltro"
+								value="#{oportunidadeBean.comboCidade}" required="true"
+								requiredMessage="Selecione uma Cidade!"
+								converter="omnifaces.SelectItemsConverter">
+
+								<f:selectItem itemLabel="#{oportunidadeBean.auxCidade}"
+									noSelectionOption="false" itemDisabled="false"></f:selectItem>
+
+								<f:selectItems value="#{oportunidadeBean.listaCidade}"
+									var="cidade" itemValue="#{cidade.codigo}"
+									itemLabel="#{cidade.nome}">
+
+								</f:selectItems>
+
+							</p:selectOneMenu>
+
+
+						</p:menuitem>
+
+					</p:submenu>
+
+					<p:submenu label="Salário">
+						<p:menuitem value="item" />
+					</p:submenu>
+
+					<p:submenu label="Nível">
+						<p:menuitem value="item" />
+					</p:submenu>
+
+					<p:submenu label="Tipo">
+						<p:menuitem value="item" />
+					</p:submenu>
+
+
+				</p:panelMenu>
+
+
+			</h:form>
+		</p:layoutUnit>
+		<!-- Fim Layout east (Right) -->
+
+
+
+		<!-- _________________________________________________________________________________________________________________________________ -->
+		<!-- Layout Center -->
+		<p:layoutUnit position="center">
+			<h:form id="form">
+				<p:growl id="msgGrowl" life="10000" />
+
+				<!-- _________________________________________________________________________________________________________________________________ -->
+				<!-- Informações de cabeçalho da tabela -->
+
+				<p:dataTable id="dataTable" rowsPerPageTemplate="7,15,30,50,100"
+					emptyMessage="Nenhum Registro encontrado" rows="7" paginator="true"
+					var="dataVar" value="#{oportunidadeBean.listaOportunidade}"
+					style=" text-align:center;">
+
+					<f:facet name="header">
+
+						<p:panelGrid>
+
+							<!-- Animação de loading -->
+							<p:dialog widgetVar="statusDialog" modal="true" draggable="false"
+								closable="false" resizable="false" showHeader="false">
+								<p:graphicImage value="/images/loading6.gif" />
+							</p:dialog>
+
+							<!-- Personalizar table -->
+							<p:commandButton title="Filtrar Colunas" id="toggler"
+								type="button" value="" icon="ui-icon-calculator"
+								style="float:left; margin-right:5px; height: 33px; width:34px " />
+							<p:columnToggler datasource="dataTable" trigger="toggler" />
+
+							<p:ajaxStatus onstart="PF('statusDialog').show()"
+								onsuccess="PF('statusDialog').hide()" />
+
+
+
+							<!-- Adicionar  -->
+							<p:commandButton icon="ui-icon-plus " value="Adicionar "
+								style="margin-right:6%; float:left; height:33px;"
+								oncomplete="PF('dialogo').show();"
+								action="#{oportunidadeBean.novo()}" update=":dialogform:" />
+
+							<!-- Header -->
+							<h:outputLabel styleClass="nameheader" value="Oportunidades"></h:outputLabel>
+
+						</p:panelGrid>
+					</f:facet>
+
+
+					<f:facet name="footer">
+						<!--Vazio...-->
+					</f:facet>
+
+					<!-- _________________________________________________________________________________________________________________________________ -->
+					<!-- Informações das Colunas -->
+
+					<p:column headerText="Exp" width="4%">
+						<!-- Expandir infos -->
+						<p:rowToggler />
+					</p:column>
+
+
+
+					<p:column headerText="ID" width="11%" sortBy="#{dataVar.codigo}"
+						filterBy="#{dataVar.codigo}">
+						<p:outputLabel value="#{dataVar.codigo}" />
+					</p:column>
+
+
+
+					<p:column filterBy="#{dataVar.cargo}" headerText="Cargo"
+						filterMatchMode="contains" sortBy="#{dataVar.cargo}">
+
+
+						<p:outputLabel value="#{dataVar.cargo}" />
+					</p:column>
+
+
+
+					<p:column headerText="Salario" width="10%"
+						sortBy="#{dataVar.salario}" filterBy="#{dataVar.salario}">
+						<p:outputLabel value="#{dataVar.salario}">
+							<f:convertNumber locale="pt_BR" minFractionDigits="2"></f:convertNumber>
+
+						</p:outputLabel>
+					</p:column>
+
+
+
+					<p:column headerText="Tipo" sortBy="#{dataVar.tipo}"
+						filterBy="#{dataVar.tipo}">
+						<p:outputLabel value="#{dataVar.tipo}" />
+					</p:column>
+
+					<p:column headerText="Nível" sortBy="#{dataVar.nivel}"
+						filterBy="#{dataVar.nivel}">
+						<p:outputLabel value="#{dataVar.nivel}" />
+					</p:column>
+
+
+
+
+
+					<p:column headerText="Estado"
+						sortBy="#{dataVar.cidade.estado.nome}"
+						filterBy="#{dataVar.cidade.estado.nome}"
+						filterMatchMode="contains">
+						<p:outputLabel
+							value="#{dataVar.cidade.estado.nome} (#{dataVar.cidade.estado.sigla})" />
+					</p:column>
+
+					<p:column headerText="Cidade" sortBy="#{dataVar.cidade.nome}"
+						filterBy="#{dataVar.cidade.nome}" filterMatchMode="contains">
+						<p:outputLabel value="#{dataVar.cidade.nome}" />
+					</p:column>
+
+
+
+
+					<p:column headerText="Opções" width="18%">
+
+
+						<!-- Editar -->
+						<p:commandButton title="Editar" icon="ui-icon-pencil"
+							actionListener="#{oportunidadeBean.getinstancia}"
+							update=":dialogform: " oncomplete="PF('dialogo').show();">
+							<f:attribute name="meuSelect" value="#{dataVar}" />
+						</p:commandButton>
+
+
+
+
+						<!-- Excluir -->
+						<p:commandButton title="Excluir" icon="ui-icon-trash"
+							actionListener="#{oportunidadeBean.excluir}"
+							update=":form:msgGrowl">
+							<p:confirm header="Confirmação" message="Deseja excluir a vaga ?"
+								icon="ui-icon-alert" />
+							<f:attribute name="meuSelect" value="#{dataVar}" />
+						</p:commandButton>
+
+						<!-- Dialogo Global -->
+						<p:confirmDialog global="true">
+							<p:commandButton value="sim" type="button"
+								styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+							<p:commandButton value="não" type="button"
+								styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+						</p:confirmDialog>
+
+					</p:column>
+
+
+
+					<!-- _________________________________________________________________________________________________________________________________ -->
+					<!-- Informações após expandir linha -->
+
+					<p:rowExpansion styleClass=" width=37%">
+
+						<p:panelGrid columns="1" columnClasses="label,value"
+							style="text-align:left;">
+
+
+							<h:outputText value="Empresa: #{dataVar.empresa.nomeEmpresa}" />
+
+							<h:outputText value="Setor: #{dataVar.setor}" />
+
+							<h:outputText value="Número de Vagas: #{dataVar.quantidade}" />
+
+							<h:outputText value="Mostrar Salário: #{dataVar.mostrarSalario}" />
+
+							<h:outputText value="Horário: #{dataVar.horario}" />
+
+
+
+
+							<h:inputTextarea cols="100" rows="4" readonly="true"
+								value="Descrição: #{dataVar.descricao}" />
+							<h:inputTextarea cols="100" rows="4" readonly="true"
+								value="Pré-Requisito: #{dataVar.preRequisitos}" />
+							<h:inputTextarea cols="100" rows="4" readonly="true"
+								value="Benefícios: #{dataVar.beneficios}" />
+
+
+
+						</p:panelGrid>
+
+						<!-- <p:separator style="border: 2px solid #999966; border-radius: 100px/9px; background-color:  #6666ff; height:10px;"> </p:separator>  -->
+						<p:separator
+							style=" height:7px;border-radius: 100px/9px; background-color:#ffffff"></p:separator>
+						<p:separator style=" height:10px;background-color:#e6e6ff"></p:separator>
+					</p:rowExpansion>
+
+				</p:dataTable>
+			</h:form>
+
+
+		</p:layoutUnit>
+		<!-- Fim Layout Center -->
+
 	</p:layout>
-	
-	
-	
+	<!-- Fim do Layout -->
+	<!-- _________________________________________________________________________________________________________________________________ -->
+
+
 
 	<!-- _________________________________________________________________________________________________________________________________ -->
 	<!--   Dialog do Adicionar  e editar        -->
@@ -365,37 +411,39 @@
 
 			<p:layout id="layoutFull" onResize="false"
 				style="min-width:900px; min-height:450px; max-width:900px; max-height:500px; ">
-				
-<!-- _________________________________________________________________________________________________________________________________ -->
-<!-- West -->
+
+				<!-- _________________________________________________________________________________________________________________________________ -->
+				<!-- West -->
 
 				<p:layoutUnit id="West" position="west" size="400" minSize="210"
 					maxSize="500">
-					
-					<p:messages id="msgDialog"></p:messages>
+
+					<p:growl id="msgDialog"></p:growl>
 
 					<h:panelGrid columns="2" id="dialogpanel">
 
-				
+
 
 
 
 						<p:outputLabel value="Empresa " />
 						<h:panelGrid columns="2">
-						<p:selectOneMenu filter="true" autoWidth="true"
-							value="#{oportunidadeBean.oportunidade.empresa}"
-							converter="omnifaces.SelectItemsConverter" required="true"
-							requiredMessage="Informe a Empresa corretamente">
-							<f:selectItem itemDisabled="true" noSelectionOption="true"
-								itemLabel="Selecione uma empresa" />
-							<f:selectItems value="#{oportunidadeBean.listaEmpresas}"
-								var="empresa" itemValue="#{empresa}"
-								itemLabel="#{empresa.nomeEmpresa}" />
-						</p:selectOneMenu>
-						<p:selectBooleanButton value="#{oportunidadeBean.oportunidade.mostrarEmpresa}" onLabel="Visível" offLabel="Oculto"></p:selectBooleanButton>
-							</h:panelGrid>
-	
-		
+							<p:selectOneMenu filter="true" autoWidth="true"
+								value="#{oportunidadeBean.oportunidade.empresa}"
+								converter="omnifaces.SelectItemsConverter" required="true"
+								requiredMessage="Informe a Empresa corretamente">
+								<f:selectItem itemDisabled="true" noSelectionOption="true"
+									itemLabel="Selecione uma empresa" />
+								<f:selectItems value="#{oportunidadeBean.listaEmpresas}"
+									var="empresa" itemValue="#{empresa}"
+									itemLabel="#{empresa.nomeEmpresa}" />
+							</p:selectOneMenu>
+							<p:selectBooleanButton
+								value="#{oportunidadeBean.oportunidade.mostrarEmpresa}"
+								onLabel="Visível" offLabel="Oculto"></p:selectBooleanButton>
+						</h:panelGrid>
+
+
 						<p:outputLabel value="Cargo: ">
 						</p:outputLabel>
 						<p:inputText id="cargo" maxlength="25" size="24" label="nome"
@@ -403,8 +451,8 @@
 							requiredMessage="Preencha o campo Cargo corretamente">
 							<f:validateLength minimum="2" />
 						</p:inputText>
-		
-							
+
+
 
 						<p:outputLabel value="Salario:" />
 						<h:panelGrid columns="2">
@@ -412,7 +460,9 @@
 								thousandSeparator="." maxlength="50" size="12"
 								value="#{oportunidadeBean.oportunidade.salario}" required="true"
 								requiredMessage="Preencha o campo Salário corretamente" />
-							<p:selectBooleanButton value="#{oportunidadeBean.oportunidade.mostrarSalario}" onLabel="Visível" offLabel="Oculto"></p:selectBooleanButton>
+							<p:selectBooleanButton
+								value="#{oportunidadeBean.oportunidade.mostrarSalario}"
+								onLabel="Visível" offLabel="Oculto"></p:selectBooleanButton>
 						</h:panelGrid>
 
 
@@ -424,7 +474,7 @@
 							requiredMessage="Preencha o campo Nº de Vagas corretamente">
 							<f:convertNumber pattern="##" minIntegerDigits="3" />
 						</p:inputNumber>
-						
+
 						<p:outputLabel value="Horário: ">
 						</p:outputLabel>
 						<p:inputText id="horario" maxlength="25" size="24" label="horario"
@@ -432,7 +482,7 @@
 							requiredMessage="Preencha o campo horário corretamente">
 							<f:validateLength minimum="2" />
 						</p:inputText>
-						
+
 						<p:outputLabel value="Nível: " />
 						<p:selectOneMenu filter="true"
 							value="#{oportunidadeBean.oportunidade.nivel}" required="true"
@@ -497,55 +547,55 @@
 
 
 					<h:panelGrid columns="2" id="dialogpanel2">
-					
-					
-					
-		<p:outputLabel value="Estado: " />
-		<p:selectOneMenu filter="true"  
-			value="#{oportunidadeBean.estado}"
-			converter="omnifaces.SelectItemsConverter" required="true"
-			requiredMessage="Informe o Estado corretamente"  >
-			
-		
-				<f:selectItem   itemDisabled="false"  noSelectionOption="false" 
-				itemLabel="#{oportunidadeBean.auxEstado}" 
-				itemValue="#{oportunidadeBean.oportunidade.cidade.estado}" />
-			
-			
-			<f:selectItems value="#{oportunidadeBean.listaEstado}" var="estado"
-				itemValue="#{estado}"
-				itemLabel="#{estado.nome} - #{estado.sigla}" />
-				<p:ajax listener="#{oportunidadeBean.filtrarCidade}" update=":dialogform:cidade"></p:ajax>
-		</p:selectOneMenu>	
-		
 
-		<p:outputLabel value="Cidade: " />
-		<p:selectOneMenu id="cidade" filter="true"
-			value="#{oportunidadeBean.oportunidade.cidade}"
-			converter="omnifaces.SelectItemsConverter" required="true"
-			requiredMessage="Informe a Cidade corretamente">
-			
-				<f:selectItem itemDisabled="false"  noSelectionOption="false" 
-				itemLabel="#{oportunidadeBean.auxCidade}" 
-				itemValue="#{oportunidadeBean.oportunidade.cidade}"  />
-			
 
-			<f:selectItems value="#{oportunidadeBean.listaCidade}" var="cidade"
-				itemValue="#{cidade}" itemLabel="#{cidade.nome}" />
-		</p:selectOneMenu>
+
+						<p:outputLabel value="Estado: " />
+						<p:selectOneMenu filter="true" value="#{oportunidadeBean.estado}"
+							converter="omnifaces.SelectItemsConverter" required="true"
+							requiredMessage="Informe o Estado corretamente">
+
+
+							<f:selectItem itemDisabled="false" noSelectionOption="false"
+								itemLabel="#{oportunidadeBean.auxEstado}"
+								itemValue="#{oportunidadeBean.oportunidade.cidade.estado}" />
+
+
+							<f:selectItems value="#{oportunidadeBean.listaEstado}"
+								var="estado" itemValue="#{estado}"
+								itemLabel="#{estado.nome} - #{estado.sigla}" />
+							<p:ajax listener="#{oportunidadeBean.filtrarCidade}"
+								update=":dialogform:cidade"></p:ajax>
+						</p:selectOneMenu>
+
+
+						<p:outputLabel value="Cidade: " />
+						<p:selectOneMenu id="cidade" filter="true"
+							value="#{oportunidadeBean.oportunidade.cidade}"
+							converter="omnifaces.SelectItemsConverter" required="true"
+							requiredMessage="Informe a Cidade corretamente">
+
+							<f:selectItem itemDisabled="false" noSelectionOption="false"
+								itemLabel="#{oportunidadeBean.auxCidade}"
+								itemValue="#{oportunidadeBean.oportunidade.cidade}" />
+
+
+							<f:selectItems value="#{oportunidadeBean.listaCidade}"
+								var="cidade" itemValue="#{cidade}" itemLabel="#{cidade.nome}" />
+						</p:selectOneMenu>
 
 						<p:outputLabel value="Descrição: " />
 						<p:inputTextarea maxlength="250" rows="3" cols="30"
 							value="#{oportunidadeBean.oportunidade.descricao}"
 							required="true"
 							requiredMessage="Preencha o campo Descrição corretamente" />
-						
+
 						<p:outputLabel value="Benefícios: " />
 						<p:inputTextarea maxlength="250" rows="3" cols="30"
 							value="#{oportunidadeBean.oportunidade.beneficios}"
 							required="true"
 							requiredMessage="Preencha o campo benefícios corretamente" />
-						
+
 						<p:outputLabel value="Pré-Requisitos: " />
 						<p:inputTextarea maxlength="250" rows="3" cols="30"
 							value="#{oportunidadeBean.oportunidade.preRequisitos}" />
@@ -587,7 +637,7 @@
 							style="margin-right:20px;">
 						</p:commandButton>
 
-				
+
 					</h:panelGrid>
 
 				</p:layoutUnit>
@@ -596,9 +646,11 @@
 		</h:form>
 
 	</p:dialog>
-	
-	
-	
+
+
+
 
 </h:body>
+
+
 </html>
