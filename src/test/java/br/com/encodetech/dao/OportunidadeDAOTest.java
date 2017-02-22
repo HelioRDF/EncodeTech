@@ -22,11 +22,11 @@ public class OportunidadeDAOTest {
 	List <Oportunidade> lista;
 	OportunidadeDAO dao = new OportunidadeDAO();
 		
-	 lista =dao.buscarVagasCargo();
+	 //lista =dao.buscarVagasCargo();
 	 
-	 for (Oportunidade oportunidade2 : lista) {
-		System.out.println("Array:"+oportunidade2);
-	}
+//	 for (Oportunidade oportunidade2 : lista) {
+//		System.out.println("Array:"+oportunidade2);
+//	}
 		
 	}
 	

@@ -7,24 +7,35 @@
 
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>Oportunidades</title>
+	<title>Oportunidades Teste</title>
 	<h:outputStylesheet library="css" name="estilos.css"></h:outputStylesheet>
 </h:head>
+
 
 <h:body>
 
 
 
+
+
+
+
+
+<!-- _________________________________________________________________________________________________________________________________ -->
+<!-- Layout -->
 <p:layout fullPage="true">
- 
- 
-  
-<!-- Cabeçalho -->
-<!-- ______________________________________________________________________________ -->
-    <p:layoutUnit position="north" size="auto"  resizable="true" visible="true">
-    <h:form>
-       	<h1>@ Encodetech</h1>
-	 	<p:menubar styleClass="menu"  >
+ 	
+ 	
+ 	<!-- _________________________________________________________________________________________________________________________________ -->
+ 	<!-- Layout TOP (North) -->
+    <p:layoutUnit position="north" size="auto"  resizable="true" closable="true" collapsible="true" visible="true">
+        
+        
+        <!-- Rodapé da Página -->
+<h:form>
+<h1>@ Encodetech</h1>
+
+<p:menubar styleClass="menu"  >
 	        <p:submenu label="Menu Principal" icon="ui-icon-arrow-4-diag">
 		    	<p:menuitem value="Usuários" outcome="/pages/administrativas/usuario.xhtml" icon="fa-bars" update="messages"/>
 		        <p:menuitem value="Empresas" outcome="/pages/administrativas/empresa.xhtml" icon="fa-bars" update="messages"/>
@@ -42,113 +53,127 @@
 	        </p:submenu>
 	 	       
 	        <f:facet name="options">
-	            <p:inputText style="margin-right:10px" placeholder="Search"/>
+	            <p:inputText style="margin-right:10px" placeholder="Buscar"/>
 	            <p:commandButton type="button" value="Logout" icon="ui-icon-extlink" />
 	        </f:facet>
     </p:menubar>
-    
-    </h:form>
-		
-    </p:layoutUnit>
- 
- 
-  
-<!-- Esquerda -->
-<!-- ______________________________________________________________________________ -->
-    <p:layoutUnit  position="east" size="280"  minSize="280" maxSize="450"  header="Filtrar Busca" resizable="true" closable="false" collapsible="true">
-    <h:form id="formWest">
 
+</h:form>
 
-
-
-
-<!-- Campo cargo -->
- <p:inputText  placeholder="Nome do Cargo"  value="#{oportunidadeBean.filtrarCargo}"
- style="  margin: 25px 10px 5px 5px; vertical-align: left;	width:90%;"> 
- </p:inputText>
- 
- 
- 
-	<!-- Atualizar table -->
-	<p:commandButton value="Buscar Oportunidades" icon="ui-icon-search" iconPos="left" 
-		action="#{oportunidadeBean.carregar}" 
-		style="  word-spacing:8px; text-align:left; height:33px; margin: 5px 10px 0px 5px; width:95%; "
-		update=":form:dataTable :form:msgGrowl :formWest"   />
-
-
-
-				<p:separator style=" margin:15px auto 15px auto; height:10px;background-color:#1c5b8c"></p:separator>
-    <p:panelMenu >
-    
-    <p:submenu label="Estado" >
-    <p:menuitem >
-    
-    
-      <p:selectOneMenu  filter="true"  id="estadoMenu" 
-            value="#{oportunidadeBean.estado}"
-            converter="omnifaces.SelectItemsConverter" required="true"
-            requiredMessage="Para melhorar sua busca, Selecione um  Estado"    >
-            
+<!--Fim do Rodapé da Página -->
         
-                <f:selectItem   itemDisabled="false"  noSelectionOption="false" 
-                itemLabel="#{oportunidadeBean.auxEstado}" 
-                itemValue="#{oportunidadeBean.oportunidade.cidade.estado}" />
-            
-            
-            <f:selectItems  value="#{oportunidadeBean.listaEstado}" var="estado"
-                itemValue="#{estado}"
-                itemLabel="#{estado.nome} - #{estado.sigla}" />
-                <p:ajax listener="#{oportunidadeBean.filtrarCidade}" update=":formWest:cidadeMenu"></p:ajax>
-        </p:selectOneMenu>  
-    
-    
-    </p:menuitem>
-    </p:submenu>
-    
-    <p:submenu label="Cidade">
-    <p:menuitem  >
-    
-    <p:selectOneMenu    id="cidadeMenu" filter="true" required="true"
-            value="#{oportunidadeBean.oportunidade.cidade}"
-            converter="omnifaces.SelectItemsConverter"
-             requiredMessage="Para melhorar sua busca, Selecione uma  Cidade"    >
-            
-                <f:selectItem itemDisabled="false"  noSelectionOption="false" 
-                itemLabel="#{oportunidadeBean.auxCidade}" 
-                itemValue="#{oportunidadeBean.oportunidade.cidade}"  />
-            
-
-            <f:selectItems value="#{oportunidadeBean.listaCidade}" var="cidade"
-                itemValue="#{cidade}" itemLabel="#{cidade.nome}" />
-        </p:selectOneMenu>
-    
-    </p:menuitem>
-    </p:submenu>
-    
-    <p:submenu label="Salário">
-    <p:menuitem value="item"/>
-    </p:submenu>
-    
-       <p:submenu label="Nível">
-    <p:menuitem value="item"/>
-    </p:submenu>
-    
-           <p:submenu label="Tipo">
-    <p:menuitem value="item"/>
-    </p:submenu>
-    
-    
-    </p:panelMenu>
-    
-        </h:form>
+        
     </p:layoutUnit>
+    <!-- Fim Layout TOP (North) -->
     
     
- 
-<!-- Centro -->
-<!-- ______________________________________________________________________________ -->
-    <p:layoutUnit position="center" >
-        <h:form id="form">
+ 	<!-- _________________________________________________________________________________________________________________________________ --> 
+ 	<!-- Layout Bottom (South) -->
+    <p:layoutUnit position="south" size="100" header="Bottom" resizable="true" visible="false" closable="true" collapsible="true">
+        <h:outputText value="South unit content." />
+    </p:layoutUnit>
+    <!--Fim Layout Bottom (South) -->
+    
+    <!-- _________________________________________________________________________________________________________________________________ -->
+ 	<!-- Layout West (Left) -->
+    <p:layoutUnit position="west" size="200" header="Left" resizable="true" closable="true" collapsible="true" visible="false">
+        <h:outputText value="West unit content." />
+    </p:layoutUnit>
+ 	<!-- Fim Layout West (Left) -->
+ 	
+ 	<!-- _________________________________________________________________________________________________________________________________ -->
+ 	<!-- Layout east (Right) -->
+    <p:layoutUnit position="east" size="280" header="Filtrar"  resizable="true" closable="true" collapsible="true" effect="drop">
+			<h:form id="formFiltro">
+			
+			
+				<!-- Campo cargo -->
+				<p:inputText placeholder="Nome do Cargo" 
+					value="#{oportunidadeBean.filtrarCargo}"
+					style="  margin: 25px 10px 5px 5px; vertical-align: left;	width:90%;">
+					
+				</p:inputText>
+				
+				
+				<!-- Atualizar table -->
+				<p:commandButton value="Buscar Oportunidades" icon="ui-icon-search"
+					iconPos="left" action="#{oportunidadeBean.carregarFiltrando}" update=":form:"
+					style="  word-spacing:8px; text-align:left; height:33px; margin: 5px 10px 0px 5px; width:95%; " />
+
+
+			
+	<p:separator style=" margin:15px auto 15px auto; height:10px;background-color:#bdc1d9"> </p:separator>
+	
+			<p:panelMenu>
+				
+				<p:submenu label="Estado">
+						<p:menuitem>
+							<p:selectOneMenu filter="true" id="estadoMenu"
+								value="#{oportunidadeBean.filtrarEstado}"
+								converter="omnifaces.SelectItemsConverter" required="true"
+								requiredMessage="Para melhorar sua busca, Selecione um  Estado">
+
+
+								<f:selectItem itemDisabled="false" noSelectionOption="false"
+									itemLabel="#{oportunidadeBean.auxEstado}"
+									itemValue="#{oportunidadeBean.oportunidade.cidade.estado}" />
+
+
+								<f:selectItems value="#{oportunidadeBean.listaEstado}"
+									var="estado" itemValue="#{estado}"
+									itemLabel="#{estado.nome} - #{estado.sigla}" />
+								<p:ajax listener="#{oportunidadeBean.filtrarCidade}"
+									update=":formFiltro:cidadeMenu:"></p:ajax>
+							</p:selectOneMenu>
+
+						</p:menuitem>
+					</p:submenu>
+					
+					
+					<p:submenu label="Cidade">
+						<p:menuitem >
+							<p:selectOneMenu id="cidadeMenu" filter="true" required="true"
+								value="#{oportunidadeBean.filtrarCidade}"
+								converter="omnifaces.SelectItemsConverter"
+								requiredMessage="Para melhorar sua busca, Selecione uma  Cidade">
+
+								<f:selectItem itemDisabled="false" noSelectionOption="false"
+									itemLabel="#{oportunidadeBean.auxCidade}"
+									itemValue="#{oportunidadeBean.oportunidade.cidade}" />
+
+
+								<f:selectItems value="#{oportunidadeBean.listaCidade}"
+									var="cidade" itemValue="#{cidade}" itemLabel="#{cidade.nome}" />
+							</p:selectOneMenu>
+						</p:menuitem>
+					</p:submenu>
+
+					<p:submenu label="Salário">
+						<p:menuitem value="item" />
+					</p:submenu>
+
+					<p:submenu label="Nível">
+						<p:menuitem value="item" />
+					</p:submenu>
+
+					<p:submenu label="Tipo">
+						<p:menuitem value="item" />
+					</p:submenu>
+
+
+				</p:panelMenu>
+    
+
+			</h:form>
+		</p:layoutUnit>
+    <!-- Fim Layout east (Right) -->
+    
+    
+ 	
+ 	<!-- _________________________________________________________________________________________________________________________________ -->
+ 	<!-- Layout Center -->
+    <p:layoutUnit position="center">
+         <h:form id="form">
 		<p:growl id="msgGrowl" life="10000" />
 
 		<!-- _________________________________________________________________________________________________________________________________ -->
@@ -179,10 +204,6 @@
 						onsuccess="PF('statusDialog').hide()" />
 
 
-<!-- 					<p:commandButton value="Atualizar" icon="ui-icon-refresh" -->
-<!-- 						action="#{oportunidadeBean.carregar()}" -->
-<!-- 						style="float:left; height:33px;" -->
-<!-- 						update=":form:dataTable :form:msgGrowl" /> -->
 
 					<!-- Adicionar  -->
 					<p:commandButton icon="ui-icon-plus " value="Adicionar "
@@ -337,19 +358,16 @@
 	</h:form>
 
 
-
-	
     </p:layoutUnit>
+    <!-- Fim Layout Center -->
  
+</p:layout>
+<!-- Fim do Layout -->
+<!-- _________________________________________________________________________________________________________________________________ -->
 
 
-	
-	</p:layout>
-	
-	
-	
 
-	<!-- _________________________________________________________________________________________________________________________________ -->
+<!-- _________________________________________________________________________________________________________________________________ -->
 	<!--   Dialog do Adicionar  e editar        -->
 
 
@@ -497,42 +515,42 @@
 
 
 					<h:panelGrid columns="2" id="dialogpanel2">
-					
-					
-					
-		<p:outputLabel value="Estado: " />
-		<p:selectOneMenu filter="true"  
-			value="#{oportunidadeBean.estado}"
-			converter="omnifaces.SelectItemsConverter" required="true"
-			requiredMessage="Informe o Estado corretamente"  >
-			
-		
-				<f:selectItem   itemDisabled="false"  noSelectionOption="false" 
-				itemLabel="#{oportunidadeBean.auxEstado}" 
-				itemValue="#{oportunidadeBean.oportunidade.cidade.estado}" />
-			
-			
-			<f:selectItems value="#{oportunidadeBean.listaEstado}" var="estado"
-				itemValue="#{estado}"
-				itemLabel="#{estado.nome} - #{estado.sigla}" />
-				<p:ajax listener="#{oportunidadeBean.filtrarCidade}" update=":dialogform:cidade"></p:ajax>
-		</p:selectOneMenu>	
-		
 
-		<p:outputLabel value="Cidade: " />
-		<p:selectOneMenu id="cidade" filter="true"
-			value="#{oportunidadeBean.oportunidade.cidade}"
-			converter="omnifaces.SelectItemsConverter" required="true"
-			requiredMessage="Informe a Cidade corretamente">
-			
-				<f:selectItem itemDisabled="false"  noSelectionOption="false" 
-				itemLabel="#{oportunidadeBean.auxCidade}" 
-				itemValue="#{oportunidadeBean.oportunidade.cidade}"  />
-			
 
-			<f:selectItems value="#{oportunidadeBean.listaCidade}" var="cidade"
-				itemValue="#{cidade}" itemLabel="#{cidade.nome}" />
-		</p:selectOneMenu>
+
+						<p:outputLabel value="Estado: " />
+						<p:selectOneMenu filter="true" value="#{oportunidadeBean.estado}"
+							converter="omnifaces.SelectItemsConverter" required="true"
+							requiredMessage="Informe o Estado corretamente">
+
+
+							<f:selectItem itemDisabled="false" noSelectionOption="false"
+								itemLabel="#{oportunidadeBean.auxEstado}"
+								itemValue="#{oportunidadeBean.oportunidade.cidade.estado}" />
+
+
+							<f:selectItems value="#{oportunidadeBean.listaEstado}"
+								var="estado" itemValue="#{estado}"
+								itemLabel="#{estado.nome} - #{estado.sigla}" />
+							<p:ajax listener="#{oportunidadeBean.filtrarCidade}"
+								update=":dialogform:cidade"></p:ajax>
+						</p:selectOneMenu>
+
+
+						<p:outputLabel value="Cidade: " />
+						<p:selectOneMenu id="cidade" filter="true"
+							value="#{oportunidadeBean.oportunidade.cidade}"
+							converter="omnifaces.SelectItemsConverter" required="true"
+							requiredMessage="Informe a Cidade corretamente">
+
+							<f:selectItem itemDisabled="false" noSelectionOption="false"
+								itemLabel="#{oportunidadeBean.auxCidade}"
+								itemValue="#{oportunidadeBean.oportunidade.cidade}" />
+
+
+							<f:selectItems value="#{oportunidadeBean.listaCidade}"
+								var="cidade" itemValue="#{cidade}" itemLabel="#{cidade.nome}" />
+						</p:selectOneMenu>
 
 						<p:outputLabel value="Descrição: " />
 						<p:inputTextarea maxlength="250" rows="3" cols="30"
@@ -596,9 +614,11 @@
 		</h:form>
 
 	</p:dialog>
-	
-	
-	
+
+
+
 
 </h:body>
+
+
 </html>

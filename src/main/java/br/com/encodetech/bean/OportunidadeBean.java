@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
 
@@ -22,7 +23,7 @@ import br.com.encodetech.domain.localizacao.Cidade;
 import br.com.encodetech.domain.localizacao.Estado;
 
 @ManagedBean
-@ViewScoped
+@SessionScoped
 public class OportunidadeBean implements Serializable {
 
 	/**
@@ -55,6 +56,11 @@ public class OportunidadeBean implements Serializable {
 
 	private Boolean botaoEditar = false;
 	private Boolean botaoSalvar = false;
+	
+	
+	private String filtrarCargo="";
+	private String filtrarEstado="";	
+	private String filtrarCidade="";	
 
 	// Salvar usuário
 	// -------------------------------------------------------------------------------------
@@ -119,8 +125,8 @@ public class OportunidadeBean implements Serializable {
 		try {
 			oportunidade = new Oportunidade();
 			dao = new OportunidadeDAO();
-			listaOportunidade = dao.listar();
-
+			listaOportunidade = dao.buscarVagasCargo(filtrarCargo);
+			System.out.println("Filtro ="+filtrarCargo);
 			Messages.addGlobalInfo("Lista atualizada com sucesso ");
 
 		} catch (Exception e) {
@@ -130,6 +136,37 @@ public class OportunidadeBean implements Serializable {
 		}
 
 	}
+	
+	// CarregarFiltrando
+		// -------------------------------------------------------------------------------------------
+			
+		public void carregarFiltrando() {
+			
+			System.out.println("\nCargo: "+filtrarCargo);
+
+			try {
+				dao = new OportunidadeDAO();
+							
+				listaOportunidade = dao.buscarVagasCargo(filtrarCargo);
+
+				Messages.addGlobalInfo("Lista atualizada com sucesso ");
+				
+				for (Oportunidade oportunidadeList : listaOportunidade) {
+					System.out.println("Oportunidade: "+oportunidadeList.getCargo());
+				}
+				
+
+			} catch (Exception e) {
+				Messages.addGlobalError("Falha ao tentar  atualizadar a lista  ");
+			} finally {
+				
+			}
+
+		}
+		
+		public void testar(){
+			System.out.println("Método teste" );
+		}
 
 	// Excluir usuário
 	// -------------------------------------------------------------------------------------------
@@ -229,39 +266,38 @@ public class OportunidadeBean implements Serializable {
 	
 	
 	
-	
-	
 	// Listar Estado e Cidade
-		// ------------------------------------------------------------------------------------------------------------------------------------------------------
-		
-			@PostConstruct
-		public void listarLocal() {
+	// ------------------------------------------------------------------------------------------------------------------------------------------------------
 
-			try {
-		
-		
-		estadoDAO = new EstadoDAO();
-		listaEstado = estadoDAO.listar("nome");
-		listaCidade = cidadeDAO.listar("nome");
-		
-		
-		for (Empresa empresa : listaEmpresas) {
-			
-			
-		}
-			
+	@PostConstruct
+	public void listarLocal() {
 
-			} catch (Exception e) {
-				// TODO: handle exception
-			} finally {
+		try {
+			
+			System.out.println("Listando...");
+
+			empresaDAO = new EmpresaDAO();
+			listaEmpresas = empresaDAO.listar();
+
+			estadoDAO = new EstadoDAO();
+			listaEstado = estadoDAO.listar("nome");
+			listaCidade = cidadeDAO.listar("nome");
+
+			for (Empresa empresa : listaEmpresas) {
+
+				System.out.println(empresa.getNomeEmpresa());
 
 			}
 
+		} catch (Exception e) {
+			// TODO: handle exception
+		} finally {
+
 		}
-		
-		
-	
-	//Filtrar Cidade
+
+	}
+
+	// Filtrar Cidade
 	// ------------------------------------------------------------------------------------------------------------------------------------------------------
 	
 	public void filtrarCidade() {
@@ -384,6 +420,30 @@ public class OportunidadeBean implements Serializable {
 
 	public void setListaCidade(List<Cidade> listaCidade) {
 		this.listaCidade = listaCidade;
+	}
+
+	public String getFiltrarCargo() {
+		return filtrarCargo;
+	}
+
+	public void setFiltrarCargo(String filtrarCargo) {
+		this.filtrarCargo = filtrarCargo;
+	}
+
+	public String getFiltrarEstado() {
+		return filtrarEstado;
+	}
+
+	public void setFiltrarEstado(String filtrarEstado) {
+		this.filtrarEstado = filtrarEstado;
+	}
+
+	public String getFiltrarCidade() {
+		return filtrarCidade;
+	}
+
+	public void setFiltrarCidade(String filtrarCidade) {
+		this.filtrarCidade = filtrarCidade;
 	}
 
 

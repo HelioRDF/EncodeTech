@@ -7,24 +7,15 @@
 
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>Oportunidades</title>
+	<title>Oportunidades Teste</title>
 	<h:outputStylesheet library="css" name="estilos.css"></h:outputStylesheet>
 </h:head>
 
-<h:body>
 
+<h:form>
+<h1>@ Encodetech</h1>
 
-
-<p:layout fullPage="true">
- 
- 
-  
-<!-- Cabeçalho -->
-<!-- ______________________________________________________________________________ -->
-    <p:layoutUnit position="north" size="auto"  resizable="true" visible="true">
-    <h:form>
-       	<h1>@ Encodetech</h1>
-	 	<p:menubar styleClass="menu"  >
+<p:menubar styleClass="menu"  >
 	        <p:submenu label="Menu Principal" icon="ui-icon-arrow-4-diag">
 		    	<p:menuitem value="Usuários" outcome="/pages/administrativas/usuario.xhtml" icon="fa-bars" update="messages"/>
 		        <p:menuitem value="Empresas" outcome="/pages/administrativas/empresa.xhtml" icon="fa-bars" update="messages"/>
@@ -42,26 +33,23 @@
 	        </p:submenu>
 	 	       
 	        <f:facet name="options">
-	            <p:inputText style="margin-right:10px" placeholder="Search"/>
+	            <p:inputText style="margin-right:10px" placeholder="Buscar"/>
 	            <p:commandButton type="button" value="Logout" icon="ui-icon-extlink" />
 	        </f:facet>
     </p:menubar>
-    
-    </h:form>
-		
-    </p:layoutUnit>
- 
- 
-  
-<!-- Esquerda -->
-<!-- ______________________________________________________________________________ -->
-    <p:layoutUnit  position="east" size="280"  minSize="280" maxSize="450"  header="Filtrar Busca" resizable="true" closable="false" collapsible="true">
-    <h:form id="formWest">
+
+</h:form>
+
+<h:body>
 
 
+<p:panelGrid columns="2">
 
 
+<!-- Menu Filtro -->
+<div title="Filtro">
 
+<h:form>
 <!-- Campo cargo -->
  <p:inputText  placeholder="Nome do Cargo"  value="#{oportunidadeBean.filtrarCargo}"
  style="  margin: 25px 10px 5px 5px; vertical-align: left;	width:90%;"> 
@@ -71,13 +59,13 @@
  
 	<!-- Atualizar table -->
 	<p:commandButton value="Buscar Oportunidades" icon="ui-icon-search" iconPos="left" 
-		action="#{oportunidadeBean.carregar}" 
+		action="#{oportunidadeBean.carregarFiltrando}" 
 		style="  word-spacing:8px; text-align:left; height:33px; margin: 5px 10px 0px 5px; width:95%; "
-		update=":form:dataTable :form:msgGrowl :formWest"   />
-
-
-
-				<p:separator style=" margin:15px auto 15px auto; height:10px;background-color:#1c5b8c"></p:separator>
+		update=":form:dataTable :form:msgGrowl: " />
+		
+		
+		
+	<p:separator style=" margin:15px auto 15px auto; height:10px;background-color:#1c5b8c"> </p:separator>
     <p:panelMenu >
     
     <p:submenu label="Estado" >
@@ -98,7 +86,7 @@
             <f:selectItems  value="#{oportunidadeBean.listaEstado}" var="estado"
                 itemValue="#{estado}"
                 itemLabel="#{estado.nome} - #{estado.sigla}" />
-                <p:ajax listener="#{oportunidadeBean.filtrarCidade}" update=":formWest:cidadeMenu"></p:ajax>
+                <p:ajax listener="#{oportunidadeBean.filtrarCidade}" update=":form:"></p:ajax>
         </p:selectOneMenu>  
     
     
@@ -140,14 +128,18 @@
     
     </p:panelMenu>
     
-        </h:form>
-    </p:layoutUnit>
-    
-    
- 
+    </h:form>
+
+</div>
+
+
+
+
+
 <!-- Centro -->
-<!-- ______________________________________________________________________________ -->
-    <p:layoutUnit position="center" >
+<div title="Centro">
+
+
         <h:form id="form">
 		<p:growl id="msgGrowl" life="10000" />
 
@@ -179,10 +171,6 @@
 						onsuccess="PF('statusDialog').hide()" />
 
 
-<!-- 					<p:commandButton value="Atualizar" icon="ui-icon-refresh" -->
-<!-- 						action="#{oportunidadeBean.carregar()}" -->
-<!-- 						style="float:left; height:33px;" -->
-<!-- 						update=":form:dataTable :form:msgGrowl" /> -->
 
 					<!-- Adicionar  -->
 					<p:commandButton icon="ui-icon-plus " value="Adicionar "
@@ -337,19 +325,12 @@
 	</h:form>
 
 
+</div>
 
-	
-    </p:layoutUnit>
- 
+</p:panelGrid>
 
 
-	
-	</p:layout>
-	
-	
-	
-
-	<!-- _________________________________________________________________________________________________________________________________ -->
+<!-- _________________________________________________________________________________________________________________________________ -->
 	<!--   Dialog do Adicionar  e editar        -->
 
 
@@ -596,7 +577,6 @@
 		</h:form>
 
 	</p:dialog>
-	
 	
 	
 
