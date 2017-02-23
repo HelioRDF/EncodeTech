@@ -1,5 +1,6 @@
 package br.com.encodetech.dao.complementos;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -170,7 +171,7 @@ import br.com.encodetech.util.HibernateUtil;
 public class OportunidadeDAO extends GenericDAO<Oportunidade>{
 	
 	
-	public List <Oportunidade> buscarVagas(String cargo, Long estado, Long cidade){
+	public List <Oportunidade> buscarVagas(String cargo, Long estado, Long cidade, BigDecimal salario){
 		
 		
 		Session sessao = HibernateUtil.getFabricadeSessoes().openSession();
@@ -179,6 +180,7 @@ public class OportunidadeDAO extends GenericDAO<Oportunidade>{
 		consulta.add(Restrictions.ilike("cargo", "%"+cargo+"%"));
 		consulta.add(Restrictions.eq("estado.codigo", estado));
 		consulta.add(Restrictions.eq("cidade.codigo", cidade));
+		consulta.add(Restrictions.ge("salario", salario));
 		
 		
 		@SuppressWarnings("unchecked")

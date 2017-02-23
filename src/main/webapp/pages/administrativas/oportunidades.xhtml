@@ -97,7 +97,7 @@
 
 		<!-- _________________________________________________________________________________________________________________________________ -->
 		<!-- Layout east (Right) -->
-		<p:layoutUnit position="east" size="280" header="Filtrar"
+		<p:layoutUnit position="east" size="330" header="Filtrar"
 			resizable="true" closable="true" collapsible="true" effect="drop">
 			<h:form id="formFiltro">
 
@@ -125,11 +125,14 @@
 
 				<p:panelMenu>
 
-
+					
+					
 
 					<p:submenu label="Localidade" expanded="true">
 						<p:menuitem>
-							<p:selectOneMenu style="margin-bottom:10px" filter="true" id="EstadoFiltro"
+					
+					
+							<p:selectOneMenu style="margin:0px 0px 10px 0px" filter="true" id="EstadoFiltro"
 								value="#{oportunidadeBean.filtrarEstado}" required="true"
 								requiredMessage="Selecione um Estado!"
 								converter="omnifaces.SelectItemsConverter">
@@ -148,6 +151,7 @@
 									update=":formFiltro:cidadeFiltro:"></p:ajax>
 							</p:selectOneMenu>
 
+							
 							<p:selectOneMenu filter="true" id="cidadeFiltro"
 								value="#{oportunidadeBean.comboCidade}" required="true"
 								requiredMessage="Selecione uma Cidade!"
@@ -164,21 +168,65 @@
 
 							</p:selectOneMenu>
 
-
+						
 						</p:menuitem>
 
 					</p:submenu>
-
+						
 					<p:submenu label="Salário">
-						<p:menuitem value="item" />
+						<p:menuitem>
+							<p:selectOneMenu value="#{oportunidadeBean.filtrarsalario}" >
+
+								<f:selectItem itemLabel="Todos" itemValue="0"></f:selectItem>
+								<f:selectItem itemLabel="Até R$ 1.000,00" itemValue="1000,00"></f:selectItem>
+								<f:selectItem itemLabel="Entre R$ 1.000,00 e R$ 1.500,00"  itemValue="1500"></f:selectItem>
+								<f:selectItem itemLabel="Entre R$ 2.000,00 e R$ 2.500,00"  itemValue="1500"></f:selectItem>
+								<f:selectItem itemLabel="Entre R$ 3.000,00 e R$ 3.500,00"  itemValue="1500"></f:selectItem>
+								<f:selectItem itemLabel="Entre R$ 4.000,00 e R$ 5.000,00"  itemValue="1500"></f:selectItem>
+								<f:selectItem itemLabel="A partir de R$ 5.000,00"  itemValue="1500"></f:selectItem>	
+							</p:selectOneMenu>
+							
+							</p:menuitem>
 					</p:submenu>
 
 					<p:submenu label="Nível">
-						<p:menuitem value="item" />
+						<p:menuitem>
+						
+						<p:selectOneMenu filter="true"
+							value="#{oportunidadeBean.oportunidade.nivel}" >
+							<f:selectItem itemValue="" itemLabel="Selecione uma modalidade" />
+
+							<f:selectItem itemValue="Trainee" itemLabel="Trainee" />
+							<f:selectItem itemValue="Junior" itemLabel="Junior" />
+							<f:selectItem itemValue="Pleno" itemLabel="Pleno" />
+							<f:selectItem itemValue="Senior" itemLabel="Senior" />
+							<f:selectItem itemValue="Master" itemLabel="Master" />
+							<f:selectItem itemValue="Especialista" itemLabel="Especialista" />
+							<f:selectItem itemValue="Todos" itemLabel="Todos" />
+							<f:selectItem itemValue="N/A" itemLabel="N/A" />
+						</p:selectOneMenu>
+						
+						</p:menuitem>
 					</p:submenu>
 
 					<p:submenu label="Tipo">
-						<p:menuitem value="item" />
+						<p:menuitem>
+						
+						
+						<p:selectOneMenu filter="true"
+							value="#{oportunidadeBean.oportunidade.tipo}" >
+							<f:selectItem itemValue="" itemLabel="Selecione uma modalidade" />
+							<f:selectItem itemValue="CLT" itemLabel="CLT" />
+							<f:selectItem itemValue="PJ" itemLabel="PJ" />
+							<f:selectItem itemValue="Empreita" itemLabel="Empreita" />
+							<f:selectItem itemValue="Estágio" itemLabel="Estágio" />
+
+							<f:selectItem itemValue="Outros" itemLabel="Outros" />
+
+
+						</p:selectOneMenu>
+						
+						</p:menuitem>
 					</p:submenu>
 
 

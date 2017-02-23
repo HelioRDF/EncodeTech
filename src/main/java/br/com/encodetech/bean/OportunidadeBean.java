@@ -1,6 +1,7 @@
 package br.com.encodetech.bean;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -52,6 +53,9 @@ public class OportunidadeBean implements Serializable {
 	private Boolean botaoEditar = false;
 	private Boolean botaoSalvar = false;
 
+	
+	private BigDecimal filtrarsalario = new BigDecimal(0);
+	
 	
 	
 	
@@ -110,12 +114,14 @@ public class OportunidadeBean implements Serializable {
 	// -------------------------------------------------------------------------------------------
 
 	public void carregarFiltrando() {
+		
+		
 
 		try {
 			dao = new OportunidadeDAO();
 			
 			
-			listaOportunidade = dao.buscarVagas(filtrarCargo, filtrarEstado,comboCidade);
+			listaOportunidade = dao.buscarVagas(filtrarCargo, filtrarEstado,comboCidade, filtrarsalario );
 			Messages.addGlobalInfo("Lista atualizada com sucesso ");
 
 			} catch (Exception e) {
@@ -386,4 +392,13 @@ public class OportunidadeBean implements Serializable {
 		this.filtrarEstado = filtrarEstado;
 	}
 
+	public BigDecimal getFiltrarsalario() {
+		return filtrarsalario;
+	}
+
+	public void setFiltrarsalario(BigDecimal filtrarsalario) {
+		this.filtrarsalario = filtrarsalario;
+	}
+
+	
 }
