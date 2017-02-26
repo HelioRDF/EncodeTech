@@ -128,11 +128,11 @@
 					
 					
 
-					<p:submenu label="Localidade" expanded="true"  >
+					<p:submenu  label="Localidade" expanded="true"  >
 						<p:menuitem>
 					
 					
-							<p:selectOneMenu style="margin:0px 0px 10px 0px" filter="true" id="EstadoFiltro"
+							<p:selectOneMenu  style="margin:0px 0px 10px 0px" filter="true" id="EstadoFiltro"
 								value="#{oportunidadeBean.filtrarEstado}" required="true"
 								requiredMessage="Selecione um Estado!"
 								converter="omnifaces.SelectItemsConverter">
@@ -295,21 +295,22 @@
 					<!-- _________________________________________________________________________________________________________________________________ -->
 					<!-- Informações das Colunas -->
 
-					<p:column headerText="Exp" width="4%">
+					<p:column headerText="Ver Mais"  width="7%">
 						<!-- Expandir infos -->
-						<p:rowToggler />
+						
+						<p:rowToggler  />
 					</p:column>
 
 
 
-					<p:column headerText="ID" width="11%" sortBy="#{dataVar.codigo}"
-						filterBy="#{dataVar.codigo}">
+					<p:column headerText="ID" width="12%" sortBy="#{dataVar.codigo}"
+						filterBy="#{dataVar.codigo}" >
 						<p:outputLabel value="#{dataVar.codigo}" />
 					</p:column>
 
 
 
-					<p:column filterBy="#{dataVar.cargo}  " headerText="Cargo"
+					<p:column filterBy="#{dataVar.cargo}  " width="12%" headerText="Cargo"
 						filterMatchMode="contains" sortBy="#{dataVar.cargo}">
 
 
@@ -319,9 +320,9 @@
 
 
 
-					<p:column headerText="Salario" width="10%"
+					<p:column headerText="Salário" width="12%" 
 						sortBy="#{dataVar.salario}" filterBy="#{dataVar.salario}">
-						<p:outputLabel value="#{dataVar.salario}">
+						<p:outputLabel value="R$ #{dataVar.salario}"  >
 							<f:convertNumber locale="pt_BR" minFractionDigits="2"></f:convertNumber>
 
 						</p:outputLabel>
@@ -329,12 +330,9 @@
 
 
 
-					<p:column headerText="Modalidade" sortBy="#{dataVar.modalidade}"
-						filterBy="#{dataVar.modalidade}">
-						<p:outputLabel value="#{dataVar.modalidade}" />
-					</p:column>
+				
 
-					<p:column headerText="Nível" sortBy="#{dataVar.nivel}"
+					<p:column headerText="Nível"  width="12%" sortBy="#{dataVar.nivel}"
 						filterBy="#{dataVar.nivel}">
 						<p:outputLabel value="#{dataVar.nivel}" />
 					</p:column>
@@ -343,23 +341,12 @@
 
 
 
-					<p:column headerText="Estado"
-						sortBy="#{dataVar.cidade.estado.nome}"
-						filterBy="#{dataVar.cidade.estado.nome}"
-						filterMatchMode="contains">
-						<p:outputLabel
-							value="#{dataVar.cidade.estado.nome} (#{dataVar.cidade.estado.sigla})" />
-					</p:column>
-
-					<p:column headerText="Cidade" sortBy="#{dataVar.cidade.nome}"
-						filterBy="#{dataVar.cidade.nome}" filterMatchMode="contains">
-						<p:outputLabel value="#{dataVar.cidade.nome}" />
-					</p:column>
+				
 
 
 
 
-					<p:column headerText="Opções" width="18%">
+					<p:column headerText="Opções" width="16%">
 
 
 						<!-- Editar -->
@@ -403,16 +390,22 @@
 
 
 							<h:outputText value="Empresa: #{dataVar.empresa.nomeEmpresa}" />
+							
+							<h:outputText value=" Estado: #{dataVar.cidade.estado.nome} (#{dataVar.cidade.estado.sigla})" />
+							<h:outputText value="Cidade: #{dataVar.cidade.nome}"/>
 
 							<h:outputText value="Área: #{dataVar.area}" />
+							
+							<h:outputText value=" Modalidade de Contratação: #{dataVar.modalidade}"/>
 
 							<h:outputText value="Número de Vagas: #{dataVar.quantidade}" />
 
 							<h:outputText value="Mostrar Salário: #{dataVar.mostrarSalario}" />
 
 							<h:outputText value="Horário: #{dataVar.horario}" />
-
-
+				
+							
+				
 
 
 							<h:inputTextarea cols="100" rows="4" readonly="true"
