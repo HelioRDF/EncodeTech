@@ -40,15 +40,15 @@ public class EnderecoDAOTest {
 		endereco.setTelefone("23243");
 		dao.salvar(endereco);
 		
-		EnderecoDAO dao2 = new EnderecoDAO();
-		Endereco endereco2 = new Endereco();
-		
-		CidadeDAO cidadeDAO2 = new CidadeDAO();
-		Cidade cidade2 = new Cidade();
-		
-		EstadoDAO estadoDAO2 = new EstadoDAO();
-		Estado estado2 = new Estado();
-	
+//		EnderecoDAO dao2 = new EnderecoDAO();
+//		Endereco endereco2 = new Endereco();
+//		
+//		CidadeDAO cidadeDAO2 = new CidadeDAO();
+//		Cidade cidade2 = new Cidade();
+//		
+//		EstadoDAO estadoDAO2 = new EstadoDAO();
+//		Estado estado2 = new Estado();
+//	
 		
 	}
 

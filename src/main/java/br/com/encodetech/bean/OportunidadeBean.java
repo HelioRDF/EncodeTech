@@ -1,7 +1,6 @@
 package br.com.encodetech.bean;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -54,7 +53,9 @@ public class OportunidadeBean implements Serializable {
 	private Boolean botaoSalvar = false;
 
 	
-	private BigDecimal filtrarsalario = new BigDecimal(0);
+	private int filtrarSalario = 0;
+	private String filtrarNivel="";
+	private String filtrarModalidade="";
 	
 	
 	
@@ -116,12 +117,14 @@ public class OportunidadeBean implements Serializable {
 	public void carregarFiltrando() {
 		
 		
+		
+		
 
 		try {
 			dao = new OportunidadeDAO();
 			
 			
-			listaOportunidade = dao.buscarVagas(filtrarCargo, filtrarEstado,comboCidade, filtrarsalario );
+			listaOportunidade = dao.buscarVagas(filtrarCargo, filtrarEstado,comboCidade, filtrarSalario, filtrarNivel, filtrarModalidade );
 			Messages.addGlobalInfo("Lista atualizada com sucesso ");
 
 			} catch (Exception e) {
@@ -392,13 +395,30 @@ public class OportunidadeBean implements Serializable {
 		this.filtrarEstado = filtrarEstado;
 	}
 
-	public BigDecimal getFiltrarsalario() {
-		return filtrarsalario;
+	public int getFiltrarSalario() {
+		return filtrarSalario;
 	}
 
-	public void setFiltrarsalario(BigDecimal filtrarsalario) {
-		this.filtrarsalario = filtrarsalario;
+	public void setFiltrarSalario(int filtrarSalario) {
+		this.filtrarSalario = filtrarSalario;
 	}
 
+	public String getFiltrarNivel() {
+		return filtrarNivel;
+	}
+
+	public void setFiltrarNivel(String filtrarNivel) {
+		this.filtrarNivel = filtrarNivel;
+	}
+
+	public String getFiltrarModalidade() {
+		return filtrarModalidade;
+	}
+
+	public void setFiltrarModalidade(String filtrarModalidade) {
+		this.filtrarModalidade = filtrarModalidade;
+	}
+
+ 
 	
 }

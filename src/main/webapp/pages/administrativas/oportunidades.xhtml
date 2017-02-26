@@ -128,7 +128,7 @@
 					
 					
 
-					<p:submenu label="Localidade" expanded="true">
+					<p:submenu label="Localidade" expanded="true"  >
 						<p:menuitem>
 					
 					
@@ -173,28 +173,28 @@
 
 					</p:submenu>
 						
-					<p:submenu label="Salário">
+					<p:submenu label="Salário" expanded="false">
 						<p:menuitem>
-							<p:selectOneMenu value="#{oportunidadeBean.filtrarsalario}" >
+							<p:selectOneMenu  value="#{oportunidadeBean.filtrarSalario}" >
 
-								<f:selectItem itemLabel="Todos" itemValue="0"></f:selectItem>
-								<f:selectItem itemLabel="Até R$ 1.000,00" itemValue="1000,00"></f:selectItem>
-								<f:selectItem itemLabel="Entre R$ 1.000,00 e R$ 1.500,00"  itemValue="1500"></f:selectItem>
-								<f:selectItem itemLabel="Entre R$ 2.000,00 e R$ 2.500,00"  itemValue="1500"></f:selectItem>
-								<f:selectItem itemLabel="Entre R$ 3.000,00 e R$ 3.500,00"  itemValue="1500"></f:selectItem>
-								<f:selectItem itemLabel="Entre R$ 4.000,00 e R$ 5.000,00"  itemValue="1500"></f:selectItem>
-								<f:selectItem itemLabel="A partir de R$ 5.000,00"  itemValue="1500"></f:selectItem>	
+								<f:selectItem itemLabel="Não especificar" itemValue="0"></f:selectItem>
+								<f:selectItem itemLabel="Até R$ 1.000,00" itemValue="1"></f:selectItem>
+								<f:selectItem itemLabel="Entre R$ 1.000,00 e R$ 1.500,00"  itemValue="2"></f:selectItem>
+								<f:selectItem itemLabel="Entre R$ 2.000,00 e R$ 2.500,00"  itemValue="3"></f:selectItem>
+								<f:selectItem itemLabel="Entre R$ 3.000,00 e R$ 3.500,00"  itemValue="4"></f:selectItem>
+								<f:selectItem itemLabel="Entre R$ 4.000,00 e R$ 5.000,00"  itemValue="5"></f:selectItem>
+								<f:selectItem itemLabel="A partir de R$ 5.000,00"  itemValue="6"></f:selectItem>	
 							</p:selectOneMenu>
 							
 							</p:menuitem>
 					</p:submenu>
 
-					<p:submenu label="Nível">
+					<p:submenu label="Nível" expanded="false">
 						<p:menuitem>
 						
 						<p:selectOneMenu filter="true"
-							value="#{oportunidadeBean.oportunidade.nivel}" >
-							<f:selectItem itemValue="" itemLabel="Selecione uma modalidade" />
+							value="#{oportunidadeBean.filtrarNivel}" >
+							<f:selectItem itemValue="" itemLabel="Não especificar" />
 
 							<f:selectItem itemValue="Trainee" itemLabel="Trainee" />
 							<f:selectItem itemValue="Junior" itemLabel="Junior" />
@@ -203,23 +203,24 @@
 							<f:selectItem itemValue="Master" itemLabel="Master" />
 							<f:selectItem itemValue="Especialista" itemLabel="Especialista" />
 							<f:selectItem itemValue="Todos" itemLabel="Todos" />
-							<f:selectItem itemValue="N/A" itemLabel="N/A" />
+							
 						</p:selectOneMenu>
 						
 						</p:menuitem>
 					</p:submenu>
 
-					<p:submenu label="Tipo">
+					<p:submenu label="Modalidade" expanded="false">
 						<p:menuitem>
 						
 						
 						<p:selectOneMenu filter="true"
-							value="#{oportunidadeBean.oportunidade.tipo}" >
-							<f:selectItem itemValue="" itemLabel="Selecione uma modalidade" />
+							value="#{oportunidadeBean.filtrarModalidade}" >
+							<f:selectItem itemValue="" itemLabel="Não especificar" />
+							<f:selectItem itemValue="Estágio" itemLabel="Estágio" />
 							<f:selectItem itemValue="CLT" itemLabel="CLT" />
 							<f:selectItem itemValue="PJ" itemLabel="PJ" />
 							<f:selectItem itemValue="Empreita" itemLabel="Empreita" />
-							<f:selectItem itemValue="Estágio" itemLabel="Estágio" />
+							
 
 							<f:selectItem itemValue="Outros" itemLabel="Outros" />
 
@@ -308,11 +309,12 @@
 
 
 
-					<p:column filterBy="#{dataVar.cargo}" headerText="Cargo"
+					<p:column filterBy="#{dataVar.cargo}  " headerText="Cargo"
 						filterMatchMode="contains" sortBy="#{dataVar.cargo}">
 
 
-						<p:outputLabel value="#{dataVar.cargo}" />
+						<p:outputLabel  style="color:#e8cf2a;"   value="#{dataVar.cargo} - PcD" rendered="#{dataVar.pcd == true}" />
+						<p:outputLabel value="#{dataVar.cargo}"  rendered="#{dataVar.pcd == false}" />
 					</p:column>
 
 
@@ -327,9 +329,9 @@
 
 
 
-					<p:column headerText="Tipo" sortBy="#{dataVar.tipo}"
-						filterBy="#{dataVar.tipo}">
-						<p:outputLabel value="#{dataVar.tipo}" />
+					<p:column headerText="Modalidade" sortBy="#{dataVar.modalidade}"
+						filterBy="#{dataVar.modalidade}">
+						<p:outputLabel value="#{dataVar.modalidade}" />
 					</p:column>
 
 					<p:column headerText="Nível" sortBy="#{dataVar.nivel}"
@@ -402,7 +404,7 @@
 
 							<h:outputText value="Empresa: #{dataVar.empresa.nomeEmpresa}" />
 
-							<h:outputText value="Setor: #{dataVar.setor}" />
+							<h:outputText value="Área: #{dataVar.area}" />
 
 							<h:outputText value="Número de Vagas: #{dataVar.quantidade}" />
 
@@ -424,7 +426,7 @@
 
 						</p:panelGrid>
 
-						<!-- <p:separator style="border: 2px solid #999966; border-radius: 100px/9px; background-color:  #6666ff; height:10px;"> </p:separator>  -->
+						<!-- <p:separator style="border: 2px solid #c1c7d9; border-radius: 100px/9px; background-color:  #d4d5e6; height:8px;"> </p:separator>  -->
 						<p:separator
 							style=" height:7px;border-radius: 100px/9px; background-color:#ffffff"></p:separator>
 						<p:separator style=" height:10px;background-color:#e6e6ff"></p:separator>
@@ -535,7 +537,7 @@
 						<p:selectOneMenu filter="true"
 							value="#{oportunidadeBean.oportunidade.nivel}" required="true"
 							requiredMessage="Preencha o campo Nível corretamente">
-							<f:selectItem itemValue="" itemLabel="Selecione uma modalidade" />
+							<f:selectItem itemValue="" itemLabel="Selecione um Nível" />
 
 							<f:selectItem itemValue="Trainee" itemLabel="Trainee" />
 							<f:selectItem itemValue="Junior" itemLabel="Junior" />
@@ -544,40 +546,46 @@
 							<f:selectItem itemValue="Master" itemLabel="Master" />
 							<f:selectItem itemValue="Especialista" itemLabel="Especialista" />
 							<f:selectItem itemValue="Todos" itemLabel="Todos" />
-							<f:selectItem itemValue="N/A" itemLabel="N/A" />
+							
 						</p:selectOneMenu>
 
-						<p:outputLabel value="Tipo: " />
+						<p:outputLabel value="Modalidade " />
 						<p:selectOneMenu filter="true"
-							value="#{oportunidadeBean.oportunidade.tipo}" required="true"
-							requiredMessage="Preencha o campo Tipo corretamente">
-							<f:selectItem itemValue="" itemLabel="Selecione uma modalidade" />
+							value="#{oportunidadeBean.oportunidade.modalidade}" required="true"
+							requiredMessage="Preencha o campo Modalidade corretamente">
+							<f:selectItem itemValue="" itemLabel="Selecione uma Modalidade" />
+							<f:selectItem itemValue="Estágio" itemLabel="Estágio" />
 							<f:selectItem itemValue="CLT" itemLabel="CLT" />
 							<f:selectItem itemValue="PJ" itemLabel="PJ" />
 							<f:selectItem itemValue="Empreita" itemLabel="Empreita" />
-							<f:selectItem itemValue="Estágio" itemLabel="Estágio" />
-
-							<f:selectItem itemValue="CLT-PcD" itemLabel="CLT-PcD" />
-							<f:selectItem itemValue="PJ-PcD" itemLabel="PJ-PcD" />
-							<f:selectItem itemValue="Empreita-PcD" itemLabel="Empreita-PcD" />
-							<f:selectItem itemValue="Estágio-PcD" itemLabel="Estágio-PcD" />
-
+							
+						
 							<f:selectItem itemValue="Outros" itemLabel="Outros" />
 
 
 						</p:selectOneMenu>
 
 
-						<p:outputLabel value="Setor: " />
+						<p:outputLabel value="Área: " />
 						<p:selectOneMenu filter="true"
-							value="#{oportunidadeBean.oportunidade.setor}" required="true"
-							requiredMessage="Preencha o campo Setor corretamente">
-							<f:selectItem itemValue="" itemLabel="Selecione uma modalidade" />
+							value="#{oportunidadeBean.oportunidade.area}" required="true"
+							requiredMessage="Preencha o campo Área corretamente">
+							<f:selectItem itemValue="" itemLabel="Selecione uma Área" />
 							<f:selectItem itemValue="Humanas" itemLabel="Humanas" />
-							<f:selectItem itemValue="Exatas" itemLabel="Exatas" />
 							<f:selectItem itemValue="Biologicas" itemLabel="Biologicas" />
+							<f:selectItem itemValue="Exatas" itemLabel="Exatas" />
+							
 
 						</p:selectOneMenu>
+						
+						
+						<p:outputLabel value="PcD: " />
+						<p:selectBooleanButton
+								value="#{oportunidadeBean.oportunidade.pcd}"
+								onLabel="Sim" offLabel="Não">
+						</p:selectBooleanButton>
+								
+				
 
 
 

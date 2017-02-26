@@ -85,16 +85,19 @@ public class Oportunidade extends GenericDomain {
 	
 	@Column
 	private Boolean mostrarEmpresa;
+	
+	@Column(name="PcD")
+	private Boolean pcd;
 
 	@ManyToOne
 	@JoinColumn(nullable = false)
 	private Empresa empresa;
 	
 	@Column
-	private String tipo; //CLT | CLT PCD | PJ | Estágio ???
+	private String modalidade; //CLT | CLT PCD | PJ | Estágio ???
 	
 	@Column
-	private String setor; //MKT | Engenharia | ???
+	private String area; //MKT | Engenharia | ???
 	
 	
 	//--------------------------------------------------
@@ -137,13 +140,7 @@ public class Oportunidade extends GenericDomain {
 		this.preRequisitos = preRequisitos;
 	}
 
-	public String getSetor() {
-		return setor;
-	}
 
-	public void setSetor(String setor) {
-		this.setor = setor;
-	}
 
 	public String getCargo() {
 		return cargo;
@@ -181,12 +178,23 @@ public class Oportunidade extends GenericDomain {
 		this.empresa = empresa;
 	}
 
-	public String getTipo() {
-		return tipo;
+	
+	
+	
+	public String getModalidade() {
+		return modalidade;
 	}
 
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
+	public void setModalidade(String modalidade) {
+		this.modalidade = modalidade;
+	}
+
+	public String getArea() {
+		return area;
+	}
+
+	public void setArea(String area) {
+		this.area = area;
 	}
 
 	public Date getDataCadastro() {
@@ -233,12 +241,21 @@ public class Oportunidade extends GenericDomain {
 	public void setBeneficios(String beneficios) {
 		this.beneficios = beneficios;
 	}
+	
+
+	public Boolean getPcd() {
+		return pcd;
+	}
+
+	public void setPcd(Boolean pcd) {
+		this.pcd = pcd;
+	}
 
 	@Override
 	public String toString() {
 		return "Oportunidade [dataCadastro=" + dataCadastro + ", cargo=" + cargo + ", nivel=" + nivel + ", descricao="
 				+ descricao + ", preRequisitos=" + preRequisitos + ", quantidade=" + quantidade + ", salario=" + salario
-				+ ", empresa=" + empresa + ", tipo=" + tipo + ", setor=" + setor + "]";
+				+ ", empresa=" + empresa + ", tipo=" + modalidade + ", setor=" + area + "]";
 	}
 	
 	

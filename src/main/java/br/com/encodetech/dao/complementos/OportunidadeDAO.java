@@ -171,7 +171,48 @@ import br.com.encodetech.util.HibernateUtil;
 public class OportunidadeDAO extends GenericDAO<Oportunidade>{
 	
 	
-	public List <Oportunidade> buscarVagas(String cargo, Long estado, Long cidade, BigDecimal salario){
+	public List <Oportunidade> buscarVagas(String cargo, Long estado, Long cidade, int salario, String nivel, String modalidade){
+		
+
+		
+		BigDecimal salarioMaior =new BigDecimal(0.00);	;
+		BigDecimal salarioMenor=new BigDecimal(99999.00);	;
+		
+		if(salario==0){
+			salarioMaior= new BigDecimal(0.00);
+			salarioMenor=new BigDecimal(99999.00);		
+		}
+		
+		if(salario==1){
+			salarioMaior= new BigDecimal(0.00);;
+			salarioMenor=new BigDecimal(1100.00);			
+		}
+		
+		if(salario==2){
+			salarioMaior=new  BigDecimal(1000.00);
+			salarioMenor=new BigDecimal(1600.00);			
+		}
+		
+		if(salario==3){
+			salarioMaior= new BigDecimal(2000.00);	
+			salarioMenor=new BigDecimal(2600.00);			
+		}
+		
+		if(salario==4){
+			salarioMaior= new BigDecimal(3000.00);	
+			salarioMenor=new BigDecimal(3600.00);			
+		}
+		
+		
+		if(salario==5){
+			salarioMaior= new BigDecimal(4000.00);	
+			salarioMenor=new BigDecimal(5100.00);				
+		}
+		
+		if(salario==6){
+			salarioMaior= new BigDecimal(5000.00);	
+			salarioMenor=new BigDecimal(99999.00);				
+		}
 		
 		
 		Session sessao = HibernateUtil.getFabricadeSessoes().openSession();
@@ -180,11 +221,24 @@ public class OportunidadeDAO extends GenericDAO<Oportunidade>{
 		consulta.add(Restrictions.ilike("cargo", "%"+cargo+"%"));
 		consulta.add(Restrictions.eq("estado.codigo", estado));
 		consulta.add(Restrictions.eq("cidade.codigo", cidade));
-		consulta.add(Restrictions.ge("salario", salario));
+		consulta.add(Restrictions.ge("salario", salarioMaior));
+		consulta.add(Restrictions.lt("salario", salarioMenor));
+		consulta.add(Restrictions.ilike("nivel", "%"+nivel+"%"));
+		consulta.add(Restrictions.ilike("modalidade", "%"+modalidade+"%"));
+		
 		
 		
 		@SuppressWarnings("unchecked")
 		List <Oportunidade> resultado = consulta.list();
+		
+		System.out.println("Saída Maior:"+salarioMaior);
+		System.out.println("Saída Menor:"+salarioMenor);
+		
+		for (Oportunidade oportunidade : resultado) {
+			
+			System.out.println("Saída Cargo:"+oportunidade.getCargo());
+			
+		}
 		
 		return resultado;
 		

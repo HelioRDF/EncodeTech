@@ -1,12 +1,6 @@
 package br.com.encodetech.dao;
 
-import java.util.List;
-
 import org.junit.Test;
-
-import br.com.encodetech.dao.complementos.OportunidadeDAO;
-
-import br.com.encodetech.domain.complementos.Oportunidade;
 
 public class OportunidadeDAOTest {
 
@@ -17,17 +11,17 @@ public class OportunidadeDAOTest {
 	public void testeQuery(){
 		
 		
-
-	//Oportunidade oportunidade = new Oportunidade();
-	List <Oportunidade> lista;
-	OportunidadeDAO dao = new OportunidadeDAO();
-		
-	 lista =dao.buscarVagasEstado("sp");
-	 
-	 for (Oportunidade oportunidade2 : lista) {
-	System.out.println("Array:"+oportunidade2);
-	System.out.println("lista tem:"+lista.size());
-	}
+//
+//	//Oportunidade oportunidade = new Oportunidade();
+//	List <Oportunidade> lista;
+//	OportunidadeDAO dao = new OportunidadeDAO();
+//		
+//	 lista =dao.buscarVagasEstado("sp");
+//	 
+//	 for (Oportunidade oportunidade2 : lista) {
+//	System.out.println("Array:"+oportunidade2);
+//	System.out.println("lista tem:"+lista.size());
+//	}
 		
 	}
 	
