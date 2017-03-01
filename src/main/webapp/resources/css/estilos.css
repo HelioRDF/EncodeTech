@@ -23,10 +23,20 @@ h1 {
 }
 
 h2 {
-	color: orange;
-	font-size: 28px;
-	margin: auto auto auto auto;
+	
+	background-color: CadetBlue;
+	color: #f4c70f;
+	font-size: 24px;
+	margin: 0% 0% 5% 0%;
 	font-family: Times New Roman, serif;
+	text-align: center;
+		
+	border-radius: 8px;
+	border-style: solid;
+	border-color: #C2C1D4;
+	border-width: 1px;
+	width: 100%;
+	height: auto;
 }
 
 h3 {
@@ -66,9 +76,9 @@ body {
 	background-color: #F2F2F2;
 	border-radius: 8px;
 	border: 1px solid #ccc;
-	margin-top: 10px;
+	margin-top: 0px;
 	margin-bottom: 10px;
-	padding: 20px 10px 10px 10px;
+	padding: 5px 5px 5px 5px;
 	width: 120%
 }
 

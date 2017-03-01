@@ -16,27 +16,30 @@
 <h:body>
 
 <h1>@ Encodetech</h1>
-<p:messages autoUpdate="true"  />
+
 
 
 	<div id="login-dialog">
-		 
+		 <p:messages id="msg" closable="true" style="width: 120%;"   />
 		<h:form id="frm">
+		
 			
-			
-			<h2 >Login</h2>
-			<h:panelGrid columns="2" styleClass="grid-login">
-			
+			<h:panelGrid   columns="1" styleClass="grid-login">
+				<h2> Login</h2>
+				
+				<h:panelGrid   columns="2">
 		<p:outputLabel style="margin-bottom:15px;"  /><p:outputLabel />
 			
-				<p:outputLabel style="padding-top:15px;" value="E-Mail" for="usuario" />
+				<p:outputLabel style="padding-top:15px;" value="E-Mail:" for="usuario" />
 				<p:inputText id="usuario" size="20" value="#{loginBean.usuario.email}" />
-				<p:outputLabel value="Senha" for="senha" />
-				<p:password id="senha" size="20"
-					value="#{loginBean.usuario.senha}" />
-					<p:separator/> <p:separator/>
-				<p:outputLabel />
-				<p:commandButton style="margin-top:5px; width:130px;" value="Entrar" actionListener="#{loginBean.autenticar}" />
+				<p:outputLabel value="Senha:" for="senha"  />
+				<p:password id="senha" size="20" 	value="#{loginBean.usuario.senha}" />
+					
+				</h:panelGrid>
+				<p:separator/> 
+				<p:commandButton update=":msg:"  actionListener="#{loginBean.autenticar}"  value="Entrar" 
+				style="margin: 5px 0px 0px 30%; width:40%; "/>
+			
 			</h:panelGrid>
 			
 			<h:link id="lembrarsenha" value="Esqueci minha senha."></h:link>
