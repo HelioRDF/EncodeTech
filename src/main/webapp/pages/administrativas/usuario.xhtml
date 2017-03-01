@@ -36,7 +36,7 @@
 	        </p:submenu>
 	 	       
 	        <f:facet name="options">
-	           <p:outputLabel styleClass="cabecalhoInfo" value="Bem Vindo, #{loginBean.usuarioLogado.nome}"></p:outputLabel>
+	           <p:outputLabel styleClass="cabecalhoInfo" value="#{loginBean.usuarioLogado.nome}"></p:outputLabel>
 	            <p:commandButton type="button" value="Logout" icon="ui-icon-extlink" />
 	        </f:facet>
     </p:menubar>
