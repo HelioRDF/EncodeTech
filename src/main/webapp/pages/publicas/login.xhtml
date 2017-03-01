@@ -16,26 +16,27 @@
 <h:body>
 
 <h1>@ Encodetech</h1>
+<p:messages autoUpdate="true"  />
 
 
 	<div id="login-dialog">
 		 
 		<h:form id="frm">
-			<p:messages autoUpdate="true" />
+			
 			
 			<h2 >Login</h2>
 			<h:panelGrid columns="2" styleClass="grid-login">
 			
 		<p:outputLabel style="margin-bottom:15px;"  /><p:outputLabel />
 			
-				<p:outputLabel style="padding-top:15px;" value="Usuário" for="usuario" />
-				<p:inputText id="usuario" size="20" value="#{loginBean.nomeUsuario}" />
+				<p:outputLabel style="padding-top:15px;" value="E-Mail" for="usuario" />
+				<p:inputText id="usuario" size="20" value="#{loginBean.usuario.email}" />
 				<p:outputLabel value="Senha" for="senha" />
 				<p:password id="senha" size="20"
-					value="#{loginBean.senha}" />
+					value="#{loginBean.usuario.senha}" />
 					<p:separator/> <p:separator/>
 				<p:outputLabel />
-				<p:commandButton style="margin-top:5px; width:130px;" value="Entrar" action="#{loginBean.login}" />
+				<p:commandButton style="margin-top:5px; width:130px;" value="Entrar" actionListener="#{loginBean.autenticar}" />
 			</h:panelGrid>
 			
 			<h:link id="lembrarsenha" value="Esqueci minha senha."></h:link>
