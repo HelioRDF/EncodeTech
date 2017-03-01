@@ -1,23 +1,13 @@
 @CHARSET "UTF-8";
 
-
-
-
-
-
-.ui-layout-north{
-	z-index:20 !important;
-	overflow:visible !important;;
-	
+.ui-layout-north {
+	z-index: 20 !important;
+	overflow: visible !important;;
 }
 
-.ui-layout-north .ui-layout-unit-content{
-	overflow:visible !important;
+.ui-layout-north .ui-layout-unit-content {
+	overflow: visible !important;
 }
-
-
-
-
 
 h1 {
 	font-size: 20px;
@@ -39,20 +29,15 @@ h2 {
 	font-family: Times New Roman, serif;
 }
 
-
-
-
 h3 {
 	
 }
-
-
 
 h4 {
 	vertical-align: left;
 	font-size: 16px;
 	color: #ff8000;
-	vertical-align:left;
+	vertical-align: left;
 	margin: 2% 7% 0% 0%;
 	padding: 10px;
 	border-style: solid;
@@ -77,19 +62,15 @@ body {
 	margin-top: 130px;
 }
 
-
-
 .grid-login {
 	background-color: #F2F2F2;
 	border-radius: 8px;
 	border: 1px solid #ccc;
 	margin-top: 10px;
-	margin-bottom:10px;
+	margin-bottom: 10px;
 	padding: 20px 10px 10px 10px;
 	width: 120%
 }
-
-
 
 .menu {
 	margin: auto auto 25px auto;
@@ -108,36 +89,24 @@ body {
 	margin: auto 25% auto auto;
 }
 
-
-.cabecalho{
+.cabecalho {
 	font-size: 18px;
 	color: orange;
 	font-family: Courier New, monospace;
 	margin: 0 auto auto 15px;
-	
-
-
 }
 
-.cabecalhoInfo{
+.cabecalhoInfo {
 	font-size: 20px;
 	color: orange;
-	
-	
 	font-family: Courier New, monospace;
 	margin: 0px 15px auto 0px;
-	vertical-align: middle;	
-	
-	
-
-
-}
-
-.visualizar{
-	
-	margin-top:15px;
-	
-	
+	vertical-align: middle;
 }
 
 
+
+
+.visualizar {
+	margin-top: 15px;
+}

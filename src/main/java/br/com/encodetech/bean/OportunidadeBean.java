@@ -56,6 +56,7 @@ public class OportunidadeBean implements Serializable {
 	private int filtrarSalario = 0;
 	private String filtrarNivel="";
 	private String filtrarModalidade="";
+	private int		FiltrarPcD =3;
 	
 	
 	
@@ -124,7 +125,7 @@ public class OportunidadeBean implements Serializable {
 			dao = new OportunidadeDAO();
 			
 			
-			listaOportunidade = dao.buscarVagas(filtrarCargo, filtrarEstado,comboCidade, filtrarSalario, filtrarNivel, filtrarModalidade );
+			listaOportunidade = dao.buscarVagas(filtrarCargo, filtrarEstado,comboCidade, filtrarSalario, filtrarNivel, filtrarModalidade, FiltrarPcD );
 			Messages.addGlobalInfo("Lista atualizada com sucesso ");
 
 			} catch (Exception e) {
@@ -418,6 +419,16 @@ public class OportunidadeBean implements Serializable {
 	public void setFiltrarModalidade(String filtrarModalidade) {
 		this.filtrarModalidade = filtrarModalidade;
 	}
+
+	public int getFiltrarPcD() {
+		return FiltrarPcD;
+	}
+
+	public void setFiltrarPcD(int filtrarPcD) {
+		FiltrarPcD = filtrarPcD;
+	}
+
+
 
  
 	

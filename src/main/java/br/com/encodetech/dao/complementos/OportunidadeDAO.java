@@ -171,7 +171,7 @@ import br.com.encodetech.util.HibernateUtil;
 public class OportunidadeDAO extends GenericDAO<Oportunidade>{
 	
 	
-	public List <Oportunidade> buscarVagas(String cargo, Long estado, Long cidade, int salario, String nivel, String modalidade){
+	public List <Oportunidade> buscarVagas(String cargo, Long estado, Long cidade, int salario, String nivel, String modalidade, int pcd){
 		
 
 		
@@ -215,12 +215,27 @@ public class OportunidadeDAO extends GenericDAO<Oportunidade>{
 		}
 		
 		
+		
+		
 		Session sessao = HibernateUtil.getFabricadeSessoes().openSession();
 		
 		Criteria consulta = sessao.createCriteria(Oportunidade.class);
 		consulta.add(Restrictions.ilike("cargo", "%"+cargo+"%"));
 		consulta.add(Restrictions.eq("estado.codigo", estado));
 		consulta.add(Restrictions.eq("cidade.codigo", cidade));
+		
+		if(pcd==1 ){
+			
+			consulta.add(Restrictions.eq("pcd", true));
+		}
+		
+		if(pcd==0 ){
+			
+			consulta.add(Restrictions.eq("pcd", false));
+		}
+		
+		
+		
 		consulta.add(Restrictions.ge("salario", salarioMaior));
 		consulta.add(Restrictions.lt("salario", salarioMenor));
 		consulta.add(Restrictions.ilike("nivel", "%"+nivel+"%"));

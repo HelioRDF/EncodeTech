@@ -7,7 +7,7 @@
 
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>Oportunidades Teste</title>
+	<title>Oportunidades</title>
 	<h:outputStylesheet library="css" name="estilos.css"></h:outputStylesheet>
 </h:head>
 
@@ -64,7 +64,7 @@
 					</p:submenu>
 
 					<f:facet name="options">
-						<p:inputText style="margin-right:10px" placeholder="Buscar" />
+						
 						<p:commandButton type="button" value="Logout"
 							icon="ui-icon-extlink" />
 					</f:facet>
@@ -111,15 +111,19 @@
 
 
 				<!-- Atualizar table -->
-				<p:commandButton value="Buscar Oportunidades" icon="ui-icon-search"
+				<p:commandButton value="Pesquisar Oportunidades" icon="ui-icon-search"
 					iconPos="left" action="#{oportunidadeBean.carregarFiltrando}"
 					update=":form: :formFiltro:"
-					style="  word-spacing:8px; text-align:left; height:33px; margin: 5px 10px 0px 5px; width:95%; " />
+					style=" border-radius: 7px; background-color: #b0c229; border-color: #C2C1D4;
+					 font-size: 16px; word-spacing:8px; text-align:left; height:38px; margin: 5px 10px 0px 5px; width:95%; " />
+
+
+
 
 
 
 				<p:separator
-					style=" margin:15px auto 15px auto; height:10px;background-color:#bdc1d9">
+					style=" margin:15px auto 15px auto; height:10px;background-color:#dde1f0">
 				</p:separator>
 
 
@@ -171,6 +175,22 @@
 						
 						</p:menuitem>
 
+					</p:submenu>
+					
+						<p:submenu label=" PcD" expanded="false">
+						<p:menuitem>
+
+
+
+							<p:selectOneButton value="#{oportunidadeBean.filtrarPcD}" >
+							
+								<f:selectItem itemLabel="Sim" itemValue="1" />
+								<f:selectItem itemLabel="Não" itemValue="0" />
+								<f:selectItem itemLabel="Indefinido" itemValue="3" />
+							</p:selectOneButton>
+
+
+						</p:menuitem>
 					</p:submenu>
 						
 					<p:submenu label="Salário" expanded="false">
@@ -230,7 +250,8 @@
 						</p:menuitem>
 					</p:submenu>
 
-
+	
+		
 				</p:panelMenu>
 
 
