@@ -87,6 +87,7 @@ public class UsuarioBean implements Serializable {
 	private Boolean botaoInfo;
 	
 
+	
 
 	// Salvar usuário
 	// -------------------------------------------------------------------------------------

@@ -37,12 +37,32 @@ public class LoginBean implements Serializable {
 			usuarioLogado = usuarioDAO.autenticar(usuario.getEmail(), usuario.getSenha());
 			
 			if(usuarioLogado==null){
-				Messages.addGlobalError("Usuário e/ou senha, incorretos");
+				Messages.addGlobalWarn("Usuário e/ou senha, incorretos");
 				return;
 				
 			}
 			
 			Faces.redirect("./pages/administrativas/usuario.xhtml");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+	
+			
+		}
+		
+		
+	}
+	
+	public void sair(){
+		
+		try {
+			
+			usuarioLogado  =null;
+			Faces.redirect("./pages/publicas/login.xhtml");
+			Messages.addGlobalInfo("Logout");
+			
+			return;
+		
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

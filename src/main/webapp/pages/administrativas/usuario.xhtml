@@ -37,7 +37,8 @@
 	 	       
 	        <f:facet name="options">
 	           <p:outputLabel styleClass="cabecalhoInfo" value="#{loginBean.usuarioLogado.nome}"></p:outputLabel>
-	            <p:commandButton type="button" value="Logout" icon="ui-icon-extlink" />
+	            <p:commandButton  value="Logout"  action="#{loginBean.sair()}"   icon="ui-icon-extlink" />
+	           
 	        </f:facet>
     </p:menubar>
 
@@ -50,9 +51,7 @@
 			emptyMessage="Nenhum Registro encontrado" rows="7" paginator="true"
 			var="dataVar" value="#{usuarioBean.listaUsuario}"
 			style=" text-align:center;">
-			
-			
-
+				
 			<f:facet name="header">
 
 				<p:panelGrid>
@@ -83,12 +82,6 @@
 						style="float:left; height:33px;"
 						oncomplete="PF('dialogo').show();" action="#{usuarioBean.novo()}"
 						update=":dialogform:" />
-
-
-
-	
-		
-		
 		
 					<!-- Header -->
 					<h:outputLabel styleClass="nameheader" value="Usuários"></h:outputLabel>
