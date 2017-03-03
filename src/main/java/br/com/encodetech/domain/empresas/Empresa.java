@@ -11,6 +11,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
+import org.jboss.logging.annotations.Message;
+
 import br.com.encodetech.domain.complementos.GenericDomain;
 import br.com.encodetech.domain.localizacao.Endereco;
 
@@ -79,7 +81,7 @@ public class Empresa extends GenericDomain {
 	@Column(length = 22)
 	private String cnpj;
 	
-	@Column(length = 33)
+	@Column(length = 33,unique=true)
 	private String email;
 	
 	@OneToOne

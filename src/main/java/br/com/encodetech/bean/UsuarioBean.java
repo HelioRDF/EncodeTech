@@ -92,7 +92,18 @@ public class UsuarioBean implements Serializable {
 	// Salvar usuário
 	// -------------------------------------------------------------------------------------
 	public void salvar() {
-
+		Boolean permitir =dao.validarEmail(usuario.getEmail());
+		
+		if(!permitir){
+			
+			Messages.addGlobalError("O e-mail já existe ... ");
+			
+			return;
+			
+		}
+	
+		
+			
 		try {
 			
 
@@ -106,11 +117,19 @@ public class UsuarioBean implements Serializable {
 			
 			usuario.setEndereco(endereco);
 			usuario.setDataCadastro(new Date());
+			
+			
+			
 			dao.salvar(usuario);
 
 			Messages.addGlobalInfo("Usuário(a) " + usuario.getNome() + ", salvo com sucesso.");
 
 		} catch (Exception e) {
+			
+			
+			
+			
+			
 			Messages.addGlobalError("Não foi possível salvar o usuário, tente novamente mais tarde ... ");
 
 			System.out.println("Erro" + e);
@@ -461,20 +480,36 @@ public class UsuarioBean implements Serializable {
 	// Editar usuário
 	// -------------------------------------------------------------------------------------------
 	public void editar() {
+		
+//		
+//		Boolean permitir =dao.validarEmail(usuario.getEmail());
+//		
+//		if(!permitir){
+//			
+//			Messages.addGlobalError("O e-mail já existe ... ");
+//			
+//			return;
+//			
+//		}
 
 		try {
 
 			
-			listarInfos();
+//			listarInfos();
 			
 			enderecoDAO= new EnderecoDAO();
 			dao = new UsuarioDAO();
 			
+			
 			endereco.setEstado(estado);
 			usuario.setEndereco(endereco);
 			
-			enderecoDAO.merge(endereco);
-			dao.merge(usuario);
+			
+			
+			
+			
+			enderecoDAO.editar(endereco);
+			dao.editar(usuario);
 			
 			auxCidade=usuario.getEndereco().getCidade().getNome() ;
 			auxEstado=usuario.getEndereco().getCidade().getEstado().getNome();
@@ -482,6 +517,9 @@ public class UsuarioBean implements Serializable {
 			Messages.addGlobalInfo("Usuário(a) ' " + usuario.getNome() + "' Editado com sucesso!!!");
 
 		} catch (Exception e) {
+			
+
+			
 			Messages.addGlobalError("Erro ao Editar Usuário(a) '" + usuario.getNome() + "'");
 			System.out.println("Editar Erro:"+ e.getMessage());
 
@@ -554,6 +592,10 @@ public class UsuarioBean implements Serializable {
 			telaEditar = true;
 			botaoSalvar = false;
 			botaoEditar = true;
+			
+			usuario = new Usuario();
+			dao = new UsuarioDAO();
+			endereco = new Endereco();
 
 			usuario = (Usuario) evento.getComponent().getAttributes().get("meuSelect");
 			Messages.addGlobalInfo("Seleção: " + usuario.getNome());
@@ -562,11 +604,15 @@ public class UsuarioBean implements Serializable {
 						
 			auxCidade=usuario.getEndereco().getCidade().getNome() ;
 			auxEstado=usuario.getEndereco().getCidade().getEstado().getNome();
-					
+			
 			listarInfos();
 			filtrarCidadeTwo();
+					
+			
+			
+			System.out.println("Usuário:"+usuario.getNome());
 	
-
+			
 		} catch (Exception e) {
 			Messages.addGlobalError("Erro ao Editar: " + usuario.getNome());
 			System.out.println("Erro getinstancia"+ e.getMessage());
