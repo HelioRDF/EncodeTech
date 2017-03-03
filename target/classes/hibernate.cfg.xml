@@ -37,7 +37,6 @@
 		<mapping class="br.com.encodetech.domain.empresas.Empresa"/>
 		<mapping class="br.com.encodetech.domain.complementos.Oportunidade"/>
 		<mapping class="br.com.encodetech.domain.usuarios.Usuario"/>
-		<mapping class="br.com.encodetech.domain.localizacao.Endereco"/>
 		
 		<mapping class="br.com.encodetech.domain.usuarios.FormacaoAcademica"/>
 		<mapping class="br.com.encodetech.domain.usuarios.ExperienciaProfissional"/>

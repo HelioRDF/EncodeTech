@@ -178,18 +178,18 @@
 					<h:outputText value="Data de Cadastro: #{dataVar.dataCadastro}" />
 					<h:outputText value="Seguimento: #{dataVar.seguimento}" />		
 						
-					<h:outputText value="Telefone: #{dataVar.endereco.telefone}" />
-					<h:outputText value="Celular: #{dataVar.endereco.celular}" />
+					<h:outputText value="Telefone: #{dataVar.telefone}" />
+					<h:outputText value="Celular: #{dataVar.celular}" />
 					
 				
 					
-					<h:outputText value="Estado: #{dataVar.endereco.cidade.estado.nome}" />
-					<h:outputText value="Cidade: #{dataVar.endereco.cidade.nome}" />
-					<h:outputText value="Rua: #{dataVar.endereco.rua}" />
-					<h:outputText value="Número: #{dataVar.endereco.numero}" />
-					<h:outputText value="Bairro: #{dataVar.endereco.bairro}" />
-					<h:outputText value="Cep: #{dataVar.endereco.cep}" />
-					<h:outputText value="Complemento: #{dataVar.endereco.complemento}" />
+					<h:outputText value="Estado: #{dataVar.cidade.estado.nome}" />
+					<h:outputText value="Cidade: #{dataVar.cidade.nome}" />
+					<h:outputText value="Rua: #{dataVar.rua}" />
+					<h:outputText value="Número: #{dataVar.numero}" />
+					<h:outputText value="Bairro: #{dataVar.bairro}" />
+					<h:outputText value="Cep: #{dataVar.cep}" />
+					<h:outputText value="Complemento: #{dataVar.complemento}" />
 						<h:outputText value="Senha: #{dataVar.senha}" />
 					
 					
@@ -332,7 +332,7 @@
 		
 				<f:selectItem   itemDisabled="false"  noSelectionOption="false" 
 				itemLabel="#{empresaBean.auxEstado}" 
-				itemValue="#{empresaBean.empresa.endereco.cidade.estado}" />
+				itemValue="#{empresaBean.empresa.cidade.estado}" />
 				
 			<f:selectItems value="#{empresaBean.listaEstado}" var="estado"
 				itemValue="#{estado}"
@@ -342,14 +342,14 @@
 
 		<p:outputLabel value="Cidade: " />
 		<p:selectOneMenu id="cidade" filter="true"
-			value="#{empresaBean.endereco.cidade}"
+			value="#{empresaBean.empresa.cidade}"
 			converter="omnifaces.SelectItemsConverter" required="true"
 			requiredMessage="Informe a Cidade corretamente">
 			
 	
 				<f:selectItem   itemDisabled="false"  noSelectionOption="false" 
 				itemLabel="#{empresaBean.auxCidade}" 
-				itemValue="#{empresaBean.empresa.endereco.cidade}" />
+				itemValue="#{empresaBean.empresa.cidade}" />
 				
 			<f:selectItems value="#{empresaBean.listaCidade}" var="cidade"
 				itemValue="#{cidade}" itemLabel="#{cidade.nome}" />
@@ -357,44 +357,44 @@
 
 		<p:outputLabel value="Rua:"/>
 		<p:inputText maxlength="30" id="rua" size="23" label="rua"
-		value="#{empresaBean.endereco.rua}" required="true" requiredMessage="Preencha o campo Rua"
+		value="#{empresaBean.empresa.rua}" required="true" requiredMessage="Preencha o campo Rua"
 		validatorMessage="Preencha o campo Rua corretamente">
 		<f:validateLength minimum="2"></f:validateLength>
 		</p:inputText>
 
 		<p:outputLabel value="Número: "></p:outputLabel>
-		<p:inputText  maxlength="5" size="10" value="#{empresaBean.endereco.numero}"
+		<p:inputText  maxlength="5" size="10" value="#{empresaBean.empresa.numero}"
 		required="true" requiredMessage="Preencha o campo Número"
 		converterMessage="Digite um número válido">
 		</p:inputText>
 
 		<p:outputLabel  value="Bairro:"></p:outputLabel>
-		<p:inputText maxlength="25" value="#{empresaBean.endereco.bairro}"
+		<p:inputText maxlength="25" value="#{empresaBean.empresa.bairro}"
 			required="true" requiredMessage="Preencha o campo bairro">
 		</p:inputText>
 
 		<p:outputLabel  value="Complemento: " />
 		<p:inputText id="complemento" maxlength="20" size="20" label="complemento"
-			value="#{empresaBean.endereco.complemento}" required="false"
+			value="#{empresaBean.empresa.complemento}" required="false"
 			requiredMessage="Preencha o campo complemento">
 		</p:inputText>
 
 		<p:outputLabel  value="CEP: " />
 		<p:inputMask size="18" mask="99999-999" id="cep"
-			value="#{empresaBean.endereco.cep}" required="true"
+			value="#{empresaBean.empresa.cep}" required="true"
 			requiredMessage="Preencha o campo CEP corretamente">
 		</p:inputMask>
 
 		<p:outputLabel  value="Telefone: " />
 		<p:inputMask size="15" mask="(99) 9999-9999" id="tel"
-			value="#{empresaBean.endereco.telefone}" required="false"
+			value="#{empresaBean.empresa.telefone}" required="false"
 			requiredMessage="Preencha o campo telefone">
 			<f:validateLength minimum="8" maximum="18"></f:validateLength>
 		</p:inputMask>
 
 		<p:outputLabel   value="Celular: " />
 		<p:inputMask size="15" mask="(99) 9 9999-9999" id="cel"
-			value="#{empresaBean.endereco.celular}" required="false"
+			value="#{empresaBean.empresa.celular}" required="false"
 			requiredMessage="Preencha o campo celular">
 			<f:validateLength minimum="10" maximum="17"></f:validateLength>
 		</p:inputMask>

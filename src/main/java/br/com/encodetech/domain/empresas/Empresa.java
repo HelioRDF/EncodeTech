@@ -11,10 +11,9 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
-import org.jboss.logging.annotations.Message;
-
 import br.com.encodetech.domain.complementos.GenericDomain;
-import br.com.encodetech.domain.localizacao.Endereco;
+import br.com.encodetech.domain.localizacao.Cidade;
+import br.com.encodetech.domain.localizacao.Estado;
 
 
 /**
@@ -84,9 +83,34 @@ public class Empresa extends GenericDomain {
 	@Column(length = 33,unique=true)
 	private String email;
 	
+	@JoinColumn
 	@OneToOne
-	@JoinColumn()
-	private Endereco endereco;
+	private Estado estado;
+
+	@JoinColumn
+	@OneToOne
+	private Cidade cidade;
+
+	@Column(length = 95)
+	private String rua;
+
+	@Column(length = 6)
+	private String numero;
+
+	@Column(length = 95)
+	private String bairro;
+
+	@Column(length = 11)
+	private String cep;
+
+	@Column(length = 90)
+	private String complemento;
+
+	@Column(length = 20)
+	private String telefone;
+
+	@Column(length = 20)
+	private String celular;
 	
 	
 
@@ -162,14 +186,79 @@ public class Empresa extends GenericDomain {
 		this.cnpj = cnpj;
 	}
 
-	public Endereco getEndereco() {
-		return endereco;
+
+	public Estado getEstado() {
+		return estado;
 	}
 
-	public void setEndereco(Endereco endereco) {
-		this.endereco = endereco;
+	public void setEstado(Estado estado) {
+		this.estado = estado;
 	}
-	
+
+	public Cidade getCidade() {
+		return cidade;
+	}
+
+	public void setCidade(Cidade cidade) {
+		this.cidade = cidade;
+	}
+
+	public String getRua() {
+		return rua;
+	}
+
+	public void setRua(String rua) {
+		this.rua = rua;
+	}
+
+	public String getNumero() {
+		return numero;
+	}
+
+	public void setNumero(String numero) {
+		this.numero = numero;
+	}
+
+	public String getBairro() {
+		return bairro;
+	}
+
+	public void setBairro(String bairro) {
+		this.bairro = bairro;
+	}
+
+	public String getCep() {
+		return cep;
+	}
+
+	public void setCep(String cep) {
+		this.cep = cep;
+	}
+
+	public String getComplemento() {
+		return complemento;
+	}
+
+	public void setComplemento(String complemento) {
+		this.complemento = complemento;
+	}
+
+	public String getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
+
+	public String getCelular() {
+		return celular;
+	}
+
+	public void setCelular(String celular) {
+		this.celular = celular;
+	}
+
 	public String getEmail() {
 		return email;
 	}
@@ -184,7 +273,7 @@ public class Empresa extends GenericDomain {
 	public String toString() {
 		return "Empresa [dataCadastro=" + dataCadastro + ", status=" + status + ", nomeEmpresa=" + nomeEmpresa
 				+ ", senha=" + senha + ", seguimento=" + seguimento + ", descricao=" + descricao + ", cnpj=" + cnpj
-				+ ", email=" + email + ", endereco=" + endereco + "]";
+				+ ", email=" + email  +  "]";
 	}
 	
 	

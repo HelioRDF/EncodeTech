@@ -15,7 +15,6 @@ import org.omnifaces.util.Messages;
 import org.primefaces.context.RequestContext;
 
 import br.com.encodetech.dao.localizacao.CidadeDAO;
-import br.com.encodetech.dao.localizacao.EnderecoDAO;
 import br.com.encodetech.dao.localizacao.EstadoDAO;
 import br.com.encodetech.dao.usuarios.AtividadesProfissionaisDAO;
 import br.com.encodetech.dao.usuarios.ExperienciaProfissionalDAO;
@@ -23,7 +22,6 @@ import br.com.encodetech.dao.usuarios.FormacaoAcademicaDAO;
 import br.com.encodetech.dao.usuarios.InformacoesAdicionaisDAO;
 import br.com.encodetech.dao.usuarios.UsuarioDAO;
 import br.com.encodetech.domain.localizacao.Cidade;
-import br.com.encodetech.domain.localizacao.Endereco;
 import br.com.encodetech.domain.localizacao.Estado;
 import br.com.encodetech.domain.usuarios.AtividadesProfissionais;
 import br.com.encodetech.domain.usuarios.ExperienciaProfissional;
@@ -59,9 +57,6 @@ public class UsuarioBean implements Serializable {
 	
 	private Boolean telaEditar =false;
 
-	private Endereco endereco;
-	private EnderecoDAO enderecoDAO;
-
 	private Boolean botaoEditar = false;
 	private Boolean botaoSalvar = false;
 
@@ -92,41 +87,29 @@ public class UsuarioBean implements Serializable {
 	// Salvar usuário
 	// -------------------------------------------------------------------------------------
 	public void salvar() {
-		Boolean permitir =dao.validarEmail(usuario.getEmail());
-		
-		if(!permitir){
-			
-			Messages.addGlobalError("O e-mail já existe ... ");
-			
-			return;
-			
-		}
-	
-		
-			
-		try {
-			
+		Boolean permitir = dao.validarEmail(usuario.getEmail());
 
-			enderecoDAO.salvar(endereco);
-			
-			
-			//Cria um hash e criptografa a senha
+		if (!permitir) {
+
+			Messages.addGlobalError("O e-mail já existe ... ");
+
+			return;
+
+		}
+
+		try {
+
+			// Cria um hash e criptografa a senha
 			SimpleHash hash = new SimpleHash("md5", usuario.getSenhaSemCriptografia());
 			usuario.setSenha(hash.toHex());
-			
-			
-			usuario.setEndereco(endereco);
+
 			usuario.setDataCadastro(new Date());
-			
-			
-			
+
 			dao.salvar(usuario);
 
 			Messages.addGlobalInfo("Usuário(a) " + usuario.getNome() + ", salvo com sucesso.");
 
-		} catch (Exception e) {
-			
-			
+		} catch (Exception e) {			
 			
 			
 			
@@ -247,8 +230,7 @@ public class UsuarioBean implements Serializable {
 		
 
 		usuario = new Usuario();
-		endereco = new Endereco();
-		enderecoDAO = new EnderecoDAO();
+		
 		dao = new UsuarioDAO();
 
 		
@@ -263,7 +245,7 @@ public class UsuarioBean implements Serializable {
 
 		usuario = new Usuario();
 		dao = new UsuarioDAO();
-		endereco = new Endereco();
+	
 	}
 
 	// Carregar
@@ -480,52 +462,36 @@ public class UsuarioBean implements Serializable {
 	// Editar usuário
 	// -------------------------------------------------------------------------------------------
 	public void editar() {
-		
-//		
-//		Boolean permitir =dao.validarEmail(usuario.getEmail());
-//		
-//		if(!permitir){
-//			
-//			Messages.addGlobalError("O e-mail já existe ... ");
-//			
-//			return;
-//			
-//		}
+
+		//
+		// Boolean permitir =dao.validarEmail(usuario.getEmail());
+		//
+		// if(!permitir){
+		//
+		// Messages.addGlobalError("O e-mail já existe ... ");
+		//
+		// return;
+		//
+		// }
 
 		try {
 
-			
-//			listarInfos();
-			
-			enderecoDAO= new EnderecoDAO();
-			dao = new UsuarioDAO();
-			
-			
-			endereco.setEstado(estado);
-			usuario.setEndereco(endereco);
-			
-			
-			
-			
-			
-			enderecoDAO.editar(endereco);
+			// listarInfos();
+
 			dao.editar(usuario);
-			
-			auxCidade=usuario.getEndereco().getCidade().getNome() ;
-			auxEstado=usuario.getEndereco().getCidade().getEstado().getNome();
+
+			auxCidade = usuario.getCidade().getNome();
+			auxEstado = usuario.getCidade().getEstado().getNome();
 
 			Messages.addGlobalInfo("Usuário(a) ' " + usuario.getNome() + "' Editado com sucesso!!!");
 
 		} catch (Exception e) {
-			
 
-			
 			Messages.addGlobalError("Erro ao Editar Usuário(a) '" + usuario.getNome() + "'");
-			System.out.println("Editar Erro:"+ e.getMessage());
+			System.out.println("Editar Erro:" + e.getMessage());
 
 		} finally {
 
-			
 		}
 
 	}
@@ -595,15 +561,15 @@ public class UsuarioBean implements Serializable {
 			
 			usuario = new Usuario();
 			dao = new UsuarioDAO();
-			endereco = new Endereco();
-
+	
+			dao = new UsuarioDAO();	
+			
 			usuario = (Usuario) evento.getComponent().getAttributes().get("meuSelect");
 			Messages.addGlobalInfo("Seleção: " + usuario.getNome());
 			
-			endereco = usuario.getEndereco();
-						
-			auxCidade=usuario.getEndereco().getCidade().getNome() ;
-			auxEstado=usuario.getEndereco().getCidade().getEstado().getNome();
+									
+			auxCidade=usuario.getCidade().getNome() ;
+			auxEstado=usuario.getCidade().getEstado().getNome();
 			
 			listarInfos();
 			filtrarCidadeTwo();
@@ -753,7 +719,7 @@ public class UsuarioBean implements Serializable {
 			
 			
 			auxCidade="Selecione uma Cidade";			
-			usuario.setEndereco(null);
+			
 			
 			
 
@@ -804,13 +770,6 @@ public class UsuarioBean implements Serializable {
 		this.listaUsuario = listaUsuario;
 	}
 
-	public Endereco getEndereco() {
-		return endereco;
-	}
-
-	public void setEndereco(Endereco endereco) {
-		this.endereco = endereco;
-	}
 
 	public List<Cidade> getListaCidade() {
 		return listaCidade;

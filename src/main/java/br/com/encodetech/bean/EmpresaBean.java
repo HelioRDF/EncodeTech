@@ -14,11 +14,9 @@ import org.primefaces.context.RequestContext;
 
 import br.com.encodetech.dao.empresas.EmpresaDAO;
 import br.com.encodetech.dao.localizacao.CidadeDAO;
-import br.com.encodetech.dao.localizacao.EnderecoDAO;
 import br.com.encodetech.dao.localizacao.EstadoDAO;
 import br.com.encodetech.domain.empresas.Empresa;
 import br.com.encodetech.domain.localizacao.Cidade;
-import br.com.encodetech.domain.localizacao.Endereco;
 import br.com.encodetech.domain.localizacao.Estado;
 
 /**
@@ -47,8 +45,8 @@ public class EmpresaBean implements Serializable {
 	private String auxEstado=" Selecione um Estado";
 	
 	
-	private Endereco endereco;
-	private EnderecoDAO enderecoDAO;
+	
+	
 	
 
 	private Boolean botaoEditar =false;
@@ -70,8 +68,8 @@ public class EmpresaBean implements Serializable {
 			empresa.setSenha(hash.toHex());
 			
 			empresa.setDataCadastro(new Date());
-			enderecoDAO.salvar(endereco);
-			empresa.setEndereco(endereco);
+		
+			
 			
 			dao.salvar(empresa);
 			Messages.addGlobalInfo("Empresa " + empresa.getNomeEmpresa() + ", salva com sucesso.");
@@ -100,8 +98,7 @@ public class EmpresaBean implements Serializable {
 		botaoSalvar=true;
 		telaEditar = false;
 		empresa = new Empresa();
-		endereco = new Endereco();
-		enderecoDAO = new EnderecoDAO();
+		
 		dao = new EmpresaDAO();
 		auxCidade="Selecione uma Cidade";
 		auxEstado=" Selecione um Estado";
@@ -162,18 +159,15 @@ public class EmpresaBean implements Serializable {
 
 			listarInfos();
 			
-			enderecoDAO= new EnderecoDAO();
 			dao = new EmpresaDAO();
 			
-			endereco.setEstado(estado);
-			empresa.setEndereco(endereco);
 			
-			enderecoDAO.merge(endereco);
+			
 			dao.merge(empresa);
 			
 
-			auxCidade=empresa.getEndereco().getCidade().getNome() ;
-			auxEstado=empresa.getEndereco().getCidade().getEstado().getNome();
+			auxCidade=empresa.getCidade().getNome() ;
+			auxEstado=empresa.getCidade().getEstado().getNome();
 			
 			Messages.addGlobalInfo("Usuário(a) ' " + empresa.getNomeEmpresa() + "' Editado com sucesso!!!");
 
@@ -227,10 +221,10 @@ public class EmpresaBean implements Serializable {
 			
 			empresa = (Empresa) evento.getComponent().getAttributes().get("meuSelect");
 			Messages.addGlobalInfo("Seleção: " + empresa.getNomeEmpresa());
-			endereco=empresa.getEndereco();
 			
-			auxCidade=empresa.getEndereco().getCidade().getNome() ;
-			auxEstado=empresa.getEndereco().getCidade().getEstado().getNome();
+			
+			auxCidade=empresa.getCidade().getNome() ;
+			auxEstado=empresa.getCidade().getEstado().getNome();
 			
 			listarInfos();
 			filtrarCidadeTwo();
@@ -275,7 +269,7 @@ public class EmpresaBean implements Serializable {
 			
 			
 			auxCidade="Selecione uma Cidade";			
-			empresa.setEndereco(null);
+			
 			
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -365,13 +359,7 @@ public class EmpresaBean implements Serializable {
 		this.listaEstado = listaEstado;
 	}
 
-	public Endereco getEndereco() {
-		return endereco;
-	}
 
-	public void setEndereco(Endereco endereco) {
-		this.endereco = endereco;
-	}
 
 	public Estado getEstado() {
 		return estado;

@@ -195,18 +195,18 @@
 						<f:convertDateTime locale="pt_BR" />
 					</h:outputText>
 
-					<h:outputText value="Telefone: #{dataVar.endereco.telefone}" />
-					<h:outputText value="Celular: #{dataVar.endereco.celular}" />
+					<h:outputText value="Telefone: #{dataVar.telefone}" />
+					<h:outputText value="Celular: #{dataVar.celular}" />
 
 
 
-					<h:outputText value="Estado: #{dataVar.endereco.cidade.estado.nome}" />
-					<h:outputText value="Cidade: #{dataVar.endereco.cidade.nome}" />
-					<h:outputText value="Rua: #{dataVar.endereco.rua}" />
-					<h:outputText value="Número: #{dataVar.endereco.numero}" />
-					<h:outputText value="Bairro: #{dataVar.endereco.bairro}" />
-					<h:outputText value="Cep: #{dataVar.endereco.cep}" />
-					<h:outputText value="Complemento: #{dataVar.endereco.complemento}" />
+					<h:outputText value="Estado: #{dataVar.cidade.estado.nome}" />
+					<h:outputText value="Cidade: #{dataVar.cidade.nome}" />
+					<h:outputText value="Rua: #{dataVar.rua}" />
+					<h:outputText value="Número: #{dataVar.numero}" />
+					<h:outputText value="Bairro: #{dataVar.bairro}" />
+					<h:outputText value="Cep: #{dataVar.cep}" />
+					<h:outputText value="Complemento: #{dataVar.complemento}" />
 
 
 				</p:panelGrid>
@@ -359,43 +359,81 @@ value="/images/calendar (3).png" />
 	<h:panelGrid columns="2" id="dialogpanel2">
 
 
-		<p:outputLabel value="Rua:" />
+
+			<p:outputLabel value="Estado: " for="estado" />
+						<p:selectOneMenu id="estado" filter="true" value="#{usuarioBean.usuario.cidade.estado}"
+							converter="omnifaces.SelectItemsConverter" required="true"
+							requiredMessage="Informe o Estado corretamente">
+
+
+							<f:selectItem itemDisabled="false" noSelectionOption="true"
+								itemLabel="#{usuarioBean.auxEstado}" value="#{usuarioBean.usuario.cidade.estado}"/>
+
+
+							<f:selectItems value="#{usuarioBean.listaEstado}" var="estado"
+								itemValue="#{estado}"
+								itemLabel="#{estado.nome} - #{estado.sigla}" />
+							<p:ajax listener="#{usuarioBean.filtrarCidade}"
+								update=":dialogform:cidade"></p:ajax>
+						</p:selectOneMenu>
+
+
+
+						<p:outputLabel value="Cidade: " for="cidade" />
+						<p:selectOneMenu id="cidade" filter="true" required="true"
+							requiredMessage="Informe a Cidade corretamente"
+							converter="omnifaces.SelectItemsConverter"
+							
+							value="#{usuarioBean.usuario.cidade}" >
+
+					<f:selectItem itemDisabled="false" noSelectionOption="true"
+									itemLabel="#{usuarioBean.auxCidade}" value="#{usuarioBean.usuario.cidade.estado}"/>
+
+
+							<f:selectItems value="#{usuarioBean.listaCidade}" var="cidade"
+								itemValue="#{cidade}" itemLabel="#{cidade.nome}" />
+						</p:selectOneMenu>
+
+
+
+
+						<p:outputLabel value="Rua:" />
 		<p:inputText maxlength="30" size="23" label="rua"
-			value="#{usuarioBean.endereco.rua}" required="true">
+			value="#{usuarioBean.usuario.rua}" required="true">
 		</p:inputText>
 
 		<p:outputLabel value="Número: "></p:outputLabel>
-		<p:inputText maxlength="5" size="10" value="#{usuarioBean.endereco.numero}"
+		<p:inputText maxlength="5" size="10" value="#{usuarioBean.usuario.numero}"
 			required="true" requiredMessage="Preencha o campo Número">
 		</p:inputText>
 
 		<p:outputLabel value="Bairro:"></p:outputLabel>
-		<p:inputText maxlength="20" size="20" value="#{usuarioBean.endereco.bairro}"
+		<p:inputText maxlength="20" size="20" value="#{usuarioBean.usuario.bairro}"
 			required="true" requiredMessage="Preencha o campo bairro">
 		</p:inputText>
 
 		<p:outputLabel value="Complemento: " />
 		<p:inputText maxlength="20" id="complemento" size="20" label="complemento"
-			value="#{usuarioBean.endereco.complemento}" required="false"
+			value="#{usuarioBean.usuario.complemento}" required="false"
 			requiredMessage="Preencha o campo complemento">
 		</p:inputText>
 
 		<p:outputLabel value="CEP: " />
 		<p:inputMask  size="18" mask="99999-999" id="cep"
-			value="#{usuarioBean.endereco.cep}" required="true"
+			value="#{usuarioBean.usuario.cep}" required="true"
 			requiredMessage="Preencha o campo CEP">
 		</p:inputMask>
 
 		<p:outputLabel value="Telefone: " />
 		<p:inputMask size="15" mask="(99) 9999-9999" id="tel"
-			value="#{usuarioBean.endereco.telefone}" required="false"
+			value="#{usuarioBean.usuario.telefone}" required="false"
 			requiredMessage="Preencha o campo telefone">
 			<f:validateLength minimum="8" maximum="18"></f:validateLength>
 		</p:inputMask>
 
 		<p:outputLabel value="Celular: " />
 		<p:inputMask size="15" mask="(99) 9 9999-9999" id="cel"
-			value="#{usuarioBean.endereco.celular}" required="false"
+			value="#{usuarioBean.usuario.celular}" required="false"
 			requiredMessage="Preencha o campo celular">
 			<f:validateLength minimum="10" maximum="17"></f:validateLength>
 		</p:inputMask>
