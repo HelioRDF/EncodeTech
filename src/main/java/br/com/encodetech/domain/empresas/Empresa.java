@@ -83,9 +83,6 @@ public class Empresa extends GenericDomain {
 	@Column(length = 33,unique=true)
 	private String email;
 	
-	@JoinColumn
-	@OneToOne
-	private Estado estado;
 
 	@JoinColumn
 	@OneToOne
@@ -187,13 +184,6 @@ public class Empresa extends GenericDomain {
 	}
 
 
-	public Estado getEstado() {
-		return estado;
-	}
-
-	public void setEstado(Estado estado) {
-		this.estado = estado;
-	}
 
 	public Cidade getCidade() {
 		return cidade;
@@ -266,16 +256,18 @@ public class Empresa extends GenericDomain {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
-	
 
 	@Override
 	public String toString() {
 		return "Empresa [dataCadastro=" + dataCadastro + ", status=" + status + ", nomeEmpresa=" + nomeEmpresa
-				+ ", senha=" + senha + ", seguimento=" + seguimento + ", descricao=" + descricao + ", cnpj=" + cnpj
-				+ ", email=" + email  +  "]";
+				+ ", senha=" + senha + ", senhaSemCriptografia=" + senhaSemCriptografia + ", seguimento=" + seguimento
+				+ ", descricao=" + descricao + ", cnpj=" + cnpj + ", email=" + email + ", cidade=" + cidade + ", rua="
+				+ rua + ", numero=" + numero + ", bairro=" + bairro + ", cep=" + cep + ", complemento=" + complemento
+				+ ", telefone=" + telefone + ", celular=" + celular + "]";
 	}
 	
+	
+
 	
 	
 	

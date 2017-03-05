@@ -360,39 +360,55 @@ value="/images/calendar (3).png" />
 
 
 
-			<p:outputLabel value="Estado: " for="estado" />
-						<p:selectOneMenu id="estado" filter="true" value="#{usuarioBean.usuario.cidade.estado}"
-							converter="omnifaces.SelectItemsConverter" required="true"
+
+
+
+
+
+
+						
+						
+					
+						<p:outputLabel value="Estado: " />
+						<p:selectOneMenu filter="true" value="#{usuarioBean.estado}"
+							converter="omnifaces.SelectItemsConverter" required="#{!usuarioBean.botaoEditar}"
 							requiredMessage="Informe o Estado corretamente">
 
 
-							<f:selectItem itemDisabled="false" noSelectionOption="true"
-								itemLabel="#{usuarioBean.auxEstado}" value="#{usuarioBean.usuario.cidade.estado}"/>
+							<f:selectItem noSelectionOption="true" 
+								itemLabel="#{usuarioBean.auxEstado}" />
 
 
-							<f:selectItems value="#{usuarioBean.listaEstado}" var="estado"
-								itemValue="#{estado}"
-								itemLabel="#{estado.nome} - #{estado.sigla}" />
+							<f:selectItems value="#{usuarioBean.listaEstado}"
+								var="es" itemValue="#{es}"
+								itemLabel="#{es.nome} - #{es.sigla}" />
 							<p:ajax listener="#{usuarioBean.filtrarCidade}"
 								update=":dialogform:cidade"></p:ajax>
 						</p:selectOneMenu>
 
 
+						<p:outputLabel value="Cidade: " />
+						<p:selectOneMenu id="cidade" filter="true"
+							value="#{usuarioBean.usuario.cidade}"
+							converter="omnifaces.SelectItemsConverter" required="#{!usuarioBean.botaoEditar}"
+							requiredMessage="Informe a Cidade corretamente">
 
-						<p:outputLabel value="Cidade: " for="cidade" />
-						<p:selectOneMenu id="cidade" filter="true" required="true"
-							requiredMessage="Informe a Cidade corretamente"
-							converter="omnifaces.SelectItemsConverter"
-							
-							value="#{usuarioBean.usuario.cidade}" >
-
-					<f:selectItem itemDisabled="false" noSelectionOption="true"
-									itemLabel="#{usuarioBean.auxCidade}" value="#{usuarioBean.usuario.cidade.estado}"/>
+							<f:selectItem noSelectionOption="true" 
+								itemLabel="#{usuarioBean.auxCidade}" />
 
 
-							<f:selectItems value="#{usuarioBean.listaCidade}" var="cidade"
-								itemValue="#{cidade}" itemLabel="#{cidade.nome}" />
+							<f:selectItems value="#{usuarioBean.listaCidade}"
+								var="ci" itemValue="#{ci}" itemLabel="#{ci.nome}" />
 						</p:selectOneMenu>
+
+						
+						
+						
+						
+						
+						
+						
+						
 
 
 

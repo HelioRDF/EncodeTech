@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.event.ActionEvent;
@@ -28,22 +29,30 @@ import br.com.encodetech.domain.localizacao.Estado;
  * incorreta", null));
  */
 
-@SuppressWarnings("serial")
+
 @ManagedBean
 @SessionScoped
 public class EmpresaBean implements Serializable {
 
+
+
+	private static final long serialVersionUID = 1L;
+	
 	private Empresa empresa;
+	private Estado estado;
+	Cidade cidade = new Cidade();
+	Cidade cidadeAux = new Cidade();
+	
 	private EmpresaDAO dao;
+	private CidadeDAO cidadeDao;
+	private EstadoDAO estadoDao;
+	
 	private List<Empresa> listaEmpresa;
 	private List<Cidade> listaCidade;
 	private List<Estado> listaEstado;
-	private CidadeDAO cidadeDao;
-	private String auxCidade="Selecione uma Cidade";
-	private EstadoDAO estadoDao;
-	private Estado estado;
-	private String auxEstado=" Selecione um Estado";
 	
+	private String auxCidade="Selecione uma Cidade";	
+	private String auxEstado=" Selecione um Estado";
 	
 	
 	
@@ -52,6 +61,8 @@ public class EmpresaBean implements Serializable {
 	private Boolean botaoEditar =false;
 	private Boolean botaoSalvar =false;
 	private Boolean telaEditar =false;
+	private String validarCampos ="";
+	
 	
 	
 	
@@ -65,10 +76,10 @@ public class EmpresaBean implements Serializable {
 			
 			//Cria um hash e criptografa a senha
 			SimpleHash hash = new SimpleHash("md5", empresa.getSenhaSemCriptografia());
-			empresa.setSenha(hash.toHex());
-			
+			empresa.setSenha(hash.toHex());			
 			empresa.setDataCadastro(new Date());
-		
+			
+			empresa.setCidade(cidade);
 			
 			
 			dao.salvar(empresa);
@@ -96,12 +107,13 @@ public class EmpresaBean implements Serializable {
 		telaEditar=false;
 		botaoEditar=false;
 		botaoSalvar=true;
-		telaEditar = false;
+	
 		empresa = new Empresa();
-		
 		dao = new EmpresaDAO();
+		
 		auxCidade="Selecione uma Cidade";
 		auxEstado=" Selecione um Estado";
+		
 		System.out.println("Método novo");
 
 	}
@@ -111,13 +123,16 @@ public class EmpresaBean implements Serializable {
 	public void fechar() {
 		RequestContext.getCurrentInstance().reset("dialogform");
 		System.out.println("Método Fechar");
+		empresa = new Empresa();
+		dao = new EmpresaDAO();
+	
 	}
 
 	// -------------------------------------------------------------------------------------------
 	public void carregar() {
 
 		try {
-			empresa = new Empresa();
+			
 			dao = new EmpresaDAO();
 			listaEmpresa = dao.listar();
 
@@ -156,26 +171,30 @@ public class EmpresaBean implements Serializable {
 	public void editar() {
 
 		try {
-
-			listarInfos();
-			
+				
 			dao = new EmpresaDAO();
 			
 			
+			if(cidade==null){
+				cidade=cidadeAux;
+			}
+			System.out.println("\nEditar");
+			System.out.println("Cidade >>>"+cidade);
+			System.out.println("CidadeAux >>>"+cidade);
 			
-			dao.merge(empresa);
 			
+			empresa.setCidade(cidade);
+			dao.editar(empresa);
+			validarCampos="ok";
+			Messages.addGlobalInfo("Empresa: '" + empresa.getNomeEmpresa() + "' Editado com sucesso!!!");
 
-			auxCidade=empresa.getCidade().getNome() ;
-			auxEstado=empresa.getCidade().getEstado().getNome();
-			
-			Messages.addGlobalInfo("Usuário(a) ' " + empresa.getNomeEmpresa() + "' Editado com sucesso!!!");
-
-		} catch (Exception e) {
-			Messages.addGlobalError("Erro ao Editar Usuário(a) '" + empresa.getNomeEmpresa() + "'");
+		} catch (NullPointerException e) {
+			Messages.addGlobalError("Erro ao Editar (Método editar)'" + empresa.getNomeEmpresa() + "'");
+	
 
 		} finally {
 
+			
 			fechar();
 
 		}
@@ -192,7 +211,6 @@ public class EmpresaBean implements Serializable {
 			//Cria um hash e criptografa a senha
 			SimpleHash hash = new SimpleHash("md5", empresa.getSenhaSemCriptografia());
 			empresa.setSenha(hash.toHex());
-			
 			dao = new EmpresaDAO();
 			dao.merge(empresa);
 			Messages.addGlobalInfo("Usuário Editado com sucesso: " + empresa.getNomeEmpresa());
@@ -211,30 +229,85 @@ public class EmpresaBean implements Serializable {
 	// Instanciar
 	// -------------------------------------------------------------------------------------------
 
-	public void getinstancia(ActionEvent evento) {
+	
+	public String getinstancia(ActionEvent evento) {
 
 		try {
+
 			
-			botaoSalvar=false;
-			botaoEditar=true;
-			telaEditar = true;
 			
+		
 			empresa = (Empresa) evento.getComponent().getAttributes().get("meuSelect");
+			System.out.println("GetInstancia");
+						
+		
+			
+			
+
+			
 			Messages.addGlobalInfo("Seleção: " + empresa.getNomeEmpresa());
+			return "xxxx";
 			
-			
-			auxCidade=empresa.getCidade().getNome() ;
-			auxEstado=empresa.getCidade().getEstado().getNome();
-			
-			listarInfos();
-			filtrarCidadeTwo();
 
 		} catch (Exception e) {
 			Messages.addGlobalError("Erro ao Editar: " + empresa.getNomeEmpresa());
+			return "xxxx";
 
+		}
+		finally{
+			
 		}
 
 	}
+	
+	// ------------------------------------------------------------------------------------------------------------------------------------------------------
+
+		public void telaEditarObj(ActionEvent evento) {
+			
+			try {
+				
+				System.out.println("\ntelaEditarOBJ");
+				botaoSalvar = false;
+				botaoEditar = true;
+				telaEditar = true;
+				
+				CidadeDAO cidDAO = new CidadeDAO();				
+				Cidade cid = new Cidade();
+				
+				empresa = (Empresa) evento.getComponent().getAttributes().get("meuSelect");
+				
+				
+
+				long num = cidDAO.buscarOBJCidadeEmpresa(empresa);
+				System.out.println("Num:"+num);
+	
+				cid = cidDAO.buscarObjCidadePorCodigo(num);
+				System.out.println("Cid:"+cid);
+				
+				if(cid==null){
+					
+					auxCidade="Selecione uma Cidade";
+					auxEstado=" Selecione um Estado";
+					
+				}else {
+				auxCidade = cid.getNome();
+				auxEstado = cid.getEstado().getNome();
+				cidadeAux=cid;
+				}
+				
+			
+				System.out.println("Estado Aux:"+auxEstado);
+				System.out.println("Cidade Aux:"+auxCidade);
+				
+				
+			} catch (Exception e) {
+				System.out.println("Erro no posGET");
+			}
+			
+		
+			
+		}
+
 
 	// ------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -243,10 +316,8 @@ public class EmpresaBean implements Serializable {
 		try {
 
 			estadoDao = new EstadoDAO();
-			
-
 			listaEstado = estadoDao.listar("nome");
-			listaCidade = cidadeDao.listar("nome");
+			
 
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -266,8 +337,6 @@ public class EmpresaBean implements Serializable {
 			
 			cidadeDao = new CidadeDAO();
 			listaCidade = cidadeDao.buscarPorEstado(estado.getCodigo());	
-			
-			
 			auxCidade="Selecione uma Cidade";			
 			
 			
@@ -277,29 +346,28 @@ public class EmpresaBean implements Serializable {
 		
 	}
 		
-
+	// Listar Estado
 	// ------------------------------------------------------------------------------------------------------------------------------------------------------
 
-	
-	public void filtrarCidadeTwo() {
+	@PostConstruct
+	public void BuscarEstados() {
 
 		try {
-	
-			cidadeDao = new CidadeDAO();
-			listaCidade = cidadeDao.buscarPorEstado(estado.getCodigo());		
-			
+
+			System.out.println("Listando estados...");
+
+			estadoDao = new EstadoDAO();
+			listaEstado = estadoDao.listar("nome");
 
 		} catch (Exception e) {
 			// TODO: handle exception
+		} finally {
+
 		}
 
 	}
-
-	
-	
 	// ------------------------------------------------------------------------------------------------------------------------------------------------------
 
-	
 	
 	public Empresa getEmpresa() {
 		return empresa;
@@ -392,12 +460,30 @@ public class EmpresaBean implements Serializable {
 	public void setAuxEstado(String auxEstado) {
 		this.auxEstado = auxEstado;
 	}
+
+	public Cidade getCi() {
+		return cidade;
+	}
+
+	public void setCi(Cidade ci) {
+		this.cidade = ci;
+	}
+
+	public String getValidarCampos() {
+		return validarCampos;
+	}
+
+	public void setValidarCampos(String validarCampos) {
+		this.validarCampos = validarCampos;
+	}
+
+
 	 
 	
 	
 	
 	
-
+	
 
 	// ------------------------------------------------------------------------------------------------------------------------------------------------------
 

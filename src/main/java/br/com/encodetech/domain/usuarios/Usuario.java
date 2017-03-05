@@ -13,7 +13,6 @@ import javax.persistence.Transient;
 
 import br.com.encodetech.domain.complementos.GenericDomain;
 import br.com.encodetech.domain.localizacao.Cidade;
-import br.com.encodetech.domain.localizacao.Estado;
 
 
 /**
@@ -78,10 +77,7 @@ public class Usuario extends GenericDomain {
 	@Column(length = 20, nullable = false)
 	private String sexo;
 	
-	@JoinColumn
-	@OneToOne
-	private Estado estado;
-
+	
 	@JoinColumn
 	@OneToOne
 	private Cidade cidade;
@@ -245,15 +241,6 @@ public class Usuario extends GenericDomain {
 		this.sexo = sexo;
 	}
 
-
-	public Estado getEstado() {
-		return estado;
-	}
-
-
-	public void setEstado(Estado estado) {
-		this.estado = estado;
-	}
 
 
 	public Cidade getCidade() {

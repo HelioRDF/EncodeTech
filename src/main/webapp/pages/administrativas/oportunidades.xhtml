@@ -14,13 +14,6 @@
 
 <h:body >
 
-
-
-
-
-
-
-
 	<!-- _________________________________________________________________________________________________________________________________ -->
 	<!-- Layout -->
 	<p:layout fullPage="true" >
@@ -151,9 +144,10 @@
 
 								</f:selectItems>
 
-								<p:ajax listener="#{oportunidadeBean.BuscarCidade}"
+								<p:ajax listener="#{oportunidadeBean.buscarCidade}"
 									update=":formFiltro:cidadeFiltro:"></p:ajax>
 							</p:selectOneMenu>
+
 
 							
 							<p:selectOneMenu filter="true" id="cidadeFiltro"
@@ -620,39 +614,49 @@
 
 
 
-						<p:outputLabel value="Estado: " />
-						<p:selectOneMenu filter="true" value="#{oportunidadeBean.estado}"
-							converter="omnifaces.SelectItemsConverter" required="true"
-							requiredMessage="Informe o Estado corretamente">
 
 
-							<f:selectItem itemDisabled="false" noSelectionOption="false"
-								itemLabel="#{oportunidadeBean.auxEstado}"
-								itemValue="#{oportunidadeBean.oportunidade.cidade.estado}" />
 
 
-							<f:selectItems value="#{oportunidadeBean.listaEstado}"
-								var="estado" itemValue="#{estado}"
-								itemLabel="#{estado.nome} - #{estado.sigla}" />
-							<p:ajax listener="#{oportunidadeBean.filtrarCidade}"
-								update=":dialogform:cidade"></p:ajax>
-						</p:selectOneMenu>
+					<p:outputLabel value="Estado: " />
+					<p:selectOneMenu filter="true" value="#{oportunidadeBean.estado}"
+						converter="omnifaces.SelectItemsConverter" required="true"
+						requiredMessage="Informe o Estado corretamente">
 
 
-						<p:outputLabel value="Cidade: " />
-						<p:selectOneMenu id="cidade" filter="true"
-							value="#{oportunidadeBean.oportunidade.cidade}"
-							converter="omnifaces.SelectItemsConverter" required="true"
-							requiredMessage="Informe a Cidade corretamente">
-
-							<f:selectItem itemDisabled="false" noSelectionOption="false"
-								itemLabel="#{oportunidadeBean.auxCidade}"
-								itemValue="#{oportunidadeBean.oportunidade.cidade}" />
+						<f:selectItem itemDisabled="false" noSelectionOption="false"
+							itemLabel="#{oportunidadeBean.auxEstado}"
+							itemValue="#{oportunidadeBean.oportunidade.cidade.estado}" />
 
 
-							<f:selectItems value="#{oportunidadeBean.listaCidade}"
-								var="cidade" itemValue="#{cidade}" itemLabel="#{cidade.nome}" />
-						</p:selectOneMenu>
+						<f:selectItems value="#{oportunidadeBean.listaEstado}"
+							var="estado" itemValue="#{estado}"
+							itemLabel="#{estado.nome} - #{estado.sigla}" />
+						<p:ajax listener="#{oportunidadeBean.filtrarCidade}"
+							update=":dialogform:cidade"></p:ajax>
+					</p:selectOneMenu>
+
+
+					<p:outputLabel value="Cidade: " />
+					<p:selectOneMenu id="cidade" filter="true"
+						value="#{oportunidadeBean.oportunidade.cidade}"
+						converter="omnifaces.SelectItemsConverter" required="true"
+						requiredMessage="Informe a Cidade corretamente">
+
+						<f:selectItem itemDisabled="false" noSelectionOption="false"
+							itemLabel="#{oportunidadeBean.auxCidade}"
+							itemValue="#{oportunidadeBean.oportunidade.cidade}" />
+
+
+						<f:selectItems value="#{oportunidadeBean.listaCidade}"
+							var="cidade" itemValue="#{cidade}" itemLabel="#{cidade.nome}" />
+					</p:selectOneMenu>
+					
+					
+					
+						
+						
+						
 
 						<p:outputLabel value="Descrição: " />
 						<p:inputTextarea maxlength="250" rows="3" cols="30"

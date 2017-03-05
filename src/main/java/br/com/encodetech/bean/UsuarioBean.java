@@ -32,57 +32,51 @@ import br.com.encodetech.domain.usuarios.Usuario;
 /**
  * [ Detalhes... ]
  * 
- * 
  * -Mensagen |FacesContext.getCurrentInstance().addMessage(null,new
  * |FacesMessage(FacesMessage.SEVERITY_WARN, "A confirmação de |senha está
  * incorreta", null));
  */
 
-@SuppressWarnings("serial")
 @ManagedBean
 @SessionScoped
 public class UsuarioBean implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+
 	private Usuario usuario;
+	private Estado estado;
+	private FormacaoAcademica formacaoAcademica;
+	private ExperienciaProfissional experienciaProfissional;
+	private AtividadesProfissionais atividadesProfissionais;
+	private InformacoesAdicionais informacoesAdicionais;
+
 	private UsuarioDAO dao;
+	private CidadeDAO cidadeDao;
+	private EstadoDAO estadoDao;
+	private FormacaoAcademicaDAO daoFormacao;
+	private ExperienciaProfissionalDAO daoExperiencia;
+	private AtividadesProfissionaisDAO daoAtividades;
+	private InformacoesAdicionaisDAO daoInfo;
+
 	private List<Usuario> listaUsuario;
 	private List<Cidade> listaCidade;
 	private List<Estado> listaEstado;
-	private CidadeDAO cidadeDao;
-	private String auxCidade="Selecione uma Cidade";
-	
-	private Estado estado;
-	private EstadoDAO estadoDao;
-	private String auxEstado=" Selecione um Estado";
-	
-	private Boolean telaEditar =false;
+	private List<FormacaoAcademica> listaFormacao;
+	private List<ExperienciaProfissional> listaExperiencia;
+	private List<AtividadesProfissionais> listaAtividades;
+	private List<InformacoesAdicionais> listInfo;
 
+	private String auxCidade = "Selecione uma Cidade";
+	private String auxEstado = " Selecione um Estado";
+
+	private Boolean telaEditar = false;
 	private Boolean botaoEditar = false;
 	private Boolean botaoSalvar = false;
-
-	private FormacaoAcademica formacaoAcademica;
-	private List<FormacaoAcademica> listaFormacao;
-	private FormacaoAcademicaDAO daoFormacao;
 	private Boolean botaoFormacao = false;
 	private Boolean statusBoolean = false;
-
-	private ExperienciaProfissional experienciaProfissional;
-	private List<ExperienciaProfissional> listaExperiencia;
-	private ExperienciaProfissionalDAO daoExperiencia;
-	private Boolean botaoExperiencia = false;
-
-	private AtividadesProfissionais atividadesProfissionais;
-	private List<AtividadesProfissionais> listaAtividades;
-	private AtividadesProfissionaisDAO daoAtividades;
 	private Boolean botaoAtividades = false;
-	
-	private InformacoesAdicionais informacoesAdicionais;
-	private List<InformacoesAdicionais> listInfo;
-	private InformacoesAdicionaisDAO daoInfo;
+	private Boolean botaoExperiencia = false;
 	private Boolean botaoInfo;
-	
-
-	
 
 	// Salvar usuário
 	// -------------------------------------------------------------------------------------
@@ -102,17 +96,14 @@ public class UsuarioBean implements Serializable {
 			// Cria um hash e criptografa a senha
 			SimpleHash hash = new SimpleHash("md5", usuario.getSenhaSemCriptografia());
 			usuario.setSenha(hash.toHex());
-
 			usuario.setDataCadastro(new Date());
+			
 
 			dao.salvar(usuario);
-
 			Messages.addGlobalInfo("Usuário(a) " + usuario.getNome() + ", salvo com sucesso.");
 
-		} catch (Exception e) {			
-			
-			
-			
+		} catch (Exception e) {
+
 			Messages.addGlobalError("Não foi possível salvar o usuário, tente novamente mais tarde ... ");
 
 			System.out.println("Erro" + e);
@@ -192,60 +183,61 @@ public class UsuarioBean implements Serializable {
 		}
 	}
 
-	
-	
 	// Salvar Infos
-		// -------------------------------------------------------------------------------------
-		public void salvarInfo() {
+	// -------------------------------------------------------------------------------------
+	public void salvarInfo() {
 
-			try {
-				if (botaoInfo = true) {
-					informacoesAdicionais.setUsuario(usuario);
-					daoInfo.merge(informacoesAdicionais);
-					Messages.addGlobalInfo("Informação salva com sucesso: ");
-					carregarCurriculo();
-				}
-
-			} catch (Exception e) {
-				Messages.addGlobalError("Não foi possível salvar as Informações, Preencha os campos corretamente. ");
-
-			} finally {
-
+		try {
+			if (botaoInfo = true) {
+				informacoesAdicionais.setUsuario(usuario);
+				daoInfo.merge(informacoesAdicionais);
+				Messages.addGlobalInfo("Informação salva com sucesso: ");
+				carregarCurriculo();
 			}
-		}
 
-	
-	
-	
+		} catch (Exception e) {
+			Messages.addGlobalError("Não foi possível salvar as Informações, Preencha os campos corretamente. ");
+
+		} finally {
+
+		}
+	}
+
 	// Novo
 	// -------------------------------------------------------------------------------------------
 	public void novo() {
-		
-		telaEditar=false;
+
 		listarInfos();
+		telaEditar = false;
 		botaoEditar = false;
 		botaoSalvar = true;
-		auxCidade="Selecione uma Cidade";
-		auxEstado=" Selecione um Estado";
 		
-
 		usuario = new Usuario();
-		
 		dao = new UsuarioDAO();
-
 		
+		auxCidade = "Selecione uma Cidade";
+		auxEstado = " Selecione um Estado";
+		
+		System.out.println("Método novo");
+		
+
 	}
 
 	// Fechar
 	// -------------------------------------------------------------------------------------------
 	public void fechar() {
-		System.out.println("Método fechar");
+		
 
 		RequestContext.getCurrentInstance().reset("dialogform");
 
 		usuario = new Usuario();
 		dao = new UsuarioDAO();
-	
+		
+		auxCidade = "Selecione uma Cidade";
+        auxEstado = " Selecione um Estado";
+		
+		System.out.println("Método fechar");
+
 	}
 
 	// Carregar
@@ -253,7 +245,7 @@ public class UsuarioBean implements Serializable {
 	public void carregar() {
 
 		try {
-			usuario = new Usuario();
+			
 			dao = new UsuarioDAO();
 			listaUsuario = dao.listar();
 
@@ -270,12 +262,10 @@ public class UsuarioBean implements Serializable {
 	// Carregar Curriculo
 	// -------------------------------------------------------------------------------------------
 	public void carregarCurriculo() {
-		
 
-		
-			
-		// Atividades Profissionais  ----------------------------------------------------------
-		
+		// Atividades Profissionais
+		// ----------------------------------------------------------
+
 		try {
 
 			atividadesProfissionais = new AtividadesProfissionais();
@@ -293,14 +283,13 @@ public class UsuarioBean implements Serializable {
 
 		} catch (Exception e) {
 			Messages.addGlobalError("Falha ao tentar  atualizadar a lista  ");
-		} 
-		
-		// Fim Atividades Profissionais  ----------------------------------------------------------
-		
-		
-		
-		
-		// Experiência  ----------------------------------------------------------
+		}
+
+		// Fim Atividades Profissionais
+		// ----------------------------------------------------------
+
+		// Experiência
+		// ----------------------------------------------------------
 		try {
 
 			experienciaProfissional = new ExperienciaProfissional();
@@ -318,11 +307,12 @@ public class UsuarioBean implements Serializable {
 
 		} catch (Exception e) {
 			Messages.addGlobalError("Falha ao tentar  atualizadar a lista  ");
-		} 
-		// Fim Experiência  ----------------------------------------------------------
-		
-			
-		// Formação Academica  ----------------------------------------------------------
+		}
+		// Fim Experiência
+		// ----------------------------------------------------------
+
+		// Formação Academica
+		// ----------------------------------------------------------
 		try {
 			formacaoAcademica = new FormacaoAcademica();
 			daoFormacao = new FormacaoAcademicaDAO();
@@ -340,14 +330,11 @@ public class UsuarioBean implements Serializable {
 		} catch (Exception e) {
 			Messages.addGlobalError("Falha ao tentar  atualizadar a lista  ");
 		}
-		
-		// Fim Formação Academica  ----------------------------------------------------------
 
-	
-	
+		// Fim Formação Academica
+		// ----------------------------------------------------------
+
 	}
-
-
 
 	// Excluir usuário
 	// -------------------------------------------------------------------------------------------
@@ -434,7 +421,7 @@ public class UsuarioBean implements Serializable {
 		}
 
 	}
-	
+
 	// Excluir Info
 	// -------------------------------------------------------------------------------------------
 	public void excluirInfo(ActionEvent evento) {
@@ -449,15 +436,13 @@ public class UsuarioBean implements Serializable {
 			carregarCurriculo();
 
 		} catch (Exception e) {
-			Messages.addGlobalError("Erro ao Remover: "  + informacoesAdicionais.getCargoPretendido());
+			Messages.addGlobalError("Erro ao Remover: " + informacoesAdicionais.getCargoPretendido());
 
 		} finally {
 
 		}
 
 	}
-	
-	
 
 	// Editar usuário
 	// -------------------------------------------------------------------------------------------
@@ -476,17 +461,38 @@ public class UsuarioBean implements Serializable {
 
 		try {
 
-			// listarInfos();
-
-			dao.editar(usuario);
-
-			auxCidade = usuario.getCidade().getNome();
-			auxEstado = usuario.getCidade().getEstado().getNome();
+			dao = new UsuarioDAO();
+			dao.merge(usuario);
 
 			Messages.addGlobalInfo("Usuário(a) ' " + usuario.getNome() + "' Editado com sucesso!!!");
 
 		} catch (Exception e) {
 
+			Messages.addGlobalError("Erro ao Editar Usuário(a) '" + usuario.getNome() + "'");
+			System.out.println("Editar Erro:" + e.getMessage());
+			System.out.println("Editar Erro:" + e.getCause());
+
+		} finally {
+
+		}
+
+	}
+
+	// Editar Objetivos
+	// -------------------------------------------------------------------------------------------
+	public void editarObjetivos() {
+
+		try {
+
+			listarInfos();
+
+			dao = new UsuarioDAO();
+
+			dao.merge(usuario);
+
+			Messages.addGlobalInfo("Usuário(a) ' " + usuario.getNome() + "' Editado com sucesso!!!");
+
+		} catch (Exception e) {
 			Messages.addGlobalError("Erro ao Editar Usuário(a) '" + usuario.getNome() + "'");
 			System.out.println("Editar Erro:" + e.getMessage());
 
@@ -495,46 +501,17 @@ public class UsuarioBean implements Serializable {
 		}
 
 	}
-	
-	// Editar Objetivos
-		// -------------------------------------------------------------------------------------------
-		public void editarObjetivos() {
 
-			try {
-
-				
-				listarInfos();
-				
-				dao = new UsuarioDAO();
-				
-				dao.merge(usuario);
-				
-				
-				Messages.addGlobalInfo("Usuário(a) ' " + usuario.getNome() + "' Editado com sucesso!!!");
-
-			} catch (Exception e) {
-				Messages.addGlobalError("Erro ao Editar Usuário(a) '" + usuario.getNome() + "'");
-				System.out.println("Editar Erro:"+ e.getMessage());
-
-			} finally {
-
-				
-			}
-
-		}
-	
 	// Salvar Senha
 	// -------------------------------------------------------------------------------------------
 	public void editarSenha() {
 
 		try {
 
-			//Cria um hash e criptografa a senha
+			// Cria um hash e criptografa a senha
 			SimpleHash hash = new SimpleHash("md5", usuario.getSenhaSemCriptografia());
 			usuario.setSenha(hash.toHex());
-
 			dao = new UsuarioDAO();
-
 			dao.merge(usuario);
 			Messages.addGlobalInfo("Usuário Editado com sucesso: " + usuario.getNome());
 
@@ -558,42 +535,27 @@ public class UsuarioBean implements Serializable {
 			telaEditar = true;
 			botaoSalvar = false;
 			botaoEditar = true;
-			
-			usuario = new Usuario();
-			dao = new UsuarioDAO();
-	
-			dao = new UsuarioDAO();	
-			
+			listarInfos();
+
 			usuario = (Usuario) evento.getComponent().getAttributes().get("meuSelect");
 			Messages.addGlobalInfo("Seleção: " + usuario.getNome());
-			
-									
-			auxCidade=usuario.getCidade().getNome() ;
-			auxEstado=usuario.getCidade().getEstado().getNome();
-			
-			listarInfos();
-			filtrarCidadeTwo();
-					
-			
-			
-			System.out.println("Usuário:"+usuario.getNome());
-	
-			
+
+			auxCidade = usuario.getCidade().getNome();
+			auxEstado = usuario.getCidade().getEstado().getNome();
+
+			System.out.println("Usuário:" + usuario.getNome());
+
 		} catch (Exception e) {
 			Messages.addGlobalError("Erro ao Editar: " + usuario.getNome());
-			System.out.println("Erro getinstancia"+ e.getMessage());
+			System.out.println("Erro getinstancia" + e.getMessage());
 
 		}
-		
-		
-	
 
 	}
 
 	// ------------------------------------------------------------------------------------------------------------------------------------------------------
 
 	public void getinstanciaCurriculo(ActionEvent evento) {
-	
 
 		try {
 
@@ -601,8 +563,6 @@ public class UsuarioBean implements Serializable {
 			Messages.addGlobalInfo("Seleção: " + usuario.getNome());
 
 			carregarCurriculo();
-
-			
 
 		} catch (Exception e) {
 			Messages.addGlobalError("Erro ao Editar: " + usuario.getNome());
@@ -666,8 +626,6 @@ public class UsuarioBean implements Serializable {
 
 	}
 
-	
-	
 	// Instancia de Infos
 	// ------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -684,9 +642,7 @@ public class UsuarioBean implements Serializable {
 		}
 
 	}
-	
-	
-	
+
 	// ------------------------------------------------------------------------------------------------------------------------------------------------------
 
 	public void listarInfos() {
@@ -696,7 +652,6 @@ public class UsuarioBean implements Serializable {
 			estadoDao = new EstadoDAO();
 
 			listaEstado = estadoDao.listar("nome");
-			listaCidade = cidadeDao.listar("nome");
 
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -705,23 +660,17 @@ public class UsuarioBean implements Serializable {
 		}
 
 	}
-	
-	//Filtrar Cidade
+
+	// Filtrar Cidade
 	// ------------------------------------------------------------------------------------------------------------------------------------------------------
 
 	public void filtrarCidade() {
 
 		try {
 
-		
 			cidadeDao = new CidadeDAO();
 			listaCidade = cidadeDao.buscarPorEstado(estado.getCodigo());
-			
-			
-			auxCidade="Selecione uma Cidade";			
-			
-			
-			
+			auxCidade = "Selecione uma Cidade";
 
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -729,16 +678,16 @@ public class UsuarioBean implements Serializable {
 
 	}
 
-	//Filtrar Cidade  2, precisei replicar o método, devido a um erro na linha quando chamada dentro do getinstance, por conta do param (actionevent)
+	// Filtrar Cidade 2, precisei replicar o método, devido a um erro na linha
+	// quando chamada dentro do getinstance, por conta do param (actionevent)
 	// ------------------------------------------------------------------------------------------------------------------------------------------------------
 
 	public void filtrarCidadeTwo() {
 
 		try {
-	
+
 			cidadeDao = new CidadeDAO();
-			listaCidade = cidadeDao.buscarPorEstado(estado.getCodigo());		
-			
+			listaCidade = cidadeDao.buscarPorEstado(estado.getCodigo());
 
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -748,8 +697,6 @@ public class UsuarioBean implements Serializable {
 
 	// ------------------------------------------------------------------------------------------------------------------------------------------------------
 
-	
-	
 	public Usuario getUsuario() {
 		return usuario;
 	}
@@ -769,7 +716,6 @@ public class UsuarioBean implements Serializable {
 	public void setListaUsuario(ArrayList<Usuario> listaUsuario) {
 		this.listaUsuario = listaUsuario;
 	}
-
 
 	public List<Cidade> getListaCidade() {
 		return listaCidade;
@@ -938,8 +884,5 @@ public class UsuarioBean implements Serializable {
 	public void setAuxEstado(String auxEstado) {
 		this.auxEstado = auxEstado;
 	}
-	
-	
 
-	
 }

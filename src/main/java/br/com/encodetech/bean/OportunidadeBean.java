@@ -250,7 +250,7 @@ public class OportunidadeBean implements Serializable {
 	// Listar de Cidade
 	// ------------------------------------------------------------------------------------------------------------------------------------------------------
 
-	public void BuscarCidade() {
+	public void buscarCidade() {
 
 		try {
 
