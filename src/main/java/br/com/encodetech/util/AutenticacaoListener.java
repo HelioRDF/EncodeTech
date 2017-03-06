@@ -40,7 +40,7 @@ public class AutenticacaoListener implements PhaseListener {
 			}
 			
 			// Encaminha para a tela principal
-			Faces.navigate("/pages/administrativas/usuario.xhtml");
+			//Faces.navigate("/pages/administrativas/usuario.xhtml");
 			System.out.println("\nAfterPhase:" + event.getPhaseId());
 			System.out.println("LoginBean:" + loginBean);
 			System.out.println("Página Atual:" + paginaAtual);
