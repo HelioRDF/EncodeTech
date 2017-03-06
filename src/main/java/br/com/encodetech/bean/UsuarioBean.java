@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.event.ActionEvent;
@@ -49,7 +50,9 @@ public class UsuarioBean implements Serializable {
 	private ExperienciaProfissional experienciaProfissional;
 	private AtividadesProfissionais atividadesProfissionais;
 	private InformacoesAdicionais informacoesAdicionais;
-
+	Cidade cidade = new Cidade();
+	Cidade cidadeAux = new Cidade();
+		
 	private UsuarioDAO dao;
 	private CidadeDAO cidadeDao;
 	private EstadoDAO estadoDao;
@@ -97,8 +100,8 @@ public class UsuarioBean implements Serializable {
 			SimpleHash hash = new SimpleHash("md5", usuario.getSenhaSemCriptografia());
 			usuario.setSenha(hash.toHex());
 			usuario.setDataCadastro(new Date());
+			usuario.setCidade(cidade);
 			
-
 			dao.salvar(usuario);
 			Messages.addGlobalInfo("Usuário(a) " + usuario.getNome() + ", salvo com sucesso.");
 
@@ -229,13 +232,10 @@ public class UsuarioBean implements Serializable {
 		
 
 		RequestContext.getCurrentInstance().reset("dialogform");
-
 		usuario = new Usuario();
 		dao = new UsuarioDAO();
 		
-		auxCidade = "Selecione uma Cidade";
-        auxEstado = " Selecione um Estado";
-		
+	
 		System.out.println("Método fechar");
 
 	}
@@ -462,7 +462,16 @@ public class UsuarioBean implements Serializable {
 		try {
 
 			dao = new UsuarioDAO();
-			dao.merge(usuario);
+			
+			if(cidade==null){
+				cidade=cidadeAux;
+			}
+			System.out.println("\nEditar");
+			System.out.println("Cidade >>>"+cidade);
+			System.out.println("CidadeAux >>>"+cidade);
+			
+			usuario.setCidade(cidade);
+			dao.editar(usuario);
 
 			Messages.addGlobalInfo("Usuário(a) ' " + usuario.getNome() + "' Editado com sucesso!!!");
 
@@ -473,7 +482,8 @@ public class UsuarioBean implements Serializable {
 			System.out.println("Editar Erro:" + e.getCause());
 
 		} finally {
-
+				
+			fechar();
 		}
 
 	}
@@ -532,16 +542,12 @@ public class UsuarioBean implements Serializable {
 
 		try {
 
-			telaEditar = true;
-			botaoSalvar = false;
-			botaoEditar = true;
-			listarInfos();
+		
 
 			usuario = (Usuario) evento.getComponent().getAttributes().get("meuSelect");
 			Messages.addGlobalInfo("Seleção: " + usuario.getNome());
 
-			auxCidade = usuario.getCidade().getNome();
-			auxEstado = usuario.getCidade().getEstado().getNome();
+	
 
 			System.out.println("Usuário:" + usuario.getNome());
 
@@ -552,6 +558,56 @@ public class UsuarioBean implements Serializable {
 		}
 
 	}
+	
+	// ------------------------------------------------------------------------------------------------------------------------------------------------------
+
+	
+	public void telaEditarObj(ActionEvent evento) {
+		
+		try {
+			
+			System.out.println("\ntelaEditarOBJ");
+			botaoSalvar = false;
+			botaoEditar = true;
+			telaEditar = true;
+			
+			CidadeDAO cidDAO = new CidadeDAO();				
+			Cidade cid = new Cidade();
+			
+			usuario = (Usuario) evento.getComponent().getAttributes().get("meuSelect");
+			
+			
+
+			long num = cidDAO.buscarOBJCidadeUsuario(usuario);
+			System.out.println("Num:"+num);
+
+			cid = cidDAO.buscarObjCidadePorCodigo(num);
+			System.out.println("Cid:"+cid);
+			
+			if(cid==null){
+				
+				auxCidade="Selecione uma Cidade";
+				auxEstado=" Selecione um Estado";
+				
+			}else {
+			auxCidade = cid.getNome();
+			auxEstado = cid.getEstado().getNome();
+			cidadeAux=cid;
+			}
+			
+		
+			System.out.println("Estado Aux:"+auxEstado);
+			System.out.println("Cidade Aux:"+auxCidade);
+			
+			
+		} catch (Exception e) {
+			System.out.println("Erro no posGET");
+		}
+		
+	
+		
+	}
+
 
 	// ------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -695,8 +751,31 @@ public class UsuarioBean implements Serializable {
 
 	}
 
-	// ------------------------------------------------------------------------------------------------------------------------------------------------------
 
+	// Listar Estado
+		// ------------------------------------------------------------------------------------------------------------------------------------------------------
+
+		@PostConstruct
+		public void BuscarEstados() {
+
+			try {
+
+				System.out.println("Listando estados...");
+
+				estadoDao = new EstadoDAO();
+				listaEstado = estadoDao.listar("nome");
+
+			} catch (Exception e) {
+				// TODO: handle exception
+			} finally {
+
+			}
+
+		}
+		// ------------------------------------------------------------------------------------------------------------------------------------------------------
+
+	
+	
 	public Usuario getUsuario() {
 		return usuario;
 	}
@@ -885,4 +964,15 @@ public class UsuarioBean implements Serializable {
 		this.auxEstado = auxEstado;
 	}
 
+	public Cidade getCidade() {
+		return cidade;
+	}
+
+	public void setCidade(Cidade cidade) {
+		this.cidade = cidade;
+	}
+	
+	
+	
+	
 }

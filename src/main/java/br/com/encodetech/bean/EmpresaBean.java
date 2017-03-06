@@ -61,7 +61,7 @@ public class EmpresaBean implements Serializable {
 	private Boolean botaoEditar =false;
 	private Boolean botaoSalvar =false;
 	private Boolean telaEditar =false;
-	private String validarCampos ="";
+
 	
 	
 	
@@ -185,7 +185,7 @@ public class EmpresaBean implements Serializable {
 			
 			empresa.setCidade(cidade);
 			dao.editar(empresa);
-			validarCampos="ok";
+			
 			Messages.addGlobalInfo("Empresa: '" + empresa.getNomeEmpresa() + "' Editado com sucesso!!!");
 
 		} catch (NullPointerException e) {
@@ -461,21 +461,16 @@ public class EmpresaBean implements Serializable {
 		this.auxEstado = auxEstado;
 	}
 
-	public Cidade getCi() {
+	public Cidade getCidade() {
 		return cidade;
 	}
 
-	public void setCi(Cidade ci) {
-		this.cidade = ci;
+	public void setCidade(Cidade cidade) {
+		this.cidade = cidade;
 	}
 
-	public String getValidarCampos() {
-		return validarCampos;
-	}
-
-	public void setValidarCampos(String validarCampos) {
-		this.validarCampos = validarCampos;
-	}
+	
+	
 
 
 	 

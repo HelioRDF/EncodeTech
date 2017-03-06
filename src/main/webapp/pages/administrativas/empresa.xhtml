@@ -110,8 +110,7 @@
 		<!-- Layout Center -->
 		<p:layoutUnit position="center">
 			<h:form id="form">
-				<p:growl id="msgGrowl" life="10000" />
-				<p:message for=":dialogform:btEditar"></p:message>
+				<p:growl id="msgGrowl" life="10000" /> 
 
 				<!-- _________________________________________________________________________________________________________________________________ -->
 				<!-- Informações de cabeçalho da tabela -->
@@ -451,7 +450,7 @@ font-size: 16px; word-spacing:8px; float:left; height:33px;  "
 
 
 
-							<f:selectItem noSelectionOption="true"
+							<f:selectItem noSelectionOption="true" itemDisabled="true" 
 								itemLabel="#{empresaBean.auxEstado}">
 							</f:selectItem>
 
@@ -466,12 +465,12 @@ font-size: 16px; word-spacing:8px; float:left; height:33px;  "
 
 						<p:outputLabel value="Cidade: " />
 						<p:selectOneMenu id="cidade" filter="true"
-							value="#{empresaBean.ci}"
+							value="#{empresaBean.cidade}"
 							converter="omnifaces.SelectItemsConverter"
 							required="#{!empresaBean.botaoEditar}"
 							requiredMessage="Informe a Cidade corretamente">
 
-							<f:selectItem noSelectionOption="true"
+							<f:selectItem noSelectionOption="true" itemDisabled="true" 
 								itemLabel="#{empresaBean.auxCidade}" />
 
 

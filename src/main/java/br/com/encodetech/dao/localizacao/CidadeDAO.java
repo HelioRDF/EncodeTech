@@ -10,6 +10,7 @@ import org.hibernate.criterion.Restrictions;
 import br.com.encodetech.dao.complementos.GenericDAO;
 import br.com.encodetech.domain.empresas.Empresa;
 import br.com.encodetech.domain.localizacao.Cidade;
+import br.com.encodetech.domain.usuarios.Usuario;
 import br.com.encodetech.util.HibernateUtil;
 
 public class CidadeDAO extends GenericDAO<Cidade> {
@@ -113,5 +114,33 @@ public class CidadeDAO extends GenericDAO<Cidade> {
 		}
 
 	}
+	
+	public long buscarOBJCidadeUsuario(Usuario usuario) {
 
+		Session sessao = HibernateUtil.getFabricadeSessoes().openSession();
+
+		try {
+			
+			long codigo = usuario.getCidade().getCodigo();
+
+			Criteria consulta = sessao.createCriteria(Cidade.class);
+			consulta.add(Restrictions.eq("codigo", codigo));
+
+			Cidade obj = (Cidade) consulta.uniqueResult();
+
+			System.out.println("Retornando Cidade: " + obj);
+
+			return codigo;
+
+		} catch (Exception e) {
+			return 0;
+		} finally {
+
+			sessao.close();
+		}
+
+	}
+
+	
+	
 }
