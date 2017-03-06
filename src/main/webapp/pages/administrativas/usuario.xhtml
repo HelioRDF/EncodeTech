@@ -48,7 +48,7 @@
 			<f:facet name="options">
 				<p:outputLabel styleClass="cabecalhoInfo"
 					value="#{loginBean.usuarioLogado.nome}"></p:outputLabel>
-				<p:commandButton value="Logout" action="#{loginBean.sair}"
+				<p:commandButton value="Sair" action="#{loginBean.sair}"
 					icon="ui-icon-extlink" />
 
 			</f:facet>
@@ -78,7 +78,7 @@
 					<p:commandButton title="Filtrar Colunas" id="toggler" type="button"
 						value="" icon="ui-icon-calculator"
 						style=" border-radius: 7px; background-color:CadetBlue; border-color: #C2C1D4;
-   						font-size: 16px; word-spacing:8px; float:left; height:33px; " />
+   						font-size: 16px; word-spacing:8px; float:left; height:33px; width:34px  " />
 					<p:columnToggler datasource="dataTable" trigger="toggler" />
 
 					<p:ajaxStatus onstart="PF('statusDialog').show()"

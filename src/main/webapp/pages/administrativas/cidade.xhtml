@@ -43,7 +43,7 @@
 	 	       
 	        <f:facet name="options">
 	                <p:outputLabel styleClass="cabecalhoInfo" value=" #{loginBean.usuarioLogado.nome}"></p:outputLabel>
-	            <p:commandButton value="Logout" action="#{loginBean.sair}"
+	            <p:commandButton value="Sair" action="#{loginBean.sair}"
 					icon="ui-icon-extlink" />
 	        </f:facet>
     </p:menubar>
@@ -71,7 +71,8 @@
 					<!-- Personalizar table -->
 					<p:commandButton title="Filtrar Colunas" id="toggler" type="button"
 						value="" icon="ui-icon-calculator"
-						style="float:left; height: 33px; width:34px " />
+						style=" border-radius: 7px; background-color:CadetBlue; border-color: #C2C1D4;
+   						font-size: 16px; word-spacing:8px; float:left; height:33px; width:34px  " />
 					<p:columnToggler datasource="dataTable" trigger="toggler" />
 					<p:ajaxStatus onstart="PF('statusDialog').show()"
 						onsuccess="PF('statusDialog').hide()"  />
@@ -79,14 +80,16 @@
 					<!-- Atualizar table -->
 					<p:commandButton value="Atualizar" icon="ui-icon-refresh"
 						action="#{cidadeBean.carregar}"
-						style="float:left; height:33px;"
+						style=" border-radius: 7px; background-color:CadetBlue; border-color: #C2C1D4;
+   						font-size: 16px; word-spacing:8px; float:left; height:33px; "
 						update=":cityform:dataTable :cityform:msgGrowl"/>
 						
 
 
 					<!-- Adicionar  -->
 					<p:commandButton icon="ui-icon-plus " value="Adicionar "
-						style="float:left; height:33px;"
+						style=" border-radius: 7px; background-color:CadetBlue; border-color: #C2C1D4;
+   						font-size: 16px; word-spacing:8px; float:left; height:33px;  "
 						actionListener="#{cidadeBean.novo}" oncomplete="PF('dialogo').show();" 
 						update=":formCadastro:dialogpanel"/>
 						

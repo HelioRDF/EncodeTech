@@ -58,7 +58,7 @@
 
 					<f:facet name="options">
 						    <p:outputLabel styleClass="cabecalhoInfo" value="#{loginBean.usuarioLogado.nome}"></p:outputLabel>
-					<p:commandButton value="Logout" action="#{loginBean.sair}"
+					<p:commandButton value="Sair" action="#{loginBean.sair}"
 					icon="ui-icon-extlink" />
 					</f:facet>
 				</p:menubar>
@@ -282,7 +282,10 @@
 							<!-- Personalizar table -->
 							<p:commandButton title="Filtrar Colunas" id="toggler"
 								type="button" value="" icon="ui-icon-calculator"
-								style="float:left; margin-right:5px; height: 33px; width:34px " />
+								
+								style=" border-radius: 7px; background-color:CadetBlue; border-color: #C2C1D4;
+   						font-size: 16px; word-spacing:8px; float:left; height:33px; width:34px  "
+								  />
 							<p:columnToggler datasource="dataTable" trigger="toggler" />
 
 							<p:ajaxStatus onstart="PF('statusDialog').show()"
@@ -292,7 +295,8 @@
 
 							<!-- Adicionar  -->
 							<p:commandButton icon="ui-icon-plus " value="Adicionar "
-								style="margin-right:6%; float:left; height:33px;"
+								style=" border-radius: 7px; background-color:CadetBlue; border-color: #C2C1D4;
+   						font-size: 16px; word-spacing:8px; float:left; height:33px; "
 								oncomplete="PF('dialogo').show();"
 								action="#{oportunidadeBean.novo}" update=":dialogform:" />
 

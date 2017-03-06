@@ -43,7 +43,7 @@
 	 	       
 	        <f:facet name="options">
 	                <p:outputLabel styleClass="cabecalhoInfo" value="#{loginBean.usuarioLogado.nome}"></p:outputLabel>
-	           <p:commandButton value="Logout" action="#{loginBean.sair}"
+	           <p:commandButton value="Sair" action="#{loginBean.sair}"
 					icon="ui-icon-extlink" />
 	        </f:facet>
     </p:menubar>
@@ -75,7 +75,8 @@
 					<!-- Personalizar table -->
 					<p:commandButton title="Filtrar Colunas" id="toggler" type="button"
 						value="" icon="ui-icon-calculator"
-						style="float:left; height: 33px; width:34px " />
+						style=" border-radius: 7px; background-color:CadetBlue; border-color: #C2C1D4;
+   						font-size: 16px; word-spacing:8px; float:left; height:33px; width:34px  " />
 					<p:columnToggler datasource="dataTable" trigger="toggler" />
 
 
@@ -85,14 +86,16 @@
 
 					<!-- Atualizar table -->
 					<p:commandButton value="Atualizar" icon="ui-icon-refresh"
-						action="#{estadoBean.carregar}" style="float:left; height:33px;"
+						action="#{estadoBean.carregar}" style=" border-radius: 7px; background-color:CadetBlue; border-color: #C2C1D4;
+   						font-size: 16px; word-spacing:8px; float:left; height:33px;  "
 						update=":statesform:dataTable :statesform:msgGrowl" />
 
 
 
 					<!-- Adicionar  -->
 					<p:commandButton icon="ui-icon-plus " value="Adicionar "
-						style="float:left; height:33px;"
+						style=" border-radius: 7px; background-color:CadetBlue; border-color: #C2C1D4;
+   						font-size: 16px; word-spacing:8px; float:left; height:33px;  "
 						oncomplete="PF('dialogo').show();" action="#{estadoBean.novo}"
 						update=":formCadastro:dialogpanel" />
 						
