@@ -58,8 +58,8 @@
 
 					<f:facet name="options">
 						    <p:outputLabel styleClass="cabecalhoInfo" value="#{loginBean.usuarioLogado.nome}"></p:outputLabel>
-						<p:commandButton type="button" value="Logout"
-							icon="ui-icon-extlink" />
+					<p:commandButton value="Logout" action="#{loginBean.sair()}"
+					icon="ui-icon-extlink" />
 					</f:facet>
 				</p:menubar>
 
@@ -136,7 +136,7 @@
 
 
 								<f:selectItem itemLabel="#{oportunidadeBean.auxEstado}"
-									noSelectionOption="false" itemDisabled="false"></f:selectItem>
+									noSelectionOption="true" itemDisabled="true"></f:selectItem>
 
 								<f:selectItems value="#{oportunidadeBean.listaEstado}"
 									var="estado" itemValue="#{estado.codigo}"
@@ -155,8 +155,8 @@
 								requiredMessage="Selecione uma Cidade!"
 								converter="omnifaces.SelectItemsConverter">
 
-								<f:selectItem itemLabel="#{oportunidadeBean.auxCidade}"
-									noSelectionOption="false" itemDisabled="false"></f:selectItem>
+								<f:selectItem itemLabel="#{oportunidadeBean.auxCidade}" 
+									noSelectionOption="true" itemDisabled="true"></f:selectItem>
 
 								<f:selectItems value="#{oportunidadeBean.listaCidade}"
 									var="cidade" itemValue="#{cidade.codigo}"
@@ -337,8 +337,10 @@
 
 					<p:column headerText="Salário" width="12%" 
 						sortBy="#{dataVar.salario}" filterBy="#{dataVar.salario}">
-						<p:outputLabel value="R$ #{dataVar.salario}"  >
-							<f:convertNumber locale="pt_BR" minFractionDigits="2"></f:convertNumber>
+						
+							<p:outputLabel value="R$ #{dataVar.salario}"  >
+							<f:convertNumber  currencyCode="R$" type="currency" pattern="#0.00" locale="pt_BR" minFractionDigits="2"></f:convertNumber>
+
 
 						</p:outputLabel>
 					</p:column>
@@ -514,13 +516,21 @@
 
 						<p:outputLabel value="Salario:" />
 						<h:panelGrid columns="2">
-							<p:inputNumber symbol="R$ " maxValue="99999" decimalSeparator=","
-								thousandSeparator="." maxlength="50" size="12"
-								value="#{oportunidadeBean.oportunidade.salario}" required="true"
-								requiredMessage="Preencha o campo Salário corretamente" />
-							<p:selectBooleanButton
-								value="#{oportunidadeBean.oportunidade.mostrarSalario}"
-								onLabel="Visível" offLabel="Oculto"></p:selectBooleanButton>
+
+
+								<p:inputNumber symbol="R$ " maxValue="99999" minValue="0"  
+									decimalSeparator="," thousandSeparator="." maxlength="50"
+									size="12" value="#{oportunidadeBean.oportunidade.salario}"
+									required="true"
+									requiredMessage="Preencha o campo Salário corretamente" >
+									
+								
+									</p:inputNumber>
+									
+									
+								<p:selectBooleanButton
+									value="#{oportunidadeBean.oportunidade.mostrarSalario}"
+									onLabel="Visível" offLabel="Oculto"></p:selectBooleanButton>
 						</h:panelGrid>
 
 

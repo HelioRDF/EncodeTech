@@ -59,8 +59,8 @@
 					<f:facet name="options">
 						<p:outputLabel styleClass="cabecalhoInfo"
 							value="#{loginBean.usuarioLogado.nome}"></p:outputLabel>
-						<p:commandButton type="button" value="Logout"
-							icon="ui-icon-extlink" />
+						<p:commandButton value="Logout" action="#{loginBean.sair()}"
+					icon="ui-icon-extlink" />
 					</f:facet>
 				</p:menubar>
 
