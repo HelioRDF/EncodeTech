@@ -58,7 +58,7 @@
 
 					<f:facet name="options">
 						    <p:outputLabel styleClass="cabecalhoInfo" value="#{loginBean.usuarioLogado.nome}"></p:outputLabel>
-					<p:commandButton value="Logout" action="#{loginBean.sair()}"
+					<p:commandButton value="Logout" action="#{loginBean.sair}"
 					icon="ui-icon-extlink" />
 					</f:facet>
 				</p:menubar>
@@ -294,7 +294,7 @@
 							<p:commandButton icon="ui-icon-plus " value="Adicionar "
 								style="margin-right:6%; float:left; height:33px;"
 								oncomplete="PF('dialogo').show();"
-								action="#{oportunidadeBean.novo()}" update=":dialogform:" />
+								action="#{oportunidadeBean.novo}" update=":dialogform:" />
 
 							<!-- Header -->
 							<h:outputLabel styleClass="nameheader" value="Oportunidades"></h:outputLabel>
@@ -339,7 +339,7 @@
 						sortBy="#{dataVar.salario}" filterBy="#{dataVar.salario}">
 						
 							<p:outputLabel value="R$ #{dataVar.salario}"  >
-							<f:convertNumber  currencyCode="R$" type="currency" pattern="#0.00" locale="pt_BR" minFractionDigits="2"></f:convertNumber>
+							<f:convertNumber   type="currency" pattern="#0.00" locale="pt_BR" minFractionDigits="2"></f:convertNumber>
 
 
 						</p:outputLabel>
@@ -716,7 +716,7 @@
 
 
 						<p:commandButton value="Fechar"
-							actionListener="#{oportunidadeBean.fechar()}"
+							actionListener="#{oportunidadeBean.fechar}"
 							oncomplete="PF('dialogo').hide();" immediate="true" ajax="false"
 							style="margin-right:20px;">
 						</p:commandButton>

@@ -13,7 +13,6 @@ import javax.persistence.Transient;
 
 import br.com.encodetech.domain.complementos.GenericDomain;
 import br.com.encodetech.domain.localizacao.Cidade;
-import br.com.encodetech.domain.localizacao.Estado;
 
 
 /**

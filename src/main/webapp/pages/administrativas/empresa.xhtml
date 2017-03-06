@@ -59,8 +59,8 @@
 					<f:facet name="options">
 						<p:outputLabel styleClass="cabecalhoInfo"
 							value="#{loginBean.usuarioLogado.nome}"></p:outputLabel>
-						<p:commandButton value="Logout" action="#{loginBean.sair()}"
-					icon="ui-icon-extlink" />
+						<p:commandButton value="Logout" action="#{loginBean.sair}"
+							icon="ui-icon-extlink" />
 					</f:facet>
 				</p:menubar>
 
@@ -110,7 +110,7 @@
 		<!-- Layout Center -->
 		<p:layoutUnit position="center">
 			<h:form id="form">
-				<p:growl id="msgGrowl" life="10000" /> 
+				<p:growl id="msgGrowl" life="10000" />
 
 				<!-- _________________________________________________________________________________________________________________________________ -->
 				<!-- Informações de cabeçalho da tabela -->
@@ -144,7 +144,7 @@ float:left; height:33px;  " />
 
 							<!-- Atualizar table -->
 							<p:commandButton value="Atualizar" icon="ui-icon-refresh"
-								action="#{empresaBean.carregar()}"
+								action="#{empresaBean.carregar}"
 								style=" border-radius: 7px; background-color:CadetBlue; border-color: #C2C1D4;
 font-size: 16px; word-spacing:8px; float:left; height:33px;  "
 								update=":form:dataTable :form:msgGrowl" />
@@ -154,8 +154,8 @@ font-size: 16px; word-spacing:8px; float:left; height:33px;  "
 							<p:commandButton icon="ui-icon-plus " value="Adicionar "
 								style=" border-radius: 7px; background-color:CadetBlue; border-color: #C2C1D4;
 font-size: 16px; word-spacing:8px; float:left; height:33px;  "
-								oncomplete="PF('dialogo').show();"
-								action="#{empresaBean.novo()}" update=":dialogform:" />
+								oncomplete="PF('dialogo').show();" action="#{empresaBean.novo}"
+								update=":dialogform:" />
 
 
 
@@ -306,9 +306,9 @@ font-size: 16px; word-spacing:8px; float:left; height:33px;  "
 
 
 	<!-- draggable = false ou true "mover a janela suspensa"| 
- resizable=false ou true"mudar o tamanho a janela suspensa" |
- modal=false ou true "clicar foda da janela suspensa"|
- closable="true?" 'controla o botão fechar do dialogo'-->
+resizable=false ou true"mudar o tamanho a janela suspensa" |
+modal=false ou true "clicar foda da janela suspensa"|
+closable="true?" 'controla o botão fechar do dialogo'-->
 
 	<p:dialog header="Adicionar Empresa" widgetVar="dialogo" modal="true"
 		responsive="true">
@@ -450,7 +450,7 @@ font-size: 16px; word-spacing:8px; float:left; height:33px;  "
 
 
 
-							<f:selectItem noSelectionOption="true" itemDisabled="true" 
+							<f:selectItem noSelectionOption="true" itemDisabled="true"
 								itemLabel="#{empresaBean.auxEstado}">
 							</f:selectItem>
 
@@ -470,7 +470,7 @@ font-size: 16px; word-spacing:8px; float:left; height:33px;  "
 							required="#{!empresaBean.botaoEditar}"
 							requiredMessage="Informe a Cidade corretamente">
 
-							<f:selectItem noSelectionOption="true" itemDisabled="true" 
+							<f:selectItem noSelectionOption="true" itemDisabled="true"
 								itemLabel="#{empresaBean.auxCidade}" />
 
 
@@ -551,7 +551,7 @@ font-size: 16px; word-spacing:8px; float:left; height:33px;  "
 					<h:panelGrid columns="3">
 
 						<p:commandButton value="Salvar"
-							actionListener="#{empresaBean.salvar()}"
+							actionListener="#{empresaBean.salvar}"
 							rendered="#{empresaBean.botaoSalvar}" validateClient="true"
 							update=":dialogform: ">
 						</p:commandButton>
@@ -559,12 +559,13 @@ font-size: 16px; word-spacing:8px; float:left; height:33px;  "
 						<p:commandButton value="Editar" id="btEditar"
 							actionListener="#{empresaBean.editar}" validateClient="true"
 							update=":dialogform: :form:"
-							rendered="#{empresaBean.botaoEditar}" oncomplete="PF('dialogo').hide();" >
+							rendered="#{empresaBean.botaoEditar}"
+							oncomplete="PF('dialogo').hide();">
 						</p:commandButton>
 						<!-- 		PF('dialogo').hide() -->
 
 						<p:commandButton value="Fechar"
-							actionListener="#{empresaBean.fechar()}" 
+							actionListener="#{empresaBean.fechar}"
 							oncomplete="PF('dialogo').hide();" immediate="true" ajax="false"
 							style="margin-right:20px;" update=":dialogform:">
 						</p:commandButton>

@@ -48,7 +48,7 @@
 			<f:facet name="options">
 				<p:outputLabel styleClass="cabecalhoInfo"
 					value="#{loginBean.usuarioLogado.nome}"></p:outputLabel>
-				<p:commandButton value="Logout" action="#{loginBean.sair()}"
+				<p:commandButton value="Logout" action="#{loginBean.sair}"
 					icon="ui-icon-extlink" />
 
 			</f:facet>
@@ -86,14 +86,14 @@
 
 					<!-- Atualizar table -->
 					<p:commandButton id="BTatualizar" value="Atualizar"
-						icon="ui-icon-refresh" action="#{usuarioBean.carregar()}"
+						icon="ui-icon-refresh" action="#{usuarioBean.carregar}"
 						style=" border-radius: 7px; background-color:CadetBlue; border-color: #C2C1D4;
    						font-size: 16px; word-spacing:8px; float:left; height:33px; " update=" :form:" />
 
 					<!-- Adicionar  -->
 					<p:commandButton icon="ui-icon-plus " value="Adicionar "
 						
-						oncomplete="PF('dialogo').show();" action="#{usuarioBean.novo()}"
+						oncomplete="PF('dialogo').show();" action="#{usuarioBean.novo}"
 						update=":dialogform:" 
 						style=" border-radius: 7px; background-color:CadetBlue; border-color: #C2C1D4;
    						font-size: 16px; word-spacing:8px; float:left; height:33px; " />
@@ -413,12 +413,14 @@
 							requiredMessage="Informe a Cidade corretamente">
 
 							<f:selectItem noSelectionOption="true" itemDisabled="true"
-								itemLabel="#{empresaBean.auxCidade}" />
+								itemLabel="#{usuarioBean.auxCidade}" />
 
 
 							<f:selectItems value="#{usuarioBean.listaCidade}" var="ci"
 								itemValue="#{ci}" itemLabel="#{ci.nome}" />
 						</p:selectOneMenu>
+
+
 
 
 
@@ -576,10 +578,10 @@
 			<h:panelGrid columns="2">
 
 				<p:commandButton value="Salvar"
-					actionListener="#{usuarioBean.editarSenha()}"
+					actionListener="#{usuarioBean.editarSenha}"
 					update=":dialogformSenha:msgdialogSenha:" />
 				<p:commandButton value="Fechar"
-					actionListener="#{usuarioBean.fechar()}"
+					actionListener="#{usuarioBean.fechar}"
 					oncomplete="PF('dialogSenhaPanel').hide();" />
 
 			</h:panelGrid>

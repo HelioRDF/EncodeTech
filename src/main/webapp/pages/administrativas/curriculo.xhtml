@@ -65,7 +65,7 @@ value="#{usuarioBean.usuario.pretensaoSalarial}" required="false" requiredMessag
             
             
             
-<p:commandButton action="#{usuarioBean.editarObjetivos()}"
+<p:commandButton action="#{usuarioBean.editarObjetivos}"
 value="Salvar"  style="margin:10px auto;" icon="ui-icon-squaresmall-plus"
  validateClient="true"  update=":dialogformCurriculo:">
 </p:commandButton>
@@ -161,7 +161,7 @@ value="Salvar"  style="margin:10px auto;" icon="ui-icon-squaresmall-plus"
 </h:panelGrid>	
  </h:panelGrid>
  </h:panelGrid>
-<p:commandButton action="#{usuarioBean.salvarFormacao()}"
+<p:commandButton action="#{usuarioBean.salvarFormacao}"
 value="Salvar" rendered="#{usuarioBean.botaoFormacao}" style="margin:10px auto;" icon="ui-icon-squaresmall-plus"
  validateClient="true"  update=":dialogformCurriculo: dialogformCurriculo:IDtabView:dataTableFormacao"></p:commandButton>
 
@@ -306,7 +306,7 @@ value="#{usuarioBean.listaFormacao}"	style=" text-align:center;"  >
 
 
 
-<p:commandButton action="#{usuarioBean.salvarExperiencia()}"
+<p:commandButton action="#{usuarioBean.salvarExperiencia}"
 value="Salvar" rendered="#{usuarioBean.botaoExperiencia}" style="margin:10px auto;" icon="ui-icon-squaresmall-plus"
  validateClient="true"  update=":dialogformCurriculo: dialogformCurriculo:IDtabView:dataTableExperiencia"></p:commandButton>
 
@@ -455,7 +455,7 @@ value="#{usuarioBean.listaExperiencia}"	style=" text-align:center;"  >
 
 
 
-<p:commandButton action="#{usuarioBean.salvarAtividades()}"
+<p:commandButton action="#{usuarioBean.salvarAtividades}"
 value="Salvar" rendered="#{usuarioBean.botaoAtividades}" style="margin:10px auto;" icon="ui-icon-squaresmall-plus"
  validateClient="true"  update=":dialogformCurriculo: dialogformCurriculo:IDtabView:dataTableQualificacoes"></p:commandButton>
 

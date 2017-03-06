@@ -43,7 +43,7 @@
 	 	       
 	        <f:facet name="options">
 	                <p:outputLabel styleClass="cabecalhoInfo" value=" #{loginBean.usuarioLogado.nome}"></p:outputLabel>
-	            <p:commandButton value="Logout" action="#{loginBean.sair()}"
+	            <p:commandButton value="Logout" action="#{loginBean.sair}"
 					icon="ui-icon-extlink" />
 	        </f:facet>
     </p:menubar>
@@ -78,7 +78,7 @@
 
 					<!-- Atualizar table -->
 					<p:commandButton value="Atualizar" icon="ui-icon-refresh"
-						action="#{cidadeBean.carregar()}"
+						action="#{cidadeBean.carregar}"
 						style="float:left; height:33px;"
 						update=":cityform:dataTable :cityform:msgGrowl"/>
 						
@@ -195,10 +195,10 @@
 			</h:panelGrid>
 			<h:panelGrid columns="2">
 				<p:commandButton value="Salvar"
-					actionListener="#{cidadeBean.salvar()}" update="msgdialog" />
+					actionListener="#{cidadeBean.salvar}" update="msgdialog" />
 
 				<p:commandButton value="Fechar" oncomplete="PF('dialogo').hide();" 
-				actionListener="#{cidadeBean.fechar()}"  />
+				actionListener="#{cidadeBean.fechar}"  />
 
 			</h:panelGrid>
 
