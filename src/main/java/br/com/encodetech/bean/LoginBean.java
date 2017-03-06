@@ -40,7 +40,19 @@ public class LoginBean implements Serializable {
 				Messages.addGlobalWarn("Usuário e/ou senha, incorretos");
 				return;
 				
+			} else{
+				
+				if(!usuarioLogado.getAdmin()){
+					
+					Messages.addGlobalWarn("Usuário sem permisões de acesso.");
+					return;
+					
+				}
+				
+				
+				
 			}
+			
 			
 			Faces.redirect("./pages/administrativas/usuario.xhtml");
 		} catch (IOException e) {

@@ -18,11 +18,13 @@ public class AutenticacaoListener implements PhaseListener {
 
 		String paginaAtual = Faces.getViewId();
 		boolean paginaDeLogin = paginaAtual.contains("login.xhtml");
-
+		LoginBean loginBean =  new LoginBean();
+		Usuario usuario = new Usuario();
+		
 		// Verifica se a tela é publica ou privada
 		if (!paginaDeLogin) {
 
-			LoginBean loginBean = Faces.getSessionAttribute("loginBean");
+			loginBean = Faces.getSessionAttribute("loginBean");
 
 			// Verifica se o Bean foi criado
 			if (loginBean == null) {
@@ -32,49 +34,22 @@ public class AutenticacaoListener implements PhaseListener {
 			}
 
 			// Verifica se o usuário existe
-			Usuario usuario = loginBean.getUsuarioLogado();
+			usuario = loginBean.getUsuarioLogado();
 			if (usuario == null) {
 				Faces.navigate("/pages/publicas/login.xhtml");
 
 				return;
 			}
 			
-			// Encaminha para a tela principal
-			//Faces.navigate("/pages/administrativas/usuario.xhtml");
-			System.out.println("\nAfterPhase:" + event.getPhaseId());
-			System.out.println("LoginBean:" + loginBean);
-			System.out.println("Página Atual:" + paginaAtual);
-
 		} 
 
-		// boolean paginaDeAutenticaçao = paginaAtual.contains("login.xhtml");
-		//
-		// //Verifica se a tela é publica ou privada
-		// if(!paginaDeAutenticaçao){
-		// LoginBean loginBean = Faces.getSessionAttribute("loginBean");
-		//
-		// //Verifica se o Bean foi criado
-		// if(loginBean==null){
-		// Faces.navigate("/pages/publicas/login.xhtml");
-		// return;
-		//
-		// }
-		// //Verifica se a usuário existe
-		// Usuario usuario = loginBean.getUsuarioLogado();
-		// if(usuario==null){
-		// Faces.navigate("/pages/publicas/login.xhtml");
-		//
-		// return;
-		// }
-		//
-		//// //Encaminha para a tela principal
-		//// Faces.navigate("/pages/administrativas/usuario.xhtml");
-		//
-		// }
+
 
 		System.out.println("\nAfterPhase:" + event.getPhaseId());
-		// System.out.println("LoginBean:"+ loginBean);
+		System.out.println("LoginBean:" + loginBean);
 		System.out.println("Página Atual:" + paginaAtual);
+		System.out.println("Admin:"+usuario.getAdmin());
+
 
 	}
 

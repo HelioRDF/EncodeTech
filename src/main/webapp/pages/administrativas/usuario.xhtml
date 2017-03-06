@@ -196,11 +196,11 @@
 
 			<p:rowExpansion styleClass=" width=37%">
 
-				<p:panelGrid columns="2" columnClasses="label,value"
+				<p:panelGrid columns="1" columnClasses="label,value"
 					style="text-align:left;">
-
+					<h:outputText value="Admin: #{dataVar.admin}" />
 					<h:outputText value="Sexo: #{dataVar.sexo}" />
-					<h:outputText value="Senha: #{dataVar.senha}" />
+					
 					<h:outputText value="CPF: #{dataVar.cpf}" />
 					<h:outputText value="RG: #{dataVar.rg}" />
 					<h:outputText value="Data de Nascimento: #{dataVar.dataNascimento}">
@@ -222,6 +222,7 @@
 					<h:outputText value="Bairro: #{dataVar.bairro}" />
 					<h:outputText value="Cep: #{dataVar.cep}" />
 					<h:outputText value="Complemento: #{dataVar.complemento}" />
+					<h:outputText value="Senha: #{dataVar.senha}" />
 
 
 				</p:panelGrid>
@@ -269,7 +270,13 @@
 							value="#{usuarioBean.usuario.status}" required="true"
 							requiredMessage="Verificar campo Status">
 						</p:selectBooleanButton>
-
+						
+						
+						<p:outputLabel value="Admin: " />
+						<p:selectBooleanButton onLabel="Ativado" offLabel="Desativado"
+							value="#{usuarioBean.usuario.admin}" required="false"
+							requiredMessage="Verificar campo Status">
+						</p:selectBooleanButton>
 
 
 						<p:outputLabel value="E-mail:" />

@@ -51,6 +51,12 @@ public class Usuario extends GenericDomain {
 
 	@Column(nullable = false)
 	private Boolean status;
+	
+	
+	@Column(nullable = false)
+	private Boolean admin;
+	
+	
 
 	@Column(length = 60, nullable = false)
 	private String nome;
@@ -322,6 +328,18 @@ public class Usuario extends GenericDomain {
 		this.celular = celular;
 	}
 
+
+	public Boolean getAdmin() {
+		return admin;
+	}
+
+
+	public void setAdmin(Boolean admin) {
+		this.admin = admin;
+	}
+
+	
+	
 	
 	
 

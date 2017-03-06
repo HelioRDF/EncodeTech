@@ -248,7 +248,7 @@ font-size: 16px; word-spacing:8px; float:left; height:33px;  "
 
 					<p:rowExpansion>
 
-						<p:panelGrid columns="2" columnClasses="label,value"
+						<p:panelGrid columns="1" columnClasses="label,value"
 							style="text-align:left;">
 							<h:outputText value="Data de Cadastro: #{dataVar.dataCadastro}" />
 							<h:outputText value="Seguimento: #{dataVar.seguimento}" />
@@ -269,17 +269,15 @@ font-size: 16px; word-spacing:8px; float:left; height:33px;  "
 
 
 							<p:panelGrid columns="1">
-								<p:outputLabel value="Descrição: "></p:outputLabel>
-								<p:inputTextarea readonly="true" cols="75" rows="8"
-									value="#{dataVar.descricao}" />
+								
+								<h:inputTextarea readonly="true" cols="75" rows="8"
+									value="Descrição: #{dataVar.descricao}" />
 
 							</p:panelGrid>
 
 						</p:panelGrid>
 
-						<p:separator
-							style="border: 2px solid #999966; border-radius: 100px/9px; background-color:  #6666ff; height:10px;">
-						</p:separator>
+						
 						<p:separator
 							style=" height:7px;border-radius: 100px/9px; background-color:#ffffff"></p:separator>
 						<p:separator style=" height:10px;background-color:#e6e6ff"></p:separator>
