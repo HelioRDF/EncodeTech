@@ -21,8 +21,8 @@
 
 		<!-- _________________________________________________________________________________________________________________________________ -->
 		<!-- Layout TOP (North) -->
-		<p:layoutUnit position="north" size="auto" resizable="true"
-			closable="true" collapsible="true" visible="true">
+		<p:layoutUnit position="north"   size="auto" resizable="true"
+			closable="false" collapsible="true" visible="true" >
 
 
 			<!-- Rodapé da Página -->
@@ -91,7 +91,7 @@
 		<!-- _________________________________________________________________________________________________________________________________ -->
 		<!-- Layout east (Right) -->
 		<p:layoutUnit position="east" size="330" header="Filtrar"
-			resizable="true" closable="true" collapsible="true" effect="drop">
+			resizable="true" closable="false" collapsible="true" effect="drop">
 			<h:form id="formFiltro">
 
 
@@ -192,11 +192,11 @@
 							<p:selectOneMenu  value="#{oportunidadeBean.filtrarSalario}" >
 
 								<f:selectItem itemLabel="Não especificar" itemValue="0"></f:selectItem>
-								<f:selectItem itemLabel="Até R$ 1.000,00" itemValue="1"></f:selectItem>
-								<f:selectItem itemLabel="Entre R$ 1.000,00 e R$ 1.500,00"  itemValue="2"></f:selectItem>
+								<f:selectItem itemLabel="Até R$ 1.500,00" itemValue="1"></f:selectItem>
+								<f:selectItem itemLabel="Entre R$ 1.500,00 e R$ 2.000,00"  itemValue="2"></f:selectItem>
 								<f:selectItem itemLabel="Entre R$ 2.000,00 e R$ 2.500,00"  itemValue="3"></f:selectItem>
-								<f:selectItem itemLabel="Entre R$ 3.000,00 e R$ 3.500,00"  itemValue="4"></f:selectItem>
-								<f:selectItem itemLabel="Entre R$ 4.000,00 e R$ 5.000,00"  itemValue="5"></f:selectItem>
+								<f:selectItem itemLabel="Entre R$ 2.500,00 e R$ 3.500,00"  itemValue="4"></f:selectItem>
+								<f:selectItem itemLabel="Entre R$ 3.500,00 e R$ 5.000,00"  itemValue="5"></f:selectItem>
 								<f:selectItem itemLabel="A partir de R$ 5.000,00"  itemValue="6"></f:selectItem>	
 							</p:selectOneMenu>
 							
@@ -264,10 +264,11 @@
 				<!-- _________________________________________________________________________________________________________________________________ -->
 				<!-- Informações de cabeçalho da tabela -->
 
-				<p:dataTable id="dataTable" rowsPerPageTemplate="7,15,30,50,100"
+				<p:dataTable id="dataTable" rowsPerPageTemplate="7,15,30,50,100" 
 					emptyMessage="Nenhum Registro encontrado" rows="7" paginator="true"
 					var="dataVar" value="#{oportunidadeBean.listaOportunidade}"
-					style=" text-align:center;">
+					style=" text-align:center;" 
+					paginatorPosition="top">
 
 					<f:facet name="header">
 

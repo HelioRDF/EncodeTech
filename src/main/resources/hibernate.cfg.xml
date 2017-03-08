@@ -41,7 +41,7 @@
 		<mapping class="br.com.encodetech.domain.usuarios.FormacaoAcademica"/>
 		<mapping class="br.com.encodetech.domain.usuarios.ExperienciaProfissional"/>
 		<mapping class="br.com.encodetech.domain.usuarios.AtividadesProfissionais"/>
-		<mapping class="br.com.encodetech.domain.usuarios.InformacoesAdicionais"/>
+	
 		
 		
 		

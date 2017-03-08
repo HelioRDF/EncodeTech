@@ -62,14 +62,14 @@
 		<p:dataTable id="dataTable" rowsPerPageTemplate="7,15,30,50"
 			emptyMessage="Nenhum Registro encontrado" rows="7" paginator="true"
 			var="dataVar" value="#{usuarioBean.listaUsuario}"
-			style=" text-align:center;">
+			style=" text-align:center;" paginatorPosition="top">
 
 			<f:facet name="header">
 
 				<p:panelGrid>
 
 					<!-- Animação de loading -->
-					<p:dialog widgetVar="statusDialog" modal="true" draggable="false"
+					<p:dialog widgetVar="statusDialog" modal="true" draggable="false" 
 						closable="false" resizable="false" showHeader="false">
 						<p:graphicImage value="/images/loading6.gif" />
 					</p:dialog>

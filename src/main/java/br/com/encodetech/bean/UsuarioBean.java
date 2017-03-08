@@ -20,14 +20,12 @@ import br.com.encodetech.dao.localizacao.EstadoDAO;
 import br.com.encodetech.dao.usuarios.AtividadesProfissionaisDAO;
 import br.com.encodetech.dao.usuarios.ExperienciaProfissionalDAO;
 import br.com.encodetech.dao.usuarios.FormacaoAcademicaDAO;
-import br.com.encodetech.dao.usuarios.InformacoesAdicionaisDAO;
 import br.com.encodetech.dao.usuarios.UsuarioDAO;
 import br.com.encodetech.domain.localizacao.Cidade;
 import br.com.encodetech.domain.localizacao.Estado;
 import br.com.encodetech.domain.usuarios.AtividadesProfissionais;
 import br.com.encodetech.domain.usuarios.ExperienciaProfissional;
 import br.com.encodetech.domain.usuarios.FormacaoAcademica;
-import br.com.encodetech.domain.usuarios.InformacoesAdicionais;
 import br.com.encodetech.domain.usuarios.Usuario;
 
 /**
@@ -49,7 +47,6 @@ public class UsuarioBean implements Serializable {
 	private FormacaoAcademica formacaoAcademica;
 	private ExperienciaProfissional experienciaProfissional;
 	private AtividadesProfissionais atividadesProfissionais;
-	private InformacoesAdicionais informacoesAdicionais;
 	Cidade cidade = new Cidade();
 	Cidade cidadeAux = new Cidade();
 		
@@ -59,7 +56,6 @@ public class UsuarioBean implements Serializable {
 	private FormacaoAcademicaDAO daoFormacao;
 	private ExperienciaProfissionalDAO daoExperiencia;
 	private AtividadesProfissionaisDAO daoAtividades;
-	private InformacoesAdicionaisDAO daoInfo;
 
 	private List<Usuario> listaUsuario;
 	private List<Cidade> listaCidade;
@@ -67,7 +63,6 @@ public class UsuarioBean implements Serializable {
 	private List<FormacaoAcademica> listaFormacao;
 	private List<ExperienciaProfissional> listaExperiencia;
 	private List<AtividadesProfissionais> listaAtividades;
-	private List<InformacoesAdicionais> listInfo;
 
 	private String auxCidade = "Selecione uma Cidade";
 	private String auxEstado = " Selecione um Estado";
@@ -186,26 +181,7 @@ public class UsuarioBean implements Serializable {
 		}
 	}
 
-	// Salvar Infos
-	// -------------------------------------------------------------------------------------
-	public void salvarInfo() {
-
-		try {
-			if (botaoInfo = true) {
-				informacoesAdicionais.setUsuario(usuario);
-				daoInfo.merge(informacoesAdicionais);
-				Messages.addGlobalInfo("Informação salva com sucesso: ");
-				carregarCurriculo();
-			}
-
-		} catch (Exception e) {
-			Messages.addGlobalError("Não foi possível salvar as Informações, Preencha os campos corretamente. ");
-
-		} finally {
-
-		}
-	}
-
+	
 	// Novo
 	// -------------------------------------------------------------------------------------------
 	public void novo() {
@@ -422,27 +398,7 @@ public class UsuarioBean implements Serializable {
 
 	}
 
-	// Excluir Info
-	// -------------------------------------------------------------------------------------------
-	public void excluirInfo(ActionEvent evento) {
 
-		try {
-
-			informacoesAdicionais = (InformacoesAdicionais) evento.getComponent().getAttributes().get("meuSelect");
-
-			InformacoesAdicionaisDAO daoinf = new InformacoesAdicionaisDAO();
-			Messages.addGlobalInfo("Qualificação removida com sucesso: " + informacoesAdicionais.getCargoPretendido());
-			daoinf.excluir(informacoesAdicionais);
-			carregarCurriculo();
-
-		} catch (Exception e) {
-			Messages.addGlobalError("Erro ao Remover: " + informacoesAdicionais.getCargoPretendido());
-
-		} finally {
-
-		}
-
-	}
 
 	// Editar usuário
 	// -------------------------------------------------------------------------------------------
@@ -682,22 +638,6 @@ public class UsuarioBean implements Serializable {
 
 	}
 
-	// Instancia de Infos
-	// ------------------------------------------------------------------------------------------------------------------------------------------------------
-
-	public void getinstanciaInfo(ActionEvent evento) {
-
-		try {
-			botaoInfo = true;
-
-			informacoesAdicionais = (InformacoesAdicionais) evento.getComponent().getAttributes().get("meuSelect");
-			Messages.addGlobalInfo("Seleção: " + informacoesAdicionais.getCargoPretendido());
-
-		} catch (Exception e) {
-			Messages.addGlobalError("Erro ao Editar: " + informacoesAdicionais.getCargoPretendido());
-		}
-
-	}
 
 	// ------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -914,22 +854,6 @@ public class UsuarioBean implements Serializable {
 
 	public void setStatusBoolean(Boolean statusBoolean) {
 		this.statusBoolean = statusBoolean;
-	}
-
-	public InformacoesAdicionais getInformacoesAdicionais() {
-		return informacoesAdicionais;
-	}
-
-	public void setInformacoesAdicionais(InformacoesAdicionais informacoesAdicionais) {
-		this.informacoesAdicionais = informacoesAdicionais;
-	}
-
-	public List<InformacoesAdicionais> getListInfo() {
-		return listInfo;
-	}
-
-	public void setListInfo(List<InformacoesAdicionais> listInfo) {
-		this.listInfo = listInfo;
 	}
 
 	public Boolean getBotaoInfo() {

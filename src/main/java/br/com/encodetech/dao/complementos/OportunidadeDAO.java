@@ -185,28 +185,28 @@ public class OportunidadeDAO extends GenericDAO<Oportunidade>{
 		
 		if(salario==1){
 			salarioMaior= new BigDecimal(0.00);;
-			salarioMenor=new BigDecimal(1100.00);			
+			salarioMenor=new BigDecimal(1500.00);			
 		}
 		
 		if(salario==2){
-			salarioMaior=new  BigDecimal(1000.00);
-			salarioMenor=new BigDecimal(1600.00);			
+			salarioMaior=new  BigDecimal(1500.00);
+			salarioMenor=new BigDecimal(2000.00);			
 		}
 		
 		if(salario==3){
 			salarioMaior= new BigDecimal(2000.00);	
-			salarioMenor=new BigDecimal(2600.00);			
+			salarioMenor=new BigDecimal(2500.00);			
 		}
 		
 		if(salario==4){
-			salarioMaior= new BigDecimal(3000.00);	
-			salarioMenor=new BigDecimal(3600.00);			
+			salarioMaior= new BigDecimal(2500.00);	
+			salarioMenor=new BigDecimal(3500.00);			
 		}
 		
 		
 		if(salario==5){
-			salarioMaior= new BigDecimal(4000.00);	
-			salarioMenor=new BigDecimal(5100.00);				
+			salarioMaior= new BigDecimal(3500.00);	
+			salarioMenor=new BigDecimal(5000.00);				
 		}
 		
 		if(salario==6){

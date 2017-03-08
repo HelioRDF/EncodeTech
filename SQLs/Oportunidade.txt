@@ -1,0 +1,33 @@
+INSERT INTO `encodedb`.`oportunidade` (`area`, `beneficios`, `cargo`, `dataCadastro`, `descricao`, `horario`, `modalidade`, `mostrarEmpresa`, `mostrarSalario`, `nivel`, `PcD`, `preRequisitos`, `quantidade`, `salario`, `cidade_codigo`, `empresa_codigo`, `estado_codigo`) VALUES
+
+
+
+ ('Biologicas', 'xxx', 'Auxiliar', '2017-03-08 16:50:23', 'xxe', '333', 'PJ', 0, 1, 'Senior', 1, 'xxxx', '33', '843.00', '5270', 1, '26'),
+
+  ('Biologicas', 'xxx', 'Auxiliar', '2017-03-08 16:50:23', 'xxe', '333', 'PJ', 0, 1, 'Senior', 1, 'xxxx', '33', '9443.00', '5270', 1, '26'),
+
+   ('Biologicas', 'xxx', 'Auxiliar', '2017-03-08 16:50:23', 'xxe', '333', 'PJ', 0, 1, 'Senior', 1, 'xxxx', '33', '1443.00', '5270', 1, '26'),
+
+    ('Biologicas', 'xxx', 'Auxiliar', '2017-03-08 16:50:23', 'xxe', '333', 'PJ', 0, 1, 'Senior', 0, 'xxxx', '33', '2443.00', '5270', 1, '26'),
+
+     ('Biologicas', 'xxx', 'Auxiliar', '2017-03-08 16:50:23', 'xxe', '333', 'PJ', 0, 1, 'Senior', 0, 'xxxx', '33', '3443.00', '5270', 1, '26'),
+
+      ('Biologicas', 'xxx', 'Auxiliar', '2017-03-08 16:50:23', 'xxe', '333', 'PJ', 0, 1, 'Senior', 0, 'xxxx', '33', '4443.00', '5270', 1, '26'),
+
+
+
+       ('Exatas', 'xxx', 'Auxiliar', '2017-03-08 16:50:23', 'xxe', '333', 'PJ', 0, 1, 'Senior', 1, 'xxxx', '33', '843.00', '5270', 1, '26'),
+
+  ('Exatas', 'xxx', 'Auxiliar', '2017-03-08 16:50:23', 'xxe', '333', 'PJ', 0, 1, 'Senior', 1, 'xxxx', '33', '9443.00', '5270', 1, '26'),
+
+   ('Exatas', 'xxx', 'Auxiliar', '2017-03-08 16:50:23', 'xxe', '333', 'PJ', 0, 1, 'Senior', 1, 'xxxx', '33', '1443.00', '5270', 1, '26'),
+
+    ('Exatas', 'xxx', 'Auxiliar', '2017-03-08 16:50:23', 'xxe', '333', 'PJ', 0, 1, 'Senior', 0, 'xxxx', '33', '2443.00', '5270', 1, '26'),
+
+     ('Exatas', 'xxx', 'Auxiliar', '2017-03-08 16:50:23', 'xxe', '333', 'PJ', 0, 1, 'Senior', 0, 'xxxx', '33', '3443.00', '5270', 1, '26'),
+
+      ('Exatas', 'xxx', 'Auxiliar', '2017-03-08 16:50:23', 'xxe', '333', 'PJ', 0, 1, 'Senior', 0, 'xxxx', '33', '4443.00', '5270', 1, '26');
+
+
+
+      

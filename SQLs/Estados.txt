@@ -1,0 +1,31 @@
+
+
+
+INSERT INTO `encodedb`.`estado`(`nomeEstado`, `sigla`) VALUES('Acre', 'AC');
+INSERT INTO `encodedb`.`estado` (`nomeEstado`, `sigla`) VALUES('Alagoas', 'AL');
+INSERT INTO `encodedb`.`estado` (`nomeEstado`, `sigla`)  VALUES('Amazonas', 'AM');
+INSERT INTO `encodedb`.`estado` (`nomeEstado`, `sigla`) VALUES('Amapá', 'AP');
+INSERT INTO `encodedb`.`estado` (`nomeEstado`, `sigla`) VALUES('Bahia', 'BA');
+INSERT INTO `encodedb`.`estado` (`nomeEstado`, `sigla`) VALUES('Ceará', 'CE');
+INSERT INTO `encodedb`.`estado` (`nomeEstado`, `sigla`) VALUES('Distrito Federal', 'DF');
+INSERT INTO `encodedb`.`estado` (`nomeEstado`, `sigla`) VALUES('Espírito Santo', 'ES');
+INSERT INTO `encodedb`.`estado` (`nomeEstado`, `sigla`) VALUES('Goiás', 'GO');
+INSERT INTO `encodedb`.`estado` (`nomeEstado`, `sigla`) VALUES('Maranhão', 'MA');
+INSERT INTO `encodedb`.`estado` (`nomeEstado`, `sigla`) VALUES('Minas Gerais', 'MG');
+INSERT INTO `encodedb`.`estado` (`nomeEstado`, `sigla`) VALUES('Mato Grosso do Sul', 'MS');
+INSERT INTO `encodedb`.`estado` (`nomeEstado`, `sigla`) VALUES('Mato Grosso', 'MT');
+INSERT INTO `encodedb`.`estado` (`nomeEstado`, `sigla`) VALUES('Pará', 'PA');
+INSERT INTO `encodedb`.`estado` (`nomeEstado`, `sigla`) VALUES('Paraíba', 'PB');
+INSERT INTO `encodedb`.`estado` (`nomeEstado`, `sigla`) VALUES('Pernambuco', 'PE');
+INSERT INTO `encodedb`.`estado` (`nomeEstado`, `sigla`) VALUES('Piauí', 'PI');
+INSERT INTO `encodedb`.`estado` (`nomeEstado`, `sigla`) VALUES('Paraná', 'PR');
+INSERT INTO `encodedb`.`estado` (`nomeEstado`, `sigla`) VALUES('Rio de Janeiro', 'RJ');
+INSERT INTO `encodedb`.`estado` (`nomeEstado`, `sigla`) VALUES('Rio Grande do Norte', 'RN');
+INSERT INTO `encodedb`.`estado` (`nomeEstado`, `sigla`) VALUES('Rondônia', 'RO');
+INSERT INTO `encodedb`.`estado` (`nomeEstado`, `sigla`) VALUES('Roraima', 'RR');
+INSERT INTO `encodedb`.`estado` (`nomeEstado`, `sigla`) VALUES('Rio Grande do Sul', 'RS');
+INSERT INTO `encodedb`.`estado` (`nomeEstado`, `sigla`) VALUES('Santa Catarina', 'SC');
+INSERT INTO `encodedb`.`estado` (`nomeEstado`, `sigla`) VALUES('Sergipe', 'SE');
+INSERT INTO `encodedb`.`estado` (`nomeEstado`, `sigla`) VALUES('São Paulo', 'SP');
+INSERT INTO `encodedb`.`estado` (`nomeEstado`, `sigla`) VALUES('Tocantins', 'TO');
+
