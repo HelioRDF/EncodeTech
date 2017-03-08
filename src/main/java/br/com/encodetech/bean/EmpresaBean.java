@@ -71,6 +71,15 @@ public class EmpresaBean implements Serializable {
 	// Salvar
 	// -------------------------------------------------------------------------------------
 	public void salvar() {
+		
+		Boolean permitir = dao.validarEmail(empresa.getEmail());
+		if (!permitir) {
+
+			 Messages.addGlobalError("O Endereço de e-mail já existe ... ");
+
+			return;
+
+		}
 
 		try {
 			
@@ -169,7 +178,19 @@ public class EmpresaBean implements Serializable {
 	// Editar usuário
 	// -------------------------------------------------------------------------------------------
 	public void editar() {
-
+		
+		Long id = empresa.getCodigo();
+		Boolean permitir =dao.validarEmail(empresa.getEmail(),id);
+			
+		 if(!permitir){
+	
+		 Messages.addGlobalError("O Endereço de e-mail já existe ... ");
+		 listaEmpresa = dao.listar();
+		
+		 return;
+		
+		 }
+		
 		try {
 				
 			dao = new EmpresaDAO();
@@ -189,6 +210,8 @@ public class EmpresaBean implements Serializable {
 			Messages.addGlobalInfo("Empresa: '" + empresa.getNomeEmpresa() + "' Editado com sucesso!!!");
 
 		} catch (NullPointerException e) {
+			
+
 			Messages.addGlobalError("Erro ao Editar (Método editar)'" + empresa.getNomeEmpresa() + "'");
 	
 

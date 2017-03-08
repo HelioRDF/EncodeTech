@@ -1,0 +1,27 @@
+
+
+
+
+INSERT INTO `encodedb`.`empresa` (`bairro`, `celular`, `cep`, `cnpj`, `complemento`, `dataCadastro`, `descricao`, `email`, `nomeEmpresa`, `numero`, `rua`, `seguimento`, `senha`, `status`, `telefone`, `cidade_codigo`) VALUES 
+
+
+
+( 'xxx', '(33) 3 3333-3333', '33333-333', '22.222.222/2222-22', 'xxxx', '2017-03-08 16:49:40', '22222222', 'heliocx3@inovax.com.br', 'EncodeTech', 'xxx', 'xxxxxxxxxxxxxx', 'TI', 'ea416ed0759d46a8de58f63a59077499', 0, '(33) 3333-3333', '5270'),
+
+( 'xxx', '(33) 3 3333-3333', '33333-333', '22.222.222/2222-22', 'xxxx', '2017-03-08 16:49:40', '22222222', 'heliocx433@inovax.com.br', 'EncodeTech', 'xxx', 'xxxxxxxxxxxxxx', 'TI', 'ea416ed0759d46a8de58f63a59077499', 0, '(33) 3333-3333', '5270'),
+
+( 'xxx', '(33) 3 3333-3333', '33333-333', '22.222.222/2222-22', 'xxxx', '2017-03-08 16:49:40', '22222222', 'heliocx43@inovax.com.br', 'EncodeTech', 'xxx', 'xxxxxxxxxxxxxx', 'TI', 'ea416ed0759d46a8de58f63a59077499', 0, '(33) 3333-3333', '5270'),
+
+( 'xxx', '(33) 3 3333-3333', '33333-333', '22.222.222/2222-22', 'xxxx', '2017-03-08 16:49:40', '22222222', 'heliocx34@inovax.com.br', 'EncodeTech', 'xxx', 'xxxxxxxxxxxxxx', 'TI', 'ea416ed0759d46a8de58f63a59077499', 0, '(33) 3333-3333', '5270'),
+
+( 'xxx', '(33) 3 3333-3333', '33333-333', '22.222.222/2222-22', 'xxxx', '2017-03-08 16:49:40', '22222222', 'helioc43x@inovax.com.br', 'EncodeTech', 'xxx', 'xxxxxxxxxxxxxx', 'TI', 'ea416ed0759d46a8de58f63a59077499', 0, '(33) 3333-3333', '5270'),
+
+( 'xxx', '(33) 3 3333-3333', '33333-333', '22.222.222/2222-22', 'xxxx', '2017-03-08 16:49:40', '22222222', 'heliocx32344@inovax.com.br', 'EncodeTech', 'xxx', 'xxxxxxxxxxxxxx', 'TI', 'ea416ed0759d46a8de58f63a59077499', 0, '(33) 3333-3333', '5270'),
+
+( 'xxx', '(33) 3 3333-3333', '33333-333', '22.222.222/2222-22', 'xxxx', '2017-03-08 16:49:40', '22222222', 'helioc2423x@inovax.com.br', 'EncodeTech', 'xxx', 'xxxxxxxxxxxxxx', 'TI', 'ea416ed0759d46a8de58f63a59077499', 0, '(33) 3333-3333', '5270');
+
+
+
+
+
+

@@ -42,9 +42,18 @@ public class LoginBean implements Serializable {
 				
 			} else{
 				
+				//Verifica se usuário é um ADM
 				if(!usuarioLogado.getAdmin()){
 					
-					Messages.addGlobalWarn("Usuário sem permisões de acesso.");
+					Messages.addGlobalError("Usuário sem permissões de acesso Administrativo.");
+					return;
+					
+				}
+				
+				//Verifica se usuário está Ativo
+				if(!usuarioLogado.getStatus()){
+					
+					Messages.addGlobalError("Usuário Desativado.");
 					return;
 					
 				}

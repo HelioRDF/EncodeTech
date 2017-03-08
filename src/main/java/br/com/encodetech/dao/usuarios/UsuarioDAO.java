@@ -69,5 +69,26 @@ public class UsuarioDAO extends GenericDAO<Usuario>{
 		return permitir;
 		
 	}
+	
+	
+	public Boolean validarEmail(String email, Long id){
+		Boolean permitir =false;
+		
+		//Abre uma sessão com Hibernate
+				Session sessao = HibernateUtil.getFabricadeSessoes().openSession();
+				
+				Criteria consulta = sessao.createCriteria(Usuario.class);	
+		
+				consulta.add(Restrictions.eq("email",email ));
+				
+				Usuario resultado = (Usuario) consulta.uniqueResult();
+				
+				if(resultado==null || id==resultado.getCodigo()){
+					permitir=true;
+				}
+		
+		return permitir;
+		
+	}
 
 }

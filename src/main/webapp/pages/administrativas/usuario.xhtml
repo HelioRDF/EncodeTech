@@ -505,7 +505,7 @@
 
 						<p:commandButton value="Editar"
 							actionListener="#{usuarioBean.editar}" validateClient="true"
-							update=":dialogform: " rendered="#{usuarioBean.botaoEditar}"
+							update=":dialogform: :form: " rendered="#{usuarioBean.botaoEditar}"
 							oncomplete="PF('dialogo').hide();">
 						</p:commandButton>
 

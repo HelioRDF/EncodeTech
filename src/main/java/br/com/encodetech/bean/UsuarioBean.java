@@ -49,7 +49,7 @@ public class UsuarioBean implements Serializable {
 	private AtividadesProfissionais atividadesProfissionais;
 	Cidade cidade = new Cidade();
 	Cidade cidadeAux = new Cidade();
-		
+
 	private UsuarioDAO dao;
 	private CidadeDAO cidadeDao;
 	private EstadoDAO estadoDao;
@@ -82,8 +82,7 @@ public class UsuarioBean implements Serializable {
 		Boolean permitir = dao.validarEmail(usuario.getEmail());
 
 		if (!permitir) {
-
-			Messages.addGlobalError("O e-mail já existe ... ");
+			 Messages.addGlobalError("O Endereço de e-mail já existe ... ");
 
 			return;
 
@@ -96,7 +95,7 @@ public class UsuarioBean implements Serializable {
 			usuario.setSenha(hash.toHex());
 			usuario.setDataCadastro(new Date());
 			usuario.setCidade(cidade);
-			
+
 			dao.salvar(usuario);
 			Messages.addGlobalInfo("Usuário(a) " + usuario.getNome() + ", salvo com sucesso.");
 
@@ -181,7 +180,6 @@ public class UsuarioBean implements Serializable {
 		}
 	}
 
-	
 	// Novo
 	// -------------------------------------------------------------------------------------------
 	public void novo() {
@@ -190,28 +188,25 @@ public class UsuarioBean implements Serializable {
 		telaEditar = false;
 		botaoEditar = false;
 		botaoSalvar = true;
-		
+
 		usuario = new Usuario();
 		dao = new UsuarioDAO();
-		
+
 		auxCidade = "Selecione uma Cidade";
 		auxEstado = " Selecione um Estado";
-		
+
 		System.out.println("Método novo");
-		
 
 	}
 
 	// Fechar
 	// -------------------------------------------------------------------------------------------
 	public void fechar() {
-		
 
 		RequestContext.getCurrentInstance().reset("dialogform");
 		usuario = new Usuario();
 		dao = new UsuarioDAO();
-		
-	
+
 		System.out.println("Método fechar");
 
 	}
@@ -221,7 +216,7 @@ public class UsuarioBean implements Serializable {
 	public void carregar() {
 
 		try {
-			
+
 			dao = new UsuarioDAO();
 			listaUsuario = dao.listar();
 
@@ -398,47 +393,49 @@ public class UsuarioBean implements Serializable {
 
 	}
 
-
-
 	// Editar usuário
 	// -------------------------------------------------------------------------------------------
 	public void editar() {
+		Long id = usuario.getCodigo();
+		
+		 Boolean permitir =dao.validarEmail(usuario.getEmail(),id);
+			
+		 if(!permitir){
 
-		//
-		// Boolean permitir =dao.validarEmail(usuario.getEmail());
-		//
-		// if(!permitir){
-		//
-		// Messages.addGlobalError("O e-mail já existe ... ");
-		//
-		// return;
-		//
-		// }
+			 Messages.addGlobalError("O Endereço de e-mail já existe ... ");
+			 listaUsuario = dao.listar();
+		
+		 return;
+		
+		 }
 
 		try {
 
 			dao = new UsuarioDAO();
-			
-			if(cidade==null){
-				cidade=cidadeAux;
+
+			if (cidade == null) {
+				cidade = cidadeAux;
 			}
 			System.out.println("\nEditar");
-			System.out.println("Cidade >>>"+cidade);
-			System.out.println("CidadeAux >>>"+cidade);
-			
+			System.out.println("Cidade >>>" + cidade);
+			System.out.println("CidadeAux >>>" + cidade);
+
 			usuario.setCidade(cidade);
 			dao.editar(usuario);
 
 			Messages.addGlobalInfo("Usuário(a) ' " + usuario.getNome() + "' Editado com sucesso!!!");
 
 		} catch (Exception e) {
+			
+			
+
 
 			Messages.addGlobalError("Erro ao Editar Usuário(a) '" + usuario.getNome() + "'");
 			System.out.println("Editar Erro:" + e.getMessage());
 			System.out.println("Editar Erro:" + e.getCause());
 
 		} finally {
-				
+
 			fechar();
 		}
 
@@ -498,12 +495,8 @@ public class UsuarioBean implements Serializable {
 
 		try {
 
-		
-
 			usuario = (Usuario) evento.getComponent().getAttributes().get("meuSelect");
 			Messages.addGlobalInfo("Seleção: " + usuario.getNome());
-
-	
 
 			System.out.println("Usuário:" + usuario.getNome());
 
@@ -514,56 +507,48 @@ public class UsuarioBean implements Serializable {
 		}
 
 	}
-	
+
 	// ------------------------------------------------------------------------------------------------------------------------------------------------------
 
-	
 	public void telaEditarObj(ActionEvent evento) {
-		
+
 		try {
-			
+
 			System.out.println("\ntelaEditarOBJ");
 			botaoSalvar = false;
 			botaoEditar = true;
 			telaEditar = true;
-			
-			CidadeDAO cidDAO = new CidadeDAO();				
+
+			CidadeDAO cidDAO = new CidadeDAO();
 			Cidade cid = new Cidade();
-			
+
 			usuario = (Usuario) evento.getComponent().getAttributes().get("meuSelect");
-			
-			
 
 			long num = cidDAO.buscarOBJCidadeUsuario(usuario);
-			System.out.println("Num:"+num);
+			System.out.println("Num:" + num);
 
 			cid = cidDAO.buscarObjCidadePorCodigo(num);
-			System.out.println("Cid:"+cid);
-			
-			if(cid==null){
-				
-				auxCidade="Selecione uma Cidade";
-				auxEstado=" Selecione um Estado";
-				
-			}else {
-			auxCidade = cid.getNome();
-			auxEstado = cid.getEstado().getNome();
-			cidadeAux=cid;
+			System.out.println("Cid:" + cid);
+
+			if (cid == null) {
+
+				auxCidade = "Selecione uma Cidade";
+				auxEstado = " Selecione um Estado";
+
+			} else {
+				auxCidade = cid.getNome();
+				auxEstado = cid.getEstado().getNome();
+				cidadeAux = cid;
 			}
-			
-		
-			System.out.println("Estado Aux:"+auxEstado);
-			System.out.println("Cidade Aux:"+auxCidade);
-			
-			
+
+			System.out.println("Estado Aux:" + auxEstado);
+			System.out.println("Cidade Aux:" + auxCidade);
+
 		} catch (Exception e) {
 			System.out.println("Erro no posGET");
 		}
-		
-	
-		
-	}
 
+	}
 
 	// ------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -638,7 +623,6 @@ public class UsuarioBean implements Serializable {
 
 	}
 
-
 	// ------------------------------------------------------------------------------------------------------------------------------------------------------
 
 	public void listarInfos() {
@@ -691,31 +675,28 @@ public class UsuarioBean implements Serializable {
 
 	}
 
-
 	// Listar Estado
-		// ------------------------------------------------------------------------------------------------------------------------------------------------------
+	// ------------------------------------------------------------------------------------------------------------------------------------------------------
 
-		@PostConstruct
-		public void BuscarEstados() {
+	@PostConstruct
+	public void BuscarEstados() {
 
-			try {
+		try {
 
-				System.out.println("Listando estados...");
+			System.out.println("Listando estados...");
 
-				estadoDao = new EstadoDAO();
-				listaEstado = estadoDao.listar("nome");
+			estadoDao = new EstadoDAO();
+			listaEstado = estadoDao.listar("nome");
 
-			} catch (Exception e) {
-				// TODO: handle exception
-			} finally {
-
-			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		} finally {
 
 		}
-		// ------------------------------------------------------------------------------------------------------------------------------------------------------
 
-	
-	
+	}
+	// ------------------------------------------------------------------------------------------------------------------------------------------------------
+
 	public Usuario getUsuario() {
 		return usuario;
 	}
@@ -895,8 +876,5 @@ public class UsuarioBean implements Serializable {
 	public void setCidade(Cidade cidade) {
 		this.cidade = cidade;
 	}
-	
-	
-	
-	
+
 }
