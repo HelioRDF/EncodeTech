@@ -397,8 +397,8 @@ public class UsuarioBean implements Serializable {
 	// -------------------------------------------------------------------------------------------
 	public void editar() {
 		Long id = usuario.getCodigo();
-		
-		 Boolean permitir =dao.validarEmail(usuario.getEmail(),id);
+		Boolean permitir =dao.validarEmail(usuario.getEmail(),id);
+	
 			
 		 if(!permitir){
 

@@ -175,12 +175,13 @@ public class EmpresaBean implements Serializable {
 
 	}
 
-	// Editar usuário
+	// Editar empresa
 	// -------------------------------------------------------------------------------------------
 	public void editar() {
 		
 		Long id = empresa.getCodigo();
 		Boolean permitir =dao.validarEmail(empresa.getEmail(),id);
+		
 			
 		 if(!permitir){
 	

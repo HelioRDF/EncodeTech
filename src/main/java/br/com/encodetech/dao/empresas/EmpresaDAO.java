@@ -6,7 +6,6 @@ import org.hibernate.criterion.Restrictions;
 
 import br.com.encodetech.dao.complementos.GenericDAO;
 import br.com.encodetech.domain.empresas.Empresa;
-import br.com.encodetech.domain.usuarios.Usuario;
 import br.com.encodetech.util.HibernateUtil;
 
 public class EmpresaDAO extends GenericDAO<Empresa> {
@@ -42,7 +41,7 @@ public class EmpresaDAO extends GenericDAO<Empresa> {
 		
 				consulta.add(Restrictions.eq("email",email ));
 				
-				Usuario resultado = (Usuario) consulta.uniqueResult();
+				Empresa resultado = (Empresa) consulta.uniqueResult();
 				
 				if(resultado==null || id==resultado.getCodigo()){
 					permitir=true;
