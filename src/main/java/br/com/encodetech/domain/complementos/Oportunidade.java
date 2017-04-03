@@ -80,6 +80,9 @@ public class Oportunidade extends GenericDomain {
 	@Column(nullable = false)
 	private BigDecimal salario;
 	
+	@Column(scale = 2)
+	private BigDecimal salarioAux;
+	
 	@Column
 	private Boolean mostrarSalario;
 	
@@ -249,6 +252,16 @@ public class Oportunidade extends GenericDomain {
 
 	public void setPcd(Boolean pcd) {
 		this.pcd = pcd;
+	}
+	
+	
+
+	public BigDecimal getSalarioAux() {
+		return salarioAux;
+	}
+
+	public void setSalarioAux(BigDecimal salarioAux) {
+		this.salarioAux = salarioAux;
 	}
 
 	@Override

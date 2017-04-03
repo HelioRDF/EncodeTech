@@ -6,6 +6,8 @@ import java.io.Serializable;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 
 import org.omnifaces.util.Faces;
 import org.omnifaces.util.Messages;
@@ -77,6 +79,11 @@ public class LoginBean implements Serializable {
 	public void sair(){
 		
 		try {
+			
+			//Destroi as sessões após loggof do usuário.
+			FacesContext facesContext = FacesContext.getCurrentInstance();
+			HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(false);
+			session.invalidate();
 			
 			usuarioLogado  =null;
 			Faces.redirect("./pages/publicas/login.xhtml");

@@ -1,6 +1,7 @@
 package br.com.encodetech.bean;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -69,6 +70,12 @@ public class OportunidadeBean implements Serializable {
 		try {
 
 			System.out.println("Método salvar");
+			
+			if (!oportunidade.getMostrarSalario()) {
+				oportunidade.setSalarioAux(new BigDecimal(1.00));
+			} else {
+				oportunidade.setSalarioAux(oportunidade.getSalario().setScale(2));
+			}
 
 			oportunidade.setDataCadastro(new Date());
 			oportunidade.setEstado(estado);
@@ -163,6 +170,14 @@ public class OportunidadeBean implements Serializable {
 
 		try {
 
+			
+
+			if (!oportunidade.getMostrarSalario()) {
+				oportunidade.setSalarioAux(new BigDecimal(1.00));
+
+			} else {
+				oportunidade.setSalarioAux(oportunidade.getSalario().setScale(2));
+			}
 			dao = new OportunidadeDAO();
 			oportunidade.setEstado(estado);
 			dao.merge(oportunidade);

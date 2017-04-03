@@ -1,32 +1,32 @@
-INSERT INTO `encodedb`.`oportunidade` (`area`, `beneficios`, `cargo`, `dataCadastro`, `descricao`, `horario`, `modalidade`, `mostrarEmpresa`, `mostrarSalario`, `nivel`, `PcD`, `preRequisitos`, `quantidade`, `salario`, `cidade_codigo`, `empresa_codigo`, `estado_codigo`) VALUES
+INSERT INTO `encodedb`.`oportunidade` (`area`, `beneficios`, `cargo`, `dataCadastro`, `descricao`, `horario`, `modalidade`, `mostrarEmpresa`, `mostrarSalario`, `nivel`, `PcD`, `preRequisitos`, `quantidade`, `salario`, `cidade_codigo`, `empresa_codigo`, `estado_codigo`, `salarioAux`) VALUES
 
 
 
- ('Biologicas', 'xxx', 'Auxiliar', '2017-03-08 16:50:23', 'xxe', '333', 'PJ', 0, 1, 'Senior', 1, 'xxxx', '33', '843.00', '5270', 1, '26'),
+ ('Biologicas', 'xxx', 'Auxiliar', '2017-03-08 16:50:23', 'xxe', '333', 'PJ', 0, 1, 'Senior', 1, 'xxxx', '33', '843.00', '5270', 1, '26', '843.00'),
 
-  ('Biologicas', 'xxx', 'Auxiliar', '2017-03-08 16:50:23', 'xxe', '333', 'PJ', 0, 1, 'Senior', 1, 'xxxx', '33', '9443.00', '5270', 1, '26'),
+  ('Biologicas', 'xxx', 'Auxiliar', '2017-03-08 16:50:23', 'xxe', '333', 'PJ', 0, 1, 'Senior', 1, 'xxxx', '33', '9443.00', '5270', 1, '26', '9443.00'),
 
-   ('Biologicas', 'xxx', 'Auxiliar', '2017-03-08 16:50:23', 'xxe', '333', 'PJ', 0, 1, 'Senior', 1, 'xxxx', '33', '1443.00', '5270', 1, '26'),
+   ('Biologicas', 'xxx', 'Auxiliar', '2017-03-08 16:50:23', 'xxe', '333', 'PJ', 0, 1, 'Senior', 1, 'xxxx', '33', '1443.00', '5270', 1, '26', '1443.00'),
 
-    ('Biologicas', 'xxx', 'Auxiliar', '2017-03-08 16:50:23', 'xxe', '333', 'PJ', 0, 1, 'Senior', 0, 'xxxx', '33', '2443.00', '5270', 1, '26'),
+    ('Biologicas', 'xxx', 'Auxiliar', '2017-03-08 16:50:23', 'xxe', '333', 'PJ', 0, 1, 'Senior', 0, 'xxxx', '33', '2443.00', '5270', 1, '26',  '2443.00'),
 
-     ('Biologicas', 'xxx', 'Auxiliar', '2017-03-08 16:50:23', 'xxe', '333', 'PJ', 0, 1, 'Senior', 0, 'xxxx', '33', '3443.00', '5270', 1, '26'),
+     ('Biologicas', 'xxx', 'Auxiliar', '2017-03-08 16:50:23', 'xxe', '333', 'PJ', 0, 1, 'Senior', 0, 'xxxx', '33', '3443.00', '5270', 1, '26', '3443.00'),
 
-      ('Biologicas', 'xxx', 'Auxiliar', '2017-03-08 16:50:23', 'xxe', '333', 'PJ', 0, 1, 'Senior', 0, 'xxxx', '33', '4443.00', '5270', 1, '26'),
+      ('Biologicas', 'xxx', 'Auxiliar', '2017-03-08 16:50:23', 'xxe', '333', 'PJ', 0, 1, 'Senior', 0, 'xxxx', '33', '4443.00', '5270', 1, '26', '4443.00'),
 
 
 
-       ('Exatas', 'xxx', 'Auxiliar', '2017-03-08 16:50:23', 'xxe', '333', 'PJ', 0, 1, 'Senior', 1, 'xxxx', '33', '843.00', '5270', 1, '26'),
+       ('Exatas', 'xxx', 'Auxiliar', '2017-03-08 16:50:23', 'xxe', '333', 'PJ', 0, 1, 'Senior', 1, 'xxxx', '33', '843.00', '5270', 1, '26',  '843.00'),
 
-  ('Exatas', 'xxx', 'Auxiliar', '2017-03-08 16:50:23', 'xxe', '333', 'PJ', 0, 1, 'Senior', 1, 'xxxx', '33', '9443.00', '5270', 1, '26'),
+  ('Exatas', 'xxx', 'Auxiliar', '2017-03-08 16:50:23', 'xxe', '333', 'PJ', 0, 1, 'Senior', 1, 'xxxx', '33', '9443.00', '5270', 1, '26', '843.00'),
 
-   ('Exatas', 'xxx', 'Auxiliar', '2017-03-08 16:50:23', 'xxe', '333', 'PJ', 0, 1, 'Senior', 1, 'xxxx', '33', '1443.00', '5270', 1, '26'),
+   ('Exatas', 'xxx', 'Auxiliar', '2017-03-08 16:50:23', 'xxe', '333', 'PJ', 0, 1, 'Senior', 1, 'xxxx', '33', '1443.00', '5270', 1, '26', '843.00'),
 
-    ('Exatas', 'xxx', 'Auxiliar', '2017-03-08 16:50:23', 'xxe', '333', 'PJ', 0, 1, 'Senior', 0, 'xxxx', '33', '2443.00', '5270', 1, '26'),
+    ('Exatas', 'xxx', 'Auxiliar', '2017-03-08 16:50:23', 'xxe', '333', 'PJ', 0, 1, 'Senior', 0, 'xxxx', '33', '2443.00', '5270', 1, '26', '843.00'),
 
-     ('Exatas', 'xxx', 'Auxiliar', '2017-03-08 16:50:23', 'xxe', '333', 'PJ', 0, 1, 'Senior', 0, 'xxxx', '33', '3443.00', '5270', 1, '26'),
+     ('Exatas', 'xxx', 'Auxiliar', '2017-03-08 16:50:23', 'xxe', '333', 'PJ', 0, 1, 'Senior', 0, 'xxxx', '33', '3443.00', '5270', 1, '26', '843.00'),
 
-      ('Exatas', 'xxx', 'Auxiliar', '2017-03-08 16:50:23', 'xxe', '333', 'PJ', 0, 1, 'Senior', 0, 'xxxx', '33', '4443.00', '5270', 1, '26');
+      ('Exatas', 'xxx', 'Auxiliar', '2017-03-08 16:50:23', 'xxe', '333', 'PJ', 0, 1, 'Senior', 0, 'xxxx', '33', '4443.00', '5270', 1, '26', '843.00');
 
 
 
