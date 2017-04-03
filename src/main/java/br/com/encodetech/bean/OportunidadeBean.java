@@ -168,9 +168,7 @@ public class OportunidadeBean implements Serializable {
 	// -------------------------------------------------------------------------------------------
 	public void editar() {
 
-		try {
-
-			
+		try {			
 
 			if (!oportunidade.getMostrarSalario()) {
 				oportunidade.setSalarioAux(new BigDecimal(1.00));
