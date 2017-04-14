@@ -42,6 +42,7 @@ public class EmpresaBean implements Serializable {
 	private Estado estado;
 	Cidade cidade = new Cidade();
 	Cidade cidadeAux = new Cidade();
+	private int totalEmpresas;
 	
 	private EmpresaDAO dao;
 	private CidadeDAO cidadeDao;
@@ -144,6 +145,7 @@ public class EmpresaBean implements Serializable {
 			
 			dao = new EmpresaDAO();
 			listaEmpresa = dao.listar();
+			totalEmpresas = listaEmpresa.size();
 
 			Messages.addGlobalInfo("Lista atualizada com sucesso ");
 
@@ -493,6 +495,15 @@ public class EmpresaBean implements Serializable {
 		this.cidade = cidade;
 	}
 
+	public int getTotalEmpresas() {
+		return totalEmpresas;
+	}
+
+	public void setTotalEmpresas(int totalEmpresas) {
+		this.totalEmpresas = totalEmpresas;
+	}
+
+	
 	
 	
 

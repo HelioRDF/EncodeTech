@@ -30,6 +30,7 @@ public class EstadoBean implements Serializable {
 	private Estado estado;
 	private EstadoDAO dao;
 	private List<Estado> listaEstado;
+	private int totalEstados;
 
 	
 
@@ -89,6 +90,7 @@ public class EstadoBean implements Serializable {
 			this.listaEstado = dao.listar();
 			dao = null;
 			estado = null;
+			totalEstados=listaEstado.size();
 			Messages.addGlobalInfo("Lista atualizada com sucesso ");
 
 		} catch (Exception e) {
@@ -152,4 +154,18 @@ public class EstadoBean implements Serializable {
 		this.listaEstado = listaEstado;
 	}
 
+
+	public int getTotalEstados() {
+		return totalEstados;
+	}
+
+
+	public void setTotalEstados(int totalEstados) {
+		this.totalEstados = totalEstados;
+	}
+
+
+	
+	
+	
 }

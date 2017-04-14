@@ -21,6 +21,7 @@ import br.com.encodetech.domain.localizacao.Estado;
 public class CidadeBean implements Serializable {
 	private List<Cidade> listaCidade;
 	private List<Estado> listaEstado;
+	private int totalCidades;
 
 	private Cidade cidade;
 	private CidadeDAO daoCidade;
@@ -107,6 +108,7 @@ public class CidadeBean implements Serializable {
 			cidade = new Cidade();
 			daoCidade = new CidadeDAO();
 			listaCidade = daoCidade.listar();
+			totalCidades = listaCidade.size();
 			
 
 			daoCidade = new CidadeDAO();
@@ -192,5 +194,17 @@ public class CidadeBean implements Serializable {
 	public void setEstado(Estado estado) {
 		this.estado = estado;
 	}
+
+	public int getTotalCidades() {
+		return totalCidades;
+	}
+
+	public void setTotalCidades(int totalCidades) {
+		this.totalCidades = totalCidades;
+	}
+
+	
+	
+	
 
 }

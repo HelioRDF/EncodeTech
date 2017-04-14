@@ -49,6 +49,7 @@ public class UsuarioBean implements Serializable {
 	private AtividadesProfissionais atividadesProfissionais;
 	Cidade cidade = new Cidade();
 	Cidade cidadeAux = new Cidade();
+	private int totalUsuario;
 
 	private UsuarioDAO dao;
 	private CidadeDAO cidadeDao;
@@ -221,6 +222,7 @@ public class UsuarioBean implements Serializable {
 			listaUsuario = dao.listar();
 
 			Messages.addGlobalInfo("Lista atualizada com sucesso ");
+			totalUsuario = listaUsuario.size();
 
 		} catch (Exception e) {
 			Messages.addGlobalError("Falha ao tentar  atualizadar a lista  ");
@@ -876,5 +878,15 @@ public class UsuarioBean implements Serializable {
 	public void setCidade(Cidade cidade) {
 		this.cidade = cidade;
 	}
+
+	public int getTotalUsuario() {
+		return totalUsuario;
+	}
+
+	public void setTotalUsuario(int totalUsuario) {
+		this.totalUsuario = totalUsuario;
+	}
+	
+	
 
 }
