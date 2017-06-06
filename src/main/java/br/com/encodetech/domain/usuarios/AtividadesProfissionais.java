@@ -22,17 +22,17 @@ import br.com.encodetech.domain.complementos.GenericDomain;
 @Entity
 public class AtividadesProfissionais extends GenericDomain {
 
-	@Column(length = 60)
+	@Column(length = 60 , nullable = false)
 	private String nomeCurso;
 
-	@Column(length = 60)
+	@Column(length = 60, nullable = false)
 	private String instituicao;
 
-	@Column()
-	@Temporal(TemporalType.DATE)
+	@Column(nullable = false)
+	@Temporal(TemporalType.DATE )
 	private Date anoCurso;
 
-	@Column(length = 7)
+	@Column(length = 7, nullable = false)
 	private String cargaHoraria;
 	
 	@ManyToOne

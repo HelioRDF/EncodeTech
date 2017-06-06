@@ -8,6 +8,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import br.com.encodetech.domain.complementos.GenericDomain;
 
@@ -23,24 +25,27 @@ public class FormacaoAcademica extends GenericDomain {
 
 	// Graduação | Técnico | Primeiro Grau| Segundo Grau| ???
 
-	@Column(length = 55)
+	@NotNull
+	@Size(min = 3)
+	@Column(length = 55, nullable = false)
 	private String instituicao; // Anhembi Morumbi
 
-	@Column(length = 55)
-	private String titulo; // Graduação | Técnico | Primeiro Grau| Segundo
-							// Grau|?
-	
-	@Column
-	private String status; 
-	
-	@Column
+	@NotNull
+	@Size(min = 3)
+	@Column (nullable = false)
 	private String nomeCurso;// Analise de Sistemas
 
-	@Column
+	@Column(length = 55, nullable = false)
+	private String titulo; // Graduação | Técnico | Primeiro Grau| Segundo
+							// Grau|?	
+	@Column (nullable = false)
+	private String status;
+	
+	@Column (nullable = false)
 	@Temporal(TemporalType.DATE)
 	private Date inicio;
 
-	@Column
+	@Column (nullable = false)
 	@Temporal(TemporalType.DATE)
 	private Date fim;
 	
@@ -48,26 +53,15 @@ public class FormacaoAcademica extends GenericDomain {
 	@JoinColumn(name="usuarioCodigo")
 	private Usuario usuario;
 	
-
-
-
-
-
-
 	// -------------------------------------------------------
 	
-
 	public String getInstituicao() {
 		return instituicao;
 	}
-
 	
-
 	public Usuario getUsuario() {
 		return usuario;
 	}
-
-
 
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;

@@ -21,6 +21,7 @@
 <h:form id="dialogformCurriculo"  >
 	<p:growl  id="msgCurriculo" life="8000" />
 	
+	
 		<h1>@ Encodetech</h1>
 
 	 	<p:menubar styleClass="menuBasico"> 
@@ -95,13 +96,15 @@ value="Salvar"  style="margin:10px auto;" icon="ui-icon-squaresmall-plus"
         
        <h:panelGrid columns="4">
   <p:outputLabel value="Curso:" style="margin-right:30px;" />
-<p:inputText  style="margin-right:20px" maxlength="60" size="33" 
-	value="#{usuarioBean.formacaoAcademica.nomeCurso}" required="false" requiredMessage="Preencha o campo Curso corretamente">
+<p:inputText  style="margin-right:20px" maxlength="60" size="33" validatorMessage="Curso: Campo não preenchido."
+	value="#{usuarioBean.formacaoAcademica.nomeCurso}"  >
+
 </p:inputText>          
         
   <p:outputLabel value="Instituição:"  />
- <p:inputText maxlength="30" size="25" style="margin:auto;"
-	value="#{usuarioBean.formacaoAcademica.instituicao}" required="false" requiredMessage="Preencha o campo Instituição corretamente">
+ <p:inputText maxlength="30" size="25" style="margin:auto;" validatorMessage="Instituição: Campo não preenchido."
+	value="#{usuarioBean.formacaoAcademica.instituicao}"  >
+
 </p:inputText>
       </h:panelGrid>           
   
@@ -112,7 +115,8 @@ value="Salvar"  style="margin:10px auto;" icon="ui-icon-squaresmall-plus"
 <p:outputLabel value="Nível:" style="margin-right:30px;"/>
     <h:panelGrid columns="3">
 <p:selectOneMenu   maxlength="25" size="20" label="rua"
-	value="#{usuarioBean.formacaoAcademica.titulo}" required="false" requiredMessage="Preencha o campo Nível corretamente" >
+	value="#{usuarioBean.formacaoAcademica.titulo}" required="false"  
+	 requiredMessage="Preencha o campo Nível corretamente" >
 <f:selectItem  itemDisabled="true" noSelectionOption="true" itemLabel="Selecionar"> </f:selectItem>
 
 <f:selectItem itemValue="Outros" itemLabel="Outros"> </f:selectItem>
@@ -140,12 +144,12 @@ value="Salvar"  style="margin:10px auto;" icon="ui-icon-squaresmall-plus"
  	<p:calendar locale="pt_BR"  
 		navigator="true" pages="1"
 		value="#{usuarioBean.formacaoAcademica.inicio}" required="false"
-		size="8" requiredMessage="Preencha o campo início do curso" > 
+		size="8" requiredMessage="Preencha o campo início do curso" >
 </p:calendar>
 	<p:graphicImage style="float:center;" value="/images/calendar (3).png" />
 	
 	
- <p:outputLabel value="Fim: " style="margin-left:15px" />	
+ <p:outputLabel value="Fim: " style="margin-left:15px"  />	
 		<p:calendar locale="pt_BR" 
 		navigator="true" pages="1"
 		value="#{usuarioBean.formacaoAcademica.fim}" required="false"
@@ -202,7 +206,7 @@ value="#{usuarioBean.listaFormacao}"	style=" text-align:center;"  >
 			
 
 				<!-- Editar -->
-				<p:commandButton title="Editar" icon="ui-icon-pencil"
+				<p:commandButton title="Editar" icon="ui-icon-pencil" ignoreAutoUpdate="true"
 					actionListener="#{usuarioBean.getinstanciaFormação}" update=":dialogformCurriculo:">
 					<f:attribute name="meuSelect" value="#{dataVarFormacao}" />
 				</p:commandButton>
@@ -268,11 +272,17 @@ value="#{usuarioBean.listaFormacao}"	style=" text-align:center;"  >
  
 <p:outputLabel value="Empresa: " style="margin-right:68px" />
 <p:inputText maxlength="35" size="25" value="#{usuarioBean.experienciaProfissional.nomeEmpresa}" 
-></p:inputText>
+>
+<f:validateLength minimum="3" disabled="true" />
+
+</p:inputText>
 
 <p:outputLabel value="Cargo: " style="margin-left:45px" />
 <p:inputText maxlength="35" size="25" value="#{usuarioBean.experienciaProfissional.cargo}" 
-></p:inputText>
+>
+<f:validateLength minimum="3" disabled="true" />
+
+</p:inputText>
 
 </h:panelGrid>
 
@@ -301,7 +311,9 @@ value="#{usuarioBean.listaFormacao}"	style=" text-align:center;"  >
 <h:panelGrid columns="2">
 <p:outputLabel value="Atividade: " style="margin-right:60px; " />
 <p:inputTextarea maxlength="250"  rows="3" cols="75" value="#{usuarioBean.experienciaProfissional.principaisAtividades}" 
-></p:inputTextarea>
+>
+<f:validateLength minimum="3" disabled="true" />
+</p:inputTextarea>
 </h:panelGrid>
 
 
@@ -422,11 +434,15 @@ value="#{usuarioBean.listaExperiencia}"	style=" text-align:center;"  >
  
 <p:inputText maxlength="30" size="25" 
 	value="#{usuarioBean.atividadesProfissionais.instituicao}" >
+<f:validateLength minimum="3" disabled="true" />
+
 </p:inputText>
                                 
  <p:outputLabel value="Curso"  />
 <p:inputText style="margin-left:2px" maxlength="40" size="35" 
 	value="#{usuarioBean.atividadesProfissionais.nomeCurso}" >
+<f:validateLength minimum="3" disabled="true" />
+
 </p:inputText>     
             
 
@@ -447,6 +463,7 @@ value="#{usuarioBean.listaExperiencia}"	style=" text-align:center;"  >
 	size="5" value="#{usuarioBean.atividadesProfissionais.cargaHoraria}"
 	>
 	<f:convertNumber locale="pt_BR" pattern="##" minIntegerDigits="4" />
+<f:validateLength minimum="3" disabled="true" />
 
 </p:inputNumber>
 <p:outputLabel  value="Hrs" />
