@@ -11,6 +11,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.NaturalId;
+
 import br.com.encodetech.domain.complementos.GenericDomain;
 import br.com.encodetech.domain.localizacao.Cidade;
 
@@ -78,6 +80,7 @@ public class Usuario extends GenericDomain {
 	private Date dataNascimento;
 
 	@Column(length = 100, nullable = false, unique=true)
+	@NaturalId
 	private String email;
 
 	@Column(length = 20, nullable = false)

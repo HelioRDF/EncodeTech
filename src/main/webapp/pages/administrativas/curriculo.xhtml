@@ -21,17 +21,20 @@
 <h:form id="dialogformCurriculo"  >
 	<p:growl  id="msgCurriculo" life="8000" />
 	
+		<div id="menu">
+			<p:outputLabel value=" Encodetech"
+				style="float:left; margin: 2px auto auto auto; font-size: 18px;"></p:outputLabel>
+
+			
+
+				
+				 <p:outputLabel styleClass="cabecalhoInfo"  value="Curriculo: #{usuarioBean.usuario.nome}"/>
+				 
+				   <p:button type="button" value="Voltar" icon="ui-icon-extlink" outcome="/pages/administrativas/usuario.xhtml" />
+			
+		</div>
+
 	
-		<h1>@ Encodetech</h1>
-
-	 	<p:menubar styleClass="menuBasico"> 
- 	
-        <f:facet name="options">
-         <p:outputLabel styleClass="cabecalhoInfo"  value="Curriculo: #{usuarioBean.usuario.nome}"/>  
-        <p:button type="button" value="Voltar" icon="ui-icon-extlink" outcome="/pages/administrativas/usuario.xhtml" />
-        </f:facet>
-    </p:menubar>
-
 
 <!-- _________________________________________________________________________________________________________________________________ -->
 <!-- Informações de cabeçalho da tabela -->

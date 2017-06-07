@@ -11,6 +11,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.NaturalId;
+
 import br.com.encodetech.domain.complementos.GenericDomain;
 import br.com.encodetech.domain.localizacao.Cidade;
 
@@ -80,6 +82,7 @@ public class Empresa extends GenericDomain {
 	private String cnpj;
 	
 	@Column(length = 33,unique=true)
+	@NaturalId
 	private String email;
 	
 
