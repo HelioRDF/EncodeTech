@@ -83,7 +83,7 @@ public class UsuarioBean implements Serializable {
 		Boolean permitir = dao.validarEmail(usuario.getEmail());
 
 		if (!permitir) {
-			 Messages.addGlobalError("O Endereço de e-mail já existe ... ");
+			Messages.addGlobalError("O Endereço de e-mail já existe ... ");
 
 			return;
 
@@ -126,11 +126,20 @@ public class UsuarioBean implements Serializable {
 					formacaoAcademica.setStatus("Incompleto");
 				}
 
-				formacaoAcademica.setUsuario(usuario);
-				daoFormacao.merge(formacaoAcademica);
+				if (formacaoAcademica.getNomeCurso().trim().isEmpty()
+						|| formacaoAcademica.getInstituicao().trim().isEmpty()) {
 
-				Messages.addGlobalInfo("Formação  salva com sucesso: " + formacaoAcademica.getNomeCurso());
-				carregarCurriculo();
+					Messages.addGlobalWarn("Preencha os campos corretamente.");
+					carregarFormacao();
+
+				} else {
+
+					formacaoAcademica.setUsuario(usuario);
+					daoFormacao.merge(formacaoAcademica);
+
+					Messages.addGlobalInfo("Formação  salva com sucesso: " + formacaoAcademica.getNomeCurso());
+					carregarFormacao();
+				}
 			}
 
 		} catch (Exception e) {
@@ -232,9 +241,36 @@ public class UsuarioBean implements Serializable {
 
 	}
 
+	// Formação Academica
+	// ----------------------------------------------------------
+
+	public void carregarFormacao() {
+
+		try {
+			formacaoAcademica = new FormacaoAcademica();
+			daoFormacao = new FormacaoAcademicaDAO();
+			listaFormacao = daoFormacao.buscarPorUsuario(usuario.getCodigo());
+
+			if (listaFormacao.size() < 7) {
+				botaoFormacao = true;
+
+			} else {
+				botaoFormacao = false;
+				Messages.addGlobalWarn("Numéro maximo de Formações atingido. (max = 7)");
+
+			}
+
+		} catch (Exception e) {
+			Messages.addGlobalError("Falha ao tentar  atualizadar a lista  ");
+		}
+
+	}
+
 	// Carregar Curriculo
 	// -------------------------------------------------------------------------------------------
 	public void carregarCurriculo() {
+
+		carregarFormacao();
 
 		// Atividades Profissionais
 		// ----------------------------------------------------------
@@ -282,29 +318,6 @@ public class UsuarioBean implements Serializable {
 			Messages.addGlobalError("Falha ao tentar  atualizadar a lista  ");
 		}
 		// Fim Experiência
-		// ----------------------------------------------------------
-
-		// Formação Academica
-		// ----------------------------------------------------------
-		try {
-			formacaoAcademica = new FormacaoAcademica();
-			daoFormacao = new FormacaoAcademicaDAO();
-			listaFormacao = daoFormacao.buscarPorUsuario(usuario.getCodigo());
-
-			if (listaFormacao.size() < 7) {
-				botaoFormacao = true;
-
-			} else {
-				botaoFormacao = false;
-				Messages.addGlobalWarn("Numéro maximo de Formações atingido. (max = 7)");
-
-			}
-
-		} catch (Exception e) {
-			Messages.addGlobalError("Falha ao tentar  atualizadar a lista  ");
-		}
-
-		// Fim Formação Academica
 		// ----------------------------------------------------------
 
 	}
@@ -399,17 +412,16 @@ public class UsuarioBean implements Serializable {
 	// -------------------------------------------------------------------------------------------
 	public void editar() {
 		Long id = usuario.getCodigo();
-		Boolean permitir =dao.validarEmail(usuario.getEmail(),id);
-	
-			
-		 if(!permitir){
+		Boolean permitir = dao.validarEmail(usuario.getEmail(), id);
 
-			 Messages.addGlobalError("O Endereço de e-mail já existe ... ");
-			 listaUsuario = dao.listar();
-		
-		 return;
-		
-		 }
+		if (!permitir) {
+
+			Messages.addGlobalError("O Endereço de e-mail já existe ... ");
+			listaUsuario = dao.listar();
+
+			return;
+
+		}
 
 		try {
 
@@ -428,9 +440,6 @@ public class UsuarioBean implements Serializable {
 			Messages.addGlobalInfo("Usuário(a) ' " + usuario.getNome() + "' Editado com sucesso!!!");
 
 		} catch (Exception e) {
-			
-			
-
 
 			Messages.addGlobalError("Erro ao Editar Usuário(a) '" + usuario.getNome() + "'");
 			System.out.println("Editar Erro:" + e.getMessage());
@@ -886,7 +895,5 @@ public class UsuarioBean implements Serializable {
 	public void setTotalUsuario(int totalUsuario) {
 		this.totalUsuario = totalUsuario;
 	}
-	
-	
 
 }
