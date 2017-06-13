@@ -3,6 +3,7 @@ package br.com.encodetech.dao.usuarios;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
@@ -33,6 +34,31 @@ public class ExperienciaProfissionalDAO extends GenericDAO<ExperienciaProfission
 			
 			
 		}
+	// Excluir ExperienciaProfissional
+	// -------------------------------------------------------------------------------------------
+
+
+	public void excluirExperienciaProfissional (Long usuarioCod) {
+		Session sessao = HibernateUtil.getFabricadeSessoes().openSession();
+
+
+		try {
+			
+			Query query = sessao.createQuery("delete ExperienciaProfissional where usuarioCodigo = :usuarioCodigo");
+			query.setParameter("usuarioCodigo", usuarioCod);
+			int result = query.executeUpdate();
+			
+			System.out.println("Quantidade de Experiencia Profissional deletada:"+result);
+
+		} catch (RuntimeException erro) {
+
+			System.out.println("Erro em excluir ExperienciaProfissional: (ExperienciaProfissionalDAO)");
+
+		} finally {
+			sessao.close();
+		}
+
+	}
 	
 	
 

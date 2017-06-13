@@ -351,6 +351,18 @@ public class UsuarioBean implements Serializable {
 
 			usuario = (Usuario) evento.getComponent().getAttributes().get("meuSelect");
 			UsuarioDAO dao = new UsuarioDAO();
+			
+			daoFormacao = new FormacaoAcademicaDAO();
+			daoFormacao.excluirFormacoes(usuario.getCodigo());
+			
+			daoAtividades = new AtividadesProfissionaisDAO();
+			daoAtividades.excluirAtividadesProfissionais(usuario.getCodigo());
+			
+			daoExperiencia = new ExperienciaProfissionalDAO();
+			daoExperiencia.excluirExperienciaProfissional(usuario.getCodigo());
+			
+			
+			
 			Messages.addGlobalInfo("Usuário(a) ' " + usuario.getNome() + "' Removido com sucesso!!!");
 			dao.excluir(usuario);
 

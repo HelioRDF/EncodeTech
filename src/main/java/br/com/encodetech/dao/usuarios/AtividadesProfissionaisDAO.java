@@ -3,6 +3,7 @@ package br.com.encodetech.dao.usuarios;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
@@ -35,6 +36,32 @@ public class AtividadesProfissionaisDAO extends GenericDAO<AtividadesProfissiona
 				
 				
 			}
+		
+		// Excluir AtividadesProfissionais
+		// -------------------------------------------------------------------------------------------
+
+
+		public void excluirAtividadesProfissionais (Long usuarioCod) {
+			Session sessao = HibernateUtil.getFabricadeSessoes().openSession();
+
+
+			try {
+				
+				Query query = sessao.createQuery("delete AtividadesProfissionais where usuarioCodigo = :usuarioCodigo");
+				query.setParameter("usuarioCodigo", usuarioCod);
+				int result = query.executeUpdate();
+				
+				System.out.println("Quantidade de Atividades Profissionais deletadas:"+result);
+
+			} catch (RuntimeException erro) {
+
+				System.out.println("Erro em excluir AtividadesProfissionais: (AtividadesProfissionaisDAO)");
+
+			} finally {
+				sessao.close();
+			}
+
+		}
 		
 		
 
