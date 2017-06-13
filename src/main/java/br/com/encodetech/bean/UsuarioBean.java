@@ -150,16 +150,25 @@ public class UsuarioBean implements Serializable {
 		}
 	}
 
-	// Salvar formação
+	// Salvar Experiência
 	// -------------------------------------------------------------------------------------
 	public void salvarExperiencia() {
 
 		try {
 			if (botaoExperiencia = true) {
-				experienciaProfissional.setUsuario(usuario);
-				daoExperiencia.merge(experienciaProfissional);
-				Messages.addGlobalInfo("Experiencia  salva com sucesso: " + experienciaProfissional.getCargo());
-				carregarCurriculo();
+
+				if (experienciaProfissional.getNomeEmpresa().trim().isEmpty()
+						|| experienciaProfissional.getCargo().trim().isEmpty()) {
+
+					Messages.addGlobalWarn("Preencha os campos corretamente.");
+					carregarExperiencia();
+
+				} else {
+					experienciaProfissional.setUsuario(usuario);
+					daoExperiencia.merge(experienciaProfissional);
+					Messages.addGlobalInfo("Experiencia  salva com sucesso: " + experienciaProfissional.getCargo());
+					carregarExperiencia();
+				}
 			}
 
 		} catch (Exception e) {
@@ -266,11 +275,44 @@ public class UsuarioBean implements Serializable {
 
 	}
 
+	
+	// Carregar Experiência
+	// -------------------------------------------------------------------------------------------
+
+	public void carregarExperiencia(){
+		
+		
+		// Experiência
+				// ----------------------------------------------------------
+				try {
+
+					experienciaProfissional = new ExperienciaProfissional();
+					daoExperiencia = new ExperienciaProfissionalDAO();
+					listaExperiencia = daoExperiencia.buscarPorUsuario(usuario.getCodigo());
+
+					if (listaExperiencia.size() < 4) {
+						botaoExperiencia = true;
+
+					} else {
+						botaoExperiencia = false;
+						Messages.addGlobalWarn("Numéro maximo de Experiência atingido. (max = 4)");
+
+					}
+
+				} catch (Exception e) {
+					Messages.addGlobalError("Falha ao tentar  atualizadar a lista  ");
+				}
+				// Fim Experiência
+				// ----------------------------------------------------------
+		
+	}
+	
 	// Carregar Curriculo
 	// -------------------------------------------------------------------------------------------
 	public void carregarCurriculo() {
 
 		carregarFormacao();
+		carregarExperiencia();
 
 		// Atividades Profissionais
 		// ----------------------------------------------------------
@@ -297,28 +339,7 @@ public class UsuarioBean implements Serializable {
 		// Fim Atividades Profissionais
 		// ----------------------------------------------------------
 
-		// Experiência
-		// ----------------------------------------------------------
-		try {
-
-			experienciaProfissional = new ExperienciaProfissional();
-			daoExperiencia = new ExperienciaProfissionalDAO();
-			listaExperiencia = daoExperiencia.buscarPorUsuario(usuario.getCodigo());
-
-			if (listaExperiencia.size() < 4) {
-				botaoExperiencia = true;
-
-			} else {
-				botaoExperiencia = false;
-				Messages.addGlobalWarn("Numéro maximo de Experiência atingido. (max = 4)");
-
-			}
-
-		} catch (Exception e) {
-			Messages.addGlobalError("Falha ao tentar  atualizadar a lista  ");
-		}
-		// Fim Experiência
-		// ----------------------------------------------------------
+		
 
 	}
 
@@ -364,7 +385,7 @@ public class UsuarioBean implements Serializable {
 
 	}
 
-	// Excluir Formacao
+	// Excluir Exp
 	// -------------------------------------------------------------------------------------------
 	public void excluirExperiencia(ActionEvent evento) {
 
