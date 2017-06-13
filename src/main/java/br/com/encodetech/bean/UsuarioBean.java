@@ -185,12 +185,18 @@ public class UsuarioBean implements Serializable {
 
 		try {
 			if (botaoAtividades = true) {
+				
+				if(atividadesProfissionais.getNomeCurso().trim().isEmpty() || atividadesProfissionais.getInstituicao().trim().isEmpty() ){
+					Messages.addGlobalWarn("Preencha os campos corretamente.");
+					carregarAtividades();
+				}else{
+			
 				atividadesProfissionais.setUsuario(usuario);
 				daoAtividades.merge(atividadesProfissionais);
 				Messages.addGlobalInfo("Qualificação  salva com sucesso: " + atividadesProfissionais.getNomeCurso());
-				carregarCurriculo();
+				carregarAtividades();
 			}
-
+			}
 		} catch (Exception e) {
 			Messages.addGlobalError("Não foi possível salvar a Qualificação, Preencha os campos corretamente. ");
 
@@ -307,12 +313,7 @@ public class UsuarioBean implements Serializable {
 		
 	}
 	
-	// Carregar Curriculo
-	// -------------------------------------------------------------------------------------------
-	public void carregarCurriculo() {
-
-		carregarFormacao();
-		carregarExperiencia();
+	public void carregarAtividades(){
 
 		// Atividades Profissionais
 		// ----------------------------------------------------------
@@ -339,10 +340,9 @@ public class UsuarioBean implements Serializable {
 		// Fim Atividades Profissionais
 		// ----------------------------------------------------------
 
-		
 
 	}
-
+	
 	// Excluir usuário
 	// -------------------------------------------------------------------------------------------
 	public void excluir(ActionEvent evento) {
@@ -374,7 +374,7 @@ public class UsuarioBean implements Serializable {
 			FormacaoAcademicaDAO dao = new FormacaoAcademicaDAO();
 			Messages.addGlobalInfo("Formação removida com sucesso: " + formacaoAcademica.getNomeCurso());
 			dao.excluir(formacaoAcademica);
-			carregarCurriculo();
+			carregarFormacao();
 
 		} catch (Exception e) {
 			Messages.addGlobalError("Erro ao Remover: " + formacaoAcademica.getNomeCurso());
@@ -396,7 +396,7 @@ public class UsuarioBean implements Serializable {
 			ExperienciaProfissionalDAO dao = new ExperienciaProfissionalDAO();
 			Messages.addGlobalInfo("Experiência removida com sucesso: " + experienciaProfissional.getCargo());
 			dao.excluir(experienciaProfissional);
-			carregarCurriculo();
+			carregarExperiencia();
 
 		} catch (Exception e) {
 			Messages.addGlobalError("Erro ao Remover: " + experienciaProfissional.getCargo());
@@ -418,7 +418,7 @@ public class UsuarioBean implements Serializable {
 			AtividadesProfissionaisDAO dao = new AtividadesProfissionaisDAO();
 			Messages.addGlobalInfo("Qualificação removida com sucesso: " + atividadesProfissionais.getNomeCurso());
 			dao.excluir(atividadesProfissionais);
-			carregarCurriculo();
+			carregarAtividades();
 
 		} catch (Exception e) {
 			Messages.addGlobalError("Erro ao Remover: " + atividadesProfissionais.getNomeCurso());
@@ -485,7 +485,7 @@ public class UsuarioBean implements Serializable {
 
 			dao.merge(usuario);
 
-			Messages.addGlobalInfo("Usuário(a) ' " + usuario.getNome() + "' Editado com sucesso!!!");
+			Messages.addGlobalInfo("Objetivos de ' " + usuario.getNome() + "' Editado com sucesso!!!");
 
 		} catch (Exception e) {
 			Messages.addGlobalError("Erro ao Editar Usuário(a) '" + usuario.getNome() + "'");
@@ -591,7 +591,9 @@ public class UsuarioBean implements Serializable {
 			usuario = (Usuario) evento.getComponent().getAttributes().get("meuSelect");
 			Messages.addGlobalInfo("Seleção: " + usuario.getNome());
 
-			carregarCurriculo();
+			carregarAtividades();
+			carregarExperiencia();
+			carregarFormacao();
 
 		} catch (Exception e) {
 			Messages.addGlobalError("Erro ao Editar: " + usuario.getNome());
