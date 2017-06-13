@@ -93,7 +93,7 @@ public class Oportunidade extends GenericDomain {
 	private Boolean pcd;
 
 	@ManyToOne
-	@JoinColumn(nullable = false)
+	@JoinColumn(name="empresaCodigo")
 	private Empresa empresa;
 	
 	@Column

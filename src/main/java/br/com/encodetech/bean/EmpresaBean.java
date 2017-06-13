@@ -13,6 +13,7 @@ import org.apache.shiro.crypto.hash.SimpleHash;
 import org.omnifaces.util.Messages;
 import org.primefaces.context.RequestContext;
 
+import br.com.encodetech.dao.complementos.OportunidadeDAO;
 import br.com.encodetech.dao.empresas.EmpresaDAO;
 import br.com.encodetech.dao.localizacao.CidadeDAO;
 import br.com.encodetech.dao.localizacao.EstadoDAO;
@@ -165,6 +166,10 @@ public class EmpresaBean implements Serializable {
 
 			empresa = (Empresa) evento.getComponent().getAttributes().get("meuSelect");
 			EmpresaDAO dao = new EmpresaDAO();
+			
+			OportunidadeDAO opdao= new OportunidadeDAO();
+			opdao.excluirOportunidades(empresa.getCodigo());
+			
 			Messages.addGlobalInfo("Empresa ' " + empresa.getNomeEmpresa() + "' Removida com sucesso!!!");
 			dao.excluir(empresa);
 

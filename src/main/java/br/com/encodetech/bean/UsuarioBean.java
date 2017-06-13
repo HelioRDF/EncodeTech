@@ -360,9 +360,7 @@ public class UsuarioBean implements Serializable {
 			
 			daoExperiencia = new ExperienciaProfissionalDAO();
 			daoExperiencia.excluirExperienciaProfissional(usuario.getCodigo());
-			
-			
-			
+						
 			Messages.addGlobalInfo("Usuário(a) ' " + usuario.getNome() + "' Removido com sucesso!!!");
 			dao.excluir(usuario);
 

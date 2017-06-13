@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
@@ -277,6 +278,31 @@ public class OportunidadeDAO extends GenericDAO<Oportunidade>{
 		
 	}
 	
+	// Excluir Formações
+	// -------------------------------------------------------------------------------------------
+
+
+	public void excluirOportunidades (Long empresaCod) {
+		Session sessao = HibernateUtil.getFabricadeSessoes().openSession();
+
+
+		try {
+			
+			Query query = sessao.createQuery("delete Oportunidade where empresaCodigo = :empresaCodigo");
+			query.setParameter("empresaCodigo", empresaCod);
+			int result = query.executeUpdate();
+			
+			System.out.println("\nQuantidade de Oportunidades deletadas:"+result);
+
+		} catch (RuntimeException erro) {
+
+			System.out.println("Erro em excluir Oportunidades: (OportunidadeDAO)");
+
+		} finally {
+			sessao.close();
+		}
+
+	}
 
 			
 }
