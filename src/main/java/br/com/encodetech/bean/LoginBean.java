@@ -2,6 +2,7 @@ package br.com.encodetech.bean;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -64,8 +65,11 @@ public class LoginBean implements Serializable {
 				
 			}
 			
-			
+			// Usuário Ok...
 			Faces.redirect("./pages/administrativas/usuario.xhtml");
+			usuarioLogado.setUltimoLogin( new Date());
+			usuarioDAO.editar(usuarioLogado);
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

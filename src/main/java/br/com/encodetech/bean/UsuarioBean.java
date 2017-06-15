@@ -728,6 +728,7 @@ public class UsuarioBean implements Serializable {
 		try {
 
 			System.out.println("Listando estados...");
+		
 
 			estadoDao = new EstadoDAO();
 			listaEstado = estadoDao.listar("nome");
