@@ -2,12 +2,15 @@ package br.com.encodetech.domain.complementos;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -35,7 +38,7 @@ import br.com.encodetech.domain.localizacao.Estado;
  */
 
 @SuppressWarnings("serial")
-@Entity
+@Entity(name="oportunidade")
 public class Oportunidade extends GenericDomain {
 	
 	
@@ -93,7 +96,7 @@ public class Oportunidade extends GenericDomain {
 	private Boolean pcd;
 
 	@ManyToOne
-	@JoinColumn(name="empresaCodigo")
+	@JoinColumn(name="empresa_Codigo")
 	private Empresa empresa;
 	
 	@Column
@@ -102,11 +105,15 @@ public class Oportunidade extends GenericDomain {
 	@Column
 	private String area; //MKT | Engenharia | ???
 	
+	@Column
+	@Lob
+	private String pergunta;
+	
+	@OneToMany(mappedBy="oportunidade_id", fetch = FetchType.EAGER)
+	private List<Ficha> candidatos;
 	
 	//--------------------------------------------------
 	
-	
-
 	public String getDescricao() {
 		return descricao;
 	}
@@ -143,8 +150,6 @@ public class Oportunidade extends GenericDomain {
 		this.preRequisitos = preRequisitos;
 	}
 
-
-
 	public String getCargo() {
 		return cargo;
 	}
@@ -179,10 +184,7 @@ public class Oportunidade extends GenericDomain {
 
 	public void setEmpresa(Empresa empresa) {
 		this.empresa = empresa;
-	}
-
-	
-	
+	}	
 	
 	public String getModalidade() {
 		return modalidade;
@@ -206,9 +208,7 @@ public class Oportunidade extends GenericDomain {
 
 	public void setDataCadastro(Date dataCadastro) {
 		this.dataCadastro = dataCadastro;
-	}
-	
-	
+	}	
 
 	public Boolean getMostrarSalario() {
 		return mostrarSalario;
@@ -216,10 +216,7 @@ public class Oportunidade extends GenericDomain {
 
 	public void setMostrarSalario(Boolean mostrarSalario) {
 		this.mostrarSalario = mostrarSalario;
-	}
-	
-	
-	 
+	}	 
 
 	public Boolean getMostrarEmpresa() {
 		return mostrarEmpresa;
@@ -243,8 +240,7 @@ public class Oportunidade extends GenericDomain {
 
 	public void setBeneficios(String beneficios) {
 		this.beneficios = beneficios;
-	}
-	
+	}	
 
 	public Boolean getPcd() {
 		return pcd;
@@ -252,9 +248,7 @@ public class Oportunidade extends GenericDomain {
 
 	public void setPcd(Boolean pcd) {
 		this.pcd = pcd;
-	}
-	
-	
+	}	
 
 	public BigDecimal getSalarioAux() {
 		return salarioAux;
@@ -270,8 +264,29 @@ public class Oportunidade extends GenericDomain {
 				+ descricao + ", preRequisitos=" + preRequisitos + ", quantidade=" + quantidade + ", salario=" + salario
 				+ ", empresa=" + empresa + ", tipo=" + modalidade + ", setor=" + area + "]";
 	}
-	
-	
+
+	public List<Ficha> getCandidatos() {
+		return candidatos;
+	}
+
+	public void setCandidatos(List<Ficha> candidatos) {
+		this.candidatos = candidatos;
+	}
+
+	public void setCandidatos(Ficha candidatos) {
+		this.candidatos.add(candidatos);
+		
+	}
+
+	public String getPergunta() {
+		return pergunta;
+	}
+
+	public void setPergunta(String pergunta) {
+		this.pergunta = pergunta;
+	}
+
+
 	
 	
 	

@@ -177,11 +177,11 @@ public class OportunidadeDAO extends GenericDAO<Oportunidade>{
 
 		
 		BigDecimal salarioMaior =new BigDecimal(0.00);	;
-		BigDecimal salarioMenor=new BigDecimal(99999.00);	;
+		BigDecimal salarioMenor=new BigDecimal(99999.99);	;
 		
 		if(salario==0){
 			salarioMaior= new BigDecimal(0.00);
-			salarioMenor=new BigDecimal(99999.00);		
+			salarioMenor=new BigDecimal(99999.99);		
 		}
 		
 		if(salario==1){
@@ -212,19 +212,23 @@ public class OportunidadeDAO extends GenericDAO<Oportunidade>{
 		
 		if(salario==6){
 			salarioMaior= new BigDecimal(5000.00);	
-			salarioMenor=new BigDecimal(99999.00);				
+			salarioMenor=new BigDecimal(99999.99);				
 		}
 		
-		
-		
-		
+				
 		Session sessao = HibernateUtil.getFabricadeSessoes().openSession();
 		
 		Criteria consulta = sessao.createCriteria(Oportunidade.class);
 		consulta.add(Restrictions.ilike("cargo", "%"+cargo+"%"));
-		consulta.add(Restrictions.eq("estado.codigo", estado));
-		consulta.add(Restrictions.eq("cidade.codigo", cidade));
 		
+		if(estado!=null){
+		consulta.add(Restrictions.eq("estado.codigo", estado));
+		if(cidade!=null){
+			consulta.add(Restrictions.eq("cidade.codigo", cidade));
+			
+		}
+		
+		}
 		if(pcd==1 ){
 			
 			consulta.add(Restrictions.eq("pcd", true));

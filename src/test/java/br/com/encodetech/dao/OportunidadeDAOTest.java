@@ -1,67 +1,112 @@
 package br.com.encodetech.dao;
 
+import java.util.Date;
+import org.junit.Ignore;
 import org.junit.Test;
+import br.com.encodetech.dao.complementos.FichaDAO;
+import br.com.encodetech.dao.complementos.OportunidadeDAO;
+import br.com.encodetech.dao.empresas.EmpresaDAO;
+import br.com.encodetech.dao.localizacao.CidadeDAO;
+import br.com.encodetech.dao.usuarios.UsuarioDAO;
+import br.com.encodetech.domain.complementos.Ficha;
+import br.com.encodetech.domain.complementos.Oportunidade;
+import br.com.encodetech.domain.empresas.Empresa;
+import br.com.encodetech.domain.localizacao.Cidade;
+import br.com.encodetech.domain.usuarios.Usuario;
 
 public class OportunidadeDAOTest {
 
-
-	
-	
 	@Test
-	public void testeQuery(){
-		
-		
-//
-//	//Oportunidade oportunidade = new Oportunidade();
-//	List <Oportunidade> lista;
-//	OportunidadeDAO dao = new OportunidadeDAO();
-//		
-//	 lista =dao.buscarVagasEstado("sp");
-//	 
-//	 for (Oportunidade oportunidade2 : lista) {
-//	System.out.println("Array:"+oportunidade2);
-//	System.out.println("lista tem:"+lista.size());
-//	}
-		
-	}
-	
-//	@Test
-//	@Ignore
-//	public void salvar() throws ParseException{
-//		
-//		Oportunidade oportunidade = new Oportunidade();
-//		OportunidadeDAO dao = new OportunidadeDAO();
-//		
-//		
-//		EmpresaDAO edao =new  EmpresaDAO();
-//		Empresa empresa = new Empresa();
-//		
-//		empresa.setNomeEmpresa("Inovax");
-//	//	empresa.setBairro("PQ SP");
-//		//empresa.setCep("0690000");
-//		empresa.setCnpj("12312313123");
-//	//	empresa.setComplemento("Centro");
-//		//empresa.setDataCadastro(new Date());
-//		empresa.setDataCadastro(new SimpleDateFormat("dd/MM/yyyy HH:mm").parse("11/11/2016 01:30"));
-//		empresa.setDescricao("TIC");
-//	//	empresa.setEmail("Jp@bol");
-//		//empresa.setNumero(new Short("224"));
-//	//	empresa.setRua("Libero");
-//		empresa.setSeguimento("TI");
-//		empresa.setStatus(true);
-//		//empresa.setTelefone("9999");
-//		empresa.setSenha("123!");
-//		
-//		edao.salvar(empresa);
-//		
-//		
-//		oportunidade.setDescricao("Vaga na inovax");
-//		oportunidade.setEmpresa(empresa);
-//		oportunidade.setQuantidade(new Short("7"));
-//		oportunidade.setSalario(new BigDecimal(2000.00));
-//		
-//		dao.salvar(oportunidade);
-//	}
-//	
+	@Ignore
+	public void incluirPerguntas() {
 
 	}
+
+	@Test
+	@Ignore
+	public void listarQuestionario() {
+
+	}
+
+	@Test
+	@Ignore
+	public void listarFichas() {
+		Oportunidade oportunidade = new Oportunidade();
+		OportunidadeDAO dao = new OportunidadeDAO();
+		oportunidade = dao.buscar(1l);
+
+		int total = oportunidade.getCandidatos().size();
+		System.out.println("\n -----------------");
+		System.out.println("\n Total: " + total);
+		System.out.println("\n -----------------");
+
+		for (Ficha opor : oportunidade.getCandidatos()) {
+			System.out.println("\nLista:" + opor.getCodigo());
+		}
+	}
+
+	@Test
+	//@Ignore
+	public void salvarFicha() throws InterruptedException {
+
+		Usuario usuario = new Usuario();
+		UsuarioDAO daoUser = new UsuarioDAO();
+		usuario = daoUser.buscar(3l);
+
+		Oportunidade oportunidade = new Oportunidade();
+		OportunidadeDAO dao = new OportunidadeDAO();
+		oportunidade = dao.buscar(3l);
+
+		FichaDAO fichaDAO = new FichaDAO();
+		Ficha fichaA = new Ficha();
+		fichaA.setCandidato(usuario);
+		fichaA.setOportunidade_id(oportunidade);
+		fichaA.setDataCadastro(new Date());
+		fichaA.setResposta("teste");
+
+		System.out.println("\n -----------------");
+		System.out.println("\n\nCod:" + fichaA.getCodigo());
+		
+		System.out.println("Data: " + fichaA.getDataCadastro());
+		System.out.println("\n -----------------");
+
+		dao.merge(oportunidade);
+		fichaDAO.merge(fichaA);
+	}
+
+	@Test
+	@Ignore
+	public void salvar() {
+
+		Oportunidade oportunidade = new Oportunidade();
+		OportunidadeDAO dao = new OportunidadeDAO();
+
+		Cidade cidade = new Cidade();
+		CidadeDAO cidadeDAO = new CidadeDAO();
+		cidade = cidadeDAO.buscar(1l);
+
+		Empresa empresa = new Empresa();
+		EmpresaDAO empresaDAO = new EmpresaDAO();
+		empresa = empresaDAO.buscar(1l);
+
+		oportunidade.setArea("Ninja");
+		oportunidade.setBeneficios("Armas");
+		oportunidade.setCargo("Assasino");
+		oportunidade.setDataCadastro(new Date());
+		oportunidade.setDescricao("Matar ou morrer");
+		oportunidade.setHorario("Noite");
+		oportunidade.setModalidade("Missão");
+		oportunidade.setMostrarEmpresa(true);
+		oportunidade.setMostrarSalario(true);
+		oportunidade.setNivel("Master");
+		oportunidade.setPcd(false);
+		oportunidade.setPreRequisitos("Nível A");
+		// oportunidade.setQuantidade((Short)3);
+		// oportunidade.setSalario(333);
+		// oportunidade.setSalarioAux(3333,00);
+		oportunidade.setCidade(cidade);
+		oportunidade.setEmpresa(empresa);
+		// oportunidade.setEstado(cidade);
+		dao.salvar(oportunidade);
+	}
+}
