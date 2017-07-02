@@ -729,7 +729,9 @@
 
 						<p:commandButton value="Editar"
 							actionListener="#{oportunidadeBean.editar}" validateClient="true"
-							update=":dialogform:" rendered="#{oportunidadeBean.botaoEditar}">
+							update=":dialogform:" rendered="#{oportunidadeBean.botaoEditar}"
+							oncomplete="PF('dialogo').hide();">
+							
 						</p:commandButton>
 
 

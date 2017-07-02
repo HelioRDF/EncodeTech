@@ -14,6 +14,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 import br.com.encodetech.domain.empresas.Empresa;
 import br.com.encodetech.domain.localizacao.Cidade;
@@ -41,7 +42,8 @@ import br.com.encodetech.domain.localizacao.Estado;
 @Entity(name="oportunidade")
 public class Oportunidade extends GenericDomain {
 	
-	
+	@Transient
+	private Boolean cadastrado;
 	
 	@Column()
 	@Temporal(TemporalType.TIMESTAMP)
@@ -284,6 +286,14 @@ public class Oportunidade extends GenericDomain {
 
 	public void setPergunta(String pergunta) {
 		this.pergunta = pergunta;
+	}
+
+	public Boolean getCadastrado() {
+		return cadastrado;
+	}
+
+	public void setCadastrado(Boolean cadastrado) {
+		this.cadastrado = cadastrado;
 	}
 
 

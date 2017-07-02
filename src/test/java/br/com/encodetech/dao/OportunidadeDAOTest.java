@@ -59,7 +59,6 @@ public class OportunidadeDAOTest {
 
 		FichaDAO fichaDAO = new FichaDAO();
 		Ficha fichaA = new Ficha();
-		fichaA.setCandidato(usuario);
 		fichaA.setOportunidade_id(oportunidade);
 		fichaA.setDataCadastro(new Date());
 		fichaA.setResposta("teste");
