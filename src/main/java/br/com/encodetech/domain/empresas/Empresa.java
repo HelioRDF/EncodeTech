@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -14,6 +15,7 @@ import javax.persistence.Transient;
 import org.hibernate.annotations.NaturalId;
 
 import br.com.encodetech.domain.complementos.GenericDomain;
+import br.com.encodetech.domain.complementos.Oportunidade;
 import br.com.encodetech.domain.localizacao.Cidade;
 
 
@@ -110,6 +112,7 @@ public class Empresa extends GenericDomain {
 
 	@Column(length = 20)
 	private String celular;
+	
 	
 	
 

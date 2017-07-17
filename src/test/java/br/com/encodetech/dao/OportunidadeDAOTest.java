@@ -1,8 +1,10 @@
 package br.com.encodetech.dao;
 
 import java.util.Date;
+
 import org.junit.Ignore;
 import org.junit.Test;
+
 import br.com.encodetech.dao.complementos.FichaDAO;
 import br.com.encodetech.dao.complementos.OportunidadeDAO;
 import br.com.encodetech.dao.empresas.EmpresaDAO;
@@ -17,8 +19,18 @@ import br.com.encodetech.domain.usuarios.Usuario;
 public class OportunidadeDAOTest {
 
 	@Test
-	@Ignore
-	public void incluirPerguntas() {
+	//@Ignore
+	public void selecionarOportunidades() {
+		
+		//Oportunidade oportunidade= new Oportunidade(); 
+		OportunidadeDAO dao = new OportunidadeDAO();
+		//Empresa empresa = new Empresa();
+		//EmpresaDAO empresaDAO = new EmpresaDAO();
+		//empresa = empresaDAO.buscar(1l);
+		
+		dao.excluirOportunidades(2l);
+		
+		
 
 	}
 
@@ -46,7 +58,7 @@ public class OportunidadeDAOTest {
 	}
 
 	@Test
-	//@Ignore
+	@Ignore
 	public void salvarFicha() throws InterruptedException {
 
 		Usuario usuario = new Usuario();

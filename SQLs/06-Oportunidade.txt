@@ -1,48 +1,14 @@
-INSERT INTO `encodedb`.`oportunidade` (`area`, `beneficios`, `cargo`, `dataCadastro`, `descricao`, `horario`, `modalidade`, `mostrarEmpresa`, `mostrarSalario`, `nivel`, `PcD`, `preRequisitos`, `quantidade`, `salario`, `cidade_codigo`, `empresa_codigo`, `estado_codigo`, `salarioAux`) VALUES
+INSERT INTO `encodedb`.`oportunidade` (`area`, `beneficios`, `cargo`, `dataCadastro`, `descricao`, `horario`, `modalidade`, `mostrarEmpresa`, `mostrarSalario`, `nivel`, `PcD`, `pergunta`, `preRequisitos`, `quantidade`, `salario`, `cidade_codigo`, `empresa_codigo`, `estado_codigo`, `salarioAux`) VALUES
 
 
 
- ('Biologicas', 'xxx', 'Auxiliar', '2017-03-08 16:50:23', 'xxe', '333', 'PJ', 0, 1, 'Senior', 1, 'xxxx', '33', '843.00', '5270', 1, '26', '843.00'),
-
-  ('Biologicas', 'xxx', 'Auxiliar', '2017-03-08 16:50:23', 'xxe', '333', 'PJ', 0, 1, 'Senior', 1, 'xxxx', '33', '9443.00', '5270', 1, '26', '9443.00'),
-
-   ('Biologicas', 'xxx', 'Auxiliar', '2017-03-08 16:50:23', 'xxe', '333', 'PJ', 0, 1, 'Senior', 1, 'xxxx', '33', '1443.00', '5270', 1, '26', '1443.00'),
-
-    ('Biologicas', 'xxx', 'Auxiliar', '2017-03-08 16:50:23', 'xxe', '333', 'PJ', 0, 1, 'Senior', 0, 'xxxx', '33', '2443.00', '5270', 1, '26',  '2443.00'),
-
-     ('Biologicas', 'xxx', 'Auxiliar', '2017-03-08 16:50:23', 'xxe', '333', 'PJ', 0, 1, 'Senior', 0, 'xxxx', '33', '3443.00', '5270', 1, '26', '3443.00'),
-
-      ('Biologicas', 'xxx', 'Auxiliar', '2017-03-08 16:50:23', 'xxe', '333', 'PJ', 0, 1, 'Senior', 0, 'xxxx', '33', '4443.00', '5270', 1, '26', '4443.00'),
-
-
-
-
-       ('Humanas', 'xxx', 'ADM', '2017-03-08 16:50:23', 'xxe', '333', 'CLT', 0, 1, 'Senior', 1, 'xxxx', '33', '843.00', '5270', 1, '26',  '843.00'),
-
-  ('Humanas', 'xxx', 'Diretor', '2017-03-08 16:50:23', 'xxe', '333', 'CLT', 0, 1, 'Senior', 1, 'xxxx', '33', '7443.00', '5270', 1, '26', '843.00'),
-
-   ('Humanas', 'xxx', 'ADM', '2017-03-08 16:50:23', 'xxe', '333', 'CLT', 0, 1, 'Senior', 1, 'xxxx', '33', '1743.00', '5270', 1, '26', '843.00'),
-
-    ('Humanas', 'xxx', 'ADM', '2017-03-08 16:50:23', 'xxe', '333', 'CLT', 0, 1, 'Senior', 0, 'xxxx', '33', '2743.00', '5270', 1, '26', '843.00'),
-
-     ('Humanas', 'xxx', 'ADM', '2017-03-08 16:50:23', 'xxe', '333', 'CLT', 0, 1, 'Senior', 0, 'xxxx', '33', '3443.00', '5270', 1, '26', '843.00'),
-
-      ('Humanas', 'xxx', 'ADM', '2017-03-08 16:50:23', 'xxe', '333', 'CLT', 0, 1, 'Senior', 0, 'xxxx', '33', '4043.00', '5270', 1, '26', '843.00'),
-
-
-
-       ('Exatas', 'xxx', 'Auxiliar', '2017-03-08 16:50:23', 'xxe', '333', 'PJ', 0, 1, 'Senior', 1, 'xxxx', '33', '843.00', '5270', 1, '26',  '843.00'),
-
-  ('Exatas', 'xxx', 'Auxiliar', '2017-03-08 16:50:23', 'xxe', '333', 'PJ', 0, 1, 'Senior', 1, 'xxxx', '33', '9443.00', '5270', 1, '26', '843.00'),
-
-   ('Exatas', 'xxx', 'Auxiliar', '2017-03-08 16:50:23', 'xxe', '333', 'PJ', 0, 1, 'Senior', 1, 'xxxx', '33', '1443.00', '5270', 1, '26', '843.00'),
-
-    ('Exatas', 'xxx', 'Auxiliar', '2017-03-08 16:50:23', 'xxe', '333', 'PJ', 0, 1, 'Senior', 0, 'xxxx', '33', '2443.00', '5270', 1, '26', '843.00'),
-
-     ('Exatas', 'xxx', 'Auxiliar', '2017-03-08 16:50:23', 'xxe', '333', 'PJ', 0, 1, 'Senior', 0, 'xxxx', '33', '3443.00', '5270', 1, '26', '843.00'),
-
-      ('Exatas', 'xxx', 'Auxiliar', '2017-03-08 16:50:23', 'xxe', '333', 'PJ', 0, 1, 'Senior', 0, 'xxxx', '33', '4443.00', '5270', 1, '26', '843.00');
-
+ ('Exatas', 'VR', 'Auxiliar', '2017-03-08 16:50:23', 'xxe', '333', 'PJ', 0, 1, 'Senior', 1, 'Fala algo','xxxx', '33', '1843.00', '5270', 1, '26', '843.00'),
+ ('Exatas', 'VT', 'Programador', '2017-03-08 16:50:23', 'xxe', '333', 'PJ', 0, 1, 'Senior', 0, 'Fala algo','xxxx', '33', '3000.00', '5270', 1, '26', '3000.00'),
+ ('Exatas', 'Nenhum', 'Diretor', '2017-03-08 16:50:23', 'xxe', '333', 'PJ', 0, 1, 'Senior', 1, 'Fala algo','xxxx', '33', '4843.00', '5270', 1, '26', '4843.00'),
+ 
 
 
       
+ ('Biologicas', 'VR', 'Pesquisador', '2017-03-08 16:50:23', 'xxe', '333', 'CLT', 0, 1, 'Senior', 1, 'Fala algo','xxxx', '33', '2843.00', '5270', 1, '26', '2843.00'),
+ ('Biologicas', 'VT', 'Medico', '2017-03-08 16:50:23', 'xxe', '333', 'CLT', 0, 1, 'Senior', 0, 'Fala algo','xxxx', '33', '4000.00', '5270', 1, '26', '4000.00'),
+ ('Biologicas', 'Nenhum', 'Professor', '2017-03-08 16:50:23', 'xxe', '333', 'CLT', 0, 1, 'Senior', 1, 'Fala algo','xxxx', '33', '1943.00', '5270', 1, '26', '1943.00');

@@ -289,18 +289,18 @@ public class OportunidadeDAO extends GenericDAO<Oportunidade>{
 	public void excluirOportunidades (Long empresaCod) {
 		Session sessao = HibernateUtil.getFabricadeSessoes().openSession();
 
-
 		try {
-			
-			Query query = sessao.createQuery("delete Oportunidade where empresaCodigo = :empresaCodigo");
-			query.setParameter("empresaCodigo", empresaCod);
+
+			//Query escrita em HQL.
+			Query query = sessao.createQuery("DELETE  oportunidade  where empresa_codigo = :meuCodigo");
+			query.setParameter("meuCodigo", empresaCod);
 			int result = query.executeUpdate();
 			
 			System.out.println("\nQuantidade de Oportunidades deletadas:"+result);
 
 		} catch (RuntimeException erro) {
 
-			System.out.println("Erro em excluir Oportunidades: (OportunidadeDAO)");
+			System.out.println("\n\nErro em excluir Oportunidades: (OportunidadeDAO)"+erro.getMessage());
 
 		} finally {
 			sessao.close();
