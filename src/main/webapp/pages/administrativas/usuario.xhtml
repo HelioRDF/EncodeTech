@@ -69,7 +69,7 @@
 				<p:panelGrid>
 
 					<!-- Animação de loading -->
-					<p:dialog widgetVar="statusDialog" modal="true" draggable="false" 
+					<p:dialog widgetVar="statusDialog" modal="true" draggable="false"
 						closable="false" resizable="false" showHeader="false">
 						<p:graphicImage value="/images/loading6.gif" />
 					</p:dialog>
@@ -88,18 +88,19 @@
 					<p:commandButton id="BTatualizar" value="Atualizar"
 						icon="ui-icon-refresh" action="#{usuarioBean.carregar}"
 						style=" border-radius: 7px; background-color:CadetBlue; border-color: #C2C1D4;
-   						font-size: 16px; word-spacing:8px; float:left; height:33px; " update=" :form:" />
+   						font-size: 16px; word-spacing:8px; float:left; height:33px; "
+						update=" :form:" />
 
 					<!-- Adicionar  -->
 					<p:commandButton icon="ui-icon-plus " value="Adicionar "
-						
 						oncomplete="PF('dialogo').show();" action="#{usuarioBean.novo}"
-						update=":dialogform:" 
+						update=":dialogform:"
 						style=" border-radius: 7px; background-color:CadetBlue; border-color: #C2C1D4;
    						font-size: 16px; word-spacing:8px; float:left; height:33px; " />
 
 					<!-- Header -->
-					<h:outputLabel styleClass="nameheader" value="Usuários(#{usuarioBean.totalUsuario})"></h:outputLabel>
+					<h:outputLabel styleClass="nameheader"
+						value="Usuários(#{usuarioBean.totalUsuario})"></h:outputLabel>
 
 				</p:panelGrid>
 			</f:facet>
@@ -200,7 +201,7 @@
 					style="text-align:left;">
 					<h:outputText value="Admin: #{dataVar.admin}" />
 					<h:outputText value="Sexo: #{dataVar.sexo}" />
-					
+
 					<h:outputText value="CPF: #{dataVar.cpf}" />
 					<h:outputText value="RG: #{dataVar.rg}" />
 					<h:outputText value="Data de Nascimento: #{dataVar.dataNascimento}">
@@ -270,8 +271,8 @@
 							value="#{usuarioBean.usuario.status}" required="true"
 							requiredMessage="Verificar campo Status">
 						</p:selectBooleanButton>
-						
-						
+
+
 						<p:outputLabel value="Admin: " />
 						<p:selectBooleanButton onLabel="Ativado" offLabel="Desativado"
 							value="#{usuarioBean.usuario.admin}" required="false"
@@ -505,7 +506,8 @@
 
 						<p:commandButton value="Editar"
 							actionListener="#{usuarioBean.editar}" validateClient="true"
-							update=":dialogform: :form: " rendered="#{usuarioBean.botaoEditar}"
+							update=":dialogform: :form: "
+							rendered="#{usuarioBean.botaoEditar}"
 							oncomplete="PF('dialogo').hide();">
 						</p:commandButton>
 
